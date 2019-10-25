@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.pack_left {
+	width : 46%;
+	/*height 임시*/
+	height : 800px;
+	border : 1px solid black;
+}
+.pack_right {
+	width : 46%;
+	height : 800px;
+	border : 1px solid black;
+	margin-left : 4%;
+	float : right;
+}
