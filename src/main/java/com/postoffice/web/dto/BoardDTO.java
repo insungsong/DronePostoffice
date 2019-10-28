@@ -7,15 +7,7 @@ public class BoardDTO {
 	private String battachfile;
 	private String bdate;
 	private String vid;
-	private String state_id;
-	
-	
-	public String getState_id() {
-		return state_id;
-	}
-	public void setState_id(String state_id) {
-		this.state_id = state_id;
-	}
+
 	public int getBid() {
 		return bid;
 	}

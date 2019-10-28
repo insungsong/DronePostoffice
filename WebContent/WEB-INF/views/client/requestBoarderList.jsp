@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -83,7 +86,6 @@
 	</script>
 	</head>
 	<body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
 		<div class="request_board_area">
 			<div class="request_board_second">
 				<div class="request_text">요청 목록</div>
@@ -104,7 +106,14 @@
 						<input type="button" value="글작성" onclick="writeBoard()"/>
 					</div>
 					<div class="client_content_content">
-						
+						<table>
+							
+							<c:forEach items="${boardList}" var = "board">
+						  		${board.bid}
+						  		${board.bcontent }
+						  	</c:forEach>
+					
+						</table>
 					</div>
 				</div>
 			</div>

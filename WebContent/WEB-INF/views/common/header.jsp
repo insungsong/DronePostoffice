@@ -14,8 +14,7 @@
 		</div>
 		<div class="menubar">
 			<ul>
-				<li><a href = "">우편물 현황</a></li>
-				<li><a href = "">우편물 패키징</a>
+				<li><a href = "packagingList">우편물 패키징</a>
 					<ul>
 				     <li><a href="#">Sliders</a></li>
 				     <li><a href="#">Galleries</a></li>
