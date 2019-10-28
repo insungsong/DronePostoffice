@@ -66,6 +66,8 @@ public class ClientRequestController {
 			return "client/mailAdd";
 		}
 	
+	
+	
 /*
  * @RequestMapping("/mailSend") public String mailSend(ClientMailDTO
  * clientMailDTO) { requestService.mailSend(clientMailDTO); return
