@@ -17,6 +17,7 @@ public class VillageDTO {
 	public String getVname() {
 		return vname;
 	}
+	
 	public void setVname(String vname) {
 		this.vname = vname;
 	}

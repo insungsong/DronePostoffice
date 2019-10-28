@@ -17,6 +17,7 @@ public class VMemberDTO {
 	public void setVmname(String vmname) {
 		this.vmname = vmname;
 	}
+	
 	public String getVmtel() {
 		return vmtel;
 	}
