@@ -3,8 +3,12 @@
 <mapper namespace="board">
 	
 	<select id="selectAll" resultType="com.postoffice.web.dto.BoardDTO">
+		
+		
+		
 		select * from board
 	</select>
 	
+
 	
 </mapper>

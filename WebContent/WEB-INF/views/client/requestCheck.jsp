@@ -45,6 +45,10 @@
 	function main() {
 		location.href = "client_index";
 	}
+	
+	function btnRegister(){
+		
+	}
 </script>
 </head>
 <body>
@@ -57,7 +61,7 @@
 			<th>작성자</th>
 			<th>작성날짜</th>
 			<th>마을번호</th>
-			<th>상태</th>
+			<th>접수상태</th>
 		</tr>
 		
 		<tr> 
@@ -69,11 +73,12 @@
 				<td>${check.battachfile}</td>
 				<td>${check.bdate}</td>
 				<td>${check.vid}</td>
+				<td><button onClick="btnRegister()" class="btn btn-primary">접수확인요청</button></td>
 			</tr>
 		</c:forEach>
 
 	</table>
-	<input type="button" value="메인으로" onClick="main()"
+	<input type="button"  value="메인으로" onClick="main()"
 		class="btn btn-primary " />
 
 
