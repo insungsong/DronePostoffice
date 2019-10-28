@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.BoardDTO;
-import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.service.ClientRequestService;
 @Controller
 public class ClientRequestController {
@@ -35,6 +34,7 @@ public class ClientRequestController {
 		int pagesPerGroup=5;
 		
 		int totalRowNum=requestService.getTotalRowNo();
+		System.out.println("---------------나는 1번");
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
 		//전체 그룹 수
@@ -56,6 +56,7 @@ public class ClientRequestController {
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;
 		
 		List<BoardDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
+		System.out.println("------------------나는 2번");
 		//JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);//model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을 씀 
 		model.addAttribute("totalPageNum", totalPageNum);
@@ -66,11 +67,6 @@ public class ClientRequestController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("boardList", boardList);
 		
-		
-		for(int i = 0; i < boardList.size(); i++) {
-			BoardDTO dto = boardList.get(i);
-			dto.getBid();
-			}
 		return "client/requestBoarderList";
 	}
 	
