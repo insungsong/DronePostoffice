@@ -32,6 +32,7 @@
 	background-color: #f2f2f2;
 }
 
+
 #customers tr:hover {
 	background-color: #ddd;
 }
