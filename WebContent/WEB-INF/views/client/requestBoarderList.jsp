@@ -104,7 +104,7 @@
 						<input type="button" value="글작성" onclick="writeBoard()"/>
 					</div>
 					<div class="client_content_content">
-						
+						${boardList }
 					</div>
 				</div>
 			</div>

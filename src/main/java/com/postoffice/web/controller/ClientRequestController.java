@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.service.ClientRequestService;
 @Controller
@@ -50,8 +51,17 @@ public class ClientRequestController {
 		int endRowNo = pageNo*rowsPerPage;
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;
 		
-		//현재 페이지의 게시물 가져오기
-		List<MailDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
+		List<BoardDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
+		
+		//JSP로 페이지 정보 넘기기
+		model.addAttribute("pagesPerGroup", pagesPerGroup);//model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을 씀 
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("boardList", boardList);
 		
 		return "client/requestBoarderList";
 	}
