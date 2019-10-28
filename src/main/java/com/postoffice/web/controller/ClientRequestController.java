@@ -23,6 +23,7 @@ public class ClientRequestController {
 	
 	@RequestMapping("/client_index")
 	public String client_index(){
+	
 		return "client/index";
 	}
 	

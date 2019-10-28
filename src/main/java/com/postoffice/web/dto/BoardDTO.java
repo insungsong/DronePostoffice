@@ -7,7 +7,7 @@ public class BoardDTO {
 	private String battachfile;
 	private String bdate;
 	private String vid;
-	//////
+
 	public int getBid() {
 		return bid;
 	}

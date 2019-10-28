@@ -27,7 +27,12 @@ public class ClientDAO {
 		Map<String,Integer> map = new HashMap<>();
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
+		
+		System.out.println("전송");
 		List<BoardDTO> ClientboardList=sqlSessionTemplate.selectList("ClientBoard.selectList",map);
+		System.out.println("도착");
+		
+		
 		return ClientboardList;
 	}
 	

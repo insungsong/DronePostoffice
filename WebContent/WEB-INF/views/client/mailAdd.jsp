@@ -11,13 +11,13 @@
 	<style>
 		.mailWrite{
 			width:48%;
-			height:500px;
+			height:800px;
 			border:solid 1px black;
 			float:left;
 		}
 		.mailCheck{
 			width:48%;
-			height:500px;
+			height:800px;
 			border:solid 1px black;
 			float:right;
 		}
@@ -36,21 +36,29 @@
 	<body>
 	<div class="mailWrite">
 		<form name="mail_info">
-		  <div class="form-group">
-		    <label for="formGroupExampleInput">보내는 이</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+		 <div class="form-group">
+		    <label for="formGroupExampleInput2">메일 고유값</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" readonly="readonly">
 		  </div>
 		  <div class="form-group">
-		    <label for="formGroupExampleInput2">받는 이</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+		    <label for="formGroupExampleInput2">받는 사람주소</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="받는 사람주소를 입력하세요">
 		  </div>
 		  <div class="form-group">
-		    <label for="formGroupExampleInput2">보내는이 주소</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+		    <label for="formGroupExampleInput">보내는 사람주소</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="보내는 사람주소를 입력하세요">
 		  </div>
 		  <div class="form-group">
-		    <label for="formGroupExampleInput2">배송지 주소</label>
-		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+		    <label for="formGroupExampleInput2">받는 사람이름</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="받는 사람이름을 입력하세요">
+		  </div>
+		  <div class="form-group">
+		    <label for="formGroupExampleInput2">보내는사람 이름</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="보내는 사람이름을 입력하세요">
+		  </div>
+		  <div class="form-group">
+		    <label for="formGroupExampleInput2">우편 무게</label>
+		    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="우편 무게를 입력하세요">
 		  </div>
 		  <button type="button" class="btn btn-danger" onclick="mailSend()">추가하기</button>
 		</form>
