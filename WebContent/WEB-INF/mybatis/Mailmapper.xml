@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="clientMailDTO">
 	<select id="selectTotalRowNum" resultType="int">
-		select count(*) from board;
+		select count(*) from board
 	</select>
 	<select id="ClientboardList" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
 	select rn,bno,btitle,bwriter,bhitcount,bdate	
@@ -15,4 +15,6 @@
 	)
 	where rn &gt; #{startRowNo}
 	</select>
+
+	
 </mapper>

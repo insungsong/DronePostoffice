@@ -2,23 +2,33 @@ package com.postoffice.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.postoffice.web.dto.BoardDTO;
+
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.service.ClientRequestService;
 @Controller
 public class ClientRequestController {
+	private static final Logger logger =LoggerFactory.getLogger(ClientRequestController.class);
+	
 	@Autowired
 	private ClientRequestService requestService;
 	
+	
 	@RequestMapping("/client_index")
 	public String client_index(){
+	
 		return "client/index";
 	}
 	
@@ -30,6 +40,7 @@ public class ClientRequestController {
 		int pagesPerGroup=5;
 		
 		int totalRowNum=requestService.getTotalRowNo();
+		System.out.println("---------------나는 1번");
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if(totalRowNum % rowsPerPage != 0) totalPageNum++;
 		//전체 그룹 수
@@ -50,8 +61,17 @@ public class ClientRequestController {
 		int endRowNo = pageNo*rowsPerPage;
 		if(pageNo == totalPageNum) endRowNo = totalRowNum;
 		
-		//현재 페이지의 게시물 가져오기
-		List<MailDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
+		List<BoardDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
+		System.out.println("------------------나는 2번");
+		//JSP로 페이지 정보 넘기기
+		model.addAttribute("pagesPerGroup", pagesPerGroup);//model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을 씀 
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("boardList", boardList);
 		
 		return "client/requestBoarderList";
 	}
@@ -65,6 +85,11 @@ public class ClientRequestController {
 		public String mailadd() {
 			return "client/mailAdd";
 		}
+	
+	
+				
+	
+	
 	
 /*
  * @RequestMapping("/mailSend") public String mailSend(ClientMailDTO
