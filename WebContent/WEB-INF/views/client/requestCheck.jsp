@@ -60,7 +60,7 @@
 			<th>상태</th>
 		</tr>
 		
-		<tr>
+		<tr> 
 
 		<c:forEach var="check" items="${CheckList}">
 				<td>${check.bid}</td>
