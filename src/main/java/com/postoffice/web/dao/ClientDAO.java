@@ -18,16 +18,16 @@ public class ClientDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	public int selectTotalRowNo() {
-		int totalRowNum = sqlSessionTemplate.selectOne("Board.selectTotalRowNum");
+		int totalRowNum = sqlSessionTemplate.selectOne("ClientBoard.selectTotalRowNum");
 		return totalRowNum;
 	} 
 	//게시판 게시물 만들기해야함
 
 	public List<BoardDTO> selectList(int startRowNo, int endRowNo) {
-		Map<String,Integer> map = new HashMap<String, Integer>();
+		Map<String,Integer> map = new HashMap<>();
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
-		List<BoardDTO> ClientboardList=sqlSessionTemplate.selectList("Board.selectList",map);
+		List<BoardDTO> ClientboardList=sqlSessionTemplate.selectList("ClientBoard.selectList",map);
 		return ClientboardList;
 	}
 	
