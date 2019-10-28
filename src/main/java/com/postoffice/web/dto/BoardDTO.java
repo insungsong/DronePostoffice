@@ -1,17 +1,17 @@
 package com.postoffice.web.dto;
 
 public class BoardDTO {
-	private String bid;
+	private int bid;
 	private String btitle;
 	private String bcontent;
 	private String battachfile;
 	private String bdate;
 	private String vid;
 	
-	public String getBid() {
+	public int getBid() {
 		return bid;
 	}
-	public void setBid(String bid) {
+	public void setBid(int bid) {
 		this.bid = bid;
 	}
 	public String getBtitle() {
