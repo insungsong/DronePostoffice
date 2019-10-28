@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.postoffice.web.dao.ClientDAO;
+import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
 
 @Service
@@ -25,6 +26,18 @@ public class ClientRequestService {
 	public List<MailDTO> getBoardList(int startRowNo, int endRowNo) {
 		List<MailDTO> ClientboardList = clientdao.selectList(startRowNo,endRowNo);
 		return ClientboardList;
+	}
+
+
+	public void requestCheck() {
+	
+		
+	}
+
+
+	public List<BoardDTO> selectAll() {
+		List<BoardDTO> boardList=clientdao.selectAll();
+		return boardList;
 	}
 	
 	

@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
 
 @Component
@@ -28,6 +28,13 @@ public class ClientDAO {
 		map.put("endRowNo",endRowNo);
 		List<MailDTO> ClientboardList=sqlSessionTemplate.selectList("ClientboardList.selectList",map);
 		return ClientboardList;
+	}
+
+
+
+	public List<BoardDTO> selectAll() {
+		List<BoardDTO> boardList=sqlSessionTemplate.selectList("board.selectAll");
+		return boardList;
 	}
 	
 //	public int mailSend() {

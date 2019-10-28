@@ -2,6 +2,8 @@ package com.postoffice.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.service.ClientRequestService;
 @Controller
 public class ClientRequestController {
 	@Autowired
 	private ClientRequestService requestService;
+	
 	
 	@RequestMapping("/client_index")
 	public String client_index(){
@@ -65,6 +69,8 @@ public class ClientRequestController {
 		public String mailadd() {
 			return "client/mailAdd";
 		}
+	
+	
 				
 	
 	

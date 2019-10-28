@@ -1,17 +1,25 @@
 package com.postoffice.web.dto;
 
 public class BoardDTO {
-	private String bid;
+	private int bid;
 	private String btitle;
 	private String bcontent;
 	private String battachfile;
 	private String bdate;
 	private String vid;
+	private String state_id;
 	
-	public String getBid() {
+	
+	public String getState_id() {
+		return state_id;
+	}
+	public void setState_id(String state_id) {
+		this.state_id = state_id;
+	}
+	public int getBid() {
 		return bid;
 	}
-	public void setBid(String bid) {
+	public void setBid(int bid) {
 		this.bid = bid;
 	}
 	public String getBtitle() {
