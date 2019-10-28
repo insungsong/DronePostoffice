@@ -34,7 +34,6 @@ public class RequestDTO {
 	public void setPackage_id(String package_id) {
 		this.package_id = package_id;
 	}
-	
 	public boolean isRequest_result() {
 		return request_result;
 	}

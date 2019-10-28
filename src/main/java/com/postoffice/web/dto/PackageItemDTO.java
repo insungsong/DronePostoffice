@@ -16,5 +16,4 @@ public class PackageItemDTO {
 		this.mail_id = mail_id;
 	}
 
-	
 }

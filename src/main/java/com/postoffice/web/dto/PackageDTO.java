@@ -38,6 +38,5 @@ public class PackageDTO {
 	public void setArrival_date(Date arrival_date) {
 		this.arrival_date = arrival_date;
 	}
-	
-	
+		
 }
