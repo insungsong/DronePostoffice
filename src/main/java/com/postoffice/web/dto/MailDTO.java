@@ -7,7 +7,7 @@ public class MailDTO {
 	private String to_name;
 	private String to_address;
 	private String vid;
-	private String mail_weight;
+	private int mail_weight;
 	private String state_id;
 	
 	public String getMail_id() {
@@ -46,10 +46,10 @@ public class MailDTO {
 	public void setVid(String vid) {
 		this.vid = vid;
 	}
-	public String getMail_weight() {
+	public int getMail_weight() {
 		return mail_weight;
 	}
-	public void setMail_weight(String mail_weight) {
+	public void setMail_weight(int mail_weight) {
 		this.mail_weight = mail_weight;
 	}
 	public String getState_id() {
