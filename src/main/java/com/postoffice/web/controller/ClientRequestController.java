@@ -83,6 +83,9 @@ public class ClientRequestController {
 		public String mailadd() {
 			return "client/mailAdd";
 		}
+				
+	
+	
 	
 /*
  * @RequestMapping("/mailSend") public String mailSend(ClientMailDTO
