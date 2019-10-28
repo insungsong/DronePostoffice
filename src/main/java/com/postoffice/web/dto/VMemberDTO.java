@@ -21,6 +21,7 @@ public class VMemberDTO {
 	public String getVmtel() {
 		return vmtel;
 	}
+	
 	public void setVmtel(String vmtel) {
 		this.vmtel = vmtel;
 	}
