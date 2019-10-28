@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.BoardDTO;
-import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.service.ClientRequestService;
 @Controller
 public class ClientRequestController {
@@ -24,6 +23,7 @@ public class ClientRequestController {
 	
 	@RequestMapping("/client_index")
 	public String client_index(){
+	
 		return "client/index";
 	}
 	
@@ -67,10 +67,7 @@ public class ClientRequestController {
 		model.addAttribute("boardList", boardList);
 		
 		
-		for(int i = 0; i < boardList.size(); i++) {
-			BoardDTO dto = boardList.get(i);
-			dto.getBid();
-			}
+
 		return "client/requestBoarderList";
 	}
 	
