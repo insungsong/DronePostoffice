@@ -13,12 +13,12 @@
 	<style type="text/css">
 		.request_board_area{
 			border:1px solid black;
-			height:843px;
+			height:909px;
 		}
 		.request_board_second{
 			margin:20px;
 			border: solid 1px black;
-    		height: 803px;
+    		height: 873px;
 		}
 		.request_text{
 			margin:10px;
@@ -29,7 +29,7 @@
 		.request_content{
 			margin: 10px;
 			border: solid 1px black;
-			height: 671px;
+			height: 740px;
 		}
 		.request_serch{
 			margin:10px;
@@ -68,7 +68,7 @@
 		
 		.client_content_content{
 			margin:10px;
-			height:525px;
+			height:595px;
 			border: solid 1px black;
 		}
 		.btn{
@@ -79,17 +79,17 @@
 			margin-left: 41%;
 		}
 	</style>
-	
 	<script type="text/javascript">
-		function writeBoard() {
-			location.href="writeBoard";
-		}
-	</script>
-	
-	<script type="text/javascript">
-		function mailAdd(){
-			 var url="mailAdd";
-	            window.open(url,"","width=1000,height=1000,left=500");
+		function requestDelete(name){
+			//test = $(this).attr('name');
+			console.log(name);
+			$.ajax({
+				url:"requestRemove",
+				data:{"mail_id":name},
+				success:function(data){
+					console.log('성공');
+				}
+			});
 		}
 	</script>
 	</head>
@@ -107,30 +107,36 @@
 					</nav>
 				</div>
 				<div class="request_content">
-					<div class="client_write_button">
-						<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="mailAdd()">글쓰기</button>
-					</div>
+					<form action="requestWrite">
+						<div class="client_write_button">
+							<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
+						</div>
+					</form>
 					<div class="client_content_content">
 								<table class="table">
 									<thead class="thead-dark">
 									   <tr>
-									     <th scope="col">번호</th>
-									     <th scope="col">제목</th>
-									     <th scope="col">내용</th>
-									     <th scope="col">첨부파일</th>
-									     <th scope="col">날짜</th>
-									     <th scope="col">마을 코드</th>
+									     <th scope="col">요청 번호</th>
+									     <th scope="col">보내는 사람</th>
+									     <th scope="col">보내는 주소</th>
+									     <th scope="col">받는 사람</th>
+									     <th scope="col">받는 주소</th>
+									     <th scope="col">메일 무게</th>
+									     <th scope="col">배송 상태</th>
+									     <th scope="col">요청 취소</th>
 									   </tr>
 									  </thead>
 									  <tbody>
-									    <c:forEach items="${boardList}" var="board">
+									    <c:forEach items="${MailList}" var="MailList">
 									 <tr>
-									    <td>${board.bid }</td>
-										<td>${board.btitle}</td>
-										<td>${board.bcontent}</td>
-										<td>${board.battachfile}</td>
-										<td>${board.bdate }</td>
-										<td>${board.vid}</td>
+									    <td>${MailList.mail_id }</td>
+										<td>${MailList.from_name}</td>
+										<td>${MailList.from_address}</td>
+										<td>${MailList.to_name }</td>
+										<td>${MailList.to_address}</td>
+										<td>${MailList.mail_weight}</td>
+										<td>${MailList.state_id}</td>
+										<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 									<tr>
 								</c:forEach>
 							</tbody>

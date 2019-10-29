@@ -5,15 +5,41 @@
 		select count(*) from board
 	</select>
 	<select id="selectList" parameterType="map" resultType="com.postoffice.web.dto.BoardDTO">
-	select rn,bid,btitle,bcontent,battachfile,bdate,vid	
+	select rn,bid,btitle,bcontent,bdate,vid	
 		from(
-		    select rownum as rn, bid, btitle, bcontent, battachfile, bdate, vid
+		    select rownum as rn, bid, btitle, bcontent, bdate, vid
 		    from(
-		        select bid,btitle,bcontent,battachfile,bdate,vid	
+		        select bid,btitle,bcontent,bdate,vid	
 		        from board
 		    )
 		    where rownum &lt;= #{endRowNo}
 		)
 		where rn &gt; = #{startRowNo}
 	</select>
+	
+	<select id="selectMailList" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
+	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		from(
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    from(
+		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id		
+		        from Mail
+		    )
+		    where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt; = #{startRowNo}
+	</select>
+	
+	<select id="selectnum" resultType="int">
+		select count(*) from Mail 
+	</select>
+	
+	<insert id="insertBoard" parameterType="com.postoffice.web.dto.MailDTO">
+		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id)
+			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001')
+	</insert>
+	
+	<delete id="removeRequest">
+		delete Mail where mail_id = #{mail_id}
+	</delete>
 </mapper>

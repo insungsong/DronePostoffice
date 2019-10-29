@@ -3,21 +3,20 @@ package com.postoffice.web.dto;
 import java.util.List;
 
 public class MailDTO {
-	private List<Integer> mail_id;
+	private int mail_id;
 	private String from_name;
 	private String from_address;
 	private String to_name;
 	private String to_address;
-	private String vid;
 	private int mail_weight;
 	private String state_id;
 	
 	
 	
-	public List<Integer> getMail_id() {
+	public int getMail_id() {
 		return mail_id;
 	}
-	public void setMail_id(List<Integer> mail_id) {
+	public void setMail_id(int mail_id) {
 		this.mail_id = mail_id;
 	}
 	public String getFrom_name() {
@@ -43,12 +42,6 @@ public class MailDTO {
 	}
 	public void setTo_address(String to_address) {
 		this.to_address = to_address;
-	}
-	public String getVid() {
-		return vid;
-	}
-	public void setVid(String vid) {
-		this.vid = vid;
 	}
 	public int getMail_weight() {
 		return mail_weight;

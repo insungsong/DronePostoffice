@@ -1,12 +1,17 @@
 package com.postoffice.web.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.postoffice.web.dao.ClientDAO;
 import com.postoffice.web.dto.BoardDTO;
+import com.postoffice.web.dto.MailDTO;
 
 @Service
 public class ClientRequestService {
@@ -27,10 +32,25 @@ public class ClientRequestService {
 		return ClientboardList;
 	}
 	
-	
-	/*
-	 * public void mailSend(ClientMailDTO clientMailDTO) {
-	 * clientdao.mailSend(clientMailDTO); }
-	 */
-	
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo){
+		List<MailDTO> ClientboardList = clientdao.selectMailList(startRowNo,endRowNo);
+		return ClientboardList;
+	}
+
+
+	public int getnum() {
+		int mailMap = clientdao.selectnum();
+		return mailMap;
+	}
+
+	public int requestWrite(MailDTO maildto) {
+		int mailDto = clientdao.insertMaildto(maildto);
+		return mailDto;
+	}
+
+
+	public int requestRemove(String mail_id) {
+		int requestRemove = clientdao.removedto(mail_id);
+		return requestRemove;
+	}
 }
