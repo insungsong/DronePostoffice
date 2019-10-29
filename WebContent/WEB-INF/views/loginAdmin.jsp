@@ -14,14 +14,17 @@
 				var result = true;
 				$(".error").text("");
 				if($("#lid").val() == "") {
-					$("#lidError").html("*아이디를 입력하세요.")
+					/* $("#lidError").html("*아이디를 입력하세요.") */
+					alert("*아이디를 입력하세요.")
 					result = false;
-				}
-				if($("#lpassword").val() == "") {
-					$("#lpasswordError").html("*비밀번호를 입력하세요.")
+				} else if($("#lpassword").val() == "") {
+					/* $("#lpasswordError").html("*비밀번호를 입력하세요.") */
+					alert("*비밀번호를 입력하세요.")
 					result = false;
-				}
+				} 
 				return result;
+				
+				
 				
 			}
 		</script>

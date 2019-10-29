@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/index.css">
 </head>
 <body>
-	<div class="header">
+	<div class="header" style="border-bottom: 2px solid #F32C28">
 		<div class="logo">
 			<img src="resources/images/logo.PNG" height=100%>
 		</div>
