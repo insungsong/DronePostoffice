@@ -45,9 +45,11 @@
 	function main() {
 		location.href = "client_index";
 	}
-	
+	 
 	function btnRegister(){
+		location.href="stateCheck?state_id=1";
 		
+		$("#btn1").val();
 	}
 </script>
 </head>
@@ -73,13 +75,12 @@
 				<td>${check.battachfile}</td>
 				<td>${check.bdate}</td>
 				<td>${check.vid}</td>
-				<td><button onClick="btnRegister()" class="btn btn-primary">접수확인요청</button></td>
+				<td><input type="button" value="접수확인요청" onClick="btnRegister()" class="btn btn-primary"></button></td>
 			</tr>
 		</c:forEach>
 
 	</table>
-	<input type="button"  value="메인으로" onClick="main()"
-		class="btn btn-primary " />
+	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
 
 
 </body>
