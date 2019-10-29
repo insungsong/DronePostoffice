@@ -31,6 +31,7 @@ public class NoticeDAO {
 		
 		List<NoticeDTO> list = sqlSessionTemplate.selectList("notice.noticeList", map);
 		
+		//join 테스트
 		for(int i = 0; i <list.size(); i++) {
 			NoticeDTO dto = list.get(i);
 			
@@ -44,11 +45,8 @@ public class NoticeDAO {
 			System.out.println("dept_id : " + memberDto.getDept_id());
 			System.out.println("membername : " + memberDto.getMname());
 			
-//			for(int j = 0; j < dto.getMemberList().size(); j++) {
-//				MemberDTO memberDto = dto.getMemberList().get(j);
-//				System.out.println("dept_id : " + memberDto.getDept_id());
-//				System.out.println("membername : " + memberDto.getMname());
-//			}
+			DeptDTO deptDto = dto.getDeptList().get(i);
+			System.out.println("deptname : " + deptDto.getDept_name());
 			
 		}
 		
@@ -68,6 +66,9 @@ public class NoticeDAO {
 	//테스트 코드/
 	public List<MemberDTO> testMember() {
 		return sqlSessionTemplate.selectList("notice.testMember");
+	}
+	public List<NoticeDTO> testNotice(){
+		return sqlSessionTemplate.selectList("notice.testNotice");
 	}
 	
 }

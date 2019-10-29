@@ -13,7 +13,16 @@ public class NoticeDTO {
 	private Date notice_date;
 	private String mid;
 	private List<MemberDTO> memberList;
+	private List<DeptDTO> deptList;
 	
+	
+	
+	public List<DeptDTO> getDeptList() {
+		return deptList;
+	}
+	public void setDeptList(List<DeptDTO> deptList) {
+		this.deptList = deptList;
+	}
 	
 	
 	public List<MemberDTO> getMemberList() {
