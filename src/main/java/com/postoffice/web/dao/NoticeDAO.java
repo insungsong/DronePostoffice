@@ -65,7 +65,7 @@ public class NoticeDAO {
 		return noticeDTO;
 	}
 	
-	//테스트 코드
+	//테스트 코드/
 	public List<MemberDTO> testMember() {
 		return sqlSessionTemplate.selectList("notice.testMember");
 	}
