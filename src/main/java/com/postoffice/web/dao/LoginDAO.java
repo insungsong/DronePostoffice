@@ -15,8 +15,8 @@ public class LoginDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	public MemberDTO selectMember(String mid) {
-		MemberDTO member = sqlSessionTemplate.selectOne("member.selectMemberByLid", mid);
+	public MemberDTO selectMember(String lid) {
+		MemberDTO member = sqlSessionTemplate.selectOne("member.selectMemberByLid", lid);
 		return member;
 	}
 	

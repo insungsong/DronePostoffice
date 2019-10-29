@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,47 +10,52 @@
 		<script type="text/javascript" src="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=application.getContextPath() %>/resources/css/login.css">
 		<script type="text/javascript">
-			function loginManager() {
+			function check() {
+				var result = true;
+				if($("#mauthority").val() == "") {
+					alert("*로그인 방법을 선택하세요.")
+					result = false;
+				} else if($("#lid").val() == "") {
+					alert("*아이디를 입력하세요.")
+					result = false;
+				} else if($("#lpassword").val() == "") {
+					alert("*비밀번호를 입력하세요.")
+					result = false;
+				}
+				return result;
+			}
+			
+			function manager(){
 				$("button").css("background", "white");
 				$("button").css("color", "black");
-				$.ajax({
-					url:"loginManager",
-					success: function(data) {
-						$(".loginForm").html(data);
-						
-					}
-				});
 				$("#manager").css("background", "#F32C28");
 				$("#manager").css("color", "white");
+				$("#mauthority").val("manager");
 			}
-			
-			function loginClient() {
+			function client(){
 				$("button").css("background", "white");
 				$("button").css("color", "black");
-				$.ajax({
-					url:"loginClient",
-					success: function(data) {
-						$(".loginForm").html(data);
-						
-					}
-				});
 				$("#client").css("background", "#F32C28");
 				$("#client").css("color", "white");
+				$("#mauthority").val("client");
 			}
-			
-			function loginAdmin() {
+			function admin(){
 				$("button").css("background", "white");
 				$("button").css("color", "black");
-				$.ajax({
-					url:"loginAdmin",
-					success: function(data) {
-						$(".loginForm").html(data);
-						
-					}
-				});
 				$("#admin").css("background", "#F32C28");
 				$("#admin").css("color", "white");
+				$("#mauthority").val("admin");
 			}
+			
+			$(function() {
+				var lidError = "<c:out value="${lidError}" />";
+				var lpasswordError = "<c:out value="${lpasswordError}" />";
+				if(lidError != "") {
+					alert(lidError)
+				} else if(lpasswordError != ""){
+					alert(lpasswordError)
+				}
+			})
 			
 		</script>
 	</head>
@@ -64,12 +69,28 @@
 			<div class="login_body">
 				<div class="login_body_tag">
 					<ul>
-						<li><button id="manager" onclick="loginManager()">직원</button></li>
-						<li><button id="client" onclick="loginClient()">이장</button></li>
-						<li><button id="admin" onclick="loginAdmin()">관리자</button></li>
+						<li><button id="manager" onclick="manager()">직원</button></li>
+						<li><button id="client" onclick="client()">이장</button></li>
+						<li><button id="admin" onclick="admin()">관리자</button></li>
 					</ul>
 				</div>
-				<div class="loginForm"></div>
+				<div class="loginForm">
+					<form method="post" action="login" onsubmit="return check()">
+						<div class="lid">
+							<input id="lid" name="lid" type="text" placeholder="아이디">
+						</div>
+						<div class="lpassword">
+							<input id="lpassword" name="lpassword" type="text" placeholder="비밀번호">
+						</div>
+						<div class="lbutton">
+							<input type="submit" value="로그인">
+						</div>
+						<input type="hidden" id="mauthority" name="mauthority" value ="">
+					</form>	 
+					<div class="jbutton">
+						<a href="joinManager">회원가입</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

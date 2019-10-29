@@ -25,55 +25,28 @@ public class LoginController {
 	private LoginService service;
 	
 	@GetMapping("/")
-	public String login() {
+	public String login(String error, Model model) {
+		if(error != null) {
+			if(error.equals("fail_lid")) {
+				model.addAttribute("lidError", "*아이디가 존재하지 않습니다.");
+			} else if(error.equals("fail_lpassword")) {
+				model.addAttribute("lpasswordError", "*비밀번호가 틀렸습니다.");
+			}
+		}
 		return "login";
 	}
 	
-	@GetMapping("/loginManager")
-	public String loginManager1(String error, Model model) {
-		if(error!=null) {
-			if(error.equals("fail_mid")) {
-				model.addAttribute("midError", "*아이디가 존재하지 않습니다.");
-			} else if(error.equals("fail_mpassword")) {
-				model.addAttribute("mpasswordError", "*비밀번호가 틀렸습니다.");
-			}
-		}
-		return "loginManager";
-	}
-	
-	@PostMapping("/loginManager")
-	public String loginManager2(String mid, String mpassword, HttpSession session, Model model) throws Exception {
-		LoginResult result = service.login(mid, mpassword);
+	@PostMapping("/login")
+	public String loginConfirm(String lid, String lpassword, HttpSession session) {
+		LoginResult result = service.login(lid, lpassword);
 		if(result == LoginResult.FAIL_MID) {
-			model.addAttribute("midError", "*아이디가 존재하지 않습니다.");
-			return "redirect:/loginManager";
+			return "redirect:/?error=fail_lid";
 		}else if(result == LoginResult.FAIL_MPASSWORD) {
-			return "redirect:/loginManager?error=fail_mpassword";
-		}else {
-			return "redirect:/index";
+			return "redirect:/?error=fail_lpassword";
 		}
-		
+		return "redirect:/";
 	}
 	
-	@GetMapping("/loginClient")
-	public String loginClient1() {
-		return "loginClient";
-	}
 	
-	@PostMapping("/loginClient")
-	public String loginClient2() {
-		return "";
-	}
-	
-	@GetMapping("/loginAdmin")
-	public String loginAdmin1() {
-		return "loginAdmin";
-	}
-	
-	@PostMapping("/loginAdmin")
-	public String loginAdmin2() {
-		
-		return "";
-	}
 	
 }

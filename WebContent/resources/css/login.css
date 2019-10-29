@@ -70,6 +70,7 @@
 
 .lbutton{
 	line-height: 50px;
+	margin: 10px 0px;
 }
 
 .lbutton input{
@@ -78,5 +79,19 @@
 	border-style: hidden;
 	color: white;
 	font-size: 25px;
+}
+
+.jbutton{
+	line-height: 50px;
+	background-color: #F32C28;
+	text-align: center;
+}
+
+.jbutton a{
+	display: block;
+	color: white;
+	text-decoration: none;
+	font-size: 25px;
+	font-weight: 100;
 }
 

@@ -15,12 +15,12 @@ public class LoginService {
 	@Autowired
 	private LoginDAO loginDao;
 	
-	public LoginResult login(String mid, String mpassword) {
-		MemberDTO member = loginDao.selectMember(mid);
+	public LoginResult login(String lid, String lpassword) {
+		MemberDTO member = loginDao.selectMember(lid);
 		if(member == null) {
 			return LoginResult.FAIL_MID;
 		} else {
-			if(mpassword.equals(member.getMpassword())) {
+			if(lpassword.equals(member.getMpassword())) {
 				return LoginResult.SUCCESS;
 			} else {
 				return LoginResult.FAIL_MPASSWORD;
