@@ -61,14 +61,14 @@ public class NoticeController {
 	 model.addAttribute("pageNum", pageNum); 
 	 model.addAttribute("noticeList",noticeList);		 
 
-	return "manager/notice/noticeList";
+	return "manager/noticeList";
 	}
 
 	// 공지사항 작성 폼
 	@GetMapping("/noticeWrite")
 	public String noticeWriteForm() {
 
-		return "manager/notice/noticeWrite";
+		return "manager/noticeWrite";
 	}
 
 	// 공지사항 작성 처리
@@ -76,7 +76,7 @@ public class NoticeController {
 	public String noticeWrite(NoticeDTO noticeDTO, HttpSession session) {
 		noticeDTO.setMid((String) session.getAttribute("mid"));
 		noticeService.noticeWrite(noticeDTO);
-		return "redirect:/manager/notice/noticeList";
+		return "redirect:/manager/noticeList";
 	}
 
 }

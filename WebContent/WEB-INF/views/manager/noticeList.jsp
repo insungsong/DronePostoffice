@@ -58,7 +58,7 @@
 		
 	</head>
 	<body>
-			<jsp:include page="../../common/header.jsp"/>
+			<jsp:include page="../common/header.jsp"/>
 			<div class= wrapper>
 				
 				<div class=content>
@@ -80,8 +80,8 @@
 									</tr>
 								
 								<tbody>
+									<c:forEach var="notice" items="${noticeList}">	
 										<tr>
-									<c:forEach var="notice" items="${noticeList}">
 											<th scope="row">${notice.notice_id}</th>
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
 											<td>${notice.dept_id}</td>
