@@ -23,6 +23,9 @@ public class NoticeController {
 
 	@RequestMapping("/noticeList")
 	public String noticeList(Model model, @RequestParam(defaultValue = "1") int pageNum, HttpSession session) {	
+		//테스트 코드
+		noticeService.testMember();
+		
 		session.setAttribute("pageNum", pageNum);
 		
 		//페이지당 행 수

@@ -17,7 +17,8 @@
 		<result column="notice_content" property="notice_content"/>
 		<result column="notice_date" property="notice_date"/>
 		<collection  property="memberList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.MemberDTO">
-		<result column="mname" property="mname"/>
+			<result column="dept_id" property="dept_id"/>
+			<result column="mname" property="mname"/>
 		</collection >
 	</resultMap>
 	
@@ -54,4 +55,12 @@
 		insert into notice(notice_id, notice_title, notice_content,notice_attach_file,notice_date,mid)
 		values(#{notice_id},#{notice_title}, #{notice_content},#{notice_attach_file}, sysdate, #{mid})
 	</insert>
+	
+	<!-- 테스트 코드 -->
+	<select id="testMember" resultType="com.postoffice.web.dto.MemberDTO">
+		SELECT
+			*
+		FROM
+			member
+	</select>
 </mapper>

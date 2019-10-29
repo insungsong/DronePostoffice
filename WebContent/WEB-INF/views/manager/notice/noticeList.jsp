@@ -80,8 +80,8 @@
 									</tr>
 								
 								<tbody>
-										<tr>
 									<c:forEach var="notice" items="${noticeList}">
+										<tr>
 											<th scope="row">${notice.notice_id}</th>
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
 											<td>${notice.dept_id}</td>

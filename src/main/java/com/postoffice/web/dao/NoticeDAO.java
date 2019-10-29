@@ -23,39 +23,36 @@ public class NoticeDAO {
 		return totalRowNum;
 	}
 
-	public List<NoticeDTO> selectList(int startRowNum, int endRowNum) {
+	public List<NoticeDTO> selectList(int startRowNum, int endRowNum) {	
 		Map<String, Integer> map = new HashMap<>();
 		map.put("startRowNum", startRowNum);
 		map.put("endRowNum", endRowNum);
 		
-		for(String str : map.keySet()) {
-			
-			System.out.println("시작"+map.get("startRowNum"));
-			System.out.println("끝"+map.get("endRowNum"));
-		}
 		
 		List<NoticeDTO> list = sqlSessionTemplate.selectList("notice.noticeList", map);
 		
 		for(int i = 0; i <list.size(); i++) {
 			NoticeDTO dto = list.get(i);
 			
-			System.out.println(dto.getNotice_id());
-			System.out.println(dto.getNotice_title());
-			System.out.println(dto.getNotice_content());
-			System.out.println(dto.getMid());
-			System.out.println(dto.getMemberList().size());
-			for(int j = 0; j < dto.getMemberList().size(); j++) {
-				MemberDTO memberDto = dto.getMemberList().get(i);
-				System.out.println(memberDto.getMid());
-				System.out.println(memberDto.getMname());
-				System.out.println(memberDto.getMpassword());
-			}
-			System.out.println(dto.getMemberList());
+			System.out.println("id : " + dto.getNotice_id());
+			System.out.println("title : " + dto.getNotice_title());
+			System.out.println("content : " + dto.getNotice_content());
+			System.out.println("mid : " + dto.getMid());
+			System.out.println("size : " + dto.getMemberList().size());
+			
+			MemberDTO memberDto = dto.getMemberList().get(i);
+			System.out.println("dept_id : " + memberDto.getDept_id());
+			System.out.println("membername : " + memberDto.getMname());
+			
+//			for(int j = 0; j < dto.getMemberList().size(); j++) {
+//				MemberDTO memberDto = dto.getMemberList().get(j);
+//				System.out.println("dept_id : " + memberDto.getDept_id());
+//				System.out.println("membername : " + memberDto.getMname());
+//			}
+			
 		}
 		
-		MemberDTO dto = new MemberDTO();
-		System.out.println(dto.getMname());
-		return sqlSessionTemplate.selectList("notice.noticeList", map);
+		return list;
 	}
 
 	public int noticeinsert(NoticeDTO noticeDTO) {
@@ -66,6 +63,11 @@ public class NoticeDAO {
 	public NoticeDTO selectNotice(int notice_id) {
 		NoticeDTO noticeDTO = sqlSessionTemplate.selectOne("notice.selectNotice", notice_id);
 		return noticeDTO;
+	}
+	
+	//테스트 코드
+	public List<MemberDTO> testMember() {
+		return sqlSessionTemplate.selectList("notice.testMember");
 	}
 	
 }
