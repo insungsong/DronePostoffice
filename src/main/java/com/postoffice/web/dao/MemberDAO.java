@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import com.postoffice.web.dto.MemberDTO;
 
 @Component
-public class LoginDAO {
-	private static final Logger logger = LoggerFactory.getLogger(LoginDAO.class);
+public class MemberDAO {
+	private static final Logger logger = LoggerFactory.getLogger(MemberDAO.class);
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;

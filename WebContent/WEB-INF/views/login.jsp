@@ -51,6 +51,7 @@
 				var lidError = "<c:out value="${lidError}" />";
 				var lpasswordError = "<c:out value="${lpasswordError}" />";
 				if(lidError != "") {
+					url:"";
 					alert(lidError)
 				} else if(lpasswordError != ""){
 					alert(lpasswordError)
@@ -80,7 +81,7 @@
 							<input id="lid" name="lid" type="text" placeholder="아이디">
 						</div>
 						<div class="lpassword">
-							<input id="lpassword" name="lpassword" type="text" placeholder="비밀번호">
+							<input id="lpassword" name="lpassword" type="password" placeholder="비밀번호">
 						</div>
 						<div class="lbutton">
 							<input type="submit" value="로그인">
