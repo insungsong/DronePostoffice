@@ -35,7 +35,7 @@ public class NoticeService {
 		NoticeDTO noticeDTO = noticeDAO.selectNotice(notice_id);
 		return noticeDTO;
 	}
-	//
+	///
 	//테스트 코드
 	public List<MemberDTO> testMember(){
 		List<MemberDTO> list = noticeDAO.testMember();
