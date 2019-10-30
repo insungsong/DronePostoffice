@@ -41,12 +41,12 @@ public class NoticeDAO {
 			System.out.println("mid : " + dto.getMid());
 			System.out.println("size : " + dto.getMemberList().size());
 			
-			MemberDTO memberDto = dto.getMemberList().get(i);
-			System.out.println("dept_id : " + memberDto.getDept_id());
-			System.out.println("membername : " + memberDto.getMname());
+			//MemberDTO memberDto = dto.getMemberList().get(i);
+			//System.out.println("dept_id : " + memberDto.getDept_id());
+			//System.out.println("membername : " + memberDto.getMname());
 			
-			DeptDTO deptDto = dto.getDeptList().get(i);
-			System.out.println("deptname : " + deptDto.getDept_name());
+			//DeptDTO deptDto = dto.getDeptList().get(i);
+			//System.out.println("deptname : " + deptDto.getDept_name());
 			
 		}
 		
