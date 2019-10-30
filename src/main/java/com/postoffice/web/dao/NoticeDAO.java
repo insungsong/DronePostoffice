@@ -31,6 +31,7 @@ public class NoticeDAO {
 		
 		List<NoticeDTO> list = sqlSessionTemplate.selectList("notice.noticeList", map);
 		
+
 //		//join 테스트
 //		for(int i = 0; i <list.size(); i++) {
 //			NoticeDTO dto = list.get(i);
