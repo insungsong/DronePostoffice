@@ -28,11 +28,12 @@ public class ClientCheckController {
 	}
 	
 	@RequestMapping("/stateCheck")
-		public String stateCheck(String state_id,Model model) {
+		public ModelAndView stateCheck(String state_id,Model model) {
 		StateDTO state=checkService.stateCheck(state_id);
-		System.out.println("ㅋㅌㄹㄹ");
+		//System.out.println("ㅋㅌㄹㄹ");
+		ModelAndView mav=new ModelAndView("client/requestCheck");
 		model.addAttribute("state",state);
-		return "redirect:/check";
+		return mav;
 		
 	}
 	
