@@ -24,14 +24,32 @@ public class LoginController {
 	@RequestMapping("/")
 	public String login(Model model, HttpSession session) {
 		String error = (String) session.getAttribute("error");
+		String mauthority = (String) session.getAttribute("mauthority");
+		
+		//아이디 또는 비밀번호 틀렸을 때 실행 
 		if(error != null) {
 			if(error.equals("fail_lid")) {
 				model.addAttribute("lidError", "*아이디가 존재하지 않습니다.");
 			} else if(error.equals("fail_lpassword")) {
 				model.addAttribute("lpasswordError", "*비밀번호가 틀렸습니다.");
+			} else if(error.equals("mauthorityError")){
+				model.addAttribute("mauthorityError", "*권한이 없습니다.");
 			}
 			session.removeAttribute("error");
 		}
+		
+		//이미 로그인 상태일 때 로그인 페이지로 돌아갈 수 없도록 실행
+		if(mauthority != null) {
+			if(mauthority.equals("manager")) {
+				return "redirect:/";
+			} else if(mauthority.equals("admin")) {
+				return "redirect:/";
+			} else {
+				return "redirect:/client_index";
+			}
+		}
+		
+		//error, mauthority 둘다 null이면 실행 
 		return "login";
 	}
 	
@@ -50,8 +68,8 @@ public class LoginController {
 			}
 			
 			//로그인 성공했을 때 실행
-			//session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			//session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
+			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
+			session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
 			if(mauthority.equals("manager")) {
 				logger.debug("직원 로그인");
 				return "redirect:/"; //직원이 로그인했을 때 이동하는 페이지
@@ -65,18 +83,27 @@ public class LoginController {
 			
 			//로그인 실패했을 때 실행
 			if(result == LoginResult.FAIL_LID) {
-				return "redirect:/?error=fail_lid";
+				session.setAttribute("error", "fail_lid");
+				return "redirect:/";
 			}else if(result == LoginResult.FAIL_LPASSWORD) {
-				return "redirect:/?error=fail_lpassword";
+				session.setAttribute("error", "fail_lpassword");
+				return "redirect:/";
 			}
 			
 			//로그인 성공했을 때 실행
-			//session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			//session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
+			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
+			session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
 			logger.debug("이장님 로그인");	
-			return "redirect:/"; //이장님이 로그인했을 때 이동하는 페이지
+			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
 		
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("lid");
+		session.removeAttribute("mauthority");
+		return "redirect:/";
 	}
 	
 	

@@ -50,12 +50,14 @@
 			$(function() {
 				var lidError = "<c:out value="${lidError}" />";
 				var lpasswordError = "<c:out value="${lpasswordError}" />";
+				var mauthorityError = "<c:out value="${mauthorityError}" />";
 				if(lidError != "") {
-					url:"";
-					alert(lidError)
+					alert(lidError);
 				} else if(lpasswordError != ""){
-					alert(lpasswordError)
-				}
+					alert(lpasswordError);
+				} else if(mauthorityError != ""){
+					alert(mauthorityError);					
+				} 
 			})
 			
 		</script>
