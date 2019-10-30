@@ -25,7 +25,7 @@ public class PackagingController {
 	@RequestMapping("/packagingList")
 	public String packagingList(Model model) {
 		model.addAttribute("mailList",service.mailList());
-		model.addAttribute("packagingList",service.packageList());
+		model.addAttribute("packageList",service.packageList());
 		
 		List<PackageDTO> list = service.packageList();
 		for(int i = 0; i < list.size(); i++) {
@@ -53,6 +53,12 @@ public class PackagingController {
 			pw.print(json.toString());
 			pw.flush();
 			pw.close();
+	}
+	
+	@RequestMapping("/pack_mailList")
+	public String pack_mailList(Model model, HttpServletResponse response, PackageDTO dto) {
+			
+			return "manager/mailList_popup";
 	}
 	
 }

@@ -7,7 +7,7 @@
 		<result column="mid" property="mid"/>
 		<result column="mname" property="mname"/>
 		<result column="mpassword" property="mpassword"/>
-		 <collection property="noticeList" column="mid" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.NoticeDTO" select="noticeList"></collection>
+		 <collection property="noticeList" column="mid" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.NoticeDTO"></collection>
 	</resultMap>
 	
 	<resultMap type="com.postoffice.web.dto.NoticeDTO" id="notice">
@@ -19,7 +19,7 @@
 		<collection  property="memberList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.MemberDTO">
 			<result column="dept_id" property="dept_id"/>
 			<result column="mname" property="mname"/>
-		</collection >
+		</collection>
 		<collection property="deptList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.DeptDTO">
 			<result column="dept_name" property="dept_name"/>
 		</collection>
