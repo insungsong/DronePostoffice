@@ -1,7 +1,5 @@
 package com.postoffice.web.dto;
 
-import java.util.List;
-
 public class MailDTO {
 	private int mail_id;
 	private String from_name;
@@ -10,8 +8,6 @@ public class MailDTO {
 	private String to_address;
 	private int mail_weight;
 	private String state_id;
-	
-	
 	
 	public int getMail_id() {
 		return mail_id;

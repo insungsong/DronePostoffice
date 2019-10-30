@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="packaging">
+<!--  	
+	<resultMap type="com.postoffice.web.dto.MailDTO" id="Mail">
+		<result
+	</resultMap>
+	<resultMap type="com.postoffice.web.dto.PackageDTO" id="Package">
+	
+	</resultMap>
+-->	
+	<select id="selectMailList" resultType="com.postoffice.web.dto.MailDTO">
+		SELECT
+			*
+		FROM
+			mail
+	</select>
+	
+	<insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">
+		<selectKey keyProperty="package_id" resultType="int" order="AFTER">
+			SELECT SEQ_PACKAGE.currval FROM dual
+		</selectKey>
+		INSERT INTO
+			package(package_id, village, package_weight, state_id, arrival_date)
+		VALUES 
+			(SEQ_PACKAGE.nextval, '자바마을', #{package_weight}, 's002', sysdate)
+	</insert>
+	
+  	
+	<update id="updateMail" parameterType="map">
+		UPDATE
+			mail
+		SET
+			package_num=#{package_id},
+			state_id='s002'
+		WHERE
+			mail_id=#{mail_id}
+	</update>
+
+	<select id="selectPackagingList" resultType="com.postoffice.web.dto.PackageDTO">
+		SELECT
+			*
+		FROM
+			package
+	</select>
+</mapper>

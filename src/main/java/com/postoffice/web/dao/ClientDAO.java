@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,6 +33,13 @@ public class ClientDAO {
 		
 		
 		return ClientboardList;
+	}
+
+
+
+	public List<BoardDTO> selectAll() {
+		List<BoardDTO> boardList=sqlSessionTemplate.selectList("board.selectAll");
+		return boardList;
 	}
 	
 	public List<MailDTO> selectMailList(int startRowNo, int endRowNo) {

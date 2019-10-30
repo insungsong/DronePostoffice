@@ -47,11 +47,6 @@
 		    <input type="text" class="form-control" name="to_address" id="to_address" placeholder="받는 사람주소 입력하세요" value="${board.to_address}">
 		    <span id="toaddressError" class="error" style="color:red">${toaddressError}</span>
 		  </div>
-		 <%--  <div class="form-group">
-		    <label for="formGroupExampleInput2">마을 이름</label>
-		    <input type="text" class="form-control" name="vid" id="villagename" placeholder="마을 이름 입력하세요">
-		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
-		  </div> --%>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">우편물 무게</label>
 		    <input type="text" class="form-control" name="mail_weight" id="mail_weight" placeholder="우편물 무게를 입력하세요" value="${board.mail_weight}">
@@ -62,7 +57,7 @@
 		    <input type="text" class="form-control" name="state_id" id="state_id" placeholder="배송요청" readonly="readonly" value="${board.state_id }">
 		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
 		  </div>
-		  <input type="submit" value="수정하기">
+		  <input type="submit" class="btn btn-success" value="수정하기">
 		  <a href="requestBoarderList" class="btn btn-secondary">뒤로가기</a>
 	</div>
 	</form>

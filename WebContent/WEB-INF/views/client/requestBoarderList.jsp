@@ -91,6 +91,14 @@
 			});
 		}
 	</script>
+	<script type="text/javascript">
+		function fn_searchList(){
+			var searchType = $("#select_searchType option:selected").val();
+			var searchWord = $("#searchWord").val();
+			
+			window.location.href="requestBoarderList.do?curPage=1&searchType="+searchType+"&searchType="+searchWord;
+		}
+	</script>
 	</head>
 	<body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -98,12 +106,16 @@
 			<div class="request_board_second">
 				<div class="request_text">요청 목록</div>
 				<div class="request_serch">
-					<nav class="navbar navbar-light bg-light">
 					  <form class="form-inline">
-					    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+					  	<p><h2>${totalRowNum}개의 우편 요청물이 있습니다.</h2></p>
+							<select name="searchType" id="searchType">
+								<option value="default" id="default">분류</option>
+								<option value="tofrom" id="tofrom">보내는 사람</option>
+								<option value="toname" id="fromname">받는 사람</option>
+							</select>
+							<input type="text" name="searchWord" id="searchWord">
+							<a href="javascript:fn_searchList()"class="btn">검색</a>
 					  </form>
-					</nav>
 				</div>
 				<div class="request_content">
 					<form action="requestWrite">

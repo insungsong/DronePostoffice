@@ -1,10 +1,7 @@
 package com.postoffice.web.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,10 +24,19 @@ public class ClientRequestController {
 	@Autowired
 	private ClientRequestService requestService;
 
-	@RequestMapping("/client_index")
-	public String client_index() {
 
-		return "client/index";
+	
+	@RequestMapping("/client_index")
+	public String client_index(HttpSession session){
+		String check = (String) session.getAttribute("mauthority");
+		if(check != null) {
+			if(check.equals("client")) {
+				return "client/index";
+			}
+		}	
+		session.setAttribute("error", "mauthorityError");
+		return "redirect:/";
+
 	}
 
 	@RequestMapping("/requestBoarderList")
@@ -42,6 +47,7 @@ public class ClientRequestController {
 		int pagesPerGroup = 5;
 
 		int totalRowNum = requestService.getTotalRowNo();
+		System.out.println(totalRowNum+"############################################################");
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if (totalRowNum % rowsPerPage != 0)
 			totalPageNum++;
@@ -73,6 +79,7 @@ public class ClientRequestController {
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
 															// 씀
 		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalRowNum",totalRowNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);
 		model.addAttribute("groupNo", groupNo);
 		model.addAttribute("startPageNo", startPageNo);
@@ -104,6 +111,11 @@ public class ClientRequestController {
 		requestService.requestRemove(mail_id);
 		return "redirect:/requestBoarderList";
 	}
+	@RequestMapping("/mailAdd")
+		public String mailadd() {
+			return "client/mailAdd";
+		}
+	
 	
 	//내가 썻던 게시물 정보부터 가져오기
 	@RequestMapping("/boardDetail")

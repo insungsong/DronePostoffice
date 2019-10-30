@@ -3,6 +3,7 @@ package com.postoffice.web.dto;
 public class VMemberDTO {
 	private String vmid;
 	private String vmname;
+	private String vmpassword;
 	private String vmtel;
 	private String vmphoto;
 	
@@ -17,6 +18,14 @@ public class VMemberDTO {
 	}
 	public void setVmname(String vmname) {
 		this.vmname = vmname;
+	}
+	
+	public String getVmpassword() {
+		return vmpassword;
+	}
+	
+	public void setVmpassword(String vmpassword) {
+		this.vmpassword = vmpassword;
 	}
 	
 	public String getVmtel() {
