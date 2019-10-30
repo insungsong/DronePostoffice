@@ -1,17 +1,19 @@
 package com.postoffice.web.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class PackageDTO {
-	private String package_id;
+	private int package_id;
 	private String village;
-	private int package_weghit;
+	private int package_weight;
 	private String state_id;
 	private Date arrival_date;
-	public String getPackage_id() {
+	
+	
+	public int getPackage_id() {
 		return package_id;
 	}
-	public void setPackage_id(String package_id) {
+	public void setPackage_id(int package_id) {
 		this.package_id = package_id;
 	}
 	public String getVillage() {
@@ -20,11 +22,12 @@ public class PackageDTO {
 	public void setVillage(String village) {
 		this.village = village;
 	}
-	public int getPackage_weghit() {
-		return package_weghit;
+	
+	public int getPackage_weight() {
+		return package_weight;
 	}
-	public void setPackage_weghit(int package_weghit) {
-		this.package_weghit = package_weghit;
+	public void setPackage_weight(int package_weight) {
+		this.package_weight = package_weight;
 	}
 	public String getState_id() {
 		return state_id;

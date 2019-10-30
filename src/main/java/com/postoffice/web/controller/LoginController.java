@@ -1,11 +1,7 @@
 package com.postoffice.web.controller;
 
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.postoffice.web.service.LoginResult;
 import com.postoffice.web.service.LoginService;
@@ -22,58 +19,93 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
-	private LoginService service;
+	private LoginService loginService;
 	
-	@GetMapping("/")
-	public String login() {
+	@RequestMapping("/")
+	public String login(Model model, HttpSession session) {
+		String error = (String) session.getAttribute("error");
+		String mauthority = (String) session.getAttribute("mauthority");
+		
+		//아이디 또는 비밀번호 틀렸을 때 실행 
+		if(error != null) {
+			if(error.equals("fail_lid")) {
+				model.addAttribute("lidError", "*아이디가 존재하지 않습니다.");
+			} else if(error.equals("fail_lpassword")) {
+				model.addAttribute("lpasswordError", "*비밀번호가 틀렸습니다.");
+			} else if(error.equals("mauthorityError")){
+				model.addAttribute("mauthorityError", "*권한이 없습니다.");
+			}
+			session.removeAttribute("error");
+		}
+		
+		//이미 로그인 상태일 때 로그인 페이지로 돌아갈 수 없도록 실행
+		if(mauthority != null) {
+			if(mauthority.equals("manager")) {
+				return "redirect:/";
+			} else if(mauthority.equals("admin")) {
+				return "redirect:/";
+			} else {
+				return "redirect:/client_index";
+			}
+		}
+		
+		//error, mauthority 둘다 null이면 실행 
 		return "login";
 	}
 	
-	@GetMapping("/loginManager")
-	public String loginManager1(String error, Model model) {
-		if(error!=null) {
-			if(error.equals("fail_mid")) {
-				model.addAttribute("midError", "*아이디가 존재하지 않습니다.");
-			} else if(error.equals("fail_mpassword")) {
-				model.addAttribute("mpasswordError", "*비밀번호가 틀렸습니다.");
+	@PostMapping("/login")
+	public String loginConfirm(String lid, String lpassword, String mauthority, HttpSession session) {
+		if(mauthority.equals("manager") || mauthority.equals("admin")) { //직원 또는 관리자가 로그인할 때 
+			LoginResult result = loginService.mLogin(lid, lpassword);
+			
+			//로그인 실패했을 때 실행
+			if(result == LoginResult.FAIL_LID) {
+				session.setAttribute("error", "fail_lid");
+				return "redirect:/";
+			}else if(result == LoginResult.FAIL_LPASSWORD) {
+				session.setAttribute("error", "fail_lpassword");
+				return "redirect:/";
 			}
-		}
-		return "loginManager";
-	}
-	
-	@PostMapping("/loginManager")
-	public String loginManager2(String mid, String mpassword, HttpSession session, Model model) throws Exception {
-		LoginResult result = service.login(mid, mpassword);
-		if(result == LoginResult.FAIL_MID) {
-			model.addAttribute("midError", "*아이디가 존재하지 않습니다.");
-			return "redirect:/loginManager";
-		}else if(result == LoginResult.FAIL_MPASSWORD) {
-			return "redirect:/loginManager?error=fail_mpassword";
-		}else {
-			return "redirect:/index";
-		}
+			
+			//로그인 성공했을 때 실행
+			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
+			session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
+			if(mauthority.equals("manager")) {
+				logger.debug("직원 로그인");
+				return "redirect:/"; //직원이 로그인했을 때 이동하는 페이지
+			} else {
+				logger.debug("관리자 로그인");
+				return "redirect:/"; //관리자가 로그인했을 때 이동하는 페이지
+			}
+			
+		}else { //이장님이 로그인했을 때
+			LoginResult result = loginService.cLogin(lid, lpassword);
+			
+			//로그인 실패했을 때 실행
+			if(result == LoginResult.FAIL_LID) {
+				session.setAttribute("error", "fail_lid");
+				return "redirect:/";
+			}else if(result == LoginResult.FAIL_LPASSWORD) {
+				session.setAttribute("error", "fail_lpassword");
+				return "redirect:/";
+			}
+			
+			//로그인 성공했을 때 실행
+			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
+			session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
+			logger.debug("이장님 로그인");	
+			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
+		} 
 		
 	}
 	
-	@GetMapping("/loginClient")
-	public String loginClient1() {
-		return "loginClient";
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("lid");
+		session.removeAttribute("mauthority");
+		return "redirect:/";
 	}
 	
-	@PostMapping("/loginClient")
-	public String loginClient2() {
-		return "";
-	}
 	
-	@GetMapping("/loginAdmin")
-	public String loginAdmin1() {
-		return "loginAdmin";
-	}
-	
-	@PostMapping("/loginAdmin")
-	public String loginAdmin2() {
-		
-		return "";
-	}
 	
 }

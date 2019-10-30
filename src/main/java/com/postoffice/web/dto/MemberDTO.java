@@ -1,5 +1,7 @@
 package com.postoffice.web.dto;
 
+import java.util.List;
+
 public class MemberDTO {
 	
 	private String mid;
@@ -9,7 +11,23 @@ public class MemberDTO {
 	private String mphoto;
 	private String dept_id;
 	private String mauthority;
+	private List<NoticeDTO> noticeList;
+	private List<DeptDTO> deptList;
 	
+	
+	
+	public List<DeptDTO> getDeptList() {
+		return deptList;
+	}
+	public void setDeptList(List<DeptDTO> deptList) {
+		this.deptList = deptList;
+	}
+	public List<NoticeDTO> getNoticeList() {
+		return noticeList;
+	}
+	public void setNoticeList(List<NoticeDTO> noticeList) {
+		this.noticeList = noticeList;
+	}
 	public String getMid() {
 		return mid;
 	}

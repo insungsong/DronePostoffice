@@ -27,9 +27,15 @@ public class ClientRequestController {
 	
 	
 	@RequestMapping("/client_index")
-	public String client_index(){
-	
-		return "client/index";
+	public String client_index(HttpSession session){
+		String check = (String) session.getAttribute("mauthority");
+		if(check != null) {
+			if(check.equals("client")) {
+				return "client/index";
+			}
+		}	
+		session.setAttribute("error", "mauthorityError");
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/requestBoarderList")
