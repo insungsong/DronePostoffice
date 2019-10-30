@@ -104,4 +104,22 @@ public class ClientRequestController {
 		requestService.requestRemove(mail_id);
 		return "redirect:/requestBoarderList";
 	}
+	
+	//내가 썻던 게시물 정보부터 가져오기
+	@RequestMapping("/boardDetail")
+	public String boardDetail(int mail_id, Model model) {
+		MailDTO board = requestService.getBoard(mail_id);
+		model.addAttribute("board",board);
+		return "client/boardDetail";
+	}
+	
+	//게시물 수정한것 저장하기
+	@RequestMapping("/updateBoard")
+	public String updateBoard(MailDTO board, HttpSession session) {
+		requestService.update(board);
+		
+		int pageNo = (Integer)session.getAttribute("pageNo");
+		return "redirect:/requestBoarderList?pageNo="+pageNo;
+	}
+	
 }

@@ -53,4 +53,18 @@ public class ClientRequestService {
 		int requestRemove = clientdao.removedto(mail_id);
 		return requestRemove;
 	}
+
+	
+	//게시판 글 수정하기
+	public MailDTO getBoard(int mail_id) {
+		MailDTO board = clientdao.selectBoard(mail_id);
+		return board;
+	}
+
+
+	//게시글 작성한것 수정한 정보 보내기
+	public void update(MailDTO board) {
+		clientdao.update(board);
+	}
+
 }

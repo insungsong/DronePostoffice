@@ -81,7 +81,6 @@
 	</style>
 	<script type="text/javascript">
 		function requestDelete(name){
-			//test = $(this).attr('name');
 			console.log(name);
 			$.ajax({
 				url:"requestRemove",
@@ -128,42 +127,42 @@
 									  </thead>
 									  <tbody>
 									    <c:forEach items="${MailList}" var="MailList">
-									 <tr>
-									    <td>${MailList.mail_id }</td>
-										<td>${MailList.from_name}</td>
-										<td>${MailList.from_address}</td>
-										<td>${MailList.to_name }</td>
-										<td>${MailList.to_address}</td>
-										<td>${MailList.mail_weight}</td>
-										<td>${MailList.state_id}</td>
-										<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
-									<tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-							<a href="requestBoarderList?pageNo=1" class="btn btn-success">처음</a>
-							<c:if test="${groupNo > 1}">
-								<a href="requestBoarderList?pageNo=${startPageNo-1}" class="btn btn-secondary">[이전]</a>
-							</c:if>		
-							<div class="btn-group mr-2" role="group" aria-label="First group">
-								<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
-										<c:if test="${pageNo==i }">
-											<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary active">${i}</a>
-										</c:if>
-										<c:if test="${pageNo!=i }">
-											<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary">${i}</a>
-										</c:if>
-						    	</c:forEach>
-						    <c:if test="${groupNo<totalGroupNum }">
-						    	<a href="requestBoarderList?pageNo=${endPageNo+1}" class="btn btn-success">다음</a>
-						    </c:if>
-						  </div>
-						  <a href="requestBoarderList?pageNo=${totalPageNum}" class="btn btn-success">맨끝</a>
-					</div>					
-				</div>			
-			</div>
-		</div>		
-	</body>
-</html>
+											 <tr>
+											    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
+												<td id="Mail_fromname">${MailList.from_name}</td>
+												<td id="Mail_fromaddress">${MailList.from_address}</td>
+												<td id="Mail_toname">${MailList.to_name }</td>
+												<td id="Msil_toaddress">${MailList.to_address}</td>
+												<td id="Mail_weight">${MailList.mail_weight}</td>
+												<td id="Mail_state_id">${MailList.state_id}</td>
+												<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
+											 <tr>
+										</c:forEach>
+									</tbody>
+							</table>
+						</div>
+						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+								<a href="requestBoarderList?pageNo=1" class="btn btn-success">처음</a>
+								<c:if test="${groupNo > 1}">
+									<a href="requestBoarderList?pageNo=${startPageNo-1}" class="btn btn-secondary">[이전]</a>
+								</c:if>		
+								<div class="btn-group mr-2" role="group" aria-label="First group">
+									<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
+											<c:if test="${pageNo==i }">
+												<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary active">${i}</a>
+											</c:if>
+											<c:if test="${pageNo!=i }">
+												<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary">${i}</a>
+											</c:if>
+							    	</c:forEach>
+							    <c:if test="${groupNo<totalGroupNum }">
+							    	<a href="requestBoarderList?pageNo=${endPageNo+1}" class="btn btn-success">다음</a>
+							    </c:if>
+							  </div>
+							  <a href="requestBoarderList?pageNo=${totalPageNum}" class="btn btn-success">맨끝</a>
+						</div>					
+					</div>			
+				</div>
+			</div>		
+		</body>
+	</html>

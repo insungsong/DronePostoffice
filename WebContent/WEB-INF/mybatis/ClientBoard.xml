@@ -42,4 +42,21 @@
 	<delete id="removeRequest">
 		delete Mail where mail_id = #{mail_id}
 	</delete>
+	
+	<select id="selectOne" parameterType="int" resultType="com.postoffice.web.dto.MailDTO">
+		select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id from mail
+		where mail_id=#{mail_id}
+	</select>
+	
+	<update id="updateOne" parameterType="com.postoffice.web.dto.MailDTO">
+		update mail set mail_id=#{mail_id}
+		,from_name=#{from_name}
+		,from_address=#{from_address}
+		,to_name=#{to_name}
+		,to_address=#{to_address}
+		,mail_weight=#{mail_weight}
+		,state_id=#{state_id}
+		where mail_id = #{mail_id}
+	</update>
+	
 </mapper>
