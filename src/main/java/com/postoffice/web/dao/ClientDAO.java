@@ -42,8 +42,39 @@ public class ClientDAO {
 		return boardList;
 	}
 	
-//	public int mailSend() {
-////		ClientMailDTO clientMailDTO = sqlSessionTemplate.insert("clientMailDTO.insert", clientMailDTO);
-//	}
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo) {
+		Map<String,Integer> map = new HashMap<>();
+		map.put("startRowNo",startRowNo);
+		map.put("endRowNo",endRowNo);
+		List<MailDTO> MailboardList=sqlSessionTemplate.selectList("ClientBoard.selectMailList",map);
+		
+		return MailboardList;
+	}
+
+	public int selectnum() {
+		int selectNum = sqlSessionTemplate.selectOne("ClientBoard.selectnum");
+		return selectNum;
+	}
+
+	public int insertMaildto(MailDTO maildto) {
+		int insertMaildto = sqlSessionTemplate.insert("ClientBoard.insertBoard",maildto);
+		return insertMaildto;
+	}
+	public int removedto(String mail_id) {
+		int removesql = sqlSessionTemplate.delete("ClientBoard.removeRequest",mail_id);
+		return removesql;
+	}
+
+	public MailDTO selectBoard(int mail_id) {
+		MailDTO maildto = sqlSessionTemplate.selectOne("ClientBoard.selectOne",mail_id);
+		return maildto;
+	}
+
+	public int update(MailDTO board) {
+		int rows=sqlSessionTemplate.update("ClientBoard.updateOne",board);
+		return rows;
+	}
+
+
 	
 }

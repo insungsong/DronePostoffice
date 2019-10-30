@@ -36,8 +36,7 @@
 				where n.mid = m.mid
 				and m.dept_id = d.dept_id
 				order by notice_id desc
-			)	
-			
+			)
 			where rownum &lt;=#{endRowNum}
 		)
 		where rn &gt;=#{startRowNum}

@@ -30,21 +30,44 @@ public class ClientRequestService {
 	}
 
 
-	public void requestCheck() {
-	
-		
-	}
-
-
 	public List<BoardDTO> selectAll() {
 		List<BoardDTO> boardList=clientdao.selectAll();
 		return boardList;
 	}
 	
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo){
+		List<MailDTO> ClientboardList = clientdao.selectMailList(startRowNo,endRowNo);
+		return ClientboardList;
+	}
+
+
+	public int getnum() {
+		int mailMap = clientdao.selectnum();
+		return mailMap;
+	}
+
+	public int requestWrite(MailDTO maildto) {
+		int mailDto = clientdao.insertMaildto(maildto);
+		return mailDto;
+	}
+
+
+	public int requestRemove(String mail_id) {
+		int requestRemove = clientdao.removedto(mail_id);
+		return requestRemove;
+	}
+
 	
-	/*
-	 * public void mailSend(ClientMailDTO clientMailDTO) {
-	 * clientdao.mailSend(clientMailDTO); }
-	 */
-	
+	//게시판 글 수정하기
+	public MailDTO getBoard(int mail_id) {
+		MailDTO board = clientdao.selectBoard(mail_id);
+		return board;
+	}
+
+
+	//게시글 작성한것 수정한 정보 보내기
+	public void update(MailDTO board) {
+		clientdao.update(board);
+	}
+
 }
