@@ -81,5 +81,7 @@ public class NoticeController {
 		noticeService.noticeWrite(noticeDTO);
 		return "redirect:/manager/noticeList";
 	}
+	
+	
 
 }

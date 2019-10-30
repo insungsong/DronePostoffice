@@ -32,7 +32,7 @@
 		<div class="body">
 			<div class="body_sub">
 			
-			<form method="post" action="noticeWrite" >
+			<form method="post" action="noticeWrite" onsubmit="return checkForm()">
 				<div class="bor_title">
 					<div class="subject">공지사항 글작성</div>
 					
@@ -46,7 +46,10 @@
 						</colgroup>
 							<tr>
 								<th scope="col">제목</th>
-								<td colspan="5"><input type="text" name="wtitle" style="border:0;width: 98%;"></td>
+								<td colspan="5">
+									<input type="text" name="wtitle" style="border:0;width: 98%;">
+									<span id="noticetitleError" class="error" style="color:red"></span>
+								</td>
 							
 							</tr>
 							<tr>
@@ -63,10 +66,13 @@
 								<td colspan="5"></td>
 							</tr>
 							<tr>
-							<td colspan="6"><textarea rows="10" cols="5" style="width: 100%;"></textarea></td>
+							<td colspan="6">
+								<textarea rows="30" cols="5" style="width: 100%;"></textarea>
+								<span id="noticecontentError" class="error" style="color:red"></span>
+							</td>
 							</tr>
 					</table>
-						<input type="submit" value="목록으로" onClick="checkForm()"></input>
+						<input type="submit" value="저장" onClick="checkForm()"></input>
 					</div>
 				</form> 
 			</div>

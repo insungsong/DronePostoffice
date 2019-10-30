@@ -74,7 +74,7 @@
 									<tr style="background:gray">
 										<th scope="col">글번호</th>
 										<th scope="col">제목</th>
-										<th scope="col">부서</th>
+										<!-- <th scope="col">부서</th> -->
 										<th scope="col">작성자</th>
 										<th scope="col">작성일</th>
 									</tr>
@@ -84,7 +84,7 @@
 										<tr>
 											<th scope="row">${notice.notice_id}</th>
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
-											<td>${notice.dept_id}</td>
+											<%-- <td>${notice.dept_id}</td> --%>
 											<td>${notice.mid}</td>
 											<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 										</tr>

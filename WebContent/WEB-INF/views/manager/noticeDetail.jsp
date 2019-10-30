@@ -56,11 +56,13 @@
 							<td colspan="6"><textarea rows="10" cols="5" style="width: 100%;" readonly></textarea></td>
 							</tr>
 					</table>
-						<input type="submit" value="목록으로" onClick="location.href='../notice/noticeList'"></input>
-						<input type="submit" value="수정" onClick="location.href='noticeWrite'"></input>
-						<input type="submit" value="삭제"></input>
+						
 					</div>
 				</form> 
+				
+				<a href="noticeList?pageNum=${PageNum}" class="btn btn-info">목록</a>	
+				<a href="noticeupdate?notice_id=${notice.notice_id}" class="btn btn-danger">수정</a>	
+				<a href="noticedelete?notice=${notice.notice_id}" class="btn btn-danger">삭제</a>
 			</div>
 		</div>
 	</body>
