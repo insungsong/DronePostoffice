@@ -13,12 +13,12 @@
 	<style type="text/css">
 		.request_board_area{
 			border:1px solid black;
-			height:843px;
+			height:909px;
 		}
 		.request_board_second{
 			margin:20px;
 			border: solid 1px black;
-    		height: 803px;
+    		height: 873px;
 		}
 		.request_text{
 			margin:10px;
@@ -29,7 +29,7 @@
 		.request_content{
 			margin: 10px;
 			border: solid 1px black;
-			height: 671px;
+			height: 740px;
 		}
 		.request_serch{
 			margin:10px;
@@ -68,7 +68,7 @@
 		
 		.client_content_content{
 			margin:10px;
-			height:525px;
+			height:595px;
 			border: solid 1px black;
 		}
 		.btn{
@@ -79,17 +79,24 @@
 			margin-left: 41%;
 		}
 	</style>
-	
 	<script type="text/javascript">
-		function writeBoard() {
-			location.href="writeBoard";
+		function requestDelete(name){
+			console.log(name);
+			$.ajax({
+				url:"requestRemove",
+				data:{"mail_id":name},
+				success:function(data){
+					console.log('성공');
+				}
+			});
 		}
 	</script>
-	
 	<script type="text/javascript">
-		function mailAdd(){
-			 var url="mailAdd";
-	            window.open(url,"","width=1000,height=1000,left=500");
+		function fn_searchList(){
+			var searchType = $("#select_searchType option:selected").val();
+			var searchWord = $("#searchWord").val();
+			
+			window.location.href="requestBoarderList.do?curPage=1&searchType="+searchType+"&searchType="+searchWord;
 		}
 	</script>
 	</head>
@@ -99,65 +106,75 @@
 			<div class="request_board_second">
 				<div class="request_text">요청 목록</div>
 				<div class="request_serch">
-					<nav class="navbar navbar-light bg-light">
 					  <form class="form-inline">
-					    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">검색</button>
+					  	<p><h3>${totalRowNum}개의 우편 요청물이 있습니다.</h3></p>
+							<select name="searchType" id="searchType">
+								<option value="default" id="default">분류</option>
+								<option value="tofrom" id="tofrom">보내는 사람</option>
+								<option value="toname" id="fromname">받는 사람</option>
+							</select>
+							<input type="text" name="searchWord" id="searchWord">
+							<a href="javascript:fn_searchList()"class="btn">검색</a>
 					  </form>
-					</nav>
 				</div>
 				<div class="request_content">
-					<div class="client_write_button">
-						<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="mailAdd()">글쓰기</button>
-					</div>
+					<form action="requestWrite">
+						<div class="client_write_button">
+							<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
+						</div>
+					</form>
 					<div class="client_content_content">
 								<table class="table">
 									<thead class="thead-dark">
 									   <tr>
-									     <th scope="col">번호</th>
-									     <th scope="col">제목</th>
-									     <th scope="col">내용</th>
-									     <th scope="col">첨부파일</th>
-									     <th scope="col">날짜</th>
-									     <th scope="col">마을 코드</th>
+									     <th scope="col">요청 번호</th>
+									     <th scope="col">보내는 사람</th>
+									     <th scope="col">보내는 주소</th>
+									     <th scope="col">받는 사람</th>
+									     <th scope="col">받는 주소</th>
+									     <th scope="col">메일 무게</th>
+									     <th scope="col">배송 상태</th>
+									     <th scope="col">요청 취소</th>
 									   </tr>
 									  </thead>
 									  <tbody>
-									    <c:forEach items="${boardList}" var="board">
-									 <tr>
-									    <td>${board.bid }</td>
-										<td>${board.btitle}</td>
-										<td>${board.bcontent}</td>
-										<td>${board.battachfile}</td>
-										<td>${board.bdate }</td>
-										<td>${board.vid}</td>
-									<tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-							<a href="requestBoarderList?pageNo=1" class="btn btn-success">처음</a>
-							<c:if test="${groupNo > 1}">
-								<a href="requestBoarderList?pageNo=${startPageNo-1}" class="btn btn-secondary">[이전]</a>
-							</c:if>		
-							<div class="btn-group mr-2" role="group" aria-label="First group">
-								<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
-										<c:if test="${pageNo==i }">
-											<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary active">${i}</a>
-										</c:if>
-										<c:if test="${pageNo!=i }">
-											<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary">${i}</a>
-										</c:if>
-						    	</c:forEach>
-						    <c:if test="${groupNo<totalGroupNum }">
-						    	<a href="requestBoarderList?pageNo=${endPageNo+1}" class="btn btn-success">다음</a>
-						    </c:if>
-						  </div>
-						  <a href="requestBoarderList?pageNo=${totalPageNum}" class="btn btn-success">맨끝</a>
-					</div>					
-				</div>			
-			</div>
-		</div>		
-	</body>
-</html>
+									    <c:forEach items="${MailList}" var="MailList">
+											 <tr>
+											    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
+												<td id="Mail_fromname">${MailList.from_name}</td>
+												<td id="Mail_fromaddress">${MailList.from_address}</td>
+												<td id="Mail_toname">${MailList.to_name }</td>
+												<td id="Msil_toaddress">${MailList.to_address}</td>
+												<td id="Mail_weight">${MailList.mail_weight}</td>
+												<td id="Mail_state_id">${MailList.state_id}</td>
+												<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
+											 <tr>
+										</c:forEach>
+									</tbody>
+							</table>
+						</div>
+						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+								<a href="requestBoarderList?pageNo=1" class="btn btn-success">처음</a>
+								<c:if test="${groupNo > 1}">
+									<a href="requestBoarderList?pageNo=${startPageNo-1}" class="btn btn-secondary">[이전]</a>
+								</c:if>		
+								<div class="btn-group mr-2" role="group" aria-label="First group">
+									<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
+											<c:if test="${pageNo==i }">
+												<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary active">${i}</a>
+											</c:if>
+											<c:if test="${pageNo!=i }">
+												<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary">${i}</a>
+											</c:if>
+							    	</c:forEach>
+							    <c:if test="${groupNo<totalGroupNum }">
+							    	<a href="requestBoarderList?pageNo=${endPageNo+1}" class="btn btn-success">다음</a>
+							    </c:if>
+							  </div>
+							  <a href="requestBoarderList?pageNo=${totalPageNum}" class="btn btn-success">맨끝</a>
+						</div>					
+					</div>			
+				</div>
+			</div>		
+		</body>
+	</html>

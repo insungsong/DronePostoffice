@@ -6,12 +6,8 @@ public class MailDTO {
 	private String from_address;
 	private String to_name;
 	private String to_address;
-	private String vid;
 	private int mail_weight;
 	private String state_id;
-	
-	
-	
 	
 	public int getMail_id() {
 		return mail_id;
@@ -42,12 +38,6 @@ public class MailDTO {
 	}
 	public void setTo_address(String to_address) {
 		this.to_address = to_address;
-	}
-	public String getVid() {
-		return vid;
-	}
-	public void setVid(String vid) {
-		this.vid = vid;
 	}
 	public int getMail_weight() {
 		return mail_weight;

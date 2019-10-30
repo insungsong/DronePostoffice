@@ -71,6 +71,16 @@
 			}
 		});
 	}
+	
+	function pack_mailList(value){
+		$.ajax({
+			url:"pack_mailList",
+			data:{"package_id",value},
+			success:function(data){
+				console.log('성공');
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -146,10 +156,13 @@
 			</div>
 			
 			<div class="pack_right">
-				<div class = "mail_list">
+				<div class="bor_title">
+					<div class="subject">패키지 목록</div>
+				</div>
+				<div class = "mail_list" style="border-bottom:1px solid #999;">
 					<table cellspacing="0" border="1" summary="명단관리  리스트" class="frt_tbl_type" style="width:100%;padding-right:15px;">
 						<colgroup>
-							<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100" />
+							<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100" /><col width="100"><col width="15">
 						</colgroup>
 						<thead>
 							<tr>
@@ -158,8 +171,8 @@
 								<th scope="col">총 무게</th>
 								<th scope="col">상태</th>
 								<th scope="col">포장 날짜</th>
-								<th scope="col"><input type="checkbox" name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()" /><label for="chk_all"></label></th>
 								<th scope="col"></th>
+								<th></th>
 							</tr>
 						</thead>
 					</table>
@@ -167,34 +180,22 @@
 						<table cellspacing="0" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
 						
 							<colgroup>
-								<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100" />
+								<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100"><col width="100" />
 							</colgroup>
 							<tbody>		
-								<c:forEach items="${packagingList}" var="package">										
+								<c:forEach items="${packageList}" var="pack">										
 									<tr>
-										<td class="num">${package.package_id}</td>
-										<td class="title" >${package.village}</td>
-										<td class="date">${package.package_weight}</td>
-										<td class="writer">${package.state_id}</td>
-										<td class="writer">${package.arrival_date}</td>
-										<td class="frm"><input type="checkbox" id="chk" name=""  value="" onclick="weight_check()"/></td>
+										<td class="num">${pack.package_id}</td>
+										<td class="title" >${pack.village}</td>
+										<td class="date">${pack.package_weight}</td>
+										<td class="writer">${pack.state_id}</td>
+										<td class="writer">${pack.arrival_date}</td>
+										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 					</div>
-					<table border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;border-top: 1px solid #999;">
-						<colgroup>
-							<col width="*" /><col width="50" /><col width="100" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col" colspan="5">총 무게</th>
-								<th scope="col" id="total_weight"></th>
-								<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="packaging()">패키징</button></th>
-							</tr>
-						</thead>
-					</table>
 				</div>
 			</div>
 		</div>
