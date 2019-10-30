@@ -8,7 +8,7 @@
 			<script type ="text/javascript" src = "<%=application.getContextPath() %>/resources/js/jquery-3.4.1.min.js"></script>
 			<link rel="stylesheet" type ="text/css" href="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 			<script type="text/javascript" src="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>			
-			
+			<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
 			<script type="text/javascript">
 				function checkForm(){
 					var result= true;
@@ -20,80 +20,57 @@
 						$("noticecontentError").text("*내용을 입력해주세요.");
 					}
 					
-					
+					return result;
 				}
-			</script>
-			
-			<style type="text/css">
-			.wrapper{
-				border:1px solid black;
-				width:100%;
-			}
-			
-			.write_title_group{
-				border:1px solid black;
-				width:99%;
-				padding-left:50px;
-				margin:5px;
-				
-			}
-			.write_member_group{
-				border:1px solid black;
-				width:99%;
-				padding-left:50px;
-				margin:5px;
-			}
-			
-			.wirte_file_group{
-				border:1px solid black;
-				width:99%;
-				padding-left:50px;
-				margin:5px;
-			}
-			.write_content_group{
-				border:1px solid black;
-				width:99%;
-				padding-left:50px;
-				margin:5px;
-			}
-			
-			</style>
-			
-		
+					
+					
+					
+			</script>		
 	</head>
 	<body>
 		<jsp:include page="../common/header.jsp"/>
-		<form method="post" action="noticeWrite" >
-			<div class="wrapper">
-				<div class="write_title_group">
-					<div>
-						<label for="write_title">제목</label>
-					</div>
-					<input type="text" class="wirte_title" id="writeTitle" placeholder="제목을 입력해주세요">				
+		<div class="body">
+			<div class="body_sub">
+			
+			<form method="post" action="noticeWrite" >
+				<div class="bor_title">
+					<div class="subject">공지사항 글작성</div>
+					
 				</div>
-				
-				<div class="write_member_group">
-					<div>
-						<label for="write_mid">작성자</label>
+
+				<div class = "mail_list">
+					<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;">
+						<colgroup>
+							<col width="10%"/><col width="23%"/><col width="10%"/>
+							<col width="23%"/><col width="10%"/><col width="24%"/>
+						</colgroup>
+							<tr>
+								<th scope="col">제목</th>
+								<td colspan="5"><input type="text" name="wtitle" style="border:0;width: 98%;"></td>
+							
+							</tr>
+							<tr>
+								<th scope="col">작성자</th>
+								<td><input type="text" name="writer" value="${notice.mid }" style="border:0; width: 100%; text-align: center" readonly></td>
+								<th scope="col">부서</th>
+								<td><input type="text" name="wdept" value="${member.dept_id}"  style="border:0; width: 100%; text-align: center" readonly></td>
+								<th scope="col">작성일</th>
+								<td><input type="text" name="wdate" value="${notice.notice_date}"  style="border:0; width: 100%; text-align: center" readonly></td>
+								
+							</tr>
+							<tr>
+								<th scope="col">첨부파일</th>
+								<td colspan="5"></td>
+							</tr>
+							<tr>
+							<td colspan="6"><textarea rows="10" cols="5" style="width: 100%;"></textarea></td>
+							</tr>
+					</table>
+						<input type="submit" value="목록으로" onClick="checkForm()"></input>
 					</div>
-					<input type="text" class="write_mid" id="writeMid" placeholder="2019-10-30" readonly>	
-				</div>
-				
-				<div class="wirte_file_group">
-					<div>
-						<label for="write_file">첨부파일</label>
-					</div>
-					<input type="text" class="write_file" id="wirteFile" placeholder="첨부파일">
-				</div>
-				
-				<div class="write_content_group">
-					<div>
-						<label for="write_content">내용</label>
-					</div>
-					<textarea rows="5" cols="100"></textarea>
-				
-				</div>
+				</form> 
 			</div>
-		</form> 
+		</div>
+		
 	</body>
 </html>
