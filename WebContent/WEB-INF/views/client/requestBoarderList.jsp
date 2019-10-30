@@ -99,6 +99,11 @@
 			window.location.href="requestBoarderList.do?curPage=1&searchType="+searchType+"&searchType="+searchWord;
 		}
 	</script>
+	<script type="text/javascript">
+		function searchBtn(){
+			
+		}
+	</script>
 	</head>
 	<body>
 	<jsp:include page="../common/header.jsp"></jsp:include>
@@ -106,15 +111,15 @@
 			<div class="request_board_second">
 				<div class="request_text">요청 목록</div>
 				<div class="request_serch">
-					  <form class="form-inline">
-					  	<p><h3>${totalRowNum}개의 우편 요청물이 있습니다.</h3></p>
-							<select name="searchType" id="searchType">
-								<option value="default" id="default">분류</option>
-								<option value="tofrom" id="tofrom">보내는 사람</option>
-								<option value="toname" id="fromname">받는 사람</option>
+					  <form id="searchForm" action="searchBoard" method="get">
+					  	<p style="margin-top: 0;margin-bottom: -1px;margin-right: 16px;margin-left: 21px;">${totalRowNum}개의 우편 요청물이 있습니다.</p>
+							<select name="searchType">
+								<option value="">선택</option>
+								<option value="from_name">보내는 사람</option>
+								<option value="to_name">받는 사람</option>
 							</select>
-							<input type="text" name="searchWord" id="searchWord">
-							<a href="javascript:fn_searchList()"class="btn">검색</a>
+							<input type="text" id="keyWord" name="keyword" style="height: 25px">
+							<button id="searchBtn" name="searchBtn">검색</button>
 					  </form>
 				</div>
 				<div class="request_content">

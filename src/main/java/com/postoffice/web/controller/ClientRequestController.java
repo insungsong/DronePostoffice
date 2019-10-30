@@ -134,4 +134,17 @@ public class ClientRequestController {
 		return "redirect:/requestBoarderList?pageNo="+pageNo;
 	}
 	
+	//search기능
+	@RequestMapping("/searchBoard")
+	public String searchBoard(String from_name,String to_name,String keyword,
+						Model model) {
+	
+
+		List<MailDTO> MailList = requestService.fromsearch(from_name,to_name,keyword);
+
+		// JSP로 페이지 정보 넘기기
+
+		model.addAttribute("MailList", MailList);
+		return "client/requestBoarderList";
+	}
 }

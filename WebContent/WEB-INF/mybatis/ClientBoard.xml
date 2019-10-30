@@ -59,4 +59,18 @@
 		where mail_id = #{mail_id}
 	</update>
 	
+	<select id="selectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
+		SELECT
+			*
+		FROM
+			mail
+		WHERE
+			to_name
+		LIKE
+			#{keyword}
+		OR
+			from_name
+		LIKE
+			#{keyword}
+	</select>
 </mapper>
