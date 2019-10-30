@@ -24,7 +24,7 @@
 }
 
 .login_body ul{
-	list-style:none;
+	list-style:none; /* 옆에 점 표시 제거 */
 	margin: 0;
 	padding: 0;
 }

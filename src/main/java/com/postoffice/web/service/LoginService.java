@@ -45,6 +45,25 @@ public class LoginService {
 			}
 		}
 	}
-	
+
+	public boolean mLidCheck(String lid) {
+		MemberDTO member = memberDao.selectMember(lid);
+		if(member == null) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+	public boolean cLidCheck(String lid) {
+		VMemberDTO vmember = vmemberDao.selectMember(lid);
+		if(vmember == null) {
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+		
 	
 }

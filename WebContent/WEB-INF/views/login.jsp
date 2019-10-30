@@ -12,7 +12,7 @@
 		<script type="text/javascript">
 			function check() {
 				var result = true;
-				if($("#mauthority").val() == "") {
+				if($("#lauthority").val() == "") {
 					alert("*로그인 방법을 선택하세요.")
 					result = false;
 				} else if($("#lid").val() == "") {
@@ -30,33 +30,33 @@
 				$("button").css("color", "black");
 				$("#manager").css("background", "#F32C28");
 				$("#manager").css("color", "white");
-				$("#mauthority").val("manager");
+				$("#lauthority").val("manager");
 			}
 			function client(){
 				$("button").css("background", "white");
 				$("button").css("color", "black");
 				$("#client").css("background", "#F32C28");
 				$("#client").css("color", "white");
-				$("#mauthority").val("client");
+				$("#lauthority").val("client");
 			}
 			function admin(){
 				$("button").css("background", "white");
 				$("button").css("color", "black");
 				$("#admin").css("background", "#F32C28");
 				$("#admin").css("color", "white");
-				$("#mauthority").val("admin");
+				$("#lauthority").val("admin");
 			}
 			
 			$(function() {
 				var lidError = "<c:out value="${lidError}" />";
 				var lpasswordError = "<c:out value="${lpasswordError}" />";
-				var mauthorityError = "<c:out value="${mauthorityError}" />";
+				var lauthorityError = "<c:out value="${lauthorityError}" />";
 				if(lidError != "") {
 					alert(lidError);
 				} else if(lpasswordError != ""){
 					alert(lpasswordError);
-				} else if(mauthorityError != ""){
-					alert(mauthorityError);					
+				} else if(lauthorityError != ""){
+					alert(lauthorityError);					
 				} 
 			})
 			
@@ -88,10 +88,10 @@
 						<div class="lbutton">
 							<input type="submit" value="로그인">
 						</div>
-						<input type="hidden" id="mauthority" name="mauthority" value ="">
+						<input type="hidden" id="lauthority" name="lauthority" value ="">
 					</form>	 
 					<div class="jbutton">
-						<a href="joinManager">회원가입</a>
+						<a href="join">회원가입</a>
 					</div>
 				</div>
 			</div>

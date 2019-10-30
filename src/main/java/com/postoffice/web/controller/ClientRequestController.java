@@ -28,13 +28,13 @@ public class ClientRequestController {
 	
 	@RequestMapping("/client_index")
 	public String client_index(HttpSession session){
-		String check = (String) session.getAttribute("mauthority");
+		String check = (String) session.getAttribute("lauthority");
 		if(check != null) {
 			if(check.equals("client")) {
 				return "client/index";
 			}
 		}	
-		session.setAttribute("error", "mauthorityError");
+		session.setAttribute("error", "lauthorityError");
 		return "redirect:/";
 	}
 	
