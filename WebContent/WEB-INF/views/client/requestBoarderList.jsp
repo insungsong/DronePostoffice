@@ -107,7 +107,7 @@
 				<div class="request_text">요청 목록</div>
 				<div class="request_serch">
 					  <form class="form-inline">
-					  	<p><h2>${totalRowNum}개의 우편 요청물이 있습니다.</h2></p>
+					  	<p><h3>${totalRowNum}개의 우편 요청물이 있습니다.</h3></p>
 							<select name="searchType" id="searchType">
 								<option value="default" id="default">분류</option>
 								<option value="tofrom" id="tofrom">보내는 사람</option>
