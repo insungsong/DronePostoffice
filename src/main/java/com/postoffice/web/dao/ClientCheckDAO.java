@@ -13,6 +13,5 @@ public class ClientCheckDAO {
 	
 	public List selectAll() {
 		return sqlSessionTemplate.selectList("board.selectAll");
-		
 	}
 }

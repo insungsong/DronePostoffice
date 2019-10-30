@@ -48,9 +48,13 @@
 	 
 	function btnRegister(){
 		$.ajax({
-			url:"stateCheck?state_id=1",
+			url:"stateCheck",
+			data:{"state_id":"s001"},
 			success:function(result){
-				$("#btn").val(result);
+				console.log(result);
+				console.log(result.state_id)
+				var var1=JSON.parse(result);
+				$("#btn").val(var1);
 			}
 		
 		});
@@ -60,34 +64,41 @@
 </script>
 </head>
 <body>
+<jsp:include page="../common/header.jsp"></jsp:include>
 
-	<table id="customers">
+
+	<table id="customers" class="table">
+		<thead class="thead-dark">
 		<tr>
-			<th>요청번호</th>
-			<th>마을이름</th>
-			<th>우편정보</th>
-			<th>작성자</th>
-			<th>작성날짜</th>
-			<th>마을번호</th>
-			<th>접수상태</th>
+			<th>요청 번호</th>
+			<th>보내는 사람</th>
+			<th>보내는 주소</th>
+			<th>받는 사람</th>
+			<th>받는 주소</th>
+			<th>메일 무게</th>
+			<th>요청 상태</th>
 		</tr>
-		
+		</thead>
+		<tbody>
 		<tr> 
 		<c:forEach var="check" items="${CheckList}">
-				<td>${check.bid}</td>
-				<td>${check.btitle}</td>
-				<td>${check.bcontent}</td>
-				<td>${check.battachfile}</td>
-				<td>${check.bdate}</td>
-				<td>${check.vid}</td>
+				<td>${check.mail_id}</td>
+				<td>${check.from_name}</td>
+				<td>${check.from_address}</td>
+				<td>${check.to_name}</td>
+				<td>${check.to_address}</td>
+				<td>${check.mail_weight}</td>
+				<td>${check.state_id}</td>
 				<td><input id="btn" type="button" value="접수확인요청" onClick="btnRegister()" class="btn btn-primary"></button></td>
 			</tr>
 		</c:forEach>
-
+	</tbody>
 	</table>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-	<input type="button" id="btn2" value="sdas" onClick="a()" />
 	
-
-</body>
-</html>
+		</div>					
+					</div>			
+				</div>
+			</div>		
+		</body>
+	</html>
