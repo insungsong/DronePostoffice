@@ -45,10 +45,18 @@
 	function main() {
 		location.href = "client_index";
 	}
-	
+	 
 	function btnRegister(){
+		$.ajax({
+			url:"stateCheck?state_id=1",
+			success:function(result){
+				$("#btn").val(result);
+			}
 		
+		});
+	
 	}
+
 </script>
 </head>
 <body>
@@ -72,14 +80,14 @@
 				<td>${check.battachfile}</td>
 				<td>${check.bdate}</td>
 				<td>${check.vid}</td>
-				<td><button onClick="btnRegister()" class="btn btn-primary">접수확인요청</button></td>
+				<td><input id="btn" type="button" value="접수확인요청" onClick="btnRegister()" class="btn btn-primary"></button></td>
 			</tr>
 		</c:forEach>
 
 	</table>
-	<input type="button"  value="메인으로" onClick="main()"
-		class="btn btn-primary " />
-
+	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
+	<input type="button" id="btn2" value="sdas" onClick="a()" />
+	
 
 </body>
 </html>
