@@ -59,18 +59,22 @@
 		where mail_id = #{mail_id}
 	</update>
 	
-	<select id="selectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
-		SELECT
-			*
-		FROM
-			mail
-		WHERE
-			to_name
-		LIKE
-			#{keyword}
-		OR
-			from_name
-		LIKE
-			#{keyword}
+	<select id="selectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">		
+		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		from(
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    from(
+		        SELECT
+					*
+				FROM
+					mail
+				WHERE
+					from_name
+				LIKE
+					#{keyword}
+		    )
+		    where rownum &lt;= #{endRowNo}
+		)
+		where rn &gt; = #{startRowNo}
 	</select>
 </mapper>

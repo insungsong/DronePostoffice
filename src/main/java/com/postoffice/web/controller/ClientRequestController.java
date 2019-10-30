@@ -136,15 +136,49 @@ public class ClientRequestController {
 	
 	//search기능
 	@RequestMapping("/searchBoard")
-	public String searchBoard(String from_name,String to_name,String keyword,
-						Model model) {
-	
+	public String searchBoard(String searchType,String keyword,
+						Model model,@RequestParam(defaultValue = "1") int pageNo, HttpSession session) {
+		session.setAttribute("pageNo", pageNo);
+		System.out.println(searchType+"++++++++++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(keyword);
+		int rowsPerPage = 10;
+		int pagesPerGroup = 5;
 
-		List<MailDTO> MailList = requestService.fromsearch(from_name,to_name,keyword);
+		int totalRowNum = requestService.getTotalRowNo();
+		int totalPageNum = totalRowNum / rowsPerPage;
+		if (totalRowNum % rowsPerPage != 0)
+			totalPageNum++;
+		int totalGroupNum = totalPageNum / pagesPerGroup;
+		if (totalPageNum % pagesPerGroup != 0)
+			totalGroupNum++;
 
-		// JSP로 페이지 정보 넘기기
+		// 현재 페이지의 그룹번호
+		int groupNo = (pageNo - 1) / pagesPerGroup + 1;
+		// 현재 그룹의 시작 페이지 번호
+		int startPageNo = (groupNo - 1) * pagesPerGroup + 1;
+		// 현재 그룹의 마지막 페이지 번호
+		int endPageNo = startPageNo + pagesPerGroup - 1;
+		if (groupNo == totalGroupNum)
+			endPageNo = totalPageNum;
 
+		// 현재 페이지의 시작 행번호
+		int startRowNo = (pageNo - 1) * rowsPerPage + 1;
+		// 현재 페이지의 끝 행번호
+		int endRowNo = pageNo * rowsPerPage;
+		if (pageNo == totalPageNum)
+			endRowNo = totalRowNum;
+
+		List<MailDTO> MailList = requestService.fromsearch(searchType,keyword,startRowNo, endRowNo);
+		
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalRowNum",totalRowNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNo", groupNo);
+		model.addAttribute("startPageNo", startPageNo);
+		model.addAttribute("endPageNo", endPageNo);
+		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
+		
 		return "client/requestBoarderList";
 	}
 }

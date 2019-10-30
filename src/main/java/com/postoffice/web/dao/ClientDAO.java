@@ -76,17 +76,18 @@ public class ClientDAO {
 	}
 
 
-	public List<MailDTO> fromSearch(String from_name, String to_name, String keyword) {
-		Map<String, String>map = new HashMap<String, String>();
-		map.put("from_name", from_name);
-		map.put("to_name",to_name);
-		map.put("keyword",keyword);
+	public List<MailDTO> fromSearch(String searchType, String keyword,int startRowNo, int endRowNo) {
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("searchType",searchType );
+		map.put("keyword", keyword);
+		map.put("startRowNo",startRowNo);
+		map.put("endRowNo",endRowNo);
 		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
+		List<MailDTO> listdto2 = sqlSessionTemplate.selectList("ClientBoard.selectsearch2", map);
 	
 	
 		return listdto;
 	}
-	
 	
 
 }
