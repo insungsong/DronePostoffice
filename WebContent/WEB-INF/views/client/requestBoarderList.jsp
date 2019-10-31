@@ -103,6 +103,7 @@
 					  <form id="searchForm" action="searchBoard" method="get">
 							<select id="searchType" name="searchType">
 								<option value="from_name">보내는 사람 조회</option>
+								<option value="to_name">받는 사람 조회</option>
 							</select>
 							<input type="text" id="keyWord" name="keyword" style="height: 25px">
 							<button>검색</button>
