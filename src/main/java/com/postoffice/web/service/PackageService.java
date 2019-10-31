@@ -15,8 +15,9 @@ public class PackageService {
 	@Autowired
 	PackageDAO packageDAO;
 	
-	public List<MailDTO> mailList(){
-		return packageDAO.mailList();
+	public List<MailDTO> mailList(String sort){
+		
+		return packageDAO.mailList(sort);
 	}
 	public List<PackageDTO> packageList(){
 		return packageDAO.packageList();

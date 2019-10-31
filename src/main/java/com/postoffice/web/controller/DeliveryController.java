@@ -15,7 +15,7 @@ public class DeliveryController {
 	
 	@RequestMapping("/delivery")
 	public String delibery(Model model) {
-		model.addAttribute("mailList",packageService.mailList());
+		//model.addAttribute("mailList",packageService.mailList());
 		model.addAttribute("packageList",packageService.packageList());
 		return "manager/delivery";
 	}
