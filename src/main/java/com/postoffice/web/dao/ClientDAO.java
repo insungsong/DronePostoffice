@@ -75,6 +75,21 @@ public class ClientDAO {
 		return rows;
 	}
 
+	public List<MailDTO> fromSearch(String searchType, String keyword,int startRowNo, int endRowNo) {
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("searchType",searchType );
+		map.put("keyword", keyword);
+		map.put("startRowNo",startRowNo);
+		map.put("endRowNo",endRowNo);
+		
+		//
+		if(searchType.equals("from_name")) {
+			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
+			return listdto;
+		}
+		
+		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.toselectsearch", map);
+		return listdto;
+	}
 
-	
 }

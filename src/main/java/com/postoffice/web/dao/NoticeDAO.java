@@ -30,7 +30,7 @@ public class NoticeDAO {
 		
 		
 		List<NoticeDTO> list = sqlSessionTemplate.selectList("notice.noticeList", map);
-		
+
 		//join 테스트
 		for(int i = 0; i <list.size(); i++) {
 			NoticeDTO dto = list.get(i);
@@ -52,15 +52,36 @@ public class NoticeDAO {
 		
 		return list;
 	}
-
+	
+	//공지사항 작성
 	public int noticeinsert(NoticeDTO noticeDTO) {
 		int rows = sqlSessionTemplate.insert("notice.noticeinsert", noticeDTO);
 		return rows;
 	}
 
+	//공지사항 정보 가져오기
 	public NoticeDTO selectNotice(int notice_id) {
-		NoticeDTO noticeDTO = sqlSessionTemplate.selectOne("notice.selectNotice", notice_id);
+		NoticeDTO noticeDTO = sqlSessionTemplate.selectOne("notice.selectnotice", notice_id);
 		return noticeDTO;
+	}
+	public MemberDTO selectmember(NoticeDTO dto) {
+		MemberDTO memberDTO = sqlSessionTemplate.selectOne("notice.selectMember",dto);
+		return memberDTO;
+	}
+	
+	public DeptDTO selectdept(MemberDTO Mdto) {
+		DeptDTO deptDTO = sqlSessionTemplate.selectOne("notice.selectDept", Mdto);
+		return deptDTO;
+	}
+	
+	//test
+	public MemberDTO showMember(MemberDTO dto) {
+		return sqlSessionTemplate.selectOne("notice.memberInfo", dto);
+	}
+	
+	//공지사항 수정
+	public int noticeupdate(NoticeDTO noticeDTO) {
+		return sqlSessionTemplate.update("notice.noticeupdate", noticeDTO);
 	}
 	
 	//테스트 코드/

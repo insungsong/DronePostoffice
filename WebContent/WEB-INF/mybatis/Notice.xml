@@ -25,8 +25,9 @@
 		</collection>
 	</resultMap>
 	
+	<!-- 공지사항 리스트 목록 가져오기 -->
 	<select id="noticeList" parameterType="map" resultMap="notice" >
-		select rn, notice_id, notice_title, notice_date, dept_id, mid, mname, dept_name
+	select rn, notice_id, notice_title, notice_date, dept_id, mid, mname, dept_name
 		from(
 			select rownum as rn,  notice_id, notice_title, notice_date, dept_id, mid, mname,dept_name
 			from
@@ -42,23 +43,50 @@
 		where rn &gt;=#{startRowNum}
 	</select>
 	
+	<!-- 공지사항 상세 정보 보기 -->
 	<select id="selectnotice" parameterType="int" resultType="com.postoffice.web.dto.NoticeDTO">
-		select notice_id, notice_title, notice_content, notice_attach_file, notice_date, mid 
+		select notice_id, notice_title, notice_content, notice_date, mid 
 		from notice 
 		where notice_id=#{notice_id}
 	</select>
 	
+	<select id="selectMember" parameterType="com.postoffice.web.dto.NoticeDTO" resultType="com.postoffice.web.dto.MemberDTO">
+		select	
+			*
+		from
+			member
+		where
+			mid=#{mid}
+	</select>
+	
+	<select id="selectDept" parameterType="com.postoffice.web.dto.MemberDTO" resultType="com.postoffice.web.dto.DeptDTO">
+		select
+			*
+		from
+			dept
+		where
+			dept_id=#{dept_id}
+	</select>
+	
+	<!-- 공지사항 리스트에 페이지 처리를 하기 위해 최종 열 갯수 가져오기 -->
 	<select id="selectTotalRowNum" resultType="int">
 		select count(*) from notice
 	</select>
 	
+	<!-- 공지사항 작성 후 저장하기 위한 insert -->
 	<insert id="noticeinsert" parameterType="com.postoffice.web.dto.NoticeDTO">
-	<selectKey keyProperty="notice_id" resultType="int" order="BEFORE">
-			select notice_num_seq.nextval from dual
-		</selectKey>
-		insert into notice(notice_id, notice_title, notice_content,notice_attach_file,notice_date,mid)
-		values(#{notice_id},#{notice_title}, #{notice_content},#{notice_attach_file}, sysdate, #{mid})
+		insert into notice(notice_id, notice_title, notice_content, notice_date, mid)
+		values(notice_num_seq.nextval,#{notice_title}, #{notice_content},sysdate,#{mid})
 	</insert>
+	
+	
+	
+	<!-- 공지사항 세부정보 열람 후 수정할 때 -->
+	<update id="noticeupdate" parameterType="com.postoffice.web.dto.NoticeDTO">
+		update notice set notice_title=#{notice_title}, notice_content=#{notice_content}
+		where notice_id=#{notice_id}
+	</update>
+	
 	
 	<!-- 테스트 코드 -->
 	<select id="testMember" resultType="com.postoffice.web.dto.MemberDTO">
@@ -74,5 +102,14 @@
 		where n.mid = m.mid
 		and m.dept_id = d.dept_id
 		order by notice_id desc
+	</select>
+	
+	<select id="memberInfo" parameterType="com.postoffice.web.dto.MemberDTO" resultType="com.postoffice.web.dto.MemberDTO">
+		select
+			*
+		from
+			member
+		where
+			mid = #{mid}
 	</select>
 </mapper>
