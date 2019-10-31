@@ -101,13 +101,22 @@ public class NoticeController {
 	}
 	
 	@GetMapping("/noticeUpdate")
-	public String noticeUpdateForm() {
+	public String noticeUpdateForm(Model model) {
+		//임시로 mid값 set
+		MemberDTO dto = new MemberDTO();
+		dto.setMid("1");
+		
+		model.addAttribute("memberInfo",noticeService.showMember(dto));
 		return "manager/noticeUpdate";
 	}
 	
 	@PostMapping("/noticeUpdate")
-	public String noticeUpdate() {
-		return "redirect:/noticeList";
+	public String noticeUpdate(NoticeDTO noticeDTO, HttpSession session) {
+		noticeService.noticeupdate(noticeDTO);	
+		MemberDTO dto = new MemberDTO();
+		dto.setMid("1");
+		int noticeid = noticeDTO.getNotice_id();
+		return "redirect:/noticeDetail?notice_id"+noticeid;
 	}
 	
 	

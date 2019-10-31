@@ -82,7 +82,11 @@ public class NoticeDAO {
 	
 	//공지사항 수정
 	public int noticeupdate(NoticeDTO noticeDTO) {
-		return sqlSessionTemplate.update("notice.noticeupdate", noticeDTO);
+		int noticeupdate= sqlSessionTemplate.update("notice.noticeupdate", noticeDTO);
+		
+		System.out.println(noticeupdate);
+		
+		return noticeupdate;
 	}
 	
 	//테스트 코드/
