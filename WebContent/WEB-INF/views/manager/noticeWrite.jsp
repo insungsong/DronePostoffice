@@ -47,18 +47,17 @@
 							<tr>
 								<th scope="col">제목</th>
 								<td colspan="5">
-									<input type="text" name="wtitle" style="border:0;width: 98%;">
+									<input type="text" name="notice_title" style="border:0;width: 98%;">
 									<span id="noticetitleError" class="error" style="color:red"></span>
 								</td>
-							
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
-								<td><input type="text" name="writer" value="${notice.mid }" style="border:0; width: 100%; text-align: center" readonly></td>
+								<td>${memberInfo.mname }</td>
 								<th scope="col">부서</th>
-								<td><input type="text" name="wdept" value="${member.dept_id}"  style="border:0; width: 100%; text-align: center" readonly></td>
+								<td>${memberInfo.dept_id}</td>
 								<th scope="col">작성일</th>
-								<td><input type="text" name="wdate" value="${notice.notice_date}"  style="border:0; width: 100%; text-align: center" readonly></td>
+								<td>${notice.notice_date}</td>
 								
 							</tr>
 							<tr>
@@ -67,7 +66,7 @@
 							</tr>
 							<tr>
 							<td colspan="6">
-								<textarea rows="30" cols="5" style="width: 100%;"></textarea>
+								<textarea name="notice_content" rows="30" cols="5" style="width: 100%;"></textarea>
 								<span id="noticecontentError" class="error" style="color:red"></span>
 							</td>
 							</tr>
