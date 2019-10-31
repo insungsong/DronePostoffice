@@ -70,4 +70,10 @@ public class ClientRequestService {
 		clientdao.update(board);
 	}
 
+
+	public List<MailDTO> fromsearch(String searchType,String keyword,int startRowNo, int endRowNo) {
+		List<MailDTO> listdto = clientdao.fromSearch(searchType,keyword,startRowNo, endRowNo);
+		return listdto;
+	}
+
 }

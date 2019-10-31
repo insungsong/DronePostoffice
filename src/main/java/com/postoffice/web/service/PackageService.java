@@ -5,21 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.postoffice.web.dao.PackagingDAO;
+import com.postoffice.web.dao.PackageDAO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 
 @Service
-public class PackagingService {
+public class PackageService {
 
 	@Autowired
-	PackagingDAO dao;
+	PackageDAO packageDAO;
 	
-	public List<MailDTO> mailList(){
-		return dao.mailList();
+	public List<MailDTO> mailList(String sort){
+		
+		return packageDAO.mailList(sort);
 	}
 	public List<PackageDTO> packageList(){
-		return dao.packageList();
+		return packageDAO.packageList();
 	}
 	
 	public List<PackageDTO> mailPackaging(String totalWeight, List<String> mailIdList) {
@@ -31,7 +32,7 @@ public class PackagingService {
 		PackageDTO packageDTO = new PackageDTO();
 		packageDTO.setPackage_weight(total);
 		//패키지 insert
-		dao.mailPackaging(packageDTO);
+		packageDAO.mailPackaging(packageDTO);
 		
 
 		MailDTO mailDTO = new MailDTO();
@@ -39,10 +40,15 @@ public class PackagingService {
 		//우편 update
 		for(int i = 0; i < mailIdList.size(); i++) {
 			mailDTO.setMail_id(Integer.parseInt(mailIdList.get(i)));
-			dao.mailUpdate(mailDTO, packageDTO);
+			packageDAO.mailUpdate(mailDTO, packageDTO);
 		}
 		
 		//패키지 목록 select
-		return dao.packageList();
+		return packageDAO.packageList();
+	}
+	
+	public List<MailDTO> pack_mailList(PackageDTO dto){
+		
+		return packageDAO.pack_mailList(dto);
 	}
 }

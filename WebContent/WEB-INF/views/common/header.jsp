@@ -10,7 +10,7 @@
 <body>
 	<div class="header">
 		<div class="logo">
-			<img src="resources/images/logo.PNG" height=100%>
+			<a href="index"><img src="resources/images/logo.PNG" height=100%></a>
 		</div>
 		<div class="menubar">
 			<ul>

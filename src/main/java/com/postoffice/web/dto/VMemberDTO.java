@@ -6,6 +6,7 @@ public class VMemberDTO {
 	private String vmpassword;
 	private String vmtel;
 	private String vmphoto;
+	private String vid;
 	
 	public String getVmid() {
 		return vmid;
@@ -41,5 +42,10 @@ public class VMemberDTO {
 	public void setVmphoto(String vmphoto) {
 		this.vmphoto = vmphoto;
 	}
-	
+	public String getVid() {
+		return vid;
+	}
+	public void setVid(String vid) {
+		this.vid = vid;
+	}
 }

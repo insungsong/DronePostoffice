@@ -45,6 +45,7 @@
 	function main() {
 		location.href = "client_index";
 	}
+<<<<<<< HEAD
 	 
 	function btnRegister(){
 		$.ajax({
@@ -62,6 +63,9 @@
 	
 	}
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 </script>
 </head>
 <body>
@@ -78,28 +82,31 @@
 			<th>받는 주소</th>
 			<th>메일 무게</th>
 			<th>요청 상태</th>
+			<th>요청 확인</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr> 
-		<c:forEach var="check" items="${CheckList}">
+		<tr>
+		<c:forEach items="${CheckList}" var="check">
 				<td>${check.mail_id}</td>
 				<td>${check.from_name}</td>
 				<td>${check.from_address}</td>
 				<td>${check.to_name}</td>
 				<td>${check.to_address}</td>
 				<td>${check.mail_weight}</td>
+				<td>${check.state_name}</td>
+				<td><a href="check?state_id=1"></a></td>
+
 				<td>${check.state_id}</td>
-				<td><input id="btn" type="button" value="접수확인요청" onClick="btnRegister()" class="btn btn-primary"></button></td>
+				<td>
+				<input id="btn" value="접수확인요청" class="btn btn-primary">
+				</td>
+
 			</tr>
 		</c:forEach>
 	</tbody>
 	</table>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-	
-		</div>					
-					</div>			
-				</div>
-			</div>		
+
 		</body>
 	</html>

@@ -92,12 +92,6 @@
 		}
 	</script>
 	<script type="text/javascript">
-		function fn_searchList(){
-			var searchType = $("#select_searchType option:selected").val();
-			var searchWord = $("#searchWord").val();
-			
-			window.location.href="requestBoarderList.do?curPage=1&searchType="+searchType+"&searchType="+searchWord;
-		}
 	</script>
 	</head>
 	<body>
@@ -106,15 +100,13 @@
 			<div class="request_board_second">
 				<div class="request_text">요청 목록</div>
 				<div class="request_serch">
-					  <form class="form-inline">
-					  	<p><h3>${totalRowNum}개의 우편 요청물이 있습니다.</h3></p>
-							<select name="searchType" id="searchType">
-								<option value="default" id="default">분류</option>
-								<option value="tofrom" id="tofrom">보내는 사람</option>
-								<option value="toname" id="fromname">받는 사람</option>
+					  <form id="searchForm" action="searchBoard" method="get">
+							<select id="searchType" name="searchType">
+								<option value="from_name">보내는 사람 조회</option>
+								<option value="to_name">받는 사람 조회</option>
 							</select>
-							<input type="text" name="searchWord" id="searchWord">
-							<a href="javascript:fn_searchList()"class="btn">검색</a>
+							<input type="text" id="keyWord" name="keyword" style="height: 25px">
+							<button>검색</button>
 					  </form>
 				</div>
 				<div class="request_content">
@@ -128,6 +120,7 @@
 									<thead class="thead-dark">
 									   <tr>
 									     <th scope="col">요청 번호</th>
+									     <th scope="col">요청 날짜</th>
 									     <th scope="col">보내는 사람</th>
 									     <th scope="col">보내는 주소</th>
 									     <th scope="col">받는 사람</th>
@@ -138,18 +131,19 @@
 									   </tr>
 									  </thead>
 									  <tbody>
-									    <c:forEach items="${MailList}" var="MailList">
-											 <tr>
-											    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
-												<td id="Mail_fromname">${MailList.from_name}</td>
-												<td id="Mail_fromaddress">${MailList.from_address}</td>
-												<td id="Mail_toname">${MailList.to_name }</td>
-												<td id="Msil_toaddress">${MailList.to_address}</td>
-												<td id="Mail_weight">${MailList.mail_weight}</td>
-												<td id="Mail_state_id">${MailList.state_id}</td>
-												<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
-											 <tr>
-										</c:forEach>
+										  	<c:forEach items="${MailList}" var="MailList">
+												 <tr>
+												    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
+												    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_date }">${MailList.mail_date}</a></td>
+													<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
+													<td id="Mail_fromaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_address}</a></td>
+													<td id="Mail_toname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_name }</a></td>
+													<td id="Msil_toaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_address}</a></td>
+													<td id="Mail_weight"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_weight}</a></td>
+													<td id="Mail_state_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.state_id}</a></td>
+													<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
+												 <tr>
+											</c:forEach>						  
 									</tbody>
 							</table>
 						</div>

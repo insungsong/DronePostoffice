@@ -1,5 +1,7 @@
 package com.postoffice.web.dto;
 
+import java.sql.Date;
+
 public class MailDTO {
 	private int mail_id;
 	private String from_name;
@@ -8,6 +10,9 @@ public class MailDTO {
 	private String to_address;
 	private int mail_weight;
 	private String state_id;
+	private int package_num;
+	private Date mail_date;
+	private String vid;
 	
 	public int getMail_id() {
 		return mail_id;
@@ -51,4 +56,23 @@ public class MailDTO {
 	public void setState_id(String state_id) {
 		this.state_id = state_id;
 	}
+	public int getPackage_num() {
+		return package_num;
+	}
+	public void setPackage_num(int package_num) {
+		this.package_num = package_num;
+	}
+	public Date getMail_date() {
+		return mail_date;
+	}
+	public void setMail_date(Date mail_date) {
+		this.mail_date = mail_date;
+	}
+	public String getVid() {
+		return vid;
+	}
+	public void setVid(String vid) {
+		this.vid = vid;
+	}
+	
 }

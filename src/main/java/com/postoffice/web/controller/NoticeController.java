@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.postoffice.web.dto.DeptDTO;
+import com.postoffice.web.dto.MemberDTO;
 import com.postoffice.web.dto.NoticeDTO;
 import com.postoffice.web.service.NoticeService;
 
@@ -69,18 +71,46 @@ public class NoticeController {
 
 	// 공지사항 작성 폼
 	@GetMapping("/noticeWrite")
-	public String noticeWriteForm() {
-
+	public String noticeWriteForm(Model model) {
+		//session 임시
+		MemberDTO dto = new MemberDTO();
+		dto.setMid("1");
+		
+		model.addAttribute("memberInfo",noticeService.showMember(dto));
 		return "manager/noticeWrite";
 	}
 
 	// 공지사항 작성 처리
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(NoticeDTO noticeDTO, HttpSession session) {
-		noticeDTO.setMid((String) session.getAttribute("mid"));
+		//noticeDTO.setMid((String) session.getAttribute("mid"));
+		
 		noticeService.noticeWrite(noticeDTO);
-		return "redirect:/manager/noticeList";
+		return "redirect:/noticeList";
 	}
+	
+	@RequestMapping("/noticeDetail")
+	public String noticeDetailForm(int notice_id, Model model) {
+		NoticeDTO notice = noticeService.getnotice(notice_id);
+		MemberDTO member = noticeService.selectMember(notice);
+		DeptDTO dept = noticeService.selectDept(member);
+		model.addAttribute("member",member);
+		model.addAttribute("notice", notice);
+		model.addAttribute("dept", dept);
+		return "manager/noticeDetail";
+	}
+	
+	@GetMapping("/noticeUpdate")
+	public String noticeUpdateForm() {
+		return "manager/noticeUpdate";
+	}
+	
+	@PostMapping("/noticeUpdate")
+	public String noticeUpdate() {
+		return "redirect:/noticeList";
+	}
+	
+	
 	
 	
 

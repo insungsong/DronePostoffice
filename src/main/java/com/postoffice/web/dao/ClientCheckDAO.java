@@ -11,7 +11,7 @@ public class ClientCheckDAO {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public List selectAll() {
-		return sqlSessionTemplate.selectList("board.selectAll");
+	public List selectAll(String state_id) {
+		return sqlSessionTemplate.selectList("board.selectAll",state_id);
 	}
 }
