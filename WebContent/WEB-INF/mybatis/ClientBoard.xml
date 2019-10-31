@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ClientBoard">
+
+
 	<select id="selectTotalRowNum" resultType="int">
 		select count(*) from mail
 	</select>
+	<!-- 마을 이름 join해서 받아와야함 -->
 	<select id="selectMailList" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
-	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date	
+	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vname
 		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vname
 		    from(
-		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date	
-		        from Mail
+		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vname
+		        from mail, village
+		        where mail.vid = village.vid
 		    )
 		    where rownum &lt;= #{endRowNo}
 		)
@@ -22,14 +26,15 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.postoffice.web.dto.MailDTO">
-		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date)
-			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate)
+		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vid)
+			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate,#{vid})
 	</insert>
 	
 	<delete id="removeRequest">
 		delete Mail where mail_id = #{mail_id}
 	</delete>
 	
+	<!-- 마을 이름 join해서 받아와야함 -->
 	<select id="selectOne" parameterType="int" resultType="com.postoffice.web.dto.MailDTO">
 		select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date from mail
 		where mail_id=#{mail_id}
@@ -46,6 +51,7 @@
 		where mail_id = #{mail_id}
 	</update>
 	
+	<!-- 이것도 -->
 	<select id="selectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">		
 		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_id	
 		from(
