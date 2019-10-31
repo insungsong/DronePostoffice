@@ -54,7 +54,7 @@
 				console.log(result);
 				console.log(result.state_id)
 				var var1=JSON.parse(result);
-				$("#btn").val(var1);
+				$("#btn").val(state_name);
 			}
 		
 		});

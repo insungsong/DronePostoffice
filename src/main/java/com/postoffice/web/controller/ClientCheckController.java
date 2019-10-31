@@ -30,6 +30,7 @@ public class ClientCheckController {
 		
 	}
 	
+	
 	@RequestMapping("/stateCheck")
 	@ResponseBody
 		public String stateCheck(String state_id,Model model) {
@@ -46,6 +47,7 @@ public class ClientCheckController {
 	    return sb.toString();
 		
 		
+	    
 	    
 	}
 	
