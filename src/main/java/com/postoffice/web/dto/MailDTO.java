@@ -1,5 +1,7 @@
 package com.postoffice.web.dto;
 
+import java.sql.Date;
+
 public class MailDTO {
 	private int mail_id;
 	private String from_name;
@@ -8,6 +10,7 @@ public class MailDTO {
 	private String to_address;
 	private int mail_weight;
 	private String state_id;
+	private Date mail_date;
 	
 	public int getMail_id() {
 		return mail_id;
@@ -51,4 +54,11 @@ public class MailDTO {
 	public void setState_id(String state_id) {
 		this.state_id = state_id;
 	}
+	public Date getMail_date() {
+		return mail_date;
+	}
+	public void setMail_date(Date mail_date) {
+		this.mail_date = mail_date;
+	}
+	
 }

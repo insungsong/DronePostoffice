@@ -17,9 +17,9 @@
 		<result column="notice_content" property="notice_content"/>
 		<result column="notice_date" property="notice_date"/>
 		<collection  property="memberList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.MemberDTO">
-			<result column="dept_id" property="dept_id"/>
 			<result column="mname" property="mname"/>
 		</collection>
+		<!--  <association property=""></association> -->
 		<collection property="deptList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.DeptDTO">
 			<result column="dept_name" property="dept_name"/>
 		</collection>
