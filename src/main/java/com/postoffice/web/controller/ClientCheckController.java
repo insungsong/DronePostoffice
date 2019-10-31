@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientCheckService;
 
 @Controller
@@ -31,24 +30,7 @@ public class ClientCheckController {
 	}
 	
 	
-	@RequestMapping("/stateCheck")
-	@ResponseBody
-		public String stateCheck(String state_id,Model model) {
-		StateDTO state=checkService.stateCheck(state_id);
-		//System.out.println("ㅋㅌㄹㄹ");
-		ModelAndView mav=new ModelAndView("client/requestCheck");
-		model.addAttribute("state",state);
-		StringBuffer sb=new StringBuffer();
-	    sb.append("{");
-	    sb.append("\"state_id\":\"s001\",");
-	    sb.append("\"state_name\":\"배송 준비중\"");
-	    sb.append("}");
-	  
-	    return sb.toString();
-		
-		
+	
 	    
-	    
-	}
 	
 }
