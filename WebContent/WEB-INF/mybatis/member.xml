@@ -4,4 +4,9 @@
 	<select id="selectMemberByLid" parameterType="string" resultType="com.postoffice.web.dto.MemberDTO">
 		select mid, mname, mpassword from member where mid=#{lid}
 	</select>
+	
+	<insert id="insert" parameterType="com.postoffice.web.dto.MemberDTO">
+		insert into member (mid, mname, mpassword, mtel, mphoto, mauthority, dept_id)
+		values (#{mid}, #{mname}, #{mpassword}, #{mtel}, #{mphoto}, #{mauthority}, (select dept_id from dept where dept_id = #{dept_id}))
+	</insert>
 </mapper>

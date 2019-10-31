@@ -139,7 +139,7 @@
 					</ul>
 				</div>	
 				<div class="joinForm">
-					<form method="post" action="join" onsubmit="return check()">
+					<form method="post" action="join" enctype="multipart/form-data" onsubmit="return check()">
 						<div>
 							<input id="lid" name="lid" type="text" placeholder="아이디">
 							<input onclick="lidCheck()" id="overlap" type="button" value="중복체크">
@@ -173,8 +173,8 @@
 						</div>
 						<div>
 							<select id="deptName" name="deptName">
-								<option value="dept1">패키징 부서</option>
-								<option value="dept2">드론 부서</option>
+								<option value="ㅎㅇ">패키징 부서</option>
+								<option value="1">드론 부서</option>
 							</select>
 						</div>
 						<div class="joinButton">
