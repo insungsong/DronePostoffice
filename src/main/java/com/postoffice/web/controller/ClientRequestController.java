@@ -72,7 +72,6 @@ public class ClientRequestController {
 		if (pageNo == totalPageNum)
 			endRowNo = totalRowNum;
 
-		List<BoardDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo);
 
 		// JSP로 페이지 정보 넘기기
@@ -85,7 +84,6 @@ public class ClientRequestController {
 		model.addAttribute("startPageNo", startPageNo);
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("boardList", boardList);
 		model.addAttribute("MailList", MailList);
 		return "client/requestBoarderList";
 	}

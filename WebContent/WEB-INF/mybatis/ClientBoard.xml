@@ -4,25 +4,12 @@
 	<select id="selectTotalRowNum" resultType="int">
 		select count(*) from mail
 	</select>
-	<select id="selectList" parameterType="map" resultType="com.postoffice.web.dto.BoardDTO">
-	select rn,bid,btitle,bcontent,bdate,vid	
-		from(
-		    select rownum as rn, bid, btitle, bcontent, bdate, vid
-		    from(
-		        select bid,btitle,bcontent,bdate,vid	
-		        from board
-		    )
-		    where rownum &lt;= #{endRowNo}
-		)
-		where rn &gt; = #{startRowNo}
-	</select>
-	
 	<select id="selectMailList" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
-	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date	
 		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date
 		    from(
-		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id		
+		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date	
 		        from Mail
 		    )
 		    where rownum &lt;= #{endRowNo}
@@ -35,8 +22,8 @@
 	</select>
 	
 	<insert id="insertBoard" parameterType="com.postoffice.web.dto.MailDTO">
-		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id)
-			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001')
+		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date)
+			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate)
 	</insert>
 	
 	<delete id="removeRequest">
@@ -44,7 +31,7 @@
 	</delete>
 	
 	<select id="selectOne" parameterType="int" resultType="com.postoffice.web.dto.MailDTO">
-		select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id from mail
+		select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date from mail
 		where mail_id=#{mail_id}
 	</select>
 	
@@ -60,9 +47,9 @@
 	</update>
 	
 	<select id="selectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">		
-		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_id	
 		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	,mail_date
 		    from(
 		        SELECT
 					*
@@ -79,9 +66,9 @@
 	</select>
 	
 	<select id="toselectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">		
-		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date	
 		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date
 		    from(
 		        SELECT
 					*

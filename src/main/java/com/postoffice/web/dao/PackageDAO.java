@@ -12,7 +12,7 @@ import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 
 @Repository
-public class PackagingDAO {
+public class PackageDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
@@ -38,9 +38,15 @@ public class PackagingDAO {
 		return sqlSessionTemplate.update("packaging.updateMail", map);
 	}
 	
-	//패키징된 우편 목록
+	//패키지 목록
 	public List<PackageDTO> packageList(){
 		
-		return sqlSessionTemplate.selectList("packaging.selectPackagingList");
+		return sqlSessionTemplate.selectList("packaging.selectPackageList");
+	}
+	
+	//패키징된 우편 목록
+	public List<MailDTO> pack_mailList(PackageDTO dto){
+		
+		return sqlSessionTemplate.selectList("packaging.selectPackageMailList", dto);
 	}
 }

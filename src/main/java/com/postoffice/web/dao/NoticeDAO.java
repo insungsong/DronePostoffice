@@ -30,26 +30,25 @@ public class NoticeDAO {
 		
 		
 		List<NoticeDTO> list = sqlSessionTemplate.selectList("notice.noticeList", map);
-		
 
-//		//join 테스트
-//		for(int i = 0; i <list.size(); i++) {
-//			NoticeDTO dto = list.get(i);
-//			
-//			System.out.println("id : " + dto.getNotice_id());
-//			System.out.println("title : " + dto.getNotice_title());
-//			System.out.println("content : " + dto.getNotice_content());
-//			System.out.println("mid : " + dto.getMid());
-//			System.out.println("size : " + dto.getMemberList().size());
-//			
-//			MemberDTO memberDto = dto.getMemberList().get(i);
-//			System.out.println("dept_id : " + memberDto.getDept_id());
-//			System.out.println("membername : " + memberDto.getMname());
-//			
-//			DeptDTO deptDto = dto.getDeptList().get(i);
-//			System.out.println("deptname : " + deptDto.getDept_name());
-//			
-//		}
+		//join 테스트
+		for(int i = 0; i <list.size(); i++) {
+			NoticeDTO dto = list.get(i);
+			
+			System.out.println("id : " + dto.getNotice_id());
+			System.out.println("title : " + dto.getNotice_title());
+			System.out.println("content : " + dto.getNotice_content());
+			System.out.println("mid : " + dto.getMid());
+			System.out.println("size : " + dto.getMemberList().size());
+			
+			MemberDTO memberDto = dto.getMemberList().get(0);
+			System.out.println("dept_id : " + memberDto.getDept_id());
+			System.out.println("membername : " + memberDto.getMname());
+			
+			DeptDTO deptDto = dto.getDeptList().get(0);
+			System.out.println("deptname : " + deptDto.getDept_name());
+			
+		}
 		
 		return list;
 	}
