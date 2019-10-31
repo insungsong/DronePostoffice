@@ -26,14 +26,7 @@ public class ClientCheckController {
 		ModelAndView mav=new ModelAndView("client/requestCheck");
 		model.addAttribute("CheckList",checkList);
 		return mav;
-		
 	}
-	
-	
-	
-	
-	
-	    
 	
 }
 

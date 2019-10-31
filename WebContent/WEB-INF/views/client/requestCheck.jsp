@@ -46,7 +46,6 @@
 		location.href = "client_index";
 	}
 
-
 </script>
 </head>
 <body>
@@ -67,8 +66,8 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr> 
-		<c:forEach var="check" items="${CheckList}">
+		<tr>
+		<c:forEach items="${CheckList}" var="check">
 				<td>${check.mail_id}</td>
 				<td>${check.from_name}</td>
 				<td>${check.from_address}</td>
@@ -77,11 +76,17 @@
 				<td>${check.mail_weight}</td>
 				<td>${check.state_name}</td>
 				<td><a href="check?state_id=1"></a></td>
+
+				<td>${check.state_id}</td>
+				<td>
+				<input id="btn" value="접수확인요청" class="btn btn-primary">
+				</td>
+
 			</tr>
 		</c:forEach>
 	</tbody>
 	</table>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-		
+
 		</body>
 	</html>
