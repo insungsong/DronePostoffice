@@ -59,9 +59,9 @@
 	</head>
 	<body>
 			<jsp:include page="../common/header.jsp"/>
-			<div class= wrapper>
+			<div class="body">
+				<div class="body_sub">
 				
-				<div class=content>
 					
 					<div class=noticeWirte_btn>
 						<a href="noticeWrite" class="btn btn-warning">글쓰기</a>
@@ -74,7 +74,7 @@
 									<tr style="background:gray">
 										<th scope="col">글번호</th>
 										<th scope="col">제목</th>
-										<th scope="col">부서</th>
+										<!-- <th scope="col">부서</th> -->
 										<th scope="col">작성자</th>
 										<th scope="col">작성일</th>
 									</tr>
@@ -84,7 +84,11 @@
 										<tr>
 											<th scope="row">${notice.notice_id}</th>
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
-											<td>${notice.dept_id}</td>
+<<<<<<< HEAD
+											<%-- <td>${notice.dept_id}</td> --%>
+=======
+
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 											<td>${notice.mid}</td>
 											<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 										</tr>
@@ -123,6 +127,5 @@
 				</div>
 			
 			</div>
-
 	</body>
 </html>

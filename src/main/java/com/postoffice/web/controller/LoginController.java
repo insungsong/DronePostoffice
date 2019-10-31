@@ -1,7 +1,11 @@
 package com.postoffice.web.controller;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +28,7 @@ public class LoginController {
 	@RequestMapping("/")
 	public String login(Model model, HttpSession session) {
 		String error = (String) session.getAttribute("error");
-		String mauthority = (String) session.getAttribute("mauthority");
+		String lauthority = (String) session.getAttribute("lauthority");
 		
 		//아이디 또는 비밀번호 틀렸을 때 실행 
 		if(error != null) {
@@ -32,17 +36,17 @@ public class LoginController {
 				model.addAttribute("lidError", "*아이디가 존재하지 않습니다.");
 			} else if(error.equals("fail_lpassword")) {
 				model.addAttribute("lpasswordError", "*비밀번호가 틀렸습니다.");
-			} else if(error.equals("mauthorityError")){
-				model.addAttribute("mauthorityError", "*권한이 없습니다.");
+			} else if(error.equals("lauthorityError")){
+				model.addAttribute("lauthorityError", "*권한이 없습니다.");
 			}
 			session.removeAttribute("error");
 		}
 		
 		//이미 로그인 상태일 때 로그인 페이지로 돌아갈 수 없도록 실행
-		if(mauthority != null) {
-			if(mauthority.equals("manager")) {
+		if(lauthority != null) {
+			if(lauthority.equals("manager")) {
 				return "redirect:/";
-			} else if(mauthority.equals("admin")) {
+			} else if(lauthority.equals("admin")) {
 				return "redirect:/";
 			} else {
 				return "redirect:/client_index";
@@ -54,8 +58,8 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String loginConfirm(String lid, String lpassword, String mauthority, HttpSession session) {
-		if(mauthority.equals("manager") || mauthority.equals("admin")) { //직원 또는 관리자가 로그인할 때 
+	public String loginConfirm(String lid, String lpassword, String lauthority, HttpSession session) {
+		if(lauthority.equals("manager") || lauthority.equals("admin")) { //직원 또는 관리자가 로그인할 때 
 			LoginResult result = loginService.mLogin(lid, lpassword);
 			
 			//로그인 실패했을 때 실행
@@ -69,8 +73,8 @@ public class LoginController {
 			
 			//로그인 성공했을 때 실행
 			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
-			if(mauthority.equals("manager")) {
+			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
+			if(lauthority.equals("manager")) {
 				logger.debug("직원 로그인");
 				return "redirect:/"; //직원이 로그인했을 때 이동하는 페이지
 			} else {
@@ -92,7 +96,7 @@ public class LoginController {
 			
 			//로그인 성공했을 때 실행
 			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			session.setAttribute("mauthority", mauthority);	//세션에 로그인 정보 저장
+			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
 			logger.debug("이장님 로그인");	
 			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
@@ -106,6 +110,40 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/join")
+	public String joinForm() {
+		return "joinForm";
+	}
 	
+	@PostMapping("/join") 
+	public String join() {
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/lidCheck")
+	public void lidCheck(String lid, String lauthority, HttpServletResponse response) throws Exception{
+		logger.debug(lid);
+		logger.debug(lauthority);
+		if(lauthority.equals("manager") || lauthority.equals("admin")) {
+			boolean result = loginService.mLidCheck(lid);
+			response.setContentType("application/json; charset=UTF-8"); 
+			PrintWriter pw = response.getWriter(); 
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", result); 
+			pw.print(jsonObject.toString());
+			pw.flush(); 
+			pw.close();
+		} else {
+			boolean result = loginService.cLidCheck(lid);
+			response.setContentType("application/json; charset=UTF-8"); 
+			PrintWriter pw = response.getWriter(); 
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", result); 
+			pw.print(jsonObject.toString());
+			pw.flush(); 
+			pw.close();
+		}
+		 
+	}
 	
 }

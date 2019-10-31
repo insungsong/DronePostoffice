@@ -12,6 +12,7 @@ public class NoticeDTO {
 	private String notice_attach_file;
 	private Date notice_date;
 	private String mid;
+	private MemberDTO dto;
 	private List<MemberDTO> memberList;
 	private List<DeptDTO> deptList;
 	
