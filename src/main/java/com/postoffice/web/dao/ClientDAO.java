@@ -82,7 +82,7 @@ public class ClientDAO {
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
 		
-		
+		//
 		if(searchType.equals("from_name")) {
 			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
 			return listdto;
