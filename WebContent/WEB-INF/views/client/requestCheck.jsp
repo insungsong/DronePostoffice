@@ -45,21 +45,7 @@
 	function main() {
 		location.href = "client_index";
 	}
-	 
-	function btnRegister(){
-		$.ajax({
-			url:"stateCheck",
-			data:{"state_id":"s001"},
-			success:function(result){
-				console.log(result);
-				console.log(result.state_id)
-				var var1=JSON.parse(result);
-				$("#btn").val(state_name);
-			}
-		
-		});
-	
-	}
+
 
 </script>
 </head>
@@ -77,6 +63,7 @@
 			<th>받는 주소</th>
 			<th>메일 무게</th>
 			<th>요청 상태</th>
+			<th>요청 확인</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -88,17 +75,13 @@
 				<td>${check.to_name}</td>
 				<td>${check.to_address}</td>
 				<td>${check.mail_weight}</td>
-				<td>${check.state_id}</td>
-				<td><input id="btn" type="button" value="접수확인요청" onClick="btnRegister()" class="btn btn-primary"></button></td>
+				<td>${check.state_name}</td>
+				<td><a href="check?state_id=1"></a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 	</table>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-	
-		</div>					
-					</div>			
-				</div>
-			</div>		
+		
 		</body>
 	</html>
