@@ -21,7 +21,7 @@
 			height: 40%;
 			background-color: blue;
 			margin-top: 14%;
-			margin-left: 349px;
+			margin-left: 349px;++++++++++++
 			margin-right: 80px;
 			display: inline-block;
 		}
