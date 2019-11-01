@@ -76,6 +76,7 @@ public class NoticeDTO {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
+
 	
 	
 	

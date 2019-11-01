@@ -71,6 +71,7 @@
 							</td>
 							</tr>
 					</table>
+						<input type="hidden" name="mid" value="${memberInfo.mid}"/>
 						<input type="submit" value="저장" onClick="checkForm()"></input>
 					</div>
 				</form> 

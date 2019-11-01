@@ -93,6 +93,7 @@
 								
 							</table>
 
+						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
 							<a href="noticeList?pageNum=1" class="btn btn-primary">처음</a>
 							<c:if test="${groupNum >1}">
@@ -117,6 +118,7 @@
 								</c:if>
 								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-primary">맨끝</a>
 							</div>
+						</c:if>
 						</div>
 					
 					</div>

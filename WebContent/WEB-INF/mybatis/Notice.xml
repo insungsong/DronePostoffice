@@ -87,6 +87,10 @@
 		where notice_id=#{notice_id}
 	</update>
 	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticedelete" parameterType="com.postoffice.web.dto.NoticeDTO">
+		delete from notice where notice_id=#{notice_id}
+	</delete>
 	
 	<!-- 테스트 코드 -->
 	<select id="testMember" resultType="com.postoffice.web.dto.MemberDTO">
