@@ -28,7 +28,4 @@ public class ClientCheckController {
 		return mav;
 	}
 	
-	/*
-	 * @RequestMapping("/RequestCheck") public Mo
-	 */
 }
