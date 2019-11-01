@@ -21,8 +21,8 @@ public class ClientCheckController {
 	private ClientCheckService checkService;
 	
 	@RequestMapping("/check")
-	public ModelAndView selectAll(String state_id,Model model) {
-		List checkList = checkService.selectAll(state_id);
+	public ModelAndView selectAll(Model model) {
+		List checkList = checkService.selectAll();
 		ModelAndView mav=new ModelAndView("client/requestCheck");
 		model.addAttribute("CheckList",checkList);
 		return mav;
