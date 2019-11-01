@@ -64,6 +64,14 @@ public class LoginService {
 		}	
 	}
 
+	public void mJoin(MemberDTO member) {
+		memberDao.insert(member);
+	}
+
+	public void cJoin(VMemberDTO vmember) {
+		vmemberDao.insert(vmember);
+	}
+
 		
 	
 }

@@ -19,6 +19,17 @@ public class MemberDAO {
 		MemberDTO member = sqlSessionTemplate.selectOne("member.selectMemberByLid", lid);
 		return member;
 	}
+
+	public int insert(MemberDTO member) {
+		logger.debug(member.getMphoto());
+		logger.debug(member.getMid());
+		logger.debug(member.getMname());
+		logger.debug(member.getMpassword());
+		logger.debug(member.getMtel());
+		logger.debug(member.getDept_id());
+		int rows = sqlSessionTemplate.insert("member.insert", member);
+		return rows;
+	}
 	
 	
 	
