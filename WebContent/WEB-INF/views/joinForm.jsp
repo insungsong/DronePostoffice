@@ -120,6 +120,11 @@
 				})
 			})
 		
+			
+			
+			
+
+	
 		
 		</script>
 	</head>
@@ -154,13 +159,14 @@
 						<div>
 							<input id="lpasswordCheck" name="lpasswordCheck" type="password" placeholder="비밀번호 확인">
 						</div>
-						<span id="lpasswordCheckError" calss="error" style="color: red"></span>
+						<span id="lpasswordCheckError" class="error" style="color: red"></span>
 						<div>
 							<input id="ltel" name="ltel" type="text" placeholder="전화번호">
 						</div>
 						<div>
-							<input id="lphoto" name="lphoto" type="file" placeholder="사진">
+							<input id="lphoto" name="lphoto" type="file">
 						</div>
+						
 						<div>
 							<input id="lauthority" name="lauthority" type="hidden" value="">
 						</div>

@@ -173,26 +173,18 @@ public class LoginController {
 	public void lidCheck(String lid, String lauthority, HttpServletResponse response) throws Exception{
 		logger.debug(lid);
 		logger.debug(lauthority);
+		boolean result;
 		if(lauthority.equals("manager") || lauthority.equals("admin")) {
-			boolean result = loginService.mLidCheck(lid);
-			response.setContentType("application/json; charset=UTF-8"); 
-			PrintWriter pw = response.getWriter(); 
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("result", result); 
-			pw.print(jsonObject.toString());
-			pw.flush(); 
-			pw.close();
+			result = loginService.mLidCheck(lid);
 		} else {
-			boolean result = loginService.cLidCheck(lid);
-			response.setContentType("application/json; charset=UTF-8"); 
-			PrintWriter pw = response.getWriter(); 
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("result", result); 
-			pw.print(jsonObject.toString());
-			pw.flush(); 
-			pw.close();
+			result = loginService.cLidCheck(lid);
 		}
-		 
+		response.setContentType("application/json; charset=UTF-8"); 
+		PrintWriter pw = response.getWriter(); 
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", result); 
+		pw.print(jsonObject.toString());
+		pw.flush(); 
+		pw.close();
 	}
-	
 }
