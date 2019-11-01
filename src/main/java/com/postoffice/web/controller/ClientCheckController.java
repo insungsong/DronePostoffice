@@ -32,9 +32,6 @@ public class ClientCheckController {
 		model.addAttribute("CheckList",checkList);
 		return mav;
 	}
-<<<<<<< HEAD
-	
-=======
 
 	@RequestMapping("/stateCheck")
 	public void stateCheck(String state_id,Model model) {
@@ -42,7 +39,6 @@ public class ClientCheckController {
 		model.addAttribute("state",stateDTO);
 	}
 	
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 }
 
 
