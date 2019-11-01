@@ -52,8 +52,7 @@
 					</table>
 						
 					</div>
-			
-				
+		
 				<a href="noticeList?pageNum=${PageNum}" class="btn btn-info">목록</a>	
 				<a href="noticeUpdate?notice_id=${notice.notice_id}" class="btn btn-danger">수정</a>	
 				<a href="noticeDelete?notice_id=${notice.notice_id}" class="btn btn-danger">삭제</a>
