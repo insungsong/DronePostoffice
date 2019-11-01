@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.StateDTO;
 
 @Component
 public class ClientDAO {
@@ -47,6 +48,21 @@ public class ClientDAO {
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
 		List<MailDTO> MailboardList=sqlSessionTemplate.selectList("ClientBoard.selectMailList",map);
+		
+		for(int i = 0; i <MailboardList.size(); i++) {
+			MailDTO dto = MailboardList.get(i);
+			
+			System.out.println("id : " + dto.getMail_id());
+			System.out.println("title : " + dto.getFrom_name());
+			System.out.println("content : " + dto.getFrom_address());
+			System.out.println("mid : " + dto.getMail_weight());
+			System.out.println("size : " + dto.getTo_address());
+			
+			StateDTO statedto = dto.getStateList().get(0);
+			
+			System.out.println("state상태: "+statedto.getState_name());
+		}
+		
 		
 		return MailboardList;
 	}

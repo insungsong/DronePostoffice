@@ -16,5 +16,10 @@ public class VMemberDAO {
 		VMemberDTO vmember = sqlSessionTemplate.selectOne("vmember.selectVmemberByLid", lid);
 		return vmember;
 	}
+
+	public int insert(VMemberDTO vmember) {
+		int rows = sqlSessionTemplate.insert("vmember.insert", vmember);
+		return rows;
+	}
 	
 }

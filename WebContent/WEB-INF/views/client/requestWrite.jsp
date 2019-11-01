@@ -97,7 +97,12 @@
 		    <input type="text" class="form-control" name="mail_weight" id="mailweight" placeholder="우편물 무게를 입력하세요" value="${mail_weight}">
 		  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
 		  </div>
-		   <div class="form-group">
+		  <div class="form-group">
+		    <label for="formGroupExampleInput">마을 분류</label>
+		    <input type="text" class="form-control" name="state_id" id="villiage" placeholder="마을 분류" readonly="readonly" value="${mail_state}">
+		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
+		  </div>
+		  <div class="form-group">
 		    <label for="formGroupExampleInput">배송 상태</label>
 		    <input type="text" class="form-control" name="state_id" id="stateid" placeholder="배송요청" readonly="readonly" value="${mail_state}">
 		  	<span id="stateError" class="error" style="color:red">${stateError}</span>

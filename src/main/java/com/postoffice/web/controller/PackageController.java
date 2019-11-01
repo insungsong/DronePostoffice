@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.PackageService;
 
@@ -20,10 +19,11 @@ public class PackageController {
 	private PackageService packageService;
 	
 	@RequestMapping("/packagingList")
-	public String packagingList(Model model) {
+	public String packagingList(Model model,
+				@RequestParam(defaultValue="0") String sort) {
 		
 		
-		model.addAttribute("mailList",packageService.mailList());
+		model.addAttribute("mailList",packageService.mailList(sort));
 		model.addAttribute("packageList",packageService.packageList());
 		
 		List<PackageDTO> list = packageService.packageList();

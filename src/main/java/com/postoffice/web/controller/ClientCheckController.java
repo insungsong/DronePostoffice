@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientCheckService;
+import com.postoffice.web.service.ClientStateCheckService;
 
 @Controller
 public class ClientCheckController {
 	
 	@Autowired
 	private ClientCheckService checkService;
+	@Autowired
+	private ClientStateCheckService clientStateCheckService;
+	
 	
 	@RequestMapping("/check")
 	public ModelAndView selectAll(Model model) {
@@ -27,8 +32,17 @@ public class ClientCheckController {
 		model.addAttribute("CheckList",checkList);
 		return mav;
 	}
+<<<<<<< HEAD
 	
-	/*
-	 * @RequestMapping("/RequestCheck") public Mo
-	 */
+=======
+
+	@RequestMapping("/stateCheck")
+	public void stateCheck(String state_id,Model model) {
+		StateDTO stateDTO=clientStateCheckService.stateCheck(state_id);
+		model.addAttribute("state",stateDTO);
+	}
+	
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 }
+
+

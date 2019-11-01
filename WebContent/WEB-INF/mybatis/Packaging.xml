@@ -10,13 +10,19 @@
 	
 	</resultMap>
 -->	
-	<select id="selectMailList" resultType="com.postoffice.web.dto.MailDTO">
+	<select id="selectMailList" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		SELECT
 			*
 		FROM
 			mail
-		ORDER BY
-			mail_date = #{mail_date}
+		<if test="sort.equals('0')">
+			ORDER BY
+				mail_date asc
+		</if>
+		<if test="sort.equals('1')">
+			ORDER BY
+				from_address asc
+		</if>	
 	</select>
 	
 	<insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">

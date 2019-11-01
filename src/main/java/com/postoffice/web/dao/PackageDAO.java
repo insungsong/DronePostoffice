@@ -18,8 +18,8 @@ public class PackageDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//우편 목록
-	public List<MailDTO> mailList(){
-		return sqlSessionTemplate.selectList("packaging.selectMailList");
+	public List<MailDTO> mailList(String sort){
+		return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
 	}
 
 	//우편 패키징
