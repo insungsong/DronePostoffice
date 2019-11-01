@@ -45,9 +45,8 @@
 	function main() {
 		location.href = "client_index";
 	}
-<<<<<<< HEAD
 	 
-	function btnRegister(){
+/* 	function btnRegister(){
 		$.ajax({
 			url:"stateCheck",
 			data:{"state_id":"s001"},
@@ -62,10 +61,16 @@
 		});
 	
 	}
-
-=======
-
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+ */
+ 	function check(){
+		$.ajax({
+			url:"stateCheck?state_id=s001",
+			success:function(){
+				console.log("ㅎㅇ");
+			}
+		});
+				
+ }
 </script>
 </head>
 <body>
@@ -94,12 +99,12 @@
 				<td>${check.to_name}</td>
 				<td>${check.to_address}</td>
 				<td>${check.mail_weight}</td>
-				<td>${check.state_name}</td>
-				<td><a href="check?state_id=1"></a></td>
+				<td>${check.state_id}</td>
+				<td>${check.vid}</td>
+				<td><input type="button" value="ㅎㅇ" onClick="check()"/></td>
 
 				<td>${check.state_id}</td>
 				<td>
-				<input id="btn" value="접수확인요청" class="btn btn-primary">
 				</td>
 
 			</tr>

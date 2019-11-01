@@ -20,7 +20,7 @@
 		<result column="state_id" property="state_id"/>
 		<result column="mail_date" property="mail_date"/>
 	</resultMap> -->
-	<select id="selectAll">
+	<select id="selectAll" resultType="com.postoffice.web.dto.MailDTO">
 		select * from mail
 	</select>
 	

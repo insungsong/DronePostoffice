@@ -15,8 +15,8 @@ public class ClientCheckService {
 	private ClientCheckDAO checkDAO;
 
 	
-	public List selectAll(String state_id) {
-		return checkDAO.selectAll(state_id);
+	public List selectAll() {
+		return checkDAO.selectAll();
 	}
 
 

@@ -12,20 +12,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientCheckService;
+import com.postoffice.web.service.ClientStateCheckService;
 
 @Controller
 public class ClientCheckController {
 	
 	@Autowired
 	private ClientCheckService checkService;
+	@Autowired
+	private ClientStateCheckService clientStateCheckService;
+	
 	
 	@RequestMapping("/check")
-	public ModelAndView selectAll(String state_id,Model model) {
-		List checkList = checkService.selectAll(state_id);
+	public ModelAndView selectAll(Model model) {
+		List checkList = checkService.selectAll();
 		ModelAndView mav=new ModelAndView("client/requestCheck");
 		model.addAttribute("CheckList",checkList);
 		return mav;
+	}
+
+	@RequestMapping("/stateCheck")
+	public void stateCheck(String state_id,Model model) {
+		StateDTO stateDTO=clientStateCheckService.stateCheck(state_id);
+		model.addAttribute("state",stateDTO);
 	}
 	
 }
