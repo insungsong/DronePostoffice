@@ -13,7 +13,7 @@
 	<style>
 		.mailWrite{
 			width:100%;
-			height:800px;
+			height:2000px;
 			border:solid 1px black;
 			float:left;
 		}
@@ -89,22 +89,17 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">마을 이름</label>
-		    <input type="text" class="form-control" name="vid" id="villagename" placeholder="마을 이름 입력하세요">
+		    <input type="text" class="form-control" name="vid" id="villagename" placeholder="${maildto_villageList.get(0).vname }" readonly="readonly">
 		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
 		  </div>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">우편물 무게</label>
-		    <input type="text" class="form-control" name="mail_weight" id="mailweight" placeholder="우편물 무게를 입력하세요" value="${mail_weight}">
+		    <input type="text" class="form-control" name="mail_weight" id="mailweight" placeholder="우편물 무게를 입력하세요" value="${maildto.mail_weight}">
 		  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
 		  </div>
 		  <div class="form-group">
-		    <label for="formGroupExampleInput">마을 분류</label>
-		    <input type="text" class="form-control" name="state_id" id="villiage" placeholder="마을 분류" readonly="readonly" value="${mail_state}">
-		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
-		  </div>
-		  <div class="form-group">
 		    <label for="formGroupExampleInput">배송 상태</label>
-		    <input type="text" class="form-control" name="state_id" id="stateid" placeholder="배송요청" readonly="readonly" value="${mail_state}">
+		    <input type="text" class="form-control" name="state_id" id="stateid" placeholder="${maildto_stateList.get(0).state_name }" readonly="readonly">
 		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
 		  </div>
 		  <button class="btn btn-danger">수정저장</button>

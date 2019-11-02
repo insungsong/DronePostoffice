@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.postoffice.web.dto.BoardDTO;
-import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.MailDTO;
-import com.postoffice.web.dto.MemberDTO;
-import com.postoffice.web.dto.NoticeDTO;
 import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientRequestService;
 
@@ -32,15 +28,6 @@ public class ClientRequestController {
 	
 	@RequestMapping("/client_index")
 	public String client_index(HttpSession session){
-<<<<<<< HEAD
-		/*
-		 * String check = (String) session.getAttribute("lauthority"); if(check != null)
-		 * { if(check.equals("client")) { return "client/index"; } }
-		 * session.setAttribute("error", "lauthorityError"); return "redirect:/";
-		 */
-		return "client/index";
-=======
-
 		/*
 		 * String check = (String) session.getAttribute("lauthority"); if(check != null)
 		 * { if(check.equals("client")) { return "client/index"; } }
@@ -48,8 +35,6 @@ public class ClientRequestController {
 		 */
 		
 		return "client/index";
-
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 	}
 
 	@RequestMapping("/requestBoarderList")

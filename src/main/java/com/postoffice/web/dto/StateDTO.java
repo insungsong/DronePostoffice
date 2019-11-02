@@ -3,7 +3,6 @@ package com.postoffice.web.dto;
 public class StateDTO {
 	private String state_id;
 	private String state_name;
-<<<<<<< HEAD
 	
 	public String getState_id() {
 		return state_id;
@@ -17,8 +16,4 @@ public class StateDTO {
 	public void setState_name(String state_name) {
 		this.state_name = state_name;
 	}
-	
-	
-=======
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 }
