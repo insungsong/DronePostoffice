@@ -68,6 +68,10 @@ public class LoginService {
 		memberDao.insert(member);
 	}
 
+	public void cJoin(VMemberDTO vmember) {
+		vmemberDao.insert(vmember);
+	}
+
 		
 	
 }

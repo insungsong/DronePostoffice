@@ -83,10 +83,10 @@ public class LoginController {
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
 			if(lauthority.equals("manager")) {
 				logger.debug("직원 로그인");
-				return "redirect:/"; //직원이 로그인했을 때 이동하는 페이지
+				return "redirect:/index"; //직원이 로그인했을 때 이동하는 페이지
 			} else {
 				logger.debug("관리자 로그인");
-				return "redirect:/"; //관리자가 로그인했을 때 이동하는 페이지
+				return "redirect:/index"; //관리자가 로그인했을 때 이동하는 페이지
 			}
 			
 		}else { //이장님이 로그인했을 때
@@ -113,7 +113,7 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("lid");
-		session.removeAttribute("mauthority");
+		session.removeAttribute("lauthority");
 		return "redirect:/";
 	}
 	
@@ -164,6 +164,12 @@ public class LoginController {
 			loginService.mJoin(member);
 			return "redirect:/";
 		} else {
+			vmember.setVmid(lid);
+			vmember.setVmname(lname);
+			vmember.setVmpassword(lpassword);
+			vmember.setVmtel(ltel);
+			vmember.setVid(vname);
+			loginService.cJoin(vmember);
 			return "redirect:/";
 		}
 		

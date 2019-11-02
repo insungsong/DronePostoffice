@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.BoardDTO;
+import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.MemberDTO;
+import com.postoffice.web.dto.NoticeDTO;
+import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientRequestService;
 
 @Controller
@@ -33,8 +37,8 @@ public class ClientRequestController {
 		 * { if(check.equals("client")) { return "client/index"; } }
 		 * session.setAttribute("error", "lauthorityError"); return "redirect:/";
 		 */
-		
 		return "client/index";
+
 	}
 
 	@RequestMapping("/requestBoarderList")
@@ -45,7 +49,7 @@ public class ClientRequestController {
 		int pagesPerGroup = 5;
 
 		int totalRowNum = requestService.getTotalRowNo();
-		System.out.println(totalRowNum+"############################################################");
+	
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if (totalRowNum % rowsPerPage != 0)
 			totalPageNum++;
@@ -127,7 +131,8 @@ public class ClientRequestController {
 		requestService.update(board);
 		
 		int pageNo = (Integer)session.getAttribute("pageNo");
-		return "redirect:/requestBoarderList?pageNo="+pageNo;
+		System.out.println("----------------------------" + pageNo);
+		return "redirect:/requestBoarderList";
 	}
 	
 	//search기능
@@ -165,6 +170,7 @@ public class ClientRequestController {
 			endRowNo = totalRowNum;
 
 		List<MailDTO> MailList = requestService.fromsearch(searchType,keyword,startRowNo, endRowNo);
+		StateDTO dto = new StateDTO();
 		
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalRowNum",totalRowNum);
@@ -174,6 +180,8 @@ public class ClientRequestController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
+		model.addAttribute("stateName", dto.getState_name());
+		System.out.println(" : " + dto.getState_name());
 		
 		return "client/requestBoarderList";
 	}

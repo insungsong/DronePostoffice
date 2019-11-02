@@ -11,12 +11,10 @@
 		<collection  property="memberList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.MemberDTO">
 			<result column="mname" property="mname"/>
 		</collection>
-		<!--  <association property=""></association> -->
 		<collection property="deptList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.DeptDTO">
 			<result column="dept_name" property="dept_name"/>
 		</collection>
 	</resultMap>
-	
 	<!--  -->
 	<!-- 공지사항 리스트 목록 가져오기 -->
 	<select id="noticeList" parameterType="map" resultMap="notice" >
@@ -80,6 +78,10 @@
 		where notice_id=#{notice_id}
 	</update>
 	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticedelete" parameterType="com.postoffice.web.dto.NoticeDTO">
+		delete from notice where notice_id=#{notice_id}
+	</delete>
 	
 	<!-- 테스트 코드 -->
 	<select id="testMember" resultType="com.postoffice.web.dto.MemberDTO">
@@ -105,4 +107,5 @@
 		where
 			mid = #{mid}
 	</select>
+	
 </mapper>

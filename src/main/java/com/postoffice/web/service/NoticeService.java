@@ -31,7 +31,7 @@ public class NoticeService {
 
 	
 	public void noticeWrite(NoticeDTO noticeDTO) {
-		noticeDTO.setMid("1");
+
 		noticeDAO.noticeinsert(noticeDTO);
 		
 	}
@@ -59,6 +59,7 @@ public class NoticeService {
 	//공지사항 수정
 	public void noticeupdate(NoticeDTO noticeDTO) {
 		noticeDAO.noticeupdate(noticeDTO);
+		
 	}
 	
 	///
@@ -90,6 +91,11 @@ public class NoticeService {
 		System.out.println("--------------------------------------------");
 		
 		return list;
+	}
+
+	public void noticeDelete(NoticeDTO noticeDTO) {
+		noticeDAO.deleteDelete(noticeDTO);
+		
 	}
 	
 }

@@ -80,9 +80,10 @@ public class NoticeDAO {
 	}
 	
 	//공지사항 수정
-	public int noticeupdate(NoticeDTO noticeDTO) {
-		return sqlSessionTemplate.update("notice.noticeupdate", noticeDTO);
+	public void noticeupdate(NoticeDTO noticeDTO) {
+		sqlSessionTemplate.update("notice.noticeupdate", noticeDTO);
 	}
+	
 	
 	//테스트 코드/
 	public List<MemberDTO> testMember() {
@@ -90,6 +91,10 @@ public class NoticeDAO {
 	}
 	public List<NoticeDTO> testNotice(){
 		return sqlSessionTemplate.selectList("notice.testNotice");
+	}
+
+	public void deleteDelete(NoticeDTO noticeDTO) {
+		sqlSessionTemplate.delete("notice.noticedelete", noticeDTO);
 	}
 	
 }

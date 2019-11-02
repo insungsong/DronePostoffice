@@ -163,7 +163,10 @@
 						<div>
 							<input id="ltel" name="ltel" type="text" placeholder="전화번호">
 						</div>
-						<div>
+						
+						<div class="filebox">
+							<input class="upload_name" value="파일선택" disabled="disabled">
+							<label for="lphoto">사진업로드</label>
 							<input id="lphoto" name="lphoto" type="file">
 						</div>
 						
@@ -172,15 +175,16 @@
 						</div>
 						<div>
 							<select id="vname" name="vname">
-								<option value="vname1">인성 마을</option>
-								<option value="vname2">소영 마을</option>
-								<option value="vname3">관우 마을</option>
+								<option value="v001">관우마을</option>
+								<option value="v002">인성마을</option>
+								<option value="v003">소영마을</option>
 							</select>
 						</div>
 						<div>
 							<select id="deptName" name="deptName">
-								<option value="ㅎㅇ">패키징 부서</option>
-								<option value="1">드론 부서</option>
+								<option value="d001">물류지원부</option>
+								<option value="d002">드론운영부</option>
+								<option value="d003">전산관리부</option>
 							</select>
 						</div>
 						<div class="joinButton">
