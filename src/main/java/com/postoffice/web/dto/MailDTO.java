@@ -10,10 +10,25 @@ public class MailDTO {
 	private String to_address;
 	private int mail_weight;
 	private String state_id;
+	private String state_name;
 	private int package_num;
 	private Date mail_date;
 	private String vid;
+	private String village_name;
 	
+	
+	public String getState_name() {
+		return state_name;
+	}
+	public void setState_name(String state_name) {
+		this.state_name = state_name;
+	}
+	public String getVillage_name() {
+		return village_name;
+	}
+	public void setVillage_name(String village_name) {
+		this.village_name = village_name;
+	}
 	public int getMail_id() {
 		return mail_id;
 	}
