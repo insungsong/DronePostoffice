@@ -2,15 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 	
-	<!-- <select id="selectAll" parameterType="string"  resultMap="result">
+	<!-- <select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		select m.mail_id , m.from_name , m.from_address,m.to_name,m.to_address
 		,m.mail_weight,s.state_name,m.package_num,m.mail_date 
         from mail m, state s
-        where s.state_id = m.state_id AND
-        s.state_id=#{state_id}
-	</select>
+        where 
+        	s.state_id = m.state_id 
+        AND s.state_id=#{state_id}
+	</select> -->
 	
-	<resultMap type="com.postoffice.web.dto.MailDTO" id="result">
+	<update id="updateStateProc" parameterType="com.postoffice.web.dto.MailDTO">
+		update
+			mail
+		set
+			state_id  = #{state_id}
+		where
+			mail_id = #{mail_id}
+	</update>
+	<!-- <resultMap type="com.postoffice.web.dto.MailDTO" id="result">
 		<result column="mail_id" property="mail_id"/>
 		<result column="from_name" property="from_name"/>
 		<result column="from_address" property="from_address"/>
@@ -21,7 +30,23 @@
 		<result column="mail_date" property="mail_date"/>
 	</resultMap> -->
 	<select id="selectAll" resultType="com.postoffice.web.dto.MailDTO">
-		select * from mail
+		select 
+			a.mail_id,
+			a.from_name,
+			a.from_address,
+			a.to_name,
+			a.to_address,
+			a.mail_weight,
+			a.state_id,
+			b.state_name as state_name,
+			a.package_num,
+			a.mail_date,
+			a.vid,
+			c.vname as village_name
+		from
+			mail a
+		Left outer join state b on b.state_id = a.state_id
+		Left outer join village c on c.vid = a.vid
 	</select>
 	
 

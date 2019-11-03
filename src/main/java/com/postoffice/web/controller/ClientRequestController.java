@@ -96,9 +96,13 @@ public class ClientRequestController {
 
 	// 클라이언트 메일 요청
 	@RequestMapping("/requestWrite")
-	public String requestProcess(MailDTO maildto, @RequestParam(defaultValue = "1") int pageNo) {
+	public String requestProcess(Model model,MailDTO maildto, @RequestParam(defaultValue = "1") int pageNo) {
 		int requestmail = requestService.requestWrite(maildto);
-		return "redirect:/requestBoarderList";
+		model.addAttribute("requestmail",requestmail);
+		for(int i=0; i<=requestmail;i++) {
+			System.out.println(i);
+		}
+		return "client/requestWrite";
 	}
 	
 	//요청 삭제

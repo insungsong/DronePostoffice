@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.postoffice.web.dto.MailDTO;
+
 @Repository
 public class ClientCheckDAO {
 	@Autowired
@@ -13,5 +15,9 @@ public class ClientCheckDAO {
 	
 	public List selectAll() {
 		return sqlSessionTemplate.selectList("board.selectAll");
+	}
+	
+	public int updateStateProc(MailDTO mailDTO) {
+		return sqlSessionTemplate.update("board.updateStateProc", mailDTO);
 	}
 }

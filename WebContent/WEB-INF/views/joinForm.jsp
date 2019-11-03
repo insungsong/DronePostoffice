@@ -163,7 +163,10 @@
 						<div>
 							<input id="ltel" name="ltel" type="text" placeholder="전화번호">
 						</div>
-						<div>
+						
+						<div class="filebox">
+							<input class="upload_name" value="파일선택" disabled="disabled">
+							<label for="lphoto">사진업로드</label>
 							<input id="lphoto" name="lphoto" type="file">
 						</div>
 						

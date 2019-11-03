@@ -1,5 +1,7 @@
 package com.postoffice.web.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,11 @@ public class ClientStateCheckService {
 	
 	public StateDTO stateCheck(String state_id) {
 		StateDTO stateDTO=stateDAO.stateCheck(state_id);
-		return stateDTO;
-		
-		
+		return stateDTO;	
+	}
+	
+	public List selectList() {
+		return stateDAO.selectList();
 	}
 	
 }

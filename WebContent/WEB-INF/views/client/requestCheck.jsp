@@ -45,8 +45,8 @@
 	function main() {
 		location.href = "client_index";
 	}
-	 
-/* 	function btnRegister(){
+	
+ 	/* function btnRegister(){
 		$.ajax({
 			url:"stateCheck",
 			data:{"state_id":"s001"},
@@ -60,23 +60,18 @@
 		
 		});
 	
-	}
- */
- 	function check(){
-		$.ajax({
-			url:"stateCheck?state_id=s001",
-			success:function(){
-				console.log("ㅎㅇ");
-			}
-		});
-				
- }
+	} */
+	
+ 	function check(state_id,mail_id){
+	 	location.href = "stateCheck?state_id=" + state_id + "&mail_id=" + mail_id;
+ 	}
+ 
 </script>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
 
-
+	<form id="form1">
 	<table id="customers" class="table">
 		<thead class="thead-dark">
 		<tr>
@@ -92,6 +87,7 @@
 		</thead>
 		<tbody>
 		<tr>
+		
 		<c:forEach items="${CheckList}" var="check">
 				<td>${check.mail_id}</td>
 				<td>${check.from_name}</td>
@@ -100,17 +96,24 @@
 				<td>${check.to_address}</td>
 				<td>${check.mail_weight}</td>
 				<td>${check.state_id}</td>
+				<td>${check.state_name}</td>
 				<td>${check.vid}</td>
-				<td><input type="button" value="ㅎㅇ" onClick="check()"/></td>
+				<td>${check.village_name}</td>
+				<select name="state">
+					<c:forEach items="${stateList }" var="state">
+						<option value="${state.state_id }">${state.state_name }</option>
+					</c:forEach>
+				</select>
+				<td><input type="button" value="ㅎㅇ" onClick="check('s002','${check.mail_id}')"/></td>
 
 				<td>${check.state_id}</td>
 				<td>
 				</td>
-
 			</tr>
 		</c:forEach>
 	</tbody>
 	</table>
+	</form>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
 
 		</body>

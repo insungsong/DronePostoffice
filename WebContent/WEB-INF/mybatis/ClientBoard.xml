@@ -45,9 +45,9 @@
 <!-- 여기를 도저히 모르겠음 -->
 	<insert id="insertBoard">
 		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname)
-			select (#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001','v001')
+			select (#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'#{state_name}','#{vname}')
 			from mail,village,state
-			where mail.vid = village.vid and mail_state_id = state.state_id
+			where mail.vid = village.vid and mail.state_id = state.state_id
 	</insert>
 	 
 	<delete id="removeRequest">

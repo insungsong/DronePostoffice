@@ -10,11 +10,34 @@ public class MailDTO {
 	private String to_name;
 	private String to_address;
 	private int mail_weight;
+
+	private String state_id;
+	private String state_name;
+
 	private List<StateDTO> stateList;
+
 	private int package_num;
 	private Date mail_date;
+
+	private String vid;
+	private String village_name;
+
 	private List<VillageDTO> villageList;
+
 	
+	
+	public String getState_name() {
+		return state_name;
+	}
+	public void setState_name(String state_name) {
+		this.state_name = state_name;
+	}
+	public String getVillage_name() {
+		return village_name;
+	}
+	public void setVillage_name(String village_name) {
+		this.village_name = village_name;
+	}
 	public int getMail_id() {
 		return mail_id;
 	}
@@ -38,6 +61,18 @@ public class MailDTO {
 	}
 	public void setTo_name(String to_name) {
 		this.to_name = to_name;
+	}
+	public String getState_id() {
+		return state_id;
+	}
+	public void setState_id(String state_id) {
+		this.state_id = state_id;
+	}
+	public String getVid() {
+		return vid;
+	}
+	public void setVid(String vid) {
+		this.vid = vid;
 	}
 	public String getTo_address() {
 		return to_address;
