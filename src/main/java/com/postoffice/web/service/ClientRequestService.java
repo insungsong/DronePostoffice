@@ -45,9 +45,13 @@ public class ClientRequestService {
 		int mailMap = clientdao.selectnum();
 		return mailMap;
 	}
+	public List<MailDTO> getjoin() {
+		List<MailDTO> listdto = clientdao.getjoin();
+		return listdto;
+	}
 
-	public int requestWrite(MailDTO maildto) {
-		int mailDto = clientdao.insertMaildto(maildto);
+	public int requestWrite() {
+		int mailDto = clientdao.insertMaildto();
 		return mailDto;
 	}
 
@@ -75,5 +79,6 @@ public class ClientRequestService {
 		List<MailDTO> listdto = clientdao.fromSearch(searchType,keyword,startRowNo, endRowNo);
 		return listdto;
 	}
+
 
 }

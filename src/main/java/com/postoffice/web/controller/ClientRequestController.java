@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -87,24 +88,15 @@ public class ClientRequestController {
 	}
 
 	//req_next값 가져오기
-	//
-	 @GetMapping("/requestWrite")
+	 @RequestMapping("/requestWrite")
 	 	public String mailadd1(Model model) { 
 		 int originMailNum = requestService.getnum()+1;
+		 List<MailDTO> requestjoin = requestService.getjoin();
 		 model.addAttribute("originMailNum",originMailNum); 
+		 model.addAttribute("requestjoin",requestjoin);
 		 return "client/requestWrite"; 
 	}
-
-	// 클라이언트 메일 요청
-	@RequestMapping("/requestWrite")
-	public String requestProcess(Model model,MailDTO maildto, @RequestParam(defaultValue = "1") int pageNo) {
-		int requestmail = requestService.requestWrite(maildto);
-		model.addAttribute("requestmail",requestmail);
-		for(int i=0; i<=requestmail;i++) {
-			System.out.println(i);
-		}
-		return "client/requestWrite";
-	}
+	 
 	
 	//요청 삭제
 	@RequestMapping("/requestRemove")

@@ -71,9 +71,13 @@ public class ClientDAO {
 		int selectNum = sqlSessionTemplate.selectOne("ClientBoard.selectnum");
 		return selectNum;
 	}
+	public List<MailDTO> getjoin() {
+		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.getjoin");
+		return listdto;
+	}
 
-	public int insertMaildto(MailDTO maildto) {
-		int insertMaildto = sqlSessionTemplate.insert("ClientBoard.insertBoard",maildto);
+	public int insertMaildto() {
+		int insertMaildto = sqlSessionTemplate.insert("ClientBoard.insertBoard");
 		return insertMaildto;
 	}
 	public int removedto(String mail_id) {
@@ -97,8 +101,7 @@ public class ClientDAO {
 		map.put("keyword", keyword);
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
-		
-		//
+
 		if(searchType.equals("from_name")) {
 			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
 			return listdto;
@@ -107,5 +110,4 @@ public class ClientDAO {
 		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.toselectsearch", map);
 		return listdto;
 	}
-
 }

@@ -41,6 +41,22 @@
 	<select id="selectnum" resultType="int">
 		select count(*) from Mail 
 	</select>
+	<select id="getjoin" resultMap="Mail">
+		select 
+			state_name,vname
+		from 
+			mail,village,state
+		where 
+			mail.vid=village.vid and mail.state_id=state.state_id
+	</select>
+	
+	<select id="joinselect" resultMap="Mail">
+		select 
+			state_name,vname
+		from 
+			mail,village,state
+		where mail.vid = viilage.vid and mail.state_id = state.state_id
+	</select>
 
 <!-- 여기를 도저히 모르겠음 -->
 	<insert id="insertBoard">
