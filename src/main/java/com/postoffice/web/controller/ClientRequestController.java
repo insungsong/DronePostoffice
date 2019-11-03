@@ -87,6 +87,7 @@ public class ClientRequestController {
 	}
 
 	//req_next값 가져오기
+	//
 	 @GetMapping("/requestWrite")
 	 	public String mailadd1(Model model) { 
 		 int originMailNum = requestService.getnum()+1;
