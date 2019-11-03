@@ -1,3 +1,5 @@
+<%@page import="com.postoffice.web.dto.MailDTO"%>
+<%@page import="com.postoffice.web.dto.StateDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -120,12 +122,14 @@
 									<thead class="thead-dark">
 									   <tr>
 									     <th scope="col">요청 번호</th>
+									     <th scope="col">요청 날짜</th>
 									     <th scope="col">보내는 사람</th>
 									     <th scope="col">보내는 주소</th>
 									     <th scope="col">받는 사람</th>
 									     <th scope="col">받는 주소</th>
 									     <th scope="col">메일 무게</th>
 									     <th scope="col">배송 상태</th>
+									     <th scope="col">마을 분류</th>
 									     <th scope="col">요청 취소</th>
 									   </tr>
 									  </thead>
@@ -133,12 +137,14 @@
 										  	<c:forEach items="${MailList}" var="MailList">
 												 <tr>
 												    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
-													<td id="Mail_fromname">${MailList.from_name}</td>
-													<td id="Mail_fromaddress">${MailList.from_address}</td>
-													<td id="Mail_toname">${MailList.to_name }</td>
-													<td id="Msil_toaddress">${MailList.to_address}</td>
-													<td id="Mail_weight">${MailList.mail_weight}</td>
-													<td id="Mail_state_id">${MailList.state_id}</td>
+												    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
+													<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
+													<td id="Mail_fromaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_address}</a></td>
+													<td id="Mail_toname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_name }</a></td>
+													<td id="Msil_toaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_address}</a></td>
+													<td id="Mail_weight"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_weight}</a></td>
+													<td id="Mail_state_name"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.stateList.get(0).state_name}</a></td>
+													<td id="Mail_vname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.villageList.get(0).vname}</a></td>
 													<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 												 <tr>
 											</c:forEach>						  

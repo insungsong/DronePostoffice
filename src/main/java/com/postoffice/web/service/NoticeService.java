@@ -1,5 +1,6 @@
 package com.postoffice.web.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,11 @@ public class NoticeService {
 		return noticeList;
 	}
 
+	SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
+
+	
 	public void noticeWrite(NoticeDTO noticeDTO) {
+
 		noticeDAO.noticeinsert(noticeDTO);
 		
 	}
@@ -35,6 +40,28 @@ public class NoticeService {
 		NoticeDTO noticeDTO = noticeDAO.selectNotice(notice_id);
 		return noticeDTO;
 	}
+	
+	public MemberDTO selectMember(NoticeDTO dto) {
+		MemberDTO memberDTO = noticeDAO.selectmember(dto);
+		return memberDTO;
+	}
+	
+	public DeptDTO selectDept(MemberDTO Mdto) {
+		DeptDTO deptDto = noticeDAO.selectdept(Mdto);
+		return deptDto;
+	}
+
+	
+	public MemberDTO showMember(MemberDTO dto) {
+		return noticeDAO.showMember(dto);
+	}
+	
+	//공지사항 수정
+	public void noticeupdate(NoticeDTO noticeDTO) {
+		noticeDAO.noticeupdate(noticeDTO);
+		
+	}
+	
 	///
 	//테스트 코드
 	public List<MemberDTO> testMember(){
@@ -64,6 +91,11 @@ public class NoticeService {
 		System.out.println("--------------------------------------------");
 		
 		return list;
+	}
+
+	public void noticeDelete(NoticeDTO noticeDTO) {
+		noticeDAO.deleteDelete(noticeDTO);
+		
 	}
 	
 }

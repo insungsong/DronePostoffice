@@ -13,7 +13,7 @@
 	<style>
 		.mailWrite{
 			width:100%;
-			height:800px;
+			height:2000px;
 			border:solid 1px black;
 			float:left;
 		}
@@ -61,45 +61,45 @@
 	</head>
 	<body>
 	<div class="mailWrite">
-		<form id="mailWrite" name="mail_id" method="post" action="requestWrite" onsubmit="return checkForm()">
+		<form id="mailWrite" name="mail_id" method="post" action="requestwrite" onsubmit="return checkForm()">
 		 <div class="form-group">
 		    <label for="formGroupExampleInput2">메일 고유값</label>
 		    <input type="text" class="form-control" id="plusNum" name="mail_id" value="${originMailNum}" readonly="readonly">
 		  </div>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">보내는 사람 이름</label>
-		    <input type="text" class="form-control" id="fromname" name="from_name" placeholder="보내는 이름을 입력하세요" value="${maildto.to_name}">
+		    <input type="text" class="form-control" id="fromname" name="from_name" placeholder="보내는 이름을 입력하세요">
 		  	<span id="fromnameError" class="error" style="color:red">${fromnameError}</span>
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">보내는 사람 주소</label>
-		    <input type="text" class="form-control" name="from_address" id="toname" placeholder="받는 사람이름을 입력하세요" value="${maildto.from_name}">
+		    <input type="text" class="form-control" name="from_address" id="toname" placeholder="받는 사람이름을 입력하세요">
 		    <span id="fromaddressError" class="error" style="color:red">${fromaddressError}</span>
 		  </div>
 		 
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">받는 사람이름</label>
-		    <input type="text" class="form-control" name="to_name" id="toaddress" placeholder="보내는 사람주소를 입력하세요" value="${maildto.from_address}">
+		    <input type="text" class="form-control" name="to_name" id="toaddress" placeholder="보내는 사람주소를 입력하세요">
 		    <span id="tonameError" class="error" style="color:red">${tonameError}</span>
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">받는 사람주소</label>
-		    <input type="text" class="form-control" name="to_address" id="toaddress" placeholder="받는 사람주소 입력하세요" value="${maildto.to_address}">
+		    <input type="text" class="form-control" name="to_address" id="toaddress" placeholder="받는 사람주소 입력하세요">
 		    <span id="toaddressError" class="error" style="color:red">${toaddressError}</span>
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">마을 이름</label>
-		    <input type="text" class="form-control" name="vid" id="villagename" placeholder="마을 이름 입력하세요">
+		    <input type="text" class="form-control" name="vid" id="villagename" value="${requestjoin.villageList.get(0).vname }">
 		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
 		  </div>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">우편물 무게</label>
-		    <input type="text" class="form-control" name="mail_weight" id="mailweight" placeholder="우편물 무게를 입력하세요" value="${mail_weight}">
+		    <input type="text" class="form-control" name="mail_weight" id="mailweight" placeholder="우편물 무게를 입력하세요" >
 		  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
 		  </div>
-		   <div class="form-group">
+		  <div class="form-group">
 		    <label for="formGroupExampleInput">배송 상태</label>
-		    <input type="text" class="form-control" name="state_id" id="stateid" placeholder="배송요청" readonly="readonly" value="${mail_state}">
+		    <input type="text" class="form-control" name="state_id" id="stateid" value="${requestjoin.stateList.get(0).state_name }">
 		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
 		  </div>
 		  <button class="btn btn-danger">수정저장</button>

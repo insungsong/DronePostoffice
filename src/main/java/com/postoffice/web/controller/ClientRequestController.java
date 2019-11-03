@@ -10,11 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientRequestService;
 
 @Controller
@@ -28,15 +29,13 @@ public class ClientRequestController {
 	
 	@RequestMapping("/client_index")
 	public String client_index(HttpSession session){
-		String check = (String) session.getAttribute("lauthority");
-		if(check != null) {
-			if(check.equals("client")) {
-				return "client/index";
-			}
-		}	
-		session.setAttribute("error", "lauthorityError");
-		return "redirect:/";
-
+		/*
+		 * String check = (String) session.getAttribute("lauthority"); if(check != null)
+		 * { if(check.equals("client")) { return "client/index"; } }
+		 * session.setAttribute("error", "lauthorityError"); return "redirect:/";
+		 */
+		
+		return "client/index";
 	}
 
 	@RequestMapping("/requestBoarderList")
@@ -47,7 +46,7 @@ public class ClientRequestController {
 		int pagesPerGroup = 5;
 
 		int totalRowNum = requestService.getTotalRowNo();
-		System.out.println(totalRowNum+"############################################################");
+	
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if (totalRowNum % rowsPerPage != 0)
 			totalPageNum++;
@@ -72,7 +71,6 @@ public class ClientRequestController {
 		if (pageNo == totalPageNum)
 			endRowNo = totalRowNum;
 
-		List<BoardDTO> boardList = requestService.getBoardList(startRowNo, endRowNo);
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo);
 
 		// JSP로 페이지 정보 넘기기
@@ -85,25 +83,20 @@ public class ClientRequestController {
 		model.addAttribute("startPageNo", startPageNo);
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
-		model.addAttribute("boardList", boardList);
 		model.addAttribute("MailList", MailList);
 		return "client/requestBoarderList";
 	}
 
 	//req_next값 가져오기
-	 @GetMapping("/requestWrite")
+	 @RequestMapping("/requestWrite")
 	 	public String mailadd1(Model model) { 
 		 int originMailNum = requestService.getnum()+1;
+		 List<MailDTO> requestjoin = requestService.getjoin();
 		 model.addAttribute("originMailNum",originMailNum); 
+		 model.addAttribute("requestjoin",requestjoin);
 		 return "client/requestWrite"; 
 	}
-
-	// 클라이언트 메일 요청
-	@RequestMapping("/requestWrite")
-	public String requestProcess(MailDTO maildto, @RequestParam(defaultValue = "1") int pageNo) {
-		int requestmail = requestService.requestWrite(maildto);
-		return "redirect:/requestBoarderList";
-	}
+	 
 	
 	//요청 삭제
 	@RequestMapping("/requestRemove")
@@ -131,7 +124,8 @@ public class ClientRequestController {
 		requestService.update(board);
 		
 		int pageNo = (Integer)session.getAttribute("pageNo");
-		return "redirect:/requestBoarderList?pageNo="+pageNo;
+		System.out.println("----------------------------" + pageNo);
+		return "redirect:/requestBoarderList";
 	}
 	
 	//search기능
@@ -169,6 +163,7 @@ public class ClientRequestController {
 			endRowNo = totalRowNum;
 
 		List<MailDTO> MailList = requestService.fromsearch(searchType,keyword,startRowNo, endRowNo);
+		StateDTO dto = new StateDTO();
 		
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalRowNum",totalRowNum);
@@ -178,6 +173,8 @@ public class ClientRequestController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
+		model.addAttribute("stateName", dto.getState_name());
+		System.out.println(" : " + dto.getState_name());
 		
 		return "client/requestBoarderList";
 	}

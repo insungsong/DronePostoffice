@@ -1,7 +1,11 @@
 package com.postoffice.web.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.Date;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.postoffice.web.dto.MemberDTO;
+import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.LoginResult;
 import com.postoffice.web.service.LoginService;
 
@@ -76,10 +83,10 @@ public class LoginController {
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
 			if(lauthority.equals("manager")) {
 				logger.debug("직원 로그인");
-				return "redirect:/"; //직원이 로그인했을 때 이동하는 페이지
+				return "redirect:/index"; //직원이 로그인했을 때 이동하는 페이지
 			} else {
 				logger.debug("관리자 로그인");
-				return "redirect:/"; //관리자가 로그인했을 때 이동하는 페이지
+				return "redirect:/index"; //관리자가 로그인했을 때 이동하는 페이지
 			}
 			
 		}else { //이장님이 로그인했을 때
@@ -106,7 +113,7 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.removeAttribute("lid");
-		session.removeAttribute("mauthority");
+		session.removeAttribute("lauthority");
 		return "redirect:/";
 	}
 	
@@ -116,34 +123,74 @@ public class LoginController {
 	}
 	
 	@PostMapping("/join") 
-	public String join() {
-		return "redirect:/";
+	public String join(String lid, String lname, String lpassword, String ltel,
+			MultipartFile lphoto, String lauthority, String vname, String deptName,
+			HttpServletRequest request, Model model) throws Exception {
+		logger.debug(lid);
+		logger.debug(lname);
+		logger.debug(lpassword);
+		logger.debug(lphoto.getOriginalFilename());
+		logger.debug(lphoto.getContentType());
+		logger.debug(""+lphoto.getSize());
+		logger.debug(lauthority);
+		logger.debug(vname);
+		logger.debug(deptName);
+		MemberDTO member = new MemberDTO();
+		VMemberDTO vmember = new VMemberDTO();
+		ServletContext application = request.getServletContext();
+		String savePath = application.getRealPath("/resources/upload/");
+		
+		//사진이 첨부되어 있다면 DTO에 저장 
+		if(!lphoto.isEmpty()) {
+			logger.debug("실행");
+			String saveFileName = new Date().getTime() + "-" + lphoto.getOriginalFilename();
+			lphoto.transferTo(new File(savePath + saveFileName));
+			if(lauthority.equals("manager") || lauthority.equals("admin")) {
+				member.setMphoto(saveFileName);
+				logger.debug("실행");
+			} else {
+				vmember.setVmphoto(saveFileName);
+			}
+		}
+		
+		//직원(관리자) 또는 이장님이 회원가입할 때 정보를 저장
+		if(lauthority.equals("manager") || lauthority.equals("admin")) {
+			member.setMid(lid);
+			member.setMname(lname);
+			member.setMpassword(lpassword);
+			member.setMtel(ltel);
+			member.setMauthority(lauthority);
+			member.setDept_id(deptName);
+			loginService.mJoin(member);
+			return "redirect:/";
+		} else {
+			vmember.setVmid(lid);
+			vmember.setVmname(lname);
+			vmember.setVmpassword(lpassword);
+			vmember.setVmtel(ltel);
+			vmember.setVid(vname);
+			loginService.cJoin(vmember);
+			return "redirect:/";
+		}
+		
 	}
 	
 	@RequestMapping("/lidCheck")
 	public void lidCheck(String lid, String lauthority, HttpServletResponse response) throws Exception{
 		logger.debug(lid);
 		logger.debug(lauthority);
+		boolean result;
 		if(lauthority.equals("manager") || lauthority.equals("admin")) {
-			boolean result = loginService.mLidCheck(lid);
-			response.setContentType("application/json; charset=UTF-8"); 
-			PrintWriter pw = response.getWriter(); 
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("result", result); 
-			pw.print(jsonObject.toString());
-			pw.flush(); 
-			pw.close();
+			result = loginService.mLidCheck(lid);
 		} else {
-			boolean result = loginService.cLidCheck(lid);
-			response.setContentType("application/json; charset=UTF-8"); 
-			PrintWriter pw = response.getWriter(); 
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("result", result); 
-			pw.print(jsonObject.toString());
-			pw.flush(); 
-			pw.close();
+			result = loginService.cLidCheck(lid);
 		}
-		 
+		response.setContentType("application/json; charset=UTF-8"); 
+		PrintWriter pw = response.getWriter(); 
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result", result); 
+		pw.print(jsonObject.toString());
+		pw.flush(); 
+		pw.close();
 	}
-	
 }

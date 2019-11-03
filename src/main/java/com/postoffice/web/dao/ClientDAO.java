@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.StateDTO;
 
 @Component
 public class ClientDAO {
@@ -48,6 +49,21 @@ public class ClientDAO {
 		map.put("endRowNo",endRowNo);
 		List<MailDTO> MailboardList=sqlSessionTemplate.selectList("ClientBoard.selectMailList",map);
 		
+		for(int i = 0; i <MailboardList.size(); i++) {
+			MailDTO dto = MailboardList.get(i);
+			
+			System.out.println("id : " + dto.getMail_id());
+			System.out.println("title : " + dto.getFrom_name());
+			System.out.println("content : " + dto.getFrom_address());
+			System.out.println("mid : " + dto.getMail_weight());
+			System.out.println("size : " + dto.getTo_address());
+			
+			StateDTO statedto = dto.getStateList().get(0);
+			
+			System.out.println("state상태: "+statedto.getState_name());
+		}
+		
+		
 		return MailboardList;
 	}
 
@@ -55,9 +71,13 @@ public class ClientDAO {
 		int selectNum = sqlSessionTemplate.selectOne("ClientBoard.selectnum");
 		return selectNum;
 	}
+	public List<MailDTO> getjoin() {
+		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.getjoin");
+		return listdto;
+	}
 
-	public int insertMaildto(MailDTO maildto) {
-		int insertMaildto = sqlSessionTemplate.insert("ClientBoard.insertBoard",maildto);
+	public int insertMaildto() {
+		int insertMaildto = sqlSessionTemplate.insert("ClientBoard.insertBoard");
 		return insertMaildto;
 	}
 	public int removedto(String mail_id) {
@@ -81,8 +101,7 @@ public class ClientDAO {
 		map.put("keyword", keyword);
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
-		
-		//
+
 		if(searchType.equals("from_name")) {
 			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
 			return listdto;
@@ -91,5 +110,4 @@ public class ClientDAO {
 		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.toselectsearch", map);
 		return listdto;
 	}
-
 }

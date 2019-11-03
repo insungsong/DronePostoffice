@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -29,33 +29,31 @@
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">보내는 사람 이름</label>
 		    <input type="text" class="form-control" id="from_name" name="from_name" placeholder="보내는 이름을 입력하세요" value="${board.from_name}">
-		  	<span id="fromnameError" class="error" style="color:red">${fromnameError}</span>
+
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">보내는 사람 주소</label>
 		    <input type="text" class="form-control" name="from_address" id="to_name" placeholder="받는 사람이름을 입력하세요" value="${board.from_address}">
-		    <span id="fromaddressError" class="error" style="color:red">${fromaddressError}</span>
+
 		  </div>
 		 
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">받는 사람이름</label>
 		    <input type="text" class="form-control" name="to_name" id="to_name" placeholder="보내는 사람주소를 입력하세요" value="${board.to_name}">
-		    <span id="tonameError" class="error" style="color:red">${tonameError}</span>
+
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">받는 사람주소</label>
 		    <input type="text" class="form-control" name="to_address" id="to_address" placeholder="받는 사람주소 입력하세요" value="${board.to_address}">
-		    <span id="toaddressError" class="error" style="color:red">${toaddressError}</span>
+
 		  </div>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">우편물 무게</label>
 		    <input type="text" class="form-control" name="mail_weight" id="mail_weight" placeholder="우편물 무게를 입력하세요" value="${board.mail_weight}">
-		  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
 		  </div>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">배송 상태</label>
-		    <input type="text" class="form-control" name="state_id" id="state_id" placeholder="배송요청" readonly="readonly" value="${board.state_id }">
-		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
+		    ${board.stateList.get(0).state_name }
 		  </div>
 		  <input type="submit" class="btn btn-success" value="수정하기">
 		  <a href="requestBoarderList" class="btn btn-secondary">뒤로가기</a>

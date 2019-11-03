@@ -1,12 +1,8 @@
 package com.postoffice.web.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,20 +10,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.PackageDTO;
-import com.postoffice.web.service.PackagingService;
+import com.postoffice.web.service.PackageService;
 
 @Controller
-public class PackagingController {
+public class PackageController {
 
 	@Autowired
-	private PackagingService service;
+	private PackageService packageService;
 	
 	@RequestMapping("/packagingList")
-	public String packagingList(Model model) {
-		model.addAttribute("mailList",service.mailList());
-		model.addAttribute("packageList",service.packageList());
+	public String packagingList(Model model,
+				@RequestParam(defaultValue="0") String sort) {
 		
-		List<PackageDTO> list = service.packageList();
+		
+		model.addAttribute("mailList",packageService.mailList(sort));
+		model.addAttribute("packageList",packageService.packageList());
+		
+		List<PackageDTO> list = packageService.packageList();
 		for(int i = 0; i < list.size(); i++) {
 			PackageDTO dto = list.get(i);
 			System.out.println("------------------------------------------");
@@ -39,26 +38,21 @@ public class PackagingController {
 	}
 	
 	@RequestMapping("/packaging")
-	public void packaging(Model model, HttpServletResponse response,
+	public String packaging(Model model,
 			@RequestParam(value="mailIdList[]") List<String> mailIdList,
 			@RequestParam(value="totalWeight") String totalWeight) throws IOException {
-		
-			response.setContentType("application/json; charset=UTF-8");
-			PrintWriter pw = response.getWriter();
 			
-			JSONObject json = new JSONObject();
+			model.addAttribute("packagingList", packageService.mailPackaging(totalWeight, mailIdList));
 			
-			json.put("packagingList", service.mailPackaging(totalWeight, mailIdList));
-			
-			pw.print(json.toString());
-			pw.flush();
-			pw.close();
+			return "redirect:/packagingList";
 	}
-	//
+	
 	@RequestMapping("/pack_mailList")
-	public String pack_mailList(Model model, HttpServletResponse response, PackageDTO dto) {
+	public String pack_mailList(Model model, PackageDTO dto) {
 			
-			return "manager/mailList_popup";
+			model.addAttribute("pack_num",dto.getPackage_id());
+			model.addAttribute("pack_mailList",packageService.pack_mailList(dto));
+			return "manager/packageMailList_popup";
 	}
 	
 }

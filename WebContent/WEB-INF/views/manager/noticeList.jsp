@@ -84,11 +84,8 @@
 										<tr>
 											<th scope="row">${notice.notice_id}</th>
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
-<<<<<<< HEAD
 											<%-- <td>${notice.dept_id}</td> --%>
-=======
 
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 											<td>${notice.mid}</td>
 											<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 										</tr>
@@ -96,6 +93,7 @@
 								
 							</table>
 
+						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
 							<a href="noticeList?pageNum=1" class="btn btn-primary">처음</a>
 							<c:if test="${groupNum >1}">
@@ -120,6 +118,7 @@
 								</c:if>
 								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-primary">맨끝</a>
 							</div>
+						</c:if>
 						</div>
 					
 					</div>

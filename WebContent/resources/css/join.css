@@ -63,6 +63,40 @@
 	line-height: 40px;
 }
 
+.joinForm input[type="file"]{
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	magin: -1px;
+	overflow: hidden;
+	clip: rect(0,0,0,0);
+	border: 0;
+}
+
+.filebox label{
+	display: inline-block;
+    width: 30%;
+    color: white;
+    font-size: 17px;
+    line-height: 44px;
+    text-align: center;
+    background-color: #F32C28;
+    cursor: pointer;
+    border: 1px solid #F32C28;
+    border-color: #F32C28;
+    margin-bottom: 0;
+}
+
+.filebox .upload_name{
+	display: inline-block;
+	width: 70%;
+	float: left;
+	background-color: white;
+	border: 0.1px solid darkgray;
+	line-height: 43.9px;
+}
+
 .joinForm select{
 	width: 100%;
 	line-height: 40px;
@@ -72,22 +106,20 @@
 #lid{
 	float: left;
 	display: inline-block;
-	width: 80%;
+	width: 70%;
 	line-height: 40px;
 }
 
 #overlap{
 	display: inline-block;
-	width: 20%;
+	width: 30%;
 	line-height: 40px;
 	background-color: #F32C28;
+	border-style: solid;
 	border-color: #F32C28;
 	color: white;
 	font-size: 17px;
-	
 }
-
-
 
 .joinButton{
 	line-height: 50px;

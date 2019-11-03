@@ -99,6 +99,8 @@
 			$(function() {
 				$("#vname").hide();
 				$("#deptName").hide();
+				
+				/* 비밀번호 일치 또는 불일치 하는 지 확인하는 코드 */
 				$("input").keyup(function(){ 
 					if($("#lpassword").val() != ""){
 						if($("#lpasswordCheck").val() != ""){
@@ -118,8 +120,27 @@
 						$("#lpasswordCheckError").html("")
 					}
 				})
+				
+				/* 파일 선택하면 파일 이름만 따서 input 태그 값에 넣어주는 코드 */
+				$(".filebox").ready(function(){
+					var fileTarget = $(".filebox #lphoto");
+					
+					fileTarget.on('change', function(){
+						if(window.FileReader) {
+							var filename = $(this)[0].files[0].name;
+						} else {
+							var filename = $(this).val().split('/').pop().split('\\').pop();
+						}
+						$(".upload_name").val(filename);
+					})
+				})
 			})
 		
+			
+			
+			
+
+	
 		
 		</script>
 	</head>
@@ -139,7 +160,7 @@
 					</ul>
 				</div>	
 				<div class="joinForm">
-					<form method="post" action="join" onsubmit="return check()">
+					<form method="post" action="join" enctype="multipart/form-data" onsubmit="return check()">
 						<div>
 							<input id="lid" name="lid" type="text" placeholder="아이디">
 							<input onclick="lidCheck()" id="overlap" type="button" value="중복체크">
@@ -154,27 +175,32 @@
 						<div>
 							<input id="lpasswordCheck" name="lpasswordCheck" type="password" placeholder="비밀번호 확인">
 						</div>
-						<span id="lpasswordCheckError" calss="error" style="color: red"></span>
+						<span id="lpasswordCheckError" class="error" style="color: red"></span>
 						<div>
 							<input id="ltel" name="ltel" type="text" placeholder="전화번호">
 						</div>
-						<div>
-							<input id="lphoto" name="lphoto" type="file" placeholder="사진">
+						
+						<div class="filebox">
+							<input class="upload_name" value="파일선택" disabled="disabled">
+							<label for="lphoto">사진업로드</label>
+							<input id="lphoto" name="lphoto" type="file">
 						</div>
+						
 						<div>
 							<input id="lauthority" name="lauthority" type="hidden" value="">
 						</div>
 						<div>
 							<select id="vname" name="vname">
-								<option value="vname1">인성 마을</option>
-								<option value="vname2">소영 마을</option>
-								<option value="vname3">관우 마을</option>
+								<option value="v001">관우마을</option>
+								<option value="v002">인성마을</option>
+								<option value="v003">소영마을</option>
 							</select>
 						</div>
 						<div>
 							<select id="deptName" name="deptName">
-								<option value="dept1">패키징 부서</option>
-								<option value="dept2">드론 부서</option>
+								<option value="d001">물류지원부</option>
+								<option value="d002">드론운영부</option>
+								<option value="d003">전산관리부</option>
 							</select>
 						</div>
 						<div class="joinButton">

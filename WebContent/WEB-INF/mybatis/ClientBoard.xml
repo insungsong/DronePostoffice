@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ClientBoard">
+
+<resultMap type="com.postoffice.web.dto.MailDTO" id="Mail">
+	<result column="mail_id" property="mail_id"/>
+	<result column="from_name" property="from_name"/>
+	<result column="from_address" property="from_address"/>
+	<result column="to_name" property="to_name"/>
+	<result column="to_address" property="to_address"/>
+	<result column="mail_weight" property="mail_weight"/>
+	<result column="package_Num" property="package_num"/>
+	<result column="mail_date" property="mail_date"/>
+<collection property="stateList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.StateDTO">
+	<result column="state_id" property="state_id"/>
+	<result column="state_name" property="state_name"/>
+</collection>
+<collection property="villageList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.VillageDTO">
+	<result column="vname" property="vname"/>
+</collection>
+</resultMap>
+
 	<select id="selectTotalRowNum" resultType="int">
 		select count(*) from mail
 	</select>
-	<select id="selectList" parameterType="map" resultType="com.postoffice.web.dto.BoardDTO">
-	select rn,bid,btitle,bcontent,bdate,vid	
+	<!-- 마을 이름 join해서 받아와야함 -->
+	<select id="selectMailList" parameterType="map" resultMap="Mail">
+	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname
 		from(
-		    select rownum as rn, bid, btitle, bcontent, bdate, vid
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname
 		    from(
-		        select bid,btitle,bcontent,bdate,vid	
-		        from board
-		    )
-		    where rownum &lt;= #{endRowNo}
-		)
-		where rn &gt; = #{startRowNo}
-	</select>
-	
-	<select id="selectMailList" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">
-	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
-		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
-		    from(
-		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id		
-		        from Mail
+		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname
+		        from mail, village ,state
+		        where mail.vid = village.vid and mail.state_id = state.state_id
 		    )
 		    where rownum &lt;= #{endRowNo}
 		)
@@ -33,21 +41,46 @@
 	<select id="selectnum" resultType="int">
 		select count(*) from Mail 
 	</select>
+	<select id="getjoin" resultMap="Mail">
+		select 
+			state_name,vname
+		from 
+			mail,village,state
+		where 
+			mail.vid=village.vid and mail.state_id=state.state_id
+	</select>
 	
-	<insert id="insertBoard" parameterType="com.postoffice.web.dto.MailDTO">
-		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id)
-			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001')
+	<select id="joinselect" resultMap="Mail">
+		select 
+			state_name,vname
+		from 
+			mail,village,state
+		where mail.vid = viilage.vid and mail.state_id = state.state_id
+	</select>
+
+<!-- 여기를 도저히 모르겠음 -->
+	<insert id="insertBoard">
+		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname)
+			select (#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'#{state_name}','#{vname}')
+			from mail,village,state
+			where mail.vid = village.vid and mail.state_id = state.state_id
 	</insert>
-	
+	 
 	<delete id="removeRequest">
 		delete Mail where mail_id = #{mail_id}
 	</delete>
 	
-	<select id="selectOne" parameterType="int" resultType="com.postoffice.web.dto.MailDTO">
-		select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id from mail
-		where mail_id=#{mail_id}
+ 	<select id="selectOne" parameterType="int" resultMap="Mail">
+ 	select 
+			mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname 
+		from 
+			mail ,village ,state
+		
+		where mail_id=#{mail_id} 
+		and mail.vid=village.vid 
+		and mail.state_id=state.state_id
 	</select>
-	
+
 	<update id="updateOne" parameterType="com.postoffice.web.dto.MailDTO">
 		update mail set mail_id=#{mail_id}
 		,from_name=#{from_name}
@@ -55,14 +88,14 @@
 		,to_name=#{to_name}
 		,to_address=#{to_address}
 		,mail_weight=#{mail_weight}
-		,state_id=#{state_id}
 		where mail_id = #{mail_id}
 	</update>
 	
+	<!-- 이것도 -->
 	<select id="selectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">		
-		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_id	
 		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	,mail_date
 		    from(
 		        SELECT
 					*
@@ -79,9 +112,9 @@
 	</select>
 	
 	<select id="toselectsearch" parameterType="map" resultType="com.postoffice.web.dto.MailDTO">		
-		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date	
 		from(
-		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id	
+		    select rownum as rn, mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date
 		    from(
 		        SELECT
 					*

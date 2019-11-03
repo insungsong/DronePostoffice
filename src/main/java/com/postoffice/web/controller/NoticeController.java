@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,19 +14,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.postoffice.web.dto.DeptDTO;
+import com.postoffice.web.dto.MemberDTO;
 import com.postoffice.web.dto.NoticeDTO;
 import com.postoffice.web.service.NoticeService;
 
+
+
 @Controller
 public class NoticeController {
+	private static final Logger logger = LoggerFactory.getLogger(NoticeController.class);
+	
+	
 
 	@Autowired
 	private NoticeService noticeService;
 
 	@RequestMapping("/noticeList")
 	public String noticeList(Model model, @RequestParam(defaultValue = "1") int pageNum, HttpSession session) {	
-		//테스트 코드
-		noticeService.testMember();
+
 		
 		session.setAttribute("pageNum", pageNum);
 		
@@ -69,17 +77,71 @@ public class NoticeController {
 
 	// 공지사항 작성 폼
 	@GetMapping("/noticeWrite")
-	public String noticeWriteForm() {
-
+	public String noticeWriteForm(Model model) {
+		//session 임시
+		MemberDTO dto = new MemberDTO();
+		dto.setMid("user1");
+		
+		model.addAttribute("memberInfo",noticeService.showMember(dto));
 		return "manager/noticeWrite";
 	}
 
 	// 공지사항 작성 처리
 	@PostMapping("/noticeWrite")
 	public String noticeWrite(NoticeDTO noticeDTO, HttpSession session) {
-		noticeDTO.setMid((String) session.getAttribute("mid"));
+		//noticeDTO.setMid((String) session.getAttribute("mid"));
+		System.out.println(noticeDTO.getMid());
+		System.out.println(noticeDTO.getNotice_title());
+		System.out.println(noticeDTO.getNotice_content());
 		noticeService.noticeWrite(noticeDTO);
-		return "redirect:/manager/noticeList";
+		return "redirect:/noticeList";
+	}
+	
+	@RequestMapping("/noticeDetail")
+	public String noticeDetailForm(int notice_id, Model model) {
+		NoticeDTO notice = noticeService.getnotice(notice_id);
+		MemberDTO member = noticeService.selectMember(notice);
+		DeptDTO dept = noticeService.selectDept(member);
+		model.addAttribute("member",member);
+		model.addAttribute("notice", notice);
+		model.addAttribute("dept", dept);
+		return "manager/noticeDetail";
+	}
+	
+	@GetMapping("/noticeUpdate")
+	public String noticeUpdateForm( NoticeDTO noticeDTO, Model model) {
+		//임시로 mid값 set
+		MemberDTO dto = new MemberDTO();
+		dto.setMid("user1");
+		NoticeDTO notice = noticeService.getnotice(noticeDTO.getNotice_id());
+		MemberDTO member = noticeService.selectMember(notice);
+		DeptDTO dept = noticeService.selectDept(member);
+		model.addAttribute("member",member);
+		model.addAttribute("notice", notice);
+		model.addAttribute("dept", dept);
+		
+		model.addAttribute("memberInfo",noticeService.showMember(dto));
+		return "manager/noticeUpdate";
+	}
+	
+	@PostMapping("/noticeUpdate")
+	public String noticeUpdate(NoticeDTO noticeDTO, HttpSession session) {
+		noticeService.noticeupdate(noticeDTO);	
+		
+		
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setMid("user1");
+		
+		return "redirect:/noticeDetail?notice_id=" +noticeDTO.getNotice_id();
+	}
+	
+	@RequestMapping("/noticeDelete")
+	public String noticeDelete(NoticeDTO noticeDTO, HttpSession session) {
+		noticeService.noticeDelete(noticeDTO);
+		int test = noticeDTO.getNotice_id();
+		logger.debug(""+test);
+		return "redirect:/noticeList";
 	}
 	
 	

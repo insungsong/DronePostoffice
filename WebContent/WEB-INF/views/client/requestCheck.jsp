@@ -45,8 +45,8 @@
 	function main() {
 		location.href = "client_index";
 	}
-	 
-	function btnRegister(){
+	
+ 	/* function btnRegister(){
 		$.ajax({
 			url:"stateCheck",
 			data:{"state_id":"s001"},
@@ -54,19 +54,24 @@
 				console.log(result);
 				console.log(result.state_id)
 				var var1=JSON.parse(result);
-				$("#btn").val(var1);
+				console.log(var1.json.state_name);
+				
 			}
 		
 		});
 	
-	}
-
+	} */
+	
+ 	function check(state_id,mail_id){
+	 	location.href = "stateCheck?state_id=" + state_id + "&mail_id=" + mail_id;
+ 	}
+ 
 </script>
 </head>
 <body>
 <jsp:include page="../common/header.jsp"></jsp:include>
 
-
+	<form id="form1">
 	<table id="customers" class="table">
 		<thead class="thead-dark">
 		<tr>
@@ -77,11 +82,13 @@
 			<th>받는 주소</th>
 			<th>메일 무게</th>
 			<th>요청 상태</th>
+			<th>요청 확인</th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr> 
-		<c:forEach var="check" items="${CheckList}">
+		<tr>
+		
+		<c:forEach items="${CheckList}" var="check">
 				<td>${check.mail_id}</td>
 				<td>${check.from_name}</td>
 				<td>${check.from_address}</td>
@@ -89,16 +96,25 @@
 				<td>${check.to_address}</td>
 				<td>${check.mail_weight}</td>
 				<td>${check.state_id}</td>
-				<td><input id="btn" type="button" value="접수확인요청" onClick="btnRegister()" class="btn btn-primary"></button></td>
+				<td>${check.state_name}</td>
+				<td>${check.vid}</td>
+				<td>${check.village_name}</td>
+				<select name="state">
+					<c:forEach items="${stateList }" var="state">
+						<option value="${state.state_id }">${state.state_name }</option>
+					</c:forEach>
+				</select>
+				<td><input type="button" value="ㅎㅇ" onClick="check('s002','${check.mail_id}')"/></td>
+
+				<td>${check.state_id}</td>
+				<td>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 	</table>
+	</form>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-	
-		</div>					
-					</div>			
-				</div>
-			</div>		
+
 		</body>
 	</html>
