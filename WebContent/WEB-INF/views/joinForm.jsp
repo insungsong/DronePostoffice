@@ -99,6 +99,8 @@
 			$(function() {
 				$("#vname").hide();
 				$("#deptName").hide();
+				
+				/* 비밀번호 일치 또는 불일치 하는 지 확인하는 코드 */
 				$("input").keyup(function(){ 
 					if($("#lpassword").val() != ""){
 						if($("#lpasswordCheck").val() != ""){
@@ -117,6 +119,20 @@
 					}else {
 						$("#lpasswordCheckError").html("")
 					}
+				})
+				
+				/* 파일 선택하면 파일 이름만 따서 input 태그 값에 넣어주는 코드 */
+				$(".filebox").ready(function(){
+					var fileTarget = $(".filebox #lphoto");
+					
+					fileTarget.on('change', function(){
+						if(window.FileReader) {
+							var filename = $(this)[0].files[0].name;
+						} else {
+							var filename = $(this).val().split('/').pop().split('\\').pop();
+						}
+						$(".upload_name").val(filename);
+					})
 				})
 			})
 		
