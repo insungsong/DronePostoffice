@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+.wrapper{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.join_header{
+	margin: auto; /* 가운데 정렬 */
+	margin-top: 50px;
+}
+
+.join_body{
+	margin: auto;
+	margin-top: 10px;
+	padding: 0;
+}
+
+.join_body_tag{
+	display: inline-block;
+	border-bottom: 2px solid #F32C28;
+}
+
+.join_body ul{
+	list-style: none; /* 옆에 점 표시 제거 */
+	margin: 0;
+	padding: 0;
+}
+
+.join_body_tag li{
+	float: left; /* 리스트 가로 방향으로 정렬 */
+}
+
+.join_body_tag button{
+	display: block; /* 블럭요소로 지정 */
+	padding: 0px 50px;
+	text-decoration: none; /* 태그 밑줄 제거 */
+	text-align: center; /* 텍스트 가운데 정렬 */
+	line-height: 40px; /* 블럭 높이 지정 */
+	background-color: white;
+	border-style: hidden;
+	border: 0;
+	outline: 0;
+}
+
+.join_body_tag button:hover{
+	background: #F32C28;
+	color: white;
+}
+
+.joinForm{
+	margin: 10px 0px;
+}
+
+.joinForm div{
+	margin: 10px 0px;
+}
+
+.joinForm input{
+	width: 100%;
+	line-height: 40px;
+}
+
+.joinForm select{
+	width: 100%;
+	line-height: 40px;
+	padding: 0.7em 0.5em;
+}
+
+#lid{
+	float: left;
+	display: inline-block;
+	width: 80%;
+	line-height: 40px;
+}
+
+#overlap{
+	display: inline-block;
+	width: 20%;
+	line-height: 40px;
+	background-color: #F32C28;
+	border-color: #F32C28;
+	color: white;
+	font-size: 17px;
+	
+}
+
+
+
+.joinButton{
+	line-height: 50px;
+	margin: 10px 0px;
+}
+
+.joinButton input{
+	line-height: 45px;
+	width: 100%;
+	background-color: #F32C28;
+	border-style: hidden;
+	color: white;
+	font-size: 25px;
+}
+
+
+
+

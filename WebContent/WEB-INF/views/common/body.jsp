@@ -5,14 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/packaging.css">
 </head>
 <body>
-	<jsp:include page = "../../common/header.jsp"/>
-	
-	<div class="pack_left">
-	</div>
-	<div class="pack_right">
+	<div class="body">
+		<div class="body_sub">
+		
+		</div>
 	</div>
 </body>
 </html>

@@ -1,21 +1,5 @@
 @charset "UTF-8";
 
-tbody {
-	font-size: 10px;
-	height : 20px;
-	text-align: center;
-}
-h2{
-	
-}
-.pack_left {
-	width : 46%;
-	float : left;
-}
-.pack_right {
-	width : 46%;
-	float : right;
-}
 
 .bor_title {
 	weight : 100%;
@@ -26,26 +10,19 @@ h2{
 	line-height: 25px;
 	font-weight: 900;
 }
-.searching{
-	weight : 50%;
-	float : right;
+.write_title{
+	border:1px solid black;
+	width:10%;
+	height:30px;
+	padding-left:2px;
+	margin:3px;
+	background: black;
+	color:white;
 }
-.searching .input_text{
-	height: 20px;
-    border: 1px solid #F32C28;
-}
-.searching .input_submit{
-	font-size: 12px;
-    height: 20px;
-    border: 1px;
-    line-height: 21px;
-	background: #F32C28;
-	color: white;
-}
-.mail_list {
-	border-left:1px solid #999;
-	border-right:1px solid #999;
-}
+
+
+
+
 .frt_tbl_type,.frt_tbl_type th,.frt_tbl_type td{border:0;}
 /**.frt_tbl_type a{color:#383838;text-decoration:none}*/
 .frt_tbl_type{width:100%; border-top:2px solid #F32C28; border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed; margin:0 0 0 0;}
