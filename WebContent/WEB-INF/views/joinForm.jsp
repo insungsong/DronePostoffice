@@ -204,7 +204,7 @@
 							</select>
 						</div>
 						<div class="joinButton">
-							<input type="submit" value="JOIN">
+							<input type="submit" value="회원가입">
 						</div>
 					</form>	
 				</div>
