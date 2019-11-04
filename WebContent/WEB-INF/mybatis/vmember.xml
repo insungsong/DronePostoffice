@@ -10,4 +10,13 @@
 		values (#{vmid}, #{vmname}, #{vmpassword}, #{vmtel}, #{vmphoto, jdbcType=VARCHAR}, (select vid from village where vid = #{vid}))
 		<!-- nullable인 컬럼이 있으면 jdbcType 지정해줘야 null값이 들어갈 수 있다. -->	
 	</insert>
+	
+	<select id="selectvname" parameterType="string" resultType="string">
+		select
+			vname
+		from 
+			village,vmember
+		where
+			village.vid = vmember.vid and vmember.vmid=#{vmid}
+	</select>
 </mapper>

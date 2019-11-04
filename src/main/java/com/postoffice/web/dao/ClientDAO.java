@@ -71,8 +71,12 @@ public class ClientDAO {
 		int selectNum = sqlSessionTemplate.selectOne("ClientBoard.selectnum");
 		return selectNum;
 	}
-	public List<MailDTO> getjoin() {
-		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.getjoin");
+	public MailDTO getstatejoin() {
+		MailDTO listdto = sqlSessionTemplate.selectOne("ClientBoard.getstatename");
+		return listdto;
+	}
+	public MailDTO getvillagejoin() {
+		MailDTO listdto = sqlSessionTemplate.selectOne("ClientBoard.getvillagename");
 		return listdto;
 	}
 
@@ -110,4 +114,19 @@ public class ClientDAO {
 		List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.toselectsearch", map);
 		return listdto;
 	}
+
+
+	public int requestwrite(MailDTO maildto) {
+		int maildto2 = sqlSessionTemplate.insert("ClientBoard.answerdto",maildto);
+		return maildto2;
+	}
+
+	public String requestvname(String vmid) {
+		String vname = sqlSessionTemplate.selectOne("vmember.selectvname",vmid);
+		return vname;
+	}
+
+	
+
+	
 }
