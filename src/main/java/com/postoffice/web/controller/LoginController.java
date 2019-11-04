@@ -36,7 +36,7 @@ public class LoginController {
 	public String login(Model model, HttpSession session) {
 		String error = (String) session.getAttribute("error");
 		String lauthority = (String) session.getAttribute("lauthority");
-		
+			
 		//아이디 또는 비밀번호 틀렸을 때 실행 
 		if(error != null) {
 			if(error.equals("fail_lid")) {
