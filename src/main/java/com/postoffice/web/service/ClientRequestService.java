@@ -82,11 +82,13 @@ public class ClientRequestService {
 		return answerdto;
 	}
 
-
+	
+	/*
 	public String getvname(String vmid) {
 		String vname = clientdao.requestvname(vmid);
 		return vname;
 	}
+	*/
 
 
 	

@@ -87,12 +87,14 @@ public class ClientRequestController {
 
 	//req_next값 가져오기
 	 @RequestMapping("/requestWrite")
-	 	public String mailadd1(Model model,String state_id,HttpSession session) { 
-		 String vmid = (String)session.getAttribute("lid");
-		 String vname = requestService.getvname(vmid);
+	 	public String mailadd1(Model model,String vname,String state_id,HttpSession session) { 
+		 String vmid = (String)session.getAttribute("vname");
+		 System.out.println(vmid+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		 //String vname = requestService.getvname(vmid);
+		 
 		 int num = requestService.getTotalRowNo()+1;
 		 model.addAttribute("state_id",state_id);
-		 model.addAttribute("vname",vname);
+		 model.addAttribute("vmid",vmid);
 		 model.addAttribute("num",num);
 		 return "client/requestWrite"; 
 	}

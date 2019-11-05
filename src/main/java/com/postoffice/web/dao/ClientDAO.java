@@ -120,11 +120,13 @@ public class ClientDAO {
 		int maildto2 = sqlSessionTemplate.insert("ClientBoard.answerdto",maildto);
 		return maildto2;
 	}
-
+	
+	/*
 	public String requestvname(String vmid) {
 		String vname = sqlSessionTemplate.selectOne("vmember.selectvname",vmid);
 		return vname;
 	}
+	*/
 
 	
 

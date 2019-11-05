@@ -26,7 +26,7 @@
 			height: 45%;
 			background-color: #F32C28;
 			margin-top: 10%;
-			margin-left: 430px;
+			margin-left: 550px;
 			margin-right: 80px;
 			display: inline-block;
 		}
