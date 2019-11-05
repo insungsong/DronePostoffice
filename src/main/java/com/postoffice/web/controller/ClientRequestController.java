@@ -9,8 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -89,13 +87,26 @@ public class ClientRequestController {
 
 	//req_next값 가져오기
 	 @RequestMapping("/requestWrite")
-	 	public String mailadd1(Model model) { 
-		 int originMailNum = requestService.getnum()+1;
-		 List<MailDTO> requestjoin = requestService.getjoin();
-		 model.addAttribute("originMailNum",originMailNum); 
-		 model.addAttribute("requestjoin",requestjoin);
+	 	public String mailadd1(Model model,String state_id,HttpSession session) { 
+		 String vmid = (String)session.getAttribute("lid");
+		 String vname = requestService.getvname(vmid);
+		 int num = requestService.getTotalRowNo()+1;
+		 model.addAttribute("state_id",state_id);
+		 model.addAttribute("vname",vname);
+		 model.addAttribute("num",num);
 		 return "client/requestWrite"; 
 	}
+	 @RequestMapping("/requestanswer")
+	 public String answer(MailDTO maildto,Model model) {
+		 System.out.println(maildto.getFrom_address());
+		 System.out.println(maildto.getMail_id());
+		 System.out.println(maildto.getFrom_name());
+		 System.out.println(maildto.getState_id());
+		 System.out.println(maildto.getVid());
+		 System.out.println("++++++++++++++++++++++++++++++++++++");
+		 requestService.getanswer(maildto);
+		 return "redirect:/requestBoarderList";
+	 }
 	 
 	
 	//요청 삭제

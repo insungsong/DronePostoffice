@@ -45,10 +45,6 @@ public class ClientRequestService {
 		int mailMap = clientdao.selectnum();
 		return mailMap;
 	}
-	public List<MailDTO> getjoin() {
-		List<MailDTO> listdto = clientdao.getjoin();
-		return listdto;
-	}
 
 	public int requestWrite() {
 		int mailDto = clientdao.insertMaildto();
@@ -80,5 +76,22 @@ public class ClientRequestService {
 		return listdto;
 	}
 
+
+	public int getanswer(MailDTO maildto) {
+		int answerdto = clientdao.requestwrite(maildto);
+		return answerdto;
+	}
+
+
+	public String getvname(String vmid) {
+		String vname = clientdao.requestvname(vmid);
+		return vname;
+	}
+
+
+	
+
+
+	
 
 }

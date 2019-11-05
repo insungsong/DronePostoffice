@@ -17,6 +17,11 @@
 			background-color: white;
 		}
 		.request{
+			width: 24%;
+			height: 40%;
+			background-color: blue;
+			margin-top: 14%;
+			margin-left: 349px;
 			width: 20%;
 			height: 45%;
 			background-color: #F32C28;
