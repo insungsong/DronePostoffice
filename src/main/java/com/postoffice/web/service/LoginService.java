@@ -72,6 +72,16 @@ public class LoginService {
 		vmemberDao.insert(vmember);
 	}
 
+	public String getDeptName(String lid) {
+		String dept_name = memberDao.selectDeptName(lid);
+		return dept_name;
+	}
+
+	public String getVname(String lid) {
+		String vname = vmemberDao.selectVname(lid);
+		return vname;
+	}
+
 		
 	
 }

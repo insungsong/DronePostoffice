@@ -21,5 +21,10 @@ public class VMemberDAO {
 		int rows = sqlSessionTemplate.insert("vmember.insert", vmember);
 		return rows;
 	}
+
+	public String selectVname(String lid) {
+		String vname = sqlSessionTemplate.selectOne("vmember.selectVname", lid);
+		return vname;
+	}
 	
 }

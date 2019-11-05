@@ -30,6 +30,11 @@ public class MemberDAO {
 		int rows = sqlSessionTemplate.insert("member.insert", member);
 		return rows;
 	}
+
+	public String selectDeptName(String lid) {
+		String dept_name = sqlSessionTemplate.selectOne("member.selectDeptName", lid);
+		return dept_name;
+	}
 	
 	
 	

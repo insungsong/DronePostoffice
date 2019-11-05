@@ -80,6 +80,8 @@ public class LoginController {
 			
 			//로그인 성공했을 때 실행
 			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
+			String dept_name = loginService.getDeptName(lid);
+			session.setAttribute("dept_name", dept_name);
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
 			if(lauthority.equals("manager")) {
 				logger.debug("직원 로그인");
@@ -103,6 +105,8 @@ public class LoginController {
 			
 			//로그인 성공했을 때 실행
 			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
+			String vname = loginService.getVname(lid);
+			session.setAttribute("vname", vname);
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
 			logger.debug("이장님 로그인");	
 			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
