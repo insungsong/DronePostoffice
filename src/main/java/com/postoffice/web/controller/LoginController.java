@@ -3,6 +3,7 @@ package com.postoffice.web.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -108,7 +109,12 @@ public class LoginController {
 			String vname = loginService.getVname(lid);
 			session.setAttribute("vname", vname);
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
-			logger.debug("이장님 로그인");	
+			logger.debug("이장님 로그인");
+			
+			String vmname = loginService.vmnrequest(lid);
+			System.out.println(vmname+"______________________________________________________");
+			session.setAttribute("vmname", vmname);
+			
 			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
 		
@@ -196,5 +202,16 @@ public class LoginController {
 		pw.print(jsonObject.toString());
 		pw.flush(); 
 		pw.close();
+	}
+	
+	@RequestMapping("/clientTouch")
+	public String vmberDTO(String lid,Model model,HttpSession session){
+		session.setAttribute("lid",lid);
+		System.out.println(lid);
+		
+		List<VMemberDTO>vmemberList = loginService.vmemberList(lid);
+		System.out.println(vmemberList.isEmpty());
+		model.addAttribute("vmemberList",vmemberList);
+		return "client/clientTouch";
 	}
 }

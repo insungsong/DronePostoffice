@@ -102,6 +102,11 @@
 	</head>
 	<body>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
+		<div class="menubar">
+			<ul style=margin-bottom:5px>
+				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href = "logout" style=display:inline>로그아웃</a>
+			</ul>
+		</div>
 		<div class="request_board_area">
 			<div class="request_board_second">
 				<div class="request_text">

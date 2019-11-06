@@ -46,7 +46,12 @@
 	</style>
 	</head>
 	<body>
-		<jsp:include page="../common/header.jsp"></jsp:include>
+		<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
+		<div class="menubar">
+			<ul style=margin-bottom:5px>
+				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href ="clientTouch?lid=${vmname }" style=display:inline>개인정보수정</a><a href = "logout" style=display:inline>로그아웃</a></li>
+			</ul>
+		</div>
 		<div class="body">
 			<a href="requestBoarderList?pageNo=1"><div class="request"><img src = "./resources/images/one-finger-tap-outlined-symbol-of-a-hand_icon-icons.com_57978.png" style="width:200px;"/><h6>요청</h6></div></a>
 			<a href="check"><div class="check"><img src = "./resources/images/thumb-up-stroke_icon-icons.com_57954.png "style="width:200px;"/><h6>확인</h6></div></a>

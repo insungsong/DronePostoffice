@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vmember">
 	<select id="selectVmemberByLid" parameterType="string" resultType="com.postoffice.web.dto.VMemberDTO">
-		select vmid, vmname, vmpassword from vmember where vmid=#{lid}
+		select vmid, vmname, vmpassword, vmname from vmember where vmid=#{lid}
 	</select>
 	
 	<insert id="insert" parameterType="com.postoffice.web.dto.VMemberDTO">
@@ -17,5 +17,22 @@
 		where
    			vmember.vid = village.vid and
     		vmember.vmid = #{lid}
+	</select>
+	
+	<select id="selectvmname" parameterType="string" resultType="string">
+		select 
+			vmname
+		from 
+			vmember
+		where vmid = #{lid}
+	</select>
+	
+	<select id="selectvmemeberList" parameterType="string" resultType="com.postoffice.web.dto.VMemberDTO">
+		select
+			*
+		from
+			vmember
+		where vmember.vmname = #{lid}
+		
 	</select>
 </mapper>

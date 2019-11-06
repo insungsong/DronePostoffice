@@ -1,5 +1,7 @@
 package com.postoffice.web.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +84,14 @@ public class LoginService {
 		return vname;
 	}
 
-		
+	public String vmnrequest(String lid) {
+		String vmname = vmemberDao.selectvmnSelect(lid);
+		return vmname;
+	}
+
+	public List<VMemberDTO> vmemberList(String lid) {
+		List<VMemberDTO> vmemberList = vmemberDao.selectvmemberList(lid);
+		return vmemberList;
+	}	
 	
 }

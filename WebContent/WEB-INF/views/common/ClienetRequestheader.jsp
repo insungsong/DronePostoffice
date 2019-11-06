@@ -12,11 +12,6 @@
 		<div class="logo">
 			<a href="index"><img src="resources/images/logo.PNG" height=100%></a>
 		</div>
-		<div class="menubar">
-			<ul>
-				<li style="position: absolute;right: 7px; border:0;"><a href = "logout">로그아웃</a>
-			</ul>
-		</div>
 	</div>
 </body>
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
+import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.ClientRequestService;
 
 @Controller
@@ -37,7 +38,7 @@ public class ClientRequestController {
 	}
 
 	@RequestMapping("/requestBoarderList")
-	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo, HttpSession session){
+	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo ,String lid, HttpSession session){
 		session.setAttribute("pageNo", pageNo);
 
 		int rowsPerPage = 10;
@@ -70,7 +71,7 @@ public class ClientRequestController {
 			endRowNo = totalRowNum;
 
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo);
-
+		
 		// JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
 															// 씀
@@ -82,6 +83,10 @@ public class ClientRequestController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
+		
+		String vmname = (String)session.getAttribute("lid");
+		System.out.println(vmname+"++++++++++++++++++++++++++++++++");
+		model.addAttribute(vmname);
 		return "client/requestBoarderList";
 	}
 
@@ -89,7 +94,7 @@ public class ClientRequestController {
 	 @RequestMapping("/requestWrite")
 	 	public String mailadd1(Model model,String vname,String state_id,HttpSession session) { 
 		 String vmid = (String)session.getAttribute("vname");
-		 System.out.println(vmid+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		 System.out.println(vmid);
 		 //String vname = requestService.getvname(vmid);
 		 
 		 int num = requestService.getTotalRowNo()+1;

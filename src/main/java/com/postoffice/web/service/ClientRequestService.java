@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.postoffice.web.dao.ClientDAO;
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.VMemberDTO;
 
 
 @Service
@@ -81,7 +82,6 @@ public class ClientRequestService {
 		int answerdto = clientdao.requestwrite(maildto);
 		return answerdto;
 	}
-
 	
 	/*
 	public String getvname(String vmid) {

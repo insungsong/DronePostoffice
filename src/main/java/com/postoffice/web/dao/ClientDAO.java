@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
+import com.postoffice.web.dto.VMemberDTO;
 
 @Component
 public class ClientDAO {

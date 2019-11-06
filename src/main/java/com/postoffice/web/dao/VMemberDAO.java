@@ -1,5 +1,7 @@
 package com.postoffice.web.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,16 @@ public class VMemberDAO {
 	public String selectVname(String lid) {
 		String vname = sqlSessionTemplate.selectOne("vmember.selectVname", lid);
 		return vname;
+	}
+
+	public String selectvmnSelect(String lid) {
+		String vmname = sqlSessionTemplate.selectOne("vmember.selectvmname",lid);
+		return vmname;
+	}
+
+	public List<VMemberDTO> selectvmemberList(String lid) {
+		List<VMemberDTO> selectListvmem = sqlSessionTemplate.selectList("vmember.selectvmemeberList",lid);
+		return selectListvmem;
 	}
 	
 }
