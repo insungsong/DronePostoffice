@@ -16,7 +16,7 @@
 			height:100%;
 			background-color: white;
 		}
-		.request{
+		.request{	
 			width: 24%;
 			height: 40%;
 			background-color: blue;
@@ -49,7 +49,8 @@
 		<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
-				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href ="clientTouch?lid=${vmname }" style=display:inline>개인정보수정</a><a href = "logout" style=display:inline>로그아웃</a></li>
+				<li>${vmname}님 환영합니다.<a href ="clientTouch?lid=${vmlid }" style=display:inline>개인정보수정</a></li>
+				<li style="float:right"><a href = "logout" style=display:inline>로그아웃</a></li>
 			</ul>
 		</div>
 		<div class="body">

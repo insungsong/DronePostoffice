@@ -27,12 +27,39 @@
 		where vmid = #{lid}
 	</select>
 	
+	<select id="selectvlid" parameterType="string" resultType="string">
+		select
+			vmid
+		from
+			vmember
+		where 
+			vmid = #{lid}
+	</select>
+	
 	<select id="selectvmemeberList" parameterType="string" resultType="com.postoffice.web.dto.VMemberDTO">
 		select
 			*
 		from
 			vmember
-		where vmember.vmname = #{lid}
-		
+		where vmember.vmid = #{lid}
 	</select>
+	
+	<!-- 개인정보 수정 -->
+	<update id="updateList" parameterType="com.postoffice.web.dto.VMemberDTO">
+		update 
+		    vmember 
+		set 
+		    vmid=#{vmid},vmname=#{vmname},vmpassword=#{vmpassword},vmtel=#{vmtel},vmphoto=#{vmphoto, jdbcType=VARCHAR},vid=#{vid}
+		where 
+		    vmid=#{vmid}
+	</update>
+	
+	<update id="updateFile" parameterType="map">
+		update
+			vmember
+		set
+			vmphoto=#{vmphoto}
+		where
+			vmid=#{vmid}
+	</update>
 </mapper>

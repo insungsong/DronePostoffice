@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dao.MemberDAO;
 import com.postoffice.web.dao.VMemberDAO;
@@ -92,6 +93,23 @@ public class LoginService {
 	public List<VMemberDTO> vmemberList(String lid) {
 		List<VMemberDTO> vmemberList = vmemberDao.selectvmemberList(lid);
 		return vmemberList;
+	}
+
+	public int vmemAfter(VMemberDTO vmdto) {
+		int vlist = vmemberDao.selectvmList(vmdto);
+		return vlist;
+	}
+
+	public String vmnlid(String lid) {
+		String vmn = vmemberDao.selectvmlid(lid);
+		return vmn;
+	}
+	
+	//파일 업로드
+	public void chaneFile(VMemberDTO vmdto,String saveFileName) {
+		System.out.println("service!!!)))))))))))))))))))))))))))");
+		vmemberDao.updateFile(vmdto,saveFileName);
+		
 	}	
 	
 }

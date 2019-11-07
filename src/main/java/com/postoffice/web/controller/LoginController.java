@@ -16,9 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dto.MemberDTO;
@@ -64,6 +66,7 @@ public class LoginController {
 		//error, mauthority 둘다 null이면 실행 
 		return "login";
 	}
+	
 	
 	@PostMapping("/login")
 	public String loginConfirm(String lid, String lpassword, String lauthority, HttpSession session) {
@@ -114,6 +117,11 @@ public class LoginController {
 			String vmname = loginService.vmnrequest(lid);
 			System.out.println(vmname+"______________________________________________________");
 			session.setAttribute("vmname", vmname);
+			
+			String vmlid = loginService.vmnlid(lid);
+			session.setAttribute("vmlid", vmlid);
+			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			
 			
 			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
@@ -180,7 +188,7 @@ public class LoginController {
 			vmember.setVmtel(ltel);
 			vmember.setVid(vname);
 			loginService.cJoin(vmember);
-			return "redirect:/";
+			return "redirect:/client_index";
 		}
 		
 	}
@@ -207,11 +215,42 @@ public class LoginController {
 	@RequestMapping("/clientTouch")
 	public String vmberDTO(String lid,Model model,HttpSession session){
 		session.setAttribute("lid",lid);
-		System.out.println(lid);
 		
 		List<VMemberDTO>vmemberList = loginService.vmemberList(lid);
 		System.out.println(vmemberList.isEmpty());
 		model.addAttribute("vmemberList",vmemberList);
 		return "client/clientTouch";
+	}
+	
+	@RequestMapping("/clientAfterWrite")
+	public String clientAfterWrite(String vmphoto, VMemberDTO vmdto ,MultipartFile lphoto,Model model,HttpSession session) {
+		System.out.println(vmdto.getVmid());
+		loginService.vmemAfter(vmdto);
+		String fileName = lphoto.getOriginalFilename();
+		
+		System.out.println(vmdto.getVmid());
+		String saveFileName = null;
+		//System.out.println("test : " + lphoto.getOriginalFilename());
+		System.out.println("before : " + vmphoto);
+		System.out.println("lphoto : "+ lphoto);
+		if(fileName == null || fileName.equals("")) {
+			System.out.println("if문 통과 :"+vmphoto);
+			saveFileName = vmphoto;
+		}else {
+			saveFileName = new Date().getTime() + "-" +fileName;
+		}
+		
+		System.out.println("after : " + saveFileName);
+		
+		loginService.chaneFile(vmdto,saveFileName);
+		System.out.println(saveFileName+")))))))))))))))))))");
+		System.out.println("성공성공성공성공성공성공성공성공성공성공성공");
+		
+		
+		session.setAttribute("vmname", vmdto.getVmname());
+		model.addAttribute(vmdto);
+		model.addAttribute("vmname",session.getAttribute("vmname"));
+		
+		return "redirect:/client_index";
 	}
 }

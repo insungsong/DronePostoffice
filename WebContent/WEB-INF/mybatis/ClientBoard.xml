@@ -43,7 +43,7 @@
 	</select>
 	
 	<select id="selectvname" resultType="String">
-		select vname from vmember;
+		select vname from vmember
 	</select>
 
 

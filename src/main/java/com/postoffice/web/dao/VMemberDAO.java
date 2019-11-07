@@ -1,10 +1,14 @@
 package com.postoffice.web.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dto.VMemberDTO;
 
@@ -37,6 +41,24 @@ public class VMemberDAO {
 	public List<VMemberDTO> selectvmemberList(String lid) {
 		List<VMemberDTO> selectListvmem = sqlSessionTemplate.selectList("vmember.selectvmemeberList",lid);
 		return selectListvmem;
+	}
+
+	public int selectvmList(VMemberDTO vmdto) {
+		int selectvmem = sqlSessionTemplate.update("vmember.updateList",vmdto);
+		return selectvmem;
+	}
+
+	public String selectvmlid(String lid) {
+		String selectvmlid = sqlSessionTemplate.selectOne("vmember.selectvlid",lid);
+		return selectvmlid;
+	}
+
+	public void updateFile(VMemberDTO vmdto,String saveFileName) {
+		System.out.println("dao))))))))))))))))))))))))))))");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("vmid", vmdto.getVmid());
+		map.put("vmphoto", saveFileName);
+		sqlSessionTemplate.update("vmember.updateFile",map);
 	}
 	
 }

@@ -135,13 +135,13 @@
 					})
 				})
 			})
+		</script>
 		
-			
-			
-			
-
-	
-		
+		<!-- 사진 업로드 했을떄 즉 버튼 눌렀을때 -->
+		<script type="text/javascript">
+	        function uploadclick() {
+				
+			}
 		</script>
 	</head>
 	<body>
@@ -182,8 +182,11 @@
 						
 						<div class="filebox">
 							<input class="upload_name" value="파일선택" disabled="disabled">
-							<label for="lphoto">사진업로드</label>
+							<label for="lphoto" onclick="uploadclick()">사진업로드</label>
 							<input id="lphoto" name="lphoto" type="file">
+							<div class="upload_picture">
+									
+							</div>
 						</div>
 						
 						<div>
