@@ -69,6 +69,6 @@
 		from
 			vmember
 		where
-			vmember.vmid=#{vmlid}
+			vmember.vmid=#{lid}
 	</select>
 </mapper>

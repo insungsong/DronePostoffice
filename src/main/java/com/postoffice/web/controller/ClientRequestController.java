@@ -16,6 +16,7 @@ import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.ClientRequestService;
+import com.postoffice.web.service.LoginService;
 
 @Controller
 public class ClientRequestController {
@@ -23,16 +24,22 @@ public class ClientRequestController {
 
 	@Autowired
 	private ClientRequestService requestService;
-
+	@Autowired
+	private LoginService loginService;
+	
 
 	
 	@RequestMapping("/client_index")
-	public String client_index(HttpSession session){
+	public String client_index(HttpSession session, Model model){
 		/*
 		 * String check = (String) session.getAttribute("lauthority"); if(check != null)
 		 * { if(check.equals("client")) { return "client/index"; } }
 		 * session.setAttribute("error", "lauthorityError"); return "redirect:/";
 		 */
+		String lid = (String)session.getAttribute("lid");
+		String vlist = loginService.vmphotofind(lid);
+		model.addAttribute("vlist",vlist);
+
 		
 		return "client/index";
 	}

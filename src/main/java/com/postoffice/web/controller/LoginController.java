@@ -1,7 +1,11 @@
 package com.postoffice.web.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -69,7 +73,8 @@ public class LoginController {
 	
 	
 	@PostMapping("/login")
-	public String loginConfirm(String lid, String lpassword, String lauthority, HttpSession session) {
+	public String loginConfirm(String lid, String lpassword, String lauthority, 
+			HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		if(lauthority.equals("manager") || lauthority.equals("admin")) { //직원 또는 관리자가 로그인할 때 
 			LoginResult result = loginService.mLogin(lid, lpassword);
 			
@@ -120,18 +125,56 @@ public class LoginController {
 			
 			String vmlid = loginService.vmnlid(lid);
 			session.setAttribute("vmlid", vmlid);
-			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-			
-			//session을 통해 사진 확인
-			List<VMemberDTO> vlist = loginService.vmphotofind(vmlid);
-			System.out.println(vlist+"controll임::::::::::::::::::::::::::::::");
-			
-			
-			
+			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");			
 			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
-		} 
-		
+		} 	
 	}
+	
+	//로그인 했을때 사진 정보 주기
+	@RequestMapping("/vmemeberphoto")
+	public String vmphoto(HttpSession session,HttpServletRequest request,
+			HttpServletResponse response,Model model) throws Exception{
+		//session을 통해 사진 확인
+		String sessioninfo = (String)session.getAttribute("lid");
+		System.out.println(sessioninfo+")))))))))))))))))))))))))))))))");
+		String vlist = loginService.vmphotofind(sessioninfo);
+		System.out.println("---------------------------------------------"+vlist);
+		
+		ServletContext application = request.getServletContext();
+		
+		String userAgent = request.getHeader("User-Agent");
+		String downloadName;
+		if(userAgent.contains("Trident/7.0") || userAgent.contains("MSIE")) {
+			//IE11 버전 또는 IE10 이하 버전에서 한글 파일을 복원하기 위해
+			downloadName = URLEncoder.encode(vlist, "UTF-8");
+		} else { 
+			//WebKit 기반 브라우저(Chrome, Safari, FireFox, Opera, Edge)에서 한글 파일을 복원하기 위해
+			downloadName = new String(vlist.getBytes("UTF-8"), "ISO-8859-1");
+		}
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + downloadName + "\"");
+		
+		String realPath = application.getRealPath("WEB-INF/images/"+vlist);
+		System.out.println(realPath+"000000000000000000000000000000000000000000000000000000");
+		File file = new File(realPath);
+		response.setHeader("Content-Length", String.valueOf(file.length()));
+		
+		//응답 본문에 데이터 추가
+		OutputStream os = response.getOutputStream();
+		InputStream is = new FileInputStream(realPath);
+		
+		byte[] buffer = new byte[1024];
+		while(true) {
+			int readByte = is.read(buffer);
+			if(readByte == -1) break;
+			os.write(buffer, 0, readByte);
+		}
+		os.flush();
+		os.close();
+		is.close();
+		
+		model.addAttribute("vlist",vlist);
+		return "client_index";
+		}
 	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
@@ -161,7 +204,7 @@ public class LoginController {
 		MemberDTO member = new MemberDTO();
 		VMemberDTO vmember = new VMemberDTO();
 		ServletContext application = request.getServletContext();
-		String savePath = application.getRealPath("/resources/upload/");
+		String savePath = application.getRealPath("/WEB-INF/images/");
 		
 		//사진이 첨부되어 있다면 DTO에 저장 
 		if(!lphoto.isEmpty()) {
@@ -193,7 +236,7 @@ public class LoginController {
 			vmember.setVmtel(ltel);
 			vmember.setVid(vname);
 			loginService.cJoin(vmember);
-			return "redirect:/client_index";
+			return "redirect:/";
 		}
 		
 	}

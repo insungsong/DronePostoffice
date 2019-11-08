@@ -113,8 +113,8 @@ public class LoginService {
 	}
 	
 	//사진 가져오기
-	public List<VMemberDTO> vmphotofind(String vmlid) {
-		List<VMemberDTO> vmphotofind = vmemberDao.selectphoto(vmlid);
+	public String vmphotofind(String lid) {
+		String vmphotofind = vmemberDao.selectphoto(lid);
 		System.out.println(vmphotofind);
 		return vmphotofind;
 	}	

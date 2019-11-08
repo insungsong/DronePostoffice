@@ -61,8 +61,8 @@ public class VMemberDAO {
 		sqlSessionTemplate.update("vmember.updateFile",map);
 	}
 
-	public List<VMemberDTO> selectphoto(String vmlid) {
-		List<VMemberDTO> vmphoto = sqlSessionTemplate.selectList("vmember.selectvphoto",vmlid);
+	public String selectphoto(String lid) {
+		String vmphoto = sqlSessionTemplate.selectOne("vmember.selectvphoto",lid);
 		System.out.println(vmphoto);
 		return vmphoto;
 	}
