@@ -62,4 +62,13 @@
 		where
 			vmid=#{vmid}
 	</update>
+	
+	<select id="selectvphoto" parameterType="string" resultType="string">
+		select
+			vmphoto
+		from
+			vmember
+		where
+			vmember.vmid=#{vmlid}
+	</select>
 </mapper>

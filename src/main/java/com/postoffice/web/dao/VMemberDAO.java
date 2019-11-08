@@ -60,5 +60,11 @@ public class VMemberDAO {
 		map.put("vmphoto", saveFileName);
 		sqlSessionTemplate.update("vmember.updateFile",map);
 	}
+
+	public List<VMemberDTO> selectphoto(String vmlid) {
+		List<VMemberDTO> vmphoto = sqlSessionTemplate.selectList("vmember.selectvphoto",vmlid);
+		System.out.println(vmphoto);
+		return vmphoto;
+	}
 	
 }

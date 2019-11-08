@@ -122,6 +122,11 @@ public class LoginController {
 			session.setAttribute("vmlid", vmlid);
 			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 			
+			//session을 통해 사진 확인
+			List<VMemberDTO> vlist = loginService.vmphotofind(vmlid);
+			System.out.println(vlist+"controll임::::::::::::::::::::::::::::::");
+			
+			
 			
 			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
 		} 

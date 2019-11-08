@@ -110,6 +110,13 @@ public class LoginService {
 		System.out.println("service!!!)))))))))))))))))))))))))))");
 		vmemberDao.updateFile(vmdto,saveFileName);
 		
+	}
+	
+	//사진 가져오기
+	public List<VMemberDTO> vmphotofind(String vmlid) {
+		List<VMemberDTO> vmphotofind = vmemberDao.selectphoto(vmlid);
+		System.out.println(vmphotofind);
+		return vmphotofind;
 	}	
 	
 }
