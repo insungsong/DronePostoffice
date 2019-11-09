@@ -22,6 +22,7 @@
 					
 					return result;
 				}
+				
 					
 					
 					
@@ -32,7 +33,7 @@
 		<div class="body">
 			<div class="body_sub">
 			
-			<form method="post" action="noticeWrite" onsubmit="return checkForm()">
+			<form method="post" action="noticeWrite" onsubmit="return checkForm()" enctype="multipart/form-data">
 				<div class="bor_title">
 					<div class="subject">공지사항 글작성</div>
 					
@@ -53,16 +54,18 @@
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
-								<td>${memberInfo.mname }</td>
+								<td>${memberInfo.mname}</td>
 								<th scope="col">부서</th>
 								<td>${memberInfo.dept_id}</td>
 								<th scope="col">작성일</th>
-								<td>${notice.notice_date}</td>
+								<td></td>
 								
 							</tr>
 							<tr>
 								<th scope="col">첨부파일</th>
-								<td colspan="5"></td>
+								<td colspan="5">
+									<input type="file" name="attachFile" id="attachFile">
+								</td>
 							</tr>
 							<tr>
 							<td colspan="6">

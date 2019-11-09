@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.MemberDTO;
@@ -46,6 +49,7 @@ public class NoticeDAO {
 			System.out.println("membername : " + memberDto.getMname());
 			
 			DeptDTO deptDto = dto.getDeptList().get(0);
+			System.out.println("deptid:" + deptDto.getDept_id());
 			System.out.println("deptname : " + deptDto.getDept_name());
 			
 		}
@@ -56,6 +60,7 @@ public class NoticeDAO {
 	//공지사항 작성
 	public int noticeinsert(NoticeDTO noticeDTO) {
 		int rows = sqlSessionTemplate.insert("notice.noticeinsert", noticeDTO);
+		
 		return rows;
 	}
 
@@ -72,6 +77,25 @@ public class NoticeDAO {
 	public DeptDTO selectdept(MemberDTO Mdto) {
 		DeptDTO deptDTO = sqlSessionTemplate.selectOne("notice.selectDept", Mdto);
 		return deptDTO;
+	}
+	
+	
+	
+	
+	//공지사항 목록 검색
+	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum, int endRowNum) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("searchNotice", searchNotice);
+		map.put("searchWord", searchWord);
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		
+		if(searchNotice.equals("notice_title")) {
+			List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.noticeidSearch",map);
+			return noticeSearch;
+		}
+		List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.midSearch",map);
+		return noticeSearch;
 	}
 	
 	//test
@@ -96,5 +120,7 @@ public class NoticeDAO {
 	public void deleteDelete(NoticeDTO noticeDTO) {
 		sqlSessionTemplate.delete("notice.noticedelete", noticeDTO);
 	}
+
+
 	
 }
