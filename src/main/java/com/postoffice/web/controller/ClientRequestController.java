@@ -43,6 +43,8 @@ public class ClientRequestController {
 	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo , HttpSession session){
 		session.setAttribute("pageNo", pageNo);
 
+		String sessioninfo = (String)session.getAttribute("lid");
+		System.out.println("sessioninfo:"+sessioninfo);
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
 
