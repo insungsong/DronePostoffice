@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -9,7 +10,13 @@
 			<link rel="stylesheet" type ="text/css" href="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 			<script type="text/javascript" src="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>			
 			<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
-			<script type="text/javascript"></script>
+		
+			<script type="text/javascript">
+				function fileCheck(){
+					form.submit();
+				}
+			</script>
+			
 	</head>
 	<body>
 	<jsp:include page="../common/header.jsp"/>
@@ -30,21 +37,28 @@
 						</colgroup>
 							<tr>
 								<th scope="col">제목</th>
-								<td colspan="5"><input type="text" name="wtitle" style="border:0;width: 98%;" value="${notice.notice_title} "readonly></td>
+								<td colspan="5"><input type="text" name="wtitle" style="border:0;width: 98%;" value="${notice.notice_title}"readonly></td>
 							
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
 								<td><input type="text" name="writer" value="${member.mname }" style="border:0; width: 100%; text-align: center" readonly></td>
 								<th scope="col">부서</th>
-								<td><input type="text" name="wdept" value="${dept.dept_name}"  style="border:0; width: 100%; text-align: center" readonly></td>
+								<td><input type="text" name="wdept" value="${dept.dept_name}" style="border:0; width: 100%; text-align: center" readonly></td>
 								<th scope="col">작성일</th>
-								<td><input type="text" name="wdate" value="${notice.notice_date}"  style="border:0; width: 100%; text-align: center" readonly></td>
+								<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 								
 							</tr>
 							<tr>
 								<th scope="col">첨부파일</th>
-								<td colspan="5"></td>
+								<td colspan="5">
+								<c:if test="${not empty notice.notice_attach_file}">
+								<form action="filedownload" method="post"enctype="nultipart/form-data">
+									<input type="hidden" value="${notice.notice_id}" id="notice_id" name="notice_id"/>
+									<input type="submit" id= "NFileName" name="NFileName" value="${notice.notice_attach_file}"/>
+								</form>								
+								</c:if>
+								</td>
 							</tr>
 							<tr>
 							<td colspan="6"><textarea rows="30" cols="5" style="width: 100%;"readonly>${notice.notice_content}</textarea></td>
@@ -53,9 +67,9 @@
 						
 					</div>
 		
-				<a href="noticeList?pageNum=${PageNum}" class="btn btn-info">목록</a>	
-				<a href="noticeUpdate?notice_id=${notice.notice_id}" class="btn btn-danger">수정</a>	
-				<a href="noticeDelete?notice_id=${notice.notice_id}" class="btn btn-danger">삭제</a>
+				<a href="noticeList?pageNum=${PageNum}" class="btn btn-info" id="listBtn">목록</a>	
+				<a href="noticeUpdate?notice_id=${notice.notice_id}" class="btn btn-danger" id="updateBtn">수정</a>	
+				<a href="noticeDelete?notice_id=${notice.notice_id}" class="btn btn-danger" id="deleteBtn">삭제</a>
 			</div>
 		</div>
 	</body>

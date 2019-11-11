@@ -1,9 +1,12 @@
 package com.postoffice.web.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dao.MemberDAO;
 import com.postoffice.web.dao.VMemberDAO;
@@ -72,6 +75,48 @@ public class LoginService {
 		vmemberDao.insert(vmember);
 	}
 
+	public String getDeptName(String lid) {
+		String dept_name = memberDao.selectDeptName(lid);
+		return dept_name;
+	}
+
+	public String getVname(String lid) {
+		String vname = vmemberDao.selectVname(lid);
+		return vname;
+	}
+
+	public String vmnrequest(String lid) {
+		String vmname = vmemberDao.selectvmnSelect(lid);
+		return vmname;
+	}
+
+	public List<VMemberDTO> vmemberList(String lid) {
+		List<VMemberDTO> vmemberList = vmemberDao.selectvmemberList(lid);
+		return vmemberList;
+	}
+
+	public int vmemAfter(VMemberDTO vmdto) {
+		int vlist = vmemberDao.selectvmList(vmdto);
+		return vlist;
+	}
+
+	public String vmnlid(String lid) {
+		String vmn = vmemberDao.selectvmlid(lid);
+		return vmn;
+	}
+	
+	//파일 업로드
+	public void chaneFile(VMemberDTO vmdto,String saveFileName) {
+		System.out.println("service!!!)))))))))))))))))))))))))))");
+		vmemberDao.updateFile(vmdto,saveFileName);
 		
+	}
+	
+	//사진 가져오기
+	public String vmphotofind(String lid) {
+		String vmphotofind = vmemberDao.selectphoto(lid);
+		System.out.println(vmphotofind);
+		return vmphotofind;
+	}	
 	
 }

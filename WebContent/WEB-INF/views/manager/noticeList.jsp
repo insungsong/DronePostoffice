@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%@page session="true"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,44 +16,48 @@
 			<script type="text/javascript" 
 			src="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>		
 			<style type="text/css">
-			.wrapper{
-				border: 1px solid black;
-				display: flex;
-				width:100%;
-   				height:810px;
-			}
-			.content{
-				margin:5px;
+			.noticeList_area{
 				border:1px solid black;
-				flex-grow:1;
-				height:798px;
-				width:100%;
-				
-				display:flex;
-				min-height:0;
+				height:909px;
 			}
+			.noticeList_sub_area{
+				margin:20px;
+				border: solid 1px black;
+    			height: 873px;
+			}
+			.noticeList_title{
+				margin:10px;
+				border: solid 1px black;
+				height:30px;
+				text-align:center;
+			}
+			.noticeList_search{
+				margin:10px;
+				border: solid 1px black;
+				height:50px;
+			}
+			.noticeList_content{
+				margin: 10px;
+				border: solid 1px black;
+				height: 740px;
+			}
+			
 			.noticeWirte_btn{
 				margin:5px;
-				border:1px solid black;
 				height:45px;
 				flex-direction:column;
-				width:100%;
+				width:99%;
 				padding:3px;
 			}
 			
 			.notice_table{
-				border:1px solid black;
-				margin-top:5px;
-				padding:5px;
-				height:670px;
+				margin:10px;
+				height:600px;
+				border: solid 1px black;
 			}
 			.notice_page{
-				border:1px solid black;
-				margin-top:300px;
-				padding-left:40%;
-				padding-top:2px;
-				width:100%;
-				height:6%;
+				margin-left: 41%;
+				padding-top: 8px;
 			}
 			
 			</style>
@@ -62,20 +68,33 @@
 			<div class="body">
 				<div class="body_sub">
 				
+					<div class="noticeList_area">
+					<div class="noticeList_sub_area">
+					<div class="noticeList_title">공지사항 목록</div>
 					
-					<div class=noticeWirte_btn>
-						<a href="noticeWrite" class="btn btn-warning">글쓰기</a>
-						<c:if test="${mid == null }">
-						</c:if>
-						
-							<div class="notice_table">
+					<div class="noticeList_search">
+						<form id="noticeSearchForm" method="get" action="noticeSearch">
+							<select id="searchNotice" name="searchNotice">
+								<option value="notice_title">제목</option>
+								<option value="mid">작성자</option>
+							</select>
+							<input type="text" id="searchWord" name="searchWord" style="height: 25px">
+							<button>검색</button>
+						</form>
+					</div>
+					
+					<div class="noticeList_content">
+						<div class=noticeWirte_btn>
+							<a href="noticeWrite" class="btn btn-warning">글쓰기</a>
+						</div>
+						<div class="notice_table">
 							<table class="table table-sm" >
 								<thead>
 									<tr style="background:gray">
 										<th scope="col">글번호</th>
 										<th scope="col">제목</th>
-										<!-- <th scope="col">부서</th> -->
 										<th scope="col">작성자</th>
+										
 										<th scope="col">작성일</th>
 									</tr>
 								
@@ -84,15 +103,14 @@
 										<tr>
 											<th scope="row">${notice.notice_id}</th>
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
-											<%-- <td>${notice.dept_id}</td> --%>
-
 											<td>${notice.mid}</td>
+											
 											<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
-								
+								</tbody>
 							</table>
-
+						</div>
 						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
 							<a href="noticeList?pageNum=1" class="btn btn-primary">처음</a>
@@ -119,9 +137,13 @@
 								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-primary">맨끝</a>
 							</div>
 						</c:if>
-						</div>
+						
 					
 					</div>
+				
+					</div>
+					</div>
+
 
 				</div>
 			

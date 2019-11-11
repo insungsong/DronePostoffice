@@ -9,17 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.postoffice.web.dto.BoardDTO;
-import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.MailDTO;
-import com.postoffice.web.dto.MemberDTO;
-import com.postoffice.web.dto.NoticeDTO;
 import com.postoffice.web.dto.StateDTO;
+import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.ClientRequestService;
+import com.postoffice.web.service.LoginService;
 
 @Controller
 public class ClientRequestController {
@@ -27,22 +24,28 @@ public class ClientRequestController {
 
 	@Autowired
 	private ClientRequestService requestService;
-
+	@Autowired
+	private LoginService loginService;
+	
 
 	
 	@RequestMapping("/client_index")
-	public String client_index(HttpSession session){
+	public String client_index(HttpSession session, Model model){
 		/*
 		 * String check = (String) session.getAttribute("lauthority"); if(check != null)
 		 * { if(check.equals("client")) { return "client/index"; } }
 		 * session.setAttribute("error", "lauthorityError"); return "redirect:/";
 		 */
-		return "client/index";
+		String lid = (String)session.getAttribute("lid");
+		String vlist = loginService.vmphotofind(lid);
+		model.addAttribute("vlist",vlist);
 
+		
+		return "client/index";
 	}
 
 	@RequestMapping("/requestBoarderList")
-	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo, HttpSession session){
+	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo ,String lid, HttpSession session){
 		session.setAttribute("pageNo", pageNo);
 
 		int rowsPerPage = 10;
@@ -75,7 +78,7 @@ public class ClientRequestController {
 			endRowNo = totalRowNum;
 
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo);
-
+		
 		// JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
 															// 씀
@@ -87,23 +90,38 @@ public class ClientRequestController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
+		
+		String vmname = (String)session.getAttribute("lid");
+		System.out.println(vmname+"++++++++++++++++++++++++++++++++");
+		model.addAttribute(vmname);
 		return "client/requestBoarderList";
 	}
 
 	//req_next값 가져오기
-	 @GetMapping("/requestWrite")
-	 	public String mailadd1(Model model) { 
-		 int originMailNum = requestService.getnum()+1;
-		 model.addAttribute("originMailNum",originMailNum); 
+	 @RequestMapping("/requestWrite")
+	 	public String mailadd1(Model model,String vname,String state_id,HttpSession session) { 
+		 String vmid = (String)session.getAttribute("vname");
+		 System.out.println(vmid);
+		 //String vname = requestService.getvname(vmid);
+		 
+		 int num = requestService.getTotalRowNo()+1;
+		 model.addAttribute("state_id",state_id);
+		 model.addAttribute("vmid",vmid);
+		 model.addAttribute("num",num);
 		 return "client/requestWrite"; 
 	}
-
-	// 클라이언트 메일 요청
-	@RequestMapping("/requestWrite")
-	public String requestProcess(MailDTO maildto, @RequestParam(defaultValue = "1") int pageNo) {
-		int requestmail = requestService.requestWrite(maildto);
-		return "redirect:/requestBoarderList";
-	}
+	 @RequestMapping("/requestanswer")
+	 public String answer(MailDTO maildto,Model model) {
+		 System.out.println(maildto.getFrom_address());
+		 System.out.println(maildto.getMail_id());
+		 System.out.println(maildto.getFrom_name());
+		 System.out.println(maildto.getState_id());
+		 System.out.println(maildto.getVid());
+		 System.out.println("++++++++++++++++++++++++++++++++++++");
+		 requestService.getanswer(maildto);
+		 return "redirect:/requestBoarderList";
+	 }
+	 
 	
 	//요청 삭제
 	@RequestMapping("/requestRemove")

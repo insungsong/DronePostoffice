@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -50,12 +50,10 @@
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">우편물 무게</label>
 		    <input type="text" class="form-control" name="mail_weight" id="mail_weight" placeholder="우편물 무게를 입력하세요" value="${board.mail_weight}">
-		
 		  </div>
 		   <div class="form-group">
 		    <label for="formGroupExampleInput">배송 상태</label>
 		    ${board.stateList.get(0).state_name }
-	
 		  </div>
 		  <input type="submit" class="btn btn-success" value="수정하기">
 		  <a href="requestBoarderList" class="btn btn-secondary">뒤로가기</a>

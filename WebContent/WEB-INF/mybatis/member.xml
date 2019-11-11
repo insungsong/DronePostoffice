@@ -10,4 +10,12 @@
 		values (#{mid}, #{mname}, #{mpassword}, #{mtel}, #{mphoto, jdbcType=VARCHAR}, #{mauthority}, (select dept_id from dept where dept_id = #{dept_id}))
 		<!-- nullable인 컬럼이 있으면 jdbcType 지정해줘야 null값이 들어갈 수 있다. -->
 	</insert>
+	
+	<select id="selectDeptName" parameterType="string" resultType="string">
+		select dept_name
+		from member, dept
+		where 
+    		member.dept_id = dept.dept_id and
+    		member.mid = #{lid}
+	</select>
 </mapper>

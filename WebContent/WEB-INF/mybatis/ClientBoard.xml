@@ -42,19 +42,25 @@
 		select count(*) from Mail 
 	</select>
 	
-	<!-- 
-	<insert id="insertBoard" parameterType="com.postoffice.web.dto.MailDTO">
+	<select id="selectvname" resultType="String">
+		select vname from vmember
+	</select>
+
+
+<!-- 여기를 도저히 모르겠음 -->
+	<insert id="insertBoard">
 		insert into Mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname)
-			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},state_name,sysdate,#{vid})
+			select (#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'#{state_name}','#{vname}')
+			from mail,village,state
+			where mail.vid = village.vid and mail.state_id = state.state_id
 	</insert>
-	 -->
 	 
 	<delete id="removeRequest">
 		delete Mail where mail_id = #{mail_id}
 	</delete>
 	
  	<select id="selectOne" parameterType="int" resultMap="Mail">
-		select 
+ 	select 
 			mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname 
 		from 
 			mail ,village ,state
@@ -112,4 +118,9 @@
 		)
 		where rn &gt; = #{startRowNo}
 	</select>
+	<insert id="answerdto" parameterType="com.postoffice.web.dto.MailDTO">
+		insert into mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vid)
+			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate,'v001')
+	</insert>
+	
 </mapper>

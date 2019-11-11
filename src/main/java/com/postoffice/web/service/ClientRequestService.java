@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.postoffice.web.dao.ClientDAO;
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.VMemberDTO;
 
 
 @Service
@@ -46,8 +47,8 @@ public class ClientRequestService {
 		return mailMap;
 	}
 
-	public int requestWrite(MailDTO maildto) {
-		int mailDto = clientdao.insertMaildto(maildto);
+	public int requestWrite() {
+		int mailDto = clientdao.insertMaildto();
 		return mailDto;
 	}
 
@@ -75,5 +76,24 @@ public class ClientRequestService {
 		List<MailDTO> listdto = clientdao.fromSearch(searchType,keyword,startRowNo, endRowNo);
 		return listdto;
 	}
+
+
+	public int getanswer(MailDTO maildto) {
+		int answerdto = clientdao.requestwrite(maildto);
+		return answerdto;
+	}
+	
+	/*
+	public String getvname(String vmid) {
+		String vname = clientdao.requestvname(vmid);
+		return vname;
+	}
+	*/
+
+
+	
+
+
+	
 
 }

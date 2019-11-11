@@ -99,6 +99,8 @@
 			$(function() {
 				$("#vname").hide();
 				$("#deptName").hide();
+				
+				/* 비밀번호 일치 또는 불일치 하는 지 확인하는 코드 */
 				$("input").keyup(function(){ 
 					if($("#lpassword").val() != ""){
 						if($("#lpasswordCheck").val() != ""){
@@ -118,14 +120,28 @@
 						$("#lpasswordCheckError").html("")
 					}
 				})
+				
+				/* 파일 선택하면 파일 이름만 따서 input 태그 값에 넣어주는 코드 */
+				$(".filebox").ready(function(){
+					var fileTarget = $(".filebox #lphoto");
+					
+					fileTarget.on('change', function(){
+						if(window.FileReader) {
+							var filename = $(this)[0].files[0].name;
+						} else {
+							var filename = $(this).val().split('/').pop().split('\\').pop();
+						}
+						$(".upload_name").val(filename);
+					})
+				})
 			})
+		</script>
 		
-			
-			
-			
-
-	
-		
+		<!-- 사진 업로드 했을떄 즉 버튼 눌렀을때 -->
+		<script type="text/javascript">
+	        function uploadclick() {
+				
+			}
 		</script>
 	</head>
 	<body>
@@ -163,8 +179,14 @@
 						<div>
 							<input id="ltel" name="ltel" type="text" placeholder="전화번호">
 						</div>
-						<div>
+						
+						<div class="filebox">
+							<input class="upload_name" value="파일선택" disabled="disabled">
+							<label for="lphoto" onclick="uploadclick()">사진업로드</label>
 							<input id="lphoto" name="lphoto" type="file">
+							<div class="upload_picture">
+									
+							</div>
 						</div>
 						
 						<div>
@@ -185,7 +207,7 @@
 							</select>
 						</div>
 						<div class="joinButton">
-							<input type="submit" value="JOIN">
+							<input type="submit" value="회원가입">
 						</div>
 					</form>	
 				</div>
