@@ -71,8 +71,9 @@ public class ClientRequestController {
 		int endRowNo = pageNo * rowsPerPage;
 		if (pageNo == totalPageNum)
 			endRowNo = totalRowNum;
-
-		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo);
+		
+		String vid = (String)session.getAttribute("vid");
+		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo ,vid);
 		
 		// JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
@@ -91,12 +92,14 @@ public class ClientRequestController {
 
 	//req_next값 가져오기
 	 @RequestMapping("/requestWrite")
-	 	public String mailadd1(Model model,String vmlid,HttpSession session) { 
-		 System.out.println("vmlid:"+vmlid);
+	 	public String mailadd1(Model model,HttpSession session) { 
+		 //ystem.out.println("vmlid:"+vmlid);
 		 //String vname = requestService.getvname(vmid);
 		 
 		 int num = requestService.getTotalRowNo()+1;
-		 model.addAttribute("vmlid",vmlid);
+		 model.addAttribute("vmlid",session.getAttribute("lid"));
+		 model.addAttribute("vname", session.getAttribute("vname"));
+		 model.addAttribute("vid", session.getAttribute("vid"));
 		 model.addAttribute("num",num);
 		 return "client/requestWrite"; 
 	}

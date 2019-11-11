@@ -125,7 +125,7 @@
 					  </form>
 				</div>
 				<div class="request_content">
-					<form action="requestWrite?vmlid=${vmlid}">
+					<form action="requestWrite">
 						<div class="client_write_button">
 							<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
 						</div>
