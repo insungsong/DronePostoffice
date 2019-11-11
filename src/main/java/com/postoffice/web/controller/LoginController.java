@@ -69,6 +69,10 @@ public class LoginController {
 		return "login";
 	}
 	
+	@RequestMapping("clientIndex")
+	public String clientIndex() {
+		return "client/index";
+	}
 	
 	@PostMapping("/login")
 	public String loginConfirm(String lid, String lpassword, String lauthority, 
@@ -113,7 +117,7 @@ public class LoginController {
 			//로그인 성공했을 때 실행
 			VMemberDTO userInfo = loginService.userInfo(lid);
 			
-			session.setAttribute("lid", userInfo.getVid()); //세션에 로그인 정보 저장
+			session.setAttribute("lid", userInfo.getVmid()); //세션에 로그인 정보 저장
 			//String vname = loginService.getVname(lid);
 			session.setAttribute("vname", userInfo.getVmname());
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
@@ -122,13 +126,11 @@ public class LoginController {
 			logger.debug("이장님 로그인");
 			
 			String vmname = loginService.vmnrequest(lid);
-			System.out.println(vmname+"______________________________________________________");
 			session.setAttribute("vmname", vmname);
 			
 			String vmlid = loginService.vmnlid(lid);
-			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 			
-			return "client/index"; //이장님이 로그인했을 때 이동하는 페이지
+			return "redirect:clientIndex"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
 	}
 	
@@ -139,6 +141,7 @@ public class LoginController {
 			HttpServletResponse response,Model model) throws Exception{
 		//session을 통해 사진 확인
 		String sessioninfo = (String)session.getAttribute("lid");
+		System.out.println("sessioninfo:"+sessioninfo);
 		String vlist = loginService.vmphotofind(sessioninfo);
 		
 		ServletContext application = request.getServletContext();
@@ -176,7 +179,6 @@ public class LoginController {
 		os.close();
 		is.close();
 		
-		model.addAttribute("vlist",vlist);
 		return "client/index";
 		}
 	
