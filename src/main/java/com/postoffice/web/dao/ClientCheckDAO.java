@@ -13,8 +13,8 @@ public class ClientCheckDAO {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	public List selectAll() {
-		return sqlSessionTemplate.selectList("board.selectAll");
+	public List selectAll(String vid) {
+		return sqlSessionTemplate.selectList("board.selectAll",vid);
 	}
 	
 	public int updateStateProc(MailDTO mailDTO) {

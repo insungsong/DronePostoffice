@@ -31,11 +31,13 @@ public class ClientCheckController {
 	
 	@RequestMapping("/check")
 	public ModelAndView selectAll(Model model,HttpSession session) {
-		List checkList = checkService.selectAll();
+		String vid=(String)session.getAttribute("vid");
+		System.out.println(vid);
+		List checkList = checkService.selectAll(vid);
 		List stateList = clientStateCheckService.selectList();
 		ModelAndView mav=new ModelAndView("client/requestCheck");
 		MailDTO mailDTO=new MailDTO();
-
+		
 		
 		
 		model.addAttribute("CheckList",checkList);

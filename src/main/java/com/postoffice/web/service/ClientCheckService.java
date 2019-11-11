@@ -16,8 +16,8 @@ public class ClientCheckService {
 	private ClientCheckDAO checkDAO;
 
 	
-	public List selectAll() {
-		return checkDAO.selectAll();
+	public List selectAll(String vid) {
+		return checkDAO.selectAll(vid);
 	}
 
 	public int updateStateProc(MailDTO mailDTO) {

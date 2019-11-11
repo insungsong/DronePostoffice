@@ -45,6 +45,9 @@
 			mail a
 		Left outer join state b on b.state_id = a.state_id
 		Left outer join village c on c.vid = a.vid
+		where
+			a.vid like '%#{vid}%' 
+		
 	</select>
 	
 

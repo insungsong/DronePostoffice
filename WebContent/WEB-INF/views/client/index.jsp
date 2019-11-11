@@ -44,6 +44,13 @@
 		    background-color: white;
    		 }
 	</style>
+	<script>
+		function check(vid){
+			
+			alert("${vid}");
+			location.href="check?vid="+vid;
+		}
+	</script>
 	</head>
 	<body>
 		<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
@@ -56,7 +63,7 @@
 		</div>
 		<div class="body">
 			<a href="requestBoarderList?pageNo=1"><div class="request"><img src = "./resources/images/one-finger-tap-outlined-symbol-of-a-hand_icon-icons.com_57978.png" style="width:200px;"/><h6>요청</h6></div></a>
-			<a href="check"><div class="check"><img src = "./resources/images/thumb-up-stroke_icon-icons.com_57954.png "style="width:200px;"/><h6>확인</h6></div></a>
+			<input type="button" onclick="check('${vid}')"><div class="check"><img src = "./resources/images/thumb-up-stroke_icon-icons.com_57954.png "style="width:200px;"/><h6>확인</h6></div></a>
 		</div>
 	</body>
 </html>
