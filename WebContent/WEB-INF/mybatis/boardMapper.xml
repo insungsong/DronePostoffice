@@ -12,9 +12,7 @@
 	</select> -->
 	
 	<update id="updateStateProc" parameterType="com.postoffice.web.dto.MailDTO">
-		update
-			mail
-		set
+		update mail set
 			state_id  = #{state_id}
 		where
 			mail_id = #{mail_id}
