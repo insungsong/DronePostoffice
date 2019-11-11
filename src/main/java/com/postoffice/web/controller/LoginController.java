@@ -20,11 +20,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dto.MemberDTO;
@@ -113,10 +111,14 @@ public class LoginController {
 			}
 			
 			//로그인 성공했을 때 실행
-			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			String vname = loginService.getVname(lid);
-			session.setAttribute("vname", vname);
+			VMemberDTO userInfo = loginService.userInfo(lid);
+			
+			session.setAttribute("lid", userInfo.getVid()); //세션에 로그인 정보 저장
+			//String vname = loginService.getVname(lid);
+			session.setAttribute("vname", userInfo.getVmname());
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
+			session.setAttribute("vname", userInfo.getVillageList().get(0).getVname());
+			session.setAttribute("vid", userInfo.getVillageList().get(0).getVid());
 			logger.debug("이장님 로그인");
 			
 			String vmname = loginService.vmnrequest(lid);

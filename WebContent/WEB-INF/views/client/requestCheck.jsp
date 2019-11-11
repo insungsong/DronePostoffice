@@ -69,7 +69,7 @@
 </script>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../common/manageHeader.jsp"></jsp:include>
 
 	<form id="form1">
 	<table id="customers" class="table">
