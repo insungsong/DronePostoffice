@@ -49,7 +49,7 @@
 		update 
 		    vmember 
 		set 
-		    vmid=#{vmid},vmname=#{vmname},vmpassword=#{vmpassword},vmtel=#{vmtel},vmphoto=#{vmphoto, jdbcType=VARCHAR},vid=#{vid}
+		    vmid=#{vmid},vmname=#{vmname},vmpassword=#{vmpassword},vmtel=#{vmtel},vmphoto=#{vmphoto},vid=#{vid}
 		where 
 		    vmid=#{vmid}
 	</update>
