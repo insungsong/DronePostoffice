@@ -1,5 +1,7 @@
 package com.postoffice.web.dto;
 
+import java.util.List;
+
 public class VMemberDTO {
 	private String vmid;
 	private String vmname;
@@ -7,6 +9,7 @@ public class VMemberDTO {
 	private String vmtel;
 	private String vmphoto;
 	private String vid;
+	private List<VillageDTO> villageList;
 	
 	public String getVmid() {
 		return vmid;
@@ -48,4 +51,11 @@ public class VMemberDTO {
 	public void setVid(String vid) {
 		this.vid = vid;
 	}
+	public List<VillageDTO> getVillageList() {
+		return villageList;
+	}
+	public void setVillageList(List<VillageDTO> villageList) {
+		this.villageList = villageList;
+	}
+	
 }

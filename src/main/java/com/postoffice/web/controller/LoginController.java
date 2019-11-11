@@ -111,10 +111,14 @@ public class LoginController {
 			}
 			
 			//로그인 성공했을 때 실행
-			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			String vname = loginService.getVname(lid);
-			session.setAttribute("vname", vname);
+			VMemberDTO userInfo = loginService.userInfo(lid);
+			
+			session.setAttribute("lid", userInfo.getVid()); //세션에 로그인 정보 저장
+			//String vname = loginService.getVname(lid);
+			session.setAttribute("vname", userInfo.getVmname());
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
+			session.setAttribute("vname", userInfo.getVillageList().get(0).getVname());
+			session.setAttribute("vid", userInfo.getVillageList().get(0).getVid());
 			logger.debug("이장님 로그인");
 			
 			String vmname = loginService.vmnrequest(lid);

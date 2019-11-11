@@ -1,10 +1,17 @@
 package com.postoffice.web.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dao.NoticeDAO;
 import com.postoffice.web.dto.DeptDTO;
@@ -24,16 +31,16 @@ public class NoticeService {
 
 	public List<NoticeDTO> getNoticeList(int startRowNum, int endRowNum) {
 		List <NoticeDTO> noticeList = noticeDAO.selectList(startRowNum, endRowNum);
+		
 		return noticeList;
 	}
 
 	SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
 	
-	public void noticeWrite(NoticeDTO noticeDTO) {
-
+	public void noticeWrite(NoticeDTO noticeDTO) {	
 		noticeDAO.noticeinsert(noticeDTO);
-		
+			
 	}
 	
 	public NoticeDTO getnotice(int notice_id) {
@@ -62,7 +69,8 @@ public class NoticeService {
 		
 	}
 	
-	///
+	
+	
 	//테스트 코드
 	public List<MemberDTO> testMember(){
 		List<MemberDTO> list = noticeDAO.testMember();
@@ -96,6 +104,11 @@ public class NoticeService {
 	public void noticeDelete(NoticeDTO noticeDTO) {
 		noticeDAO.deleteDelete(noticeDTO);
 		
+	}
+
+	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum, int endRowNum) {
+		List<NoticeDTO> noticeSearch=noticeDAO.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
+		return noticeSearch;
 	}
 	
 }
