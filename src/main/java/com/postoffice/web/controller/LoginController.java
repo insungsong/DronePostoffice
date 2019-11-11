@@ -20,11 +20,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dto.MemberDTO;
@@ -74,7 +72,7 @@ public class LoginController {
 	
 	@PostMapping("/login")
 	public String loginConfirm(String lid, String lpassword, String lauthority, 
-			HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
+			HttpSession session,HttpServletRequest request,HttpServletResponse response,Model model) throws Exception{
 		if(lauthority.equals("manager") || lauthority.equals("admin")) { //직원 또는 관리자가 로그인할 때 
 			LoginResult result = loginService.mLogin(lid, lpassword);
 			
@@ -113,10 +111,14 @@ public class LoginController {
 			}
 			
 			//로그인 성공했을 때 실행
-			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
-			String vname = loginService.getVname(lid);
-			session.setAttribute("vname", vname);
+			VMemberDTO userInfo = loginService.userInfo(lid);
+			
+			session.setAttribute("lid", userInfo.getVid()); //세션에 로그인 정보 저장
+			//String vname = loginService.getVname(lid);
+			session.setAttribute("vname", userInfo.getVmname());
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
+			session.setAttribute("vname", userInfo.getVillageList().get(0).getVname());
+			session.setAttribute("vid", userInfo.getVillageList().get(0).getVid());
 			logger.debug("이장님 로그인");
 			
 			String vmname = loginService.vmnrequest(lid);
@@ -124,11 +126,12 @@ public class LoginController {
 			session.setAttribute("vmname", vmname);
 			
 			String vmlid = loginService.vmnlid(lid);
-			session.setAttribute("vmlid", vmlid);
-			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");			
-			return "redirect:/client_index"; //이장님이 로그인했을 때 이동하는 페이지
-		} 	
+			System.out.println(vmlid+"|||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+			
+			return "client/index"; //이장님이 로그인했을 때 이동하는 페이지
+		} 
 	}
+	
 	
 	//로그인 했을때 사진 정보 주기
 	@RequestMapping("/vmemeberphoto")
@@ -136,13 +139,12 @@ public class LoginController {
 			HttpServletResponse response,Model model) throws Exception{
 		//session을 통해 사진 확인
 		String sessioninfo = (String)session.getAttribute("lid");
-		System.out.println(sessioninfo+")))))))))))))))))))))))))))))))");
 		String vlist = loginService.vmphotofind(sessioninfo);
-		System.out.println("---------------------------------------------"+vlist);
 		
 		ServletContext application = request.getServletContext();
 		
 		String userAgent = request.getHeader("User-Agent");
+		
 		String downloadName;
 		if(userAgent.contains("Trident/7.0") || userAgent.contains("MSIE")) {
 			//IE11 버전 또는 IE10 이하 버전에서 한글 파일을 복원하기 위해
@@ -153,18 +155,20 @@ public class LoginController {
 		}
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + downloadName + "\"");
 		
-		String realPath = application.getRealPath("WEB-INF/images/"+vlist);
-		System.out.println(realPath+"000000000000000000000000000000000000000000000000000000");
+		String realPath = application.getRealPath("/WEB-INF/views/images/"+vlist);
+		
 		File file = new File(realPath);
+		
 		response.setHeader("Content-Length", String.valueOf(file.length()));
 		
 		//응답 본문에 데이터 추가
-		OutputStream os = response.getOutputStream();
 		InputStream is = new FileInputStream(realPath);
+		OutputStream os = response.getOutputStream();
 		
 		byte[] buffer = new byte[1024];
 		while(true) {
 			int readByte = is.read(buffer);
+			
 			if(readByte == -1) break;
 			os.write(buffer, 0, readByte);
 		}
@@ -173,7 +177,7 @@ public class LoginController {
 		is.close();
 		
 		model.addAttribute("vlist",vlist);
-		return "client_index";
+		return "client/index";
 		}
 	
 	@RequestMapping("/logout")
@@ -204,7 +208,7 @@ public class LoginController {
 		MemberDTO member = new MemberDTO();
 		VMemberDTO vmember = new VMemberDTO();
 		ServletContext application = request.getServletContext();
-		String savePath = application.getRealPath("/WEB-INF/images/");
+		String savePath = application.getRealPath("/WEB-INF/views/images/");
 		
 		//사진이 첨부되어 있다면 DTO에 저장 
 		if(!lphoto.isEmpty()) {

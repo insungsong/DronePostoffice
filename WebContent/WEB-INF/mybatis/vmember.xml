@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="vmember">
-	<select id="selectVmemberByLid" parameterType="string" resultType="com.postoffice.web.dto.VMemberDTO">
-		select vmid, vmname, vmpassword, vmname from vmember where vmid=#{lid}
+	<resultMap type="com.postoffice.web.dto.VMemberDTO" id="vmemberInfo">
+		<id column="vmid" property="vmid"/>
+		<result column="vmname" property="vmname"/>
+		<result column="vmpassword" property="vmpassword"/>
+		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
+			<id column="vid" property="vid"/>
+			<result column="vname" property="vname"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectVmemberByLpw" parameterType="string" resultType="com.postoffice.web.dto.VMemberDTO">
+		select
+			vmpassword
+		from
+			vmember
+		where
+			vmid=#{lid}
+	</select>
+	
+	<select id="selectUserInfo" parameterType="string" resultMap="vmemberInfo">
+		select 
+			vmember.vmid, vmember.vmname, vmember.vmpassword, vmember.vmname, village.vid, village.vname 
+		from 
+			vmember, village 
+		where 
+			vmember.vid = village.vid
+		and
+			vmid=#{lid}
 	</select>
 	
 	<insert id="insert" parameterType="com.postoffice.web.dto.VMemberDTO">
@@ -49,7 +75,7 @@
 		update 
 		    vmember 
 		set 
-		    vmid=#{vmid},vmname=#{vmname},vmpassword=#{vmpassword},vmtel=#{vmtel},vmphoto=#{vmphoto, jdbcType=VARCHAR},vid=#{vid}
+		    vmid=#{vmid},vmname=#{vmname},vmpassword=#{vmpassword},vmtel=#{vmtel},vmphoto=#{vmphoto},vid=#{vid}
 		where 
 		    vmid=#{vmid}
 	</update>

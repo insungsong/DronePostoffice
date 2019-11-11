@@ -44,10 +44,11 @@ public class ClientDAO {
 		return boardList;
 	}
 	
-	public List<MailDTO> selectMailList(int startRowNo, int endRowNo) {
-		Map<String,Integer> map = new HashMap<>();
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo, String vid) {
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
+		map.put("vid", vid);
 		List<MailDTO> MailboardList=sqlSessionTemplate.selectList("ClientBoard.selectMailList",map);
 		
 		for(int i = 0; i <MailboardList.size(); i++) {

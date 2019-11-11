@@ -31,21 +31,16 @@ public class ClientRequestController {
 	
 	@RequestMapping("/client_index")
 	public String client_index(HttpSession session, Model model){
-		/*
-		 * String check = (String) session.getAttribute("lauthority"); if(check != null)
-		 * { if(check.equals("client")) { return "client/index"; } }
-		 * session.setAttribute("error", "lauthorityError"); return "redirect:/";
-		 */
 		String lid = (String)session.getAttribute("lid");
 		String vlist = loginService.vmphotofind(lid);
 		model.addAttribute("vlist",vlist);
+		model.addAttribute("lid",lid);
 
-		
 		return "client/index";
 	}
 
 	@RequestMapping("/requestBoarderList")
-	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo ,String lid, HttpSession session){
+	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo , HttpSession session){
 		session.setAttribute("pageNo", pageNo);
 
 		int rowsPerPage = 10;
@@ -76,8 +71,9 @@ public class ClientRequestController {
 		int endRowNo = pageNo * rowsPerPage;
 		if (pageNo == totalPageNum)
 			endRowNo = totalRowNum;
-
-		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo);
+		
+		String vid = (String)session.getAttribute("vid");
+		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo ,vid);
 		
 		// JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
@@ -91,33 +87,24 @@ public class ClientRequestController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
 		
-		String vmname = (String)session.getAttribute("lid");
-		System.out.println(vmname+"++++++++++++++++++++++++++++++++");
-		model.addAttribute(vmname);
 		return "client/requestBoarderList";
 	}
 
 	//req_next값 가져오기
 	 @RequestMapping("/requestWrite")
-	 	public String mailadd1(Model model,String vname,String state_id,HttpSession session) { 
-		 String vmid = (String)session.getAttribute("vname");
-		 System.out.println(vmid);
+	 	public String mailadd1(Model model,HttpSession session) { 
+		 //ystem.out.println("vmlid:"+vmlid);
 		 //String vname = requestService.getvname(vmid);
 		 
 		 int num = requestService.getTotalRowNo()+1;
-		 model.addAttribute("state_id",state_id);
-		 model.addAttribute("vmid",vmid);
+		 model.addAttribute("vmlid",session.getAttribute("lid"));
+		 model.addAttribute("vname", session.getAttribute("vname"));
+		 model.addAttribute("vid", session.getAttribute("vid"));
 		 model.addAttribute("num",num);
 		 return "client/requestWrite"; 
 	}
 	 @RequestMapping("/requestanswer")
 	 public String answer(MailDTO maildto,Model model) {
-		 System.out.println(maildto.getFrom_address());
-		 System.out.println(maildto.getMail_id());
-		 System.out.println(maildto.getFrom_name());
-		 System.out.println(maildto.getState_id());
-		 System.out.println(maildto.getVid());
-		 System.out.println("++++++++++++++++++++++++++++++++++++");
 		 requestService.getanswer(maildto);
 		 return "redirect:/requestBoarderList";
 	 }

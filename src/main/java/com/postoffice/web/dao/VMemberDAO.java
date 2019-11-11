@@ -19,10 +19,14 @@ public class VMemberDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public VMemberDTO selectMember(String lid) {
-		VMemberDTO vmember = sqlSessionTemplate.selectOne("vmember.selectVmemberByLid", lid);
+		VMemberDTO vmember = sqlSessionTemplate.selectOne("vmember.selectUserInfo", lid);
 		return vmember;
 	}
 
+	public VMemberDTO selectVmemberByLpw(String lid) {
+		VMemberDTO vmember = sqlSessionTemplate.selectOne("vmember.selectVmemberByLpw", lid);
+		return vmember;
+	}
 	public int insert(VMemberDTO vmember) {
 		int rows = sqlSessionTemplate.insert("vmember.insert", vmember);
 		return rows;

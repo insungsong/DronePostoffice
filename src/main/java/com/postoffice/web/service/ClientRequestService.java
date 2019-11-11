@@ -36,8 +36,8 @@ public class ClientRequestService {
 		return boardList;
 	}
 	
-	public List<MailDTO> selectMailList(int startRowNo, int endRowNo){
-		List<MailDTO> ClientboardList = clientdao.selectMailList(startRowNo,endRowNo);
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo, String vid){
+		List<MailDTO> ClientboardList = clientdao.selectMailList(startRowNo,endRowNo, vid);
 		return ClientboardList;
 	}
 
