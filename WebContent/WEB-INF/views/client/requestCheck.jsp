@@ -64,28 +64,32 @@
 	} */
 	
  	function check(state_id,mail_id){
-		var result=confirm("요청 하시겠습니까?");
+		/* var result=confirm("요청 하시겠습니까?");
 		if(result==true){
 	 		location.href = "stateCheck?state_id=" + state_id + "&mail_id=" + mail_id;
 	 		alert("요청완료");
+	 		 
+		}else{
+			alert("취소하셨습니다.");
+		} */
+		var result=confirm("요청 하시겠습니까?");
+		if(result==true){
+		$.ajax({
+			url:"stateCheck",
+			data:{
+					"state_id":state_id,
+					"mail_id":mail_id	
+					},
+		success:function(){
+			$("#btn").val("요청완료");
+				alert("요쳥완료");
+			}
+		});
+		
 		}else{
 			alert("취소하셨습니다.");
 		}
 		
-		
-	 /* 	var result=true;
-	 	if(result==true){
-	 		$("#btn").val("염현지ㅄ");
-	 		return true;
-	 	}
-	 	console.log($("#btn").val()) */;
-	 	/* $("btn").val("접수 완료"); */
-		/* $.ajax({
-			url:"stateCheck?state_id=" +state_id+ "&mail_id="+mail_id,
-			success:function(result){
-				$("#btn").val("접수완료");
-			}
-		}); */
  	}
 	
 

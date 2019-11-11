@@ -16,6 +16,7 @@
 			state_id  = #{state_id}
 		where
 			mail_id = #{mail_id}
+			
 	</update>
 	
 	<select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
