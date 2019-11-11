@@ -88,9 +88,7 @@
 		}); */
  	}
 	
-	function btn(){
-		
-	}
+
  
 </script>
 </head>
@@ -108,9 +106,9 @@
 			<th>받는 사람</th>
 			<th>받는 주소</th>
 			<th>메일 무게</th>
+			<th>마을 이름</th>
 			<th>요청 상태</th>
 			<th>요청 확인</th>
-			<th>마을 이름</th>
 			<th>접수 요청</th>
 		</tr>
 		</thead>
@@ -118,15 +116,19 @@
 		<tr>
 		
 		<c:forEach items="${CheckList}" var="check">
-				<td>${check.mail_id}</td>
-				<td>${check.from_name}</td>
-				<td>${check.from_address}</td>
-				<td>${check.to_name}</td>
-				<td>${check.to_address}</td>
-				<td>${check.mail_weight}</td>
-				<td>${check.state_id}</td>
-				<td>${check.state_name}</td>
-				<td>${check.village_name}</td>
+				<c:if test="${vid == check.vid}">
+					<td>${check.mail_id}</td>
+					<td>${check.from_name}</td>
+					<td>${check.from_address}</td>
+					<td>${check.to_name}</td>
+					<td>${check.to_address}</td>
+					<td>${check.mail_weight}</td>
+					<td>${check.village_name}</td>
+					<td>${check.state_id}</td>
+					<td>${check.state_name}</td>
+				<td><input id="btn" type="button" value="접수 요청하기" onClick="check('s005','${check.mail_id}')"/></td>
+					
+				</c:if>
 				
 				<%-- <select name="state"> 
 					<c:forEach items="${stateList }" var="state">
@@ -134,7 +136,6 @@
 					</c:forEach>
 				</select> --%>
 				
-				<td><input id="btn" type="button" value="접수 요청하기" onClick="check('s005','${check.mail_id}')"/></td>
 
 			</tr>
 		</c:forEach>
@@ -142,6 +143,7 @@
 	</table>
 	</form>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-
+	
+	
 		</body>
 	</html>

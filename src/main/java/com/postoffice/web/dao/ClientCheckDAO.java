@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.service.LoginService;
 
 @Repository
 public class ClientCheckDAO {
 	@Autowired
-	SqlSessionTemplate sqlSessionTemplate;
+	private SqlSessionTemplate sqlSessionTemplate;
+
 	
-	public List selectAll(String vid) {
-		return sqlSessionTemplate.selectList("board.selectAll",vid);
+	public List selectAll( ) {
+		
+		return sqlSessionTemplate.selectList("board.selectAll");
 	}
 	
 	public int updateStateProc(MailDTO mailDTO) {

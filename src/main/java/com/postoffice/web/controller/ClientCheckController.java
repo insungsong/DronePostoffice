@@ -1,6 +1,7 @@
 package com.postoffice.web.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -32,12 +33,11 @@ public class ClientCheckController {
 	@RequestMapping("/check")
 	public ModelAndView selectAll(Model model,HttpSession session) {
 		String vid=(String)session.getAttribute("vid");
+		
 		System.out.println(vid);
-		List checkList = checkService.selectAll(vid);
+		List checkList = checkService.selectAll();
 		List stateList = clientStateCheckService.selectList();
 		ModelAndView mav=new ModelAndView("client/requestCheck");
-		MailDTO mailDTO=new MailDTO();
-		
 		
 		
 		model.addAttribute("CheckList",checkList);
