@@ -42,6 +42,7 @@ public class ClientCheckController {
 		
 		model.addAttribute("CheckList",checkList);
 		model.addAttribute("stateList", stateList);
+
 		return mav;
 	}
 		
@@ -50,8 +51,14 @@ public class ClientCheckController {
 		MailDTO mailDTO=new MailDTO();
 		mailDTO.setMail_id(Integer.parseInt(request.getParameter("mail_id")));
 		mailDTO.setState_id(request.getParameter("state_id"));
+		//System.out.println("state 넘어가는거");
+		String str=mailDTO.getState_id();
+		//System.out.println("state 넘어가는거"+str);
+		
+		model.addAttribute("state",str);
 		
 		int result = checkService.updateStateProc(mailDTO);
+		System.out.println(mailDTO.getState_id());
 		
 		return "redirect:/check";
 	}

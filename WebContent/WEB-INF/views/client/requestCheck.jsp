@@ -64,15 +64,16 @@
 	} */
 	
  	function check(state_id,mail_id){
-		/* var result=confirm("요청 하시겠습니까?");
+		var result=confirm("요청 하시겠습니까?");
 		if(result==true){
 	 		location.href = "stateCheck?state_id=" + state_id + "&mail_id=" + mail_id;
 	 		alert("요청완료");
 	 		 
 		}else{
 			alert("취소하셨습니다.");
-		} */
-		var result=confirm("요청 하시겠습니까?");
+		} 
+		
+		/* var result=confirm("요청 하시겠습니까?");
 		if(result==true){
 		$.ajax({
 			url:"stateCheck",
@@ -81,19 +82,24 @@
 					"mail_id":mail_id	
 					},
 		success:function(){
-			$("#btn").val("요청완료");
+			$("#btn").hide();
+			
 				alert("요쳥완료");
+			$("#td").text("접수 요청 완료!!");
 			}
+
 		});
 		
 		}else{
 			alert("취소하셨습니다.");
-		}
-		
- 	}
-	
+		} */
+		  	
+	}
+	/* function change(){
+		$("#td1").text("ㅇ");
+		$("#btn").hide();
+	} */
 
- 
 </script>
 </head>
 <body>
@@ -120,7 +126,7 @@
 		<tr>
 		
 		<c:forEach items="${CheckList}" var="check">
-				<c:if test="${vid == check.vid}">
+				<c:if test="${vid eq check.vid}">
 					<td>${check.mail_id}</td>
 					<td>${check.from_name}</td>
 					<td>${check.from_address}</td>
@@ -130,19 +136,30 @@
 					<td>${check.village_name}</td>
 					<td>${check.state_id}</td>
 					<td>${check.state_name}</td>
-				<td><input id="btn" type="button" value="접수 요청하기" onClick="check('s005','${check.mail_id}')"/></td>
-					
+				
+				<c:if test="${check.state_id eq 's005' or check.state_id eq 's002'}">
+					<td>접수 요청완료!</td>
 				</c:if>
 				
+				
+				<c:if test="${check.state_id ne 's005' or check.state_id eq 's002'}">
+					<td><input id="btn" type="button"  value="접수 요청하기" onClick="check('s005','${check.mail_id}')"/></td>
+				</c:if>
+				
+				
+				
+				
+				
+				
+				</c:if>
 				<%-- <select name="state"> 
 					<c:forEach items="${stateList }" var="state">
 						<option value="${state.state_id}">${state.state_name }</option>
 					</c:forEach>
 				</select> --%>
-				
-
 			</tr>
 		</c:forEach>
+		
 	</tbody>
 	</table>
 	</form>
