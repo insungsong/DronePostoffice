@@ -18,4 +18,13 @@
     		member.dept_id = dept.dept_id and
     		member.mid = #{lid}
 	</select>
+	
+	<select id="selectMname" parameterType="string" resultType="string">
+		select mname
+		from 
+			member
+		where
+			mid=#{lid}
+		
+	</select>
 </mapper>

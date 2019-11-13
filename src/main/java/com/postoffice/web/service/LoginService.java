@@ -84,6 +84,11 @@ public class LoginService {
 		String dept_name = memberDao.selectDeptName(lid);
 		return dept_name;
 	}
+	
+	public String getMname(String lid) {
+		String mname = memberDao.selectMname(lid);
+		return mname;
+	}
 
 	public String getVname(String lid) {
 		String vname = vmemberDao.selectVname(lid);

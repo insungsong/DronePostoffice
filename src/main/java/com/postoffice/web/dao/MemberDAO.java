@@ -19,6 +19,7 @@ public class MemberDAO {
 		MemberDTO member = sqlSessionTemplate.selectOne("member.selectMemberByLid", lid);
 		return member;
 	}
+	
 
 	public int insert(MemberDTO member) {
 		logger.debug(member.getMphoto());
@@ -36,6 +37,12 @@ public class MemberDAO {
 		return dept_name;
 	}
 	
+	public String selectMname(String lid) {
+		String mname = sqlSessionTemplate.selectOne("member.selectMname", lid);
+		return mname;
+		
+		
+	}
 	
 	
 }
