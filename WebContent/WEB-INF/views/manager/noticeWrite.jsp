@@ -14,8 +14,6 @@
 				function checkForm(){
 					var result= true;
 					
-					$(".error").text("");
-					
 					if($("#notice_title").val()==""){
 						$("#notice_title").attr("placeholder","*제목을 입력해주세요");
 						result = false;
@@ -23,7 +21,6 @@
 					if($("#notice_content").val()==""){
 						
 						$("#notice_content").attr("placeholder", "*내용을 입력해주세요.");
-						//$("#noticecontentError").text("*내용을 입력해주세요.");
 						
 						result = false;
 					}

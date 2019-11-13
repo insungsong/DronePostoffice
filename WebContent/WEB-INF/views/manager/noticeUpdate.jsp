@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -13,20 +14,26 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
 	<style type="text/css">
 		#notice_attach_file{
-			width:250px;
+			width:210px;
 		}
 	</style>
 	<script type="text/javascript">
-		function checkForm(){
-			var result= true;					
-			if($("#notice_title").val()==""){
-				$("noticetitleError").text("*제목을 입력해주세요.");
-			}
-			if($("#notice_content").val()==""){
-				$("noticecontentError").text("*내용을 입력해주세요.");
-			}			
-			return result;
+	function checkForm(){
+		var result= true;
+		
+		if($("#notice_title").val()==""){
+			$("#notice_title").attr("placeholder","*제목을 입력해주세요");
+			result = false;
 		}
+		if($("#notice_content").val()==""){
+			
+			$("#notice_content").attr("placeholder", "*내용을 입력해주세요.");
+			
+			result = false;
+		}
+		
+		return result;
+	}
 	</script>		
 
 
@@ -52,28 +59,34 @@
 								<th scope="col">제목</th>
 								<td colspan="5">
 									<input type="text" name="notice_title" value="${notice.notice_title}" style="border:0; width: 98%;">
-									<span id="noticetitleError" class="error" style="color:red"></span>
 								</td>
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
-								<td><input type="text" name="notice_name" value="${sessionScope.mname}" style="border:0;width: 98%;"></td>
+								<td><input type="text" name="notice_name" value="${sessionScope.mname}" style="border:0;width: 98%; text-align:center;"></td>
 								<th scope="col">부서</th>
-								<td><input type="text" name="dept_name" value="${sessionScope.dept_name}" style="border:0;width: 98%;"></td>
+								<td><input type="text" name="dept_name" value="${sessionScope.dept_name}" style="border:0;width: 98%; text-align:center;"></td>
 								<th scope="col">작성일</th>
 								<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 							</tr>
 							<tr>
 								<th scope="col">첨부파일</th>
+								<c:if test="${empty notice.notice_attach_file}">
 								<td colspan="3">
-									<input type="text" id="notice_attach_file" name="notice_attach_file" value="${notice.notice_attach_file}" style="border:0" readonly>
+									<input type="text" id="notice_attach_file" name="notice_attach_file" value="${notice.notice_attach_file}" style="border:0;" readonly>
+									<input type="file" name="attachFile" id="attachFile" style="padding-left:100px;">
+								</td>
+								</c:if>
+								<c:if test="${not empty notice.notice_attach_file}">
+								<td colspan="5">
+									<input type="text" id="notice_attach_file" name="notice_attach_file" value="${notice.notice_attach_file}" style="border:0;" readonly>
 									<input type="file" name="attachFile" id="attachFile">
 								</td>
+								</c:if>
 							</tr>
 							<tr>
 							<td colspan="6">
 								<textarea name="notice_content" rows="30" cols="5" style="width: 100%;">${notice.notice_content}</textarea>
-								<span id="noticecontentError" class="error" style="color:red"></span>
 							</td>
 							</tr>
 					</table>
