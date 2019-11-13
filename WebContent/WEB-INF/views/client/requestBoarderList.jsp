@@ -98,7 +98,7 @@
 		}
 	</script>
 	<script type="text/javascript">
-		function packaging(){
+		function clientpackaging(){
 			var Array = [];
 			
 			$('input:checkbox:checked').each(function(){
@@ -109,10 +109,12 @@
 			for(var i= 0; i < Array.length; i++){
 				console.log('array' + Array[i]);
 			};
+			
 			$.ajax({
 				url:"mailpackaging",
 				data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
 				success:function(data){
+					console.log('성공');
 					location.reload();
 				}
 			});
@@ -121,7 +123,6 @@
 	
 	</head>
 	<body>
-	<h5>${mailpackaginList}</h5>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
@@ -156,7 +157,7 @@
 						<tr>
 							<th scope="col" colspan="5">총 무게</th>					
 							<th scope="col" id="total_weight">${totalWeight}</th>
-							<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="packaging()">패키징</button></th>
+							<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
 						</tr>
 					</table>
 					<div class="client_content_content">
