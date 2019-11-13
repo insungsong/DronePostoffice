@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.dto.VMemberDTO;
 
@@ -44,10 +45,11 @@ public class ClientDAO {
 		return boardList;
 	}
 	
-	public List<MailDTO> selectMailList(int startRowNo, int endRowNo) {
-		Map<String,Integer> map = new HashMap<>();
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo, String vid) {
+		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
+		map.put("vid", vid);
 		List<MailDTO> MailboardList=sqlSessionTemplate.selectList("ClientBoard.selectMailList",map);
 		
 		for(int i = 0; i <MailboardList.size(); i++) {
@@ -121,15 +123,13 @@ public class ClientDAO {
 		int maildto2 = sqlSessionTemplate.insert("ClientBoard.answerdto",maildto);
 		return maildto2;
 	}
-	
-	/*
-	public String requestvname(String vmid) {
-		String vname = sqlSessionTemplate.selectOne("vmember.selectvname",vmid);
-		return vname;
+
+	public int mailPackaging(PackageDTO packageDTO,String vname) {
+		Map<String,Object>map = new HashMap<String, Object>();
+		map.put("pakageDTO", packageDTO.getPackage_weight());
+		map.put("vname", vname);
+		
+		int packageNum = sqlSessionTemplate.insert("ClientBoard.insertMailPackaging",map);
+		return packageNum;
 	}
-	*/
-
-	
-
-	
 }

@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.postoffice.web.dao.MemberDAO;
 import com.postoffice.web.dao.VMemberDAO;
@@ -36,8 +35,14 @@ public class LoginService {
 		}
 	}
 
-	public LoginResult cLogin(String lid, String lpassword) {
+	public VMemberDTO userInfo(String lid) {
 		VMemberDTO vmember = vmemberDao.selectMember(lid);
+		return vmember;
+	}
+	
+	public LoginResult cLogin(String lid, String lpassword) {
+		VMemberDTO vmember = vmemberDao.selectVmemberByLpw(lid);
+		
 		if(vmember == null) {
 			return LoginResult.FAIL_LID;
 		} else {

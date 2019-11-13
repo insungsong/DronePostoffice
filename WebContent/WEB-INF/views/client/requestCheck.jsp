@@ -44,6 +44,7 @@
 <script>
 	function main() {
 		location.href = "client_index";
+		
 	}
 	
  	/* function btnRegister(){
@@ -63,17 +64,51 @@
 	} */
 	
  	function check(state_id,mail_id){
-	 	location.href = "stateCheck?state_id=" + state_id + "&mail_id=" + mail_id;
- 	}
- 
+		var result=confirm("요청 하시겠습니까?");
+		if(result==true){
+	 		location.href = "stateCheck?state_id=" + state_id + "&mail_id=" + mail_id;
+	 		alert("요청완료");
+	 		 
+		}else{
+			alert("취소하셨습니다.");
+		} 
+		
+		/* var result=confirm("요청 하시겠습니까?");
+		if(result==true){
+		$.ajax({
+			url:"stateCheck",
+			data:{
+					"state_id":state_id,
+					"mail_id":mail_id	
+					},
+		success:function(){
+			$("#btn").hide();
+			
+				alert("요쳥완료");
+			$("#td").text("접수 요청 완료!!");
+			}
+
+		});
+		
+		}else{
+			alert("취소하셨습니다.");
+		} */
+		  	
+	}
+	/* function change(){
+		$("#td1").text("ㅇ");
+		$("#btn").hide();
+	} */
+
 </script>
 </head>
 <body>
-<jsp:include page="../common/header.jsp"></jsp:include>
+<jsp:include page="../common/manageHeader.jsp"></jsp:include>
 
 	<form id="form1">
 	<table id="customers" class="table">
 		<thead class="thead-dark">
+		${vmname} 님 환영합니다.
 		<tr>
 			<th>요청 번호</th>
 			<th>보내는 사람</th>
@@ -81,40 +116,55 @@
 			<th>받는 사람</th>
 			<th>받는 주소</th>
 			<th>메일 무게</th>
+			<th>마을 이름</th>
 			<th>요청 상태</th>
 			<th>요청 확인</th>
+			<th>접수 요청</th>
 		</tr>
 		</thead>
 		<tbody>
 		<tr>
 		
 		<c:forEach items="${CheckList}" var="check">
-				<td>${check.mail_id}</td>
-				<td>${check.from_name}</td>
-				<td>${check.from_address}</td>
-				<td>${check.to_name}</td>
-				<td>${check.to_address}</td>
-				<td>${check.mail_weight}</td>
-				<td>${check.state_id}</td>
-				<td>${check.state_name}</td>
-				<td>${check.vid}</td>
-				<td>${check.village_name}</td>
-				<select name="state">
+				<c:if test="${vid eq check.vid}">
+					<td>${check.mail_id}</td>
+					<td>${check.from_name}</td>
+					<td>${check.from_address}</td>
+					<td>${check.to_name}</td>
+					<td>${check.to_address}</td>
+					<td>${check.mail_weight}</td>
+					<td>${check.village_name}</td>
+					<td>${check.state_id}</td>
+					<td>${check.state_name}</td>
+				
+				<c:if test="${check.state_id eq 's005' or check.state_id eq 's002'}">
+					<td>접수 요청완료!</td>
+				</c:if>
+				
+				
+				<c:if test="${check.state_id ne 's005' or check.state_id eq 's002'}">
+					<td><input id="btn" type="button"  value="접수 요청하기" onClick="check('s005','${check.mail_id}')"/></td>
+				</c:if>
+				
+				
+				
+				
+				
+				
+				</c:if>
+				<%-- <select name="state"> 
 					<c:forEach items="${stateList }" var="state">
-						<option value="${state.state_id }">${state.state_name }</option>
+						<option value="${state.state_id}">${state.state_name }</option>
 					</c:forEach>
-				</select>
-				<td><input type="button" value="ㅎㅇ" onClick="check('s002','${check.mail_id}')"/></td>
-
-				<td>${check.state_id}</td>
-				<td>
-				</td>
+				</select> --%>
 			</tr>
 		</c:forEach>
+		
 	</tbody>
 	</table>
 	</form>
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
-
+	
+	
 		</body>
 	</html>

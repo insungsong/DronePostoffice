@@ -126,7 +126,8 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="formGroupExampleInput2">마을 이름</label>
-		    <input type="text" class="form-control" name="vname" id="vname" value="${vmid }">
+		    
+		    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
 		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
 		  </div>
 		   <div class="form-group">
@@ -136,7 +137,9 @@
 		  </div>
 		  <div class="form-group">
 		    <!-- 배송 상태전달값 -->
-		    <input type="hidden" class="form-control" name="state_id" id="state_name" value="${state_name }">
+		    <!-- hidden zone -->
+		    <input type="hidden" class="form-control" name="state_id" id="state_name" value="${state_id }">
+		    <input type="hidden" name="vid" value="${vid }">
 		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
 		  </div>
 		  <button class="btn btn-danger">요청 저장</button>

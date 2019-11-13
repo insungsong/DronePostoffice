@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.postoffice.web.dao.ClientDAO;
+import com.postoffice.web.dao.PackageDAO;
 import com.postoffice.web.dto.BoardDTO;
 import com.postoffice.web.dto.MailDTO;
+import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.dto.VMemberDTO;
 
 
@@ -36,8 +38,8 @@ public class ClientRequestService {
 		return boardList;
 	}
 	
-	public List<MailDTO> selectMailList(int startRowNo, int endRowNo){
-		List<MailDTO> ClientboardList = clientdao.selectMailList(startRowNo,endRowNo);
+	public List<MailDTO> selectMailList(int startRowNo, int endRowNo, String vid){
+		List<MailDTO> ClientboardList = clientdao.selectMailList(startRowNo,endRowNo, vid);
 		return ClientboardList;
 	}
 
@@ -82,18 +84,18 @@ public class ClientRequestService {
 		int answerdto = clientdao.requestwrite(maildto);
 		return answerdto;
 	}
-	
-	/*
-	public String getvname(String vmid) {
-		String vname = clientdao.requestvname(vmid);
-		return vname;
+
+
+	public int mailPackaging(List<String> mailIdList, String totalWeight,String vname) {
+		String rep = totalWeight.replace("g", "");
+		int total = Integer.parseInt(rep);
+		
+		PackageDTO packageDTO = new PackageDTO();
+		packageDTO.setPackage_weight(total);
+		
+		//insert
+		int mailpackaginList = clientdao.mailPackaging(packageDTO,vname);
+		
+		return mailpackaginList;
 	}
-	*/
-
-
-	
-
-
-	
-
 }

@@ -42,9 +42,11 @@
 		
 	</head>
 	<body>
-	<jsp:include page="../common/header.jsp"/>
-		<div class="body">
-			<div class="body_sub">
+
+			<jsp:include page="../common/manageHeader.jsp"/>
+			<div class="body">
+				<div class="body_sub">
+
 				
 				<div class="mail_list">
 				<div class="bor_title">

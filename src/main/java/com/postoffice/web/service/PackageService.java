@@ -31,6 +31,7 @@ public class PackageService {
 		
 		PackageDTO packageDTO = new PackageDTO();
 		packageDTO.setPackage_weight(total);
+		
 		//패키지 insert
 		packageDAO.mailPackaging(packageDTO);
 		

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ClientBoard">
 
-<resultMap type="com.postoffice.web.dto.MailDTO" id="Mail">
+<resultMap type="com.postoffice.web.dto.MailDTO" id="Mail" >
 	<result column="mail_id" property="mail_id"/>
 	<result column="from_name" property="from_name"/>
 	<result column="from_address" property="from_address"/>
@@ -31,7 +31,9 @@
 		    from(
 		        select mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname
 		        from mail, village ,state
-		        where mail.vid = village.vid and mail.state_id = state.state_id
+		        where mail.vid = village.vid 
+		        and mail.state_id = state.state_id
+		        and mail.vid = #{vid}
 		    )
 		    where rownum &lt;= #{endRowNo}
 		)
@@ -118,9 +120,18 @@
 		)
 		where rn &gt; = #{startRowNo}
 	</select>
+	
 	<insert id="answerdto" parameterType="com.postoffice.web.dto.MailDTO">
 		insert into mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vid)
-			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate,'v001')
+			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate, #{vid})
 	</insert>
-	
+		
+	<insert id="insertMailPackaging" parameterType="map">
+		<selectKey keyProperty="package_id" resultType="int" order="AFTER">
+			select seq_package.currval from dual
+		</selectKey>
+		insert into
+			package(package_id, package_weight, state_id, PACKAGE_DIVISION)					
+		values (seq_package.nextval, #{pakageDTO},'s006',#{vname})
+	</insert>
 </mapper>
