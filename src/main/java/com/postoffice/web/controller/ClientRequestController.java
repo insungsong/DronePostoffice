@@ -2,7 +2,6 @@ package com.postoffice.web.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
-import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.ClientRequestService;
 import com.postoffice.web.service.LoginService;
 
@@ -51,16 +49,17 @@ public class ClientRequestController {
 
 			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vname));
 		
-		return "redirect/requestBoarderList";
+		return "redirect:/requestBoarderList";
 	}
 
 	@RequestMapping("/requestBoarderList")
 	public String requestBoarderList(Model model,HttpSession session,
 					@RequestParam(defaultValue = "1") int pageNo, 
-					@RequestParam(defaultValue = "0") String totalWeight){
+					@RequestParam(defaultValue = "0") String totalWeight,
+					@RequestParam(defaultValue = "garbage") String totalMailId){
 		
 		System.out.println("TESTESTESR : " + totalWeight);
-		
+		System.out.println("testttttttttttt : " + totalMailId);
 		session.setAttribute("pageNo", pageNo);
 
 		String sessioninfo = (String)session.getAttribute("lid");
@@ -109,6 +108,7 @@ public class ClientRequestController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
 		model.addAttribute("totalWeight", totalWeight);
+		model.addAttribute("totalMailId", totalMailId);
 		return "client/requestBoarderList";
 	}
 

@@ -175,18 +175,7 @@ public class NoticeController {
 		
 		return "redirect:/noticeList";
 	}
-	
-	/*
-	 * @RequestMapping("/noticeDetail") public String noticeDetailForm(int
-	 * notice_id, Model model, HttpSession session) { NoticeDTO notice =
-	 * noticeService.getnotice(notice_id); MemberDTO member =
-	 * noticeService.selectMember(notice); DeptDTO dept =
-	 * noticeService.selectDept(member);
-	 * 
-	 * model.addAttribute("member",member); model.addAttribute("notice", notice);
-	 * model.addAttribute("dept", dept); return "manager/noticeDetail"; }
-	 */
-	
+	//세부정보 확인
 	@RequestMapping("/noticeDetail")
 	public String noticeDetailForm(Model model, HttpSession session, NoticeDTO noticeDTO) {
 		NoticeDTO noticedetail = noticeService.noticeDetail(noticeDTO);

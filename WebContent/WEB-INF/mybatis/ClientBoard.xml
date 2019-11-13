@@ -132,7 +132,7 @@
 		</selectKey>
 		insert into
 			package(package_id, package_weight, state_id, PACKAGE_DIVISION)					
-		values (seq_package.nextval, #{package_weight},'s006',#{package_division})
+		values (seq_package.nextval, #{package_weight},'s005',#{package_division})
 	</insert>
 	
 	<update id="updateMail" parameterType="map">

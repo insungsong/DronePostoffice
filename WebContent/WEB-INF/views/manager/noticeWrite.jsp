@@ -14,21 +14,29 @@
 				function checkForm(){
 					var result= true;
 					
-					$(".error").text("");
-					
 					if($("#notice_title").val()==""){
-						$("#noticetitleError").text("*제목을 입력해주세요.");
+						$("#notice_title").attr("placeholder","*제목을 입력해주세요");
 						result = false;
 					}
 					if($("#notice_content").val()==""){
-						$("#noticecontentError").text("*내용을 입력해주세요.");
+						
+						$("#notice_content").attr("placeholder", "*내용을 입력해주세요.");
+						
 						result = false;
 					}
 					
 					return result;
 				}
 		
-			</script>		
+			</script>
+			<style type="text/css">
+			input::placeholder{
+				color:red;
+			}
+			textarea::placeholder{
+				color:red;
+			}
+			</style>		
 	</head>
 	<body>
 		<jsp:include page="../common/manageHeader.jsp"/>
@@ -51,8 +59,8 @@
 								<th scope="col">제목</th>
 								<td colspan="5">
 									<input type="text" id="notice_title" name="notice_title" style="border:0;width: 98%;">
-									<span id="noticetitleError" class="error" style="color:red"></span>
-								</td>
+<!-- 									<span id="noticetitleError" class="error" style="color:red;width:22%;"></span>
+ -->								</td>
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>

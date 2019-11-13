@@ -25,6 +25,7 @@
 				data:{"mail_id":name},
 				success:function(data){
 					console.log('성공');
+					location.reload();
 				}
 			});
 		}
@@ -56,102 +57,105 @@
 	</head>
 	<body>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
+	
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
 				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href = "logout" style=display:inline>로그아웃</a>
 			</ul>
 		</div>
-		<div class="request_board_area" style="width:90%;margin: auto;">
-			<div class="request_board_second">
-				<div class="request_serch" style="float:right; maring-top:15px">
-					<div style="height:20px"></div>
-					  <form id="searchForm" action="searchBoard" method="get">
-							<select id="searchType" name="searchType">
-								<option value="from_name">보내는 사람 조회</option>
-								<option value="to_name">받는 사람 조회</option>
-							</select>
-							<input type="text" id="keyWord" name="keyword" style="height: 25px; border:#F32C28 1px solid;">
-							<button id="search_btn" style="height: 28px; text-align:center; font-size:15px; background-color:#F32C28; border:#F32C28 1px solid;color:white;">검색</button>
-					  </form>
-				</div>
-				<div>
-					<div class="subject" style="maring-top:5px;">우편 요청</div>
-					<div class="client_content_content">
-								<table border="1" class="frt_tbl_type" style="width:100%;">
-									<thead class="thead-dark">
-									   <tr style="height: 39px">
-									     <th scope="col">요청 번호</th>
-									     <th scope="col">요청 날짜</th>
-									     <th scope="col">보내는 사람</th>
-									     <th scope="col">보내는 주소</th>
-									     <th scope="col">받는 사람</th>
-									     <th scope="col">받는 주소</th>
-									     <th scope="col">메일 무게</th>
-									     <th scope="col">배송 상태</th>
-									     <th scope="col">마을 분류</th>
-									     <th scope="col">취소</th>
-									     <th scope="col" id="total_weight"></th>
-									   </tr>
-									  </thead>
-									  <tbody>
-										  	<c:forEach items="${MailList}" var="MailList">
-										  		<c:if test="${MailList.stateList.get(0).state_name eq '접수완료'}"><!-- 접수대기로 바꿔야함 -->
-										  			<tr>
-												    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
-												    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
-													<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
-													<td id="Mail_fromaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_address}</a></td>
-													<td id="Mail_toname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_name }</a></td>
-													<td id="Msil_toaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_address }</a></td>
-													<td id="Mail_weight"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_weight }</a></td>
-													<td id="Mail_state_name"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.stateList.get(0).state_name}</a></td>
-													<td id="Mail_vname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.villageList.get(0).vname}</a></td>
-													<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
-													<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
-												</tr>
-										  		</c:if>
-											</c:forEach>						  
-									</tbody>
-							</table>
-							<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
-								<div class="client_write_button">
-									<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
+		<div class="body">
+			<div class="body_sub">
+					<div class="request_board_second">
+						<div class="request_serch" style="float:right; maring-top:15px">
+							<div style="height:20px"></div>
+							  <form id="searchForm" action="searchBoard" method="get">
+									<select id="searchType" name="searchType">
+										<option value="from_name">보내는 사람 조회</option>
+										<option value="to_name">받는 사람 조회</option>
+									</select>
+									<input type="text" id="keyWord" name="keyword" style="height: 25px; border:#F32C28 1px solid;">
+									<button id="search_btn" style="height: 28px; text-align:center; font-size:15px; background-color:#F32C28; border:#F32C28 1px solid;color:white;">검색</button>
+							  </form>
+						</div>
+						<div>
+							<div class="subject" style="maring-top:5px;">우편 요청</div>
+							<div class="client_content_content">
+										<table border="1" class="frt_tbl_type" style="width:100%;">
+											<thead class="thead-dark">
+											   <tr style="height: 39px">
+											     <th scope="col">요청 번호</th>
+											     <th scope="col">요청 날짜</th>
+											     <th scope="col">보내는 사람</th>
+											     <th scope="col">보내는 주소</th>
+											     <th scope="col">받는 사람</th>
+											     <th scope="col">받는 주소</th>
+											     <th scope="col">메일 무게</th>
+											     <th scope="col">배송 상태</th>
+											     <th scope="col">마을 분류</th>
+											     <th scope="col">취소</th>
+											     <th scope="col" id="total_weight"></th>
+											   </tr>
+											  </thead>
+											  <tbody>
+												  	<c:forEach items="${MailList}" var="MailList">
+												  		<c:if test="${MailList.stateList.get(0).state_name eq '접수대기'}"><!-- 접수대기로 바꿔야함 -->
+												  			<tr>
+														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
+														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
+															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
+															<td id="Mail_fromaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_address}</a></td>
+															<td id="Mail_toname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_name }</a></td>
+															<td id="Mail_toaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_address }</a></td>
+															<td id="Mail_weight"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_weight }</a></td>
+															<td id="Mail_state_name"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.stateList.get(0).state_name}</a></td>
+															<td id="Mail_vname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.villageList.get(0).vname}</a></td>
+															<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
+															<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
+														</tr>
+												  		</c:if>
+													</c:forEach>						  
+											</tbody>
+									</table>
+									<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
+										<div class="client_write_button">
+											<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
+										</div>
+									</form>
 								</div>
-							</form>
+								<div class="request_content" style="border-top: 2px solid #F32C28;">
+								<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
+									<table style="margin-top:10px; float:right;">
+										<tr>				
+											<%-- <th scope="col" id="total_weight">${totalWeight}</th> --%>
+											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
+										</tr>
+									</table>
+								</div>
+		
+								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block; float:left;margin-left: 640px;margin-top: 20px;" >
+										<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-success">처음</a>
+										<c:if test="${groupNo > 1}">
+											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-secondary">[이전]</a>
+										</c:if>		
+										<div class="btn-group mr-2" role="group" aria-label="First group">
+											<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
+													<c:if test="${pageNo==i }">
+														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-secondary active">${i}</a>
+													</c:if>
+													<c:if test="${pageNo!=i }">
+														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test3" class="btn btn-secondary">${i}</a>
+													</c:if>
+									    	</c:forEach>
+									    <c:if test="${groupNo<totalGroupNum }">
+									    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-success">다음</a>
+									    </c:if>
+									  </div>
+									  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-success">맨끝</a>
+								</div>					
+							</div>			
 						</div>
-						<div class="request_content" style="border-top: 2px solid #F32C28;">
-						<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
-							<table style="margin-top:10px; float:right;">
-								<tr>				
-									<%-- <th scope="col" id="total_weight">${totalWeight}</th> --%>
-									<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
-								</tr>
-							</table>
-						</div>
-
-						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block; float:left;margin-left: 640px;margin-top: 20px;" >
-								<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-success">처음</a>
-								<c:if test="${groupNo > 1}">
-									<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-secondary">[이전]</a>
-								</c:if>		
-								<div class="btn-group mr-2" role="group" aria-label="First group">
-									<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
-											<c:if test="${pageNo==i }">
-												<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-secondary active">${i}</a>
-											</c:if>
-											<c:if test="${pageNo!=i }">
-												<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test3" class="btn btn-secondary">${i}</a>
-											</c:if>
-							    	</c:forEach>
-							    <c:if test="${groupNo<totalGroupNum }">
-							    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-success">다음</a>
-							    </c:if>
-							  </div>
-							  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-success">맨끝</a>
-						</div>					
-					</div>			
+					</div>
 				</div>
-			</div>		
 		</body>
 		<script type="text/javascript">
 		var testLen = $('a#test3').length;
