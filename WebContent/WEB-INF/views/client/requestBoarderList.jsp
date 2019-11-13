@@ -126,7 +126,7 @@
 								<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
 									<table style="margin-top:10px; float:right;">
 										<tr>				
-											<%-- <th scope="col" id="total_weight">${totalWeight}</th> --%>
+											<%-- <sth scope="col" id="total_weight">${totalWeight}</th> --%>
 											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
 										</tr>
 									</table>
