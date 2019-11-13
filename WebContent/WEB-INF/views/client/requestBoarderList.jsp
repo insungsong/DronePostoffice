@@ -222,7 +222,6 @@
 				</div>
 			</div>		
 		</body>
-		
 		<script type="text/javascript">
 		var testLen = $('a#test3').length;
 		console.log('leg :' + testLen);
