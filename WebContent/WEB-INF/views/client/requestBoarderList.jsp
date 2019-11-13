@@ -86,6 +86,8 @@
 		}
 	</style>
 	<script type="text/javascript">
+	
+	
 		function requestDelete(name){
 			console.log(name);
 			$.ajax({
@@ -117,6 +119,106 @@
 				}
 			});
 		}
+		
+		
+		
+		
+		var pageLen;
+		var totalChkLen;
+		
+		var first_href;
+		var href2;
+		var now_href;	
+		var href4 = [];
+		var href5;
+		var end_href;
+		
+		var totalWeight;
+		var totalMailId;
+		
+		$(function(){
+			//이동할 페이징 갯수
+			pageLen = $('a#href4').length;
+			
+			//현재 페이지 체크박스 총 갯수
+			totalChkLen = $('input#chk').length;
+			
+			//(페이지 이동시)서버에서 넘어온 무게,메일 id
+			totalWeight = $('#totalWeight').val();
+			totalMailId = $('#totalMailId').val();
+
+			//데이터(무게,메일 id) 추가하지 않은 기본 href 경로
+			first_href = $('a#href1').attr('href');
+			href2 = $('a#href2').attr('href');
+			now_href = $('a#href3').attr('href');			
+			href5 = $('a#href5').attr('href');
+			end_href = $('a#href6').attr('href');
+			href4 = [];
+			for(var i = 0; i < pageLen; i++){
+				var hrefArr = $('a#href4').eq(i).attr('href');
+				href4.push(hrefArr);
+			}
+			
+			//(페이지 이동시)서버에서 넘어온 데이터(무게, 메일 id)로 파라미터 변경
+			$('a#href1').attr('href',first_href+'&totalWeight='+totalWeight+'&totalMailId='+totalMailId);
+			$('a#href2').attr('href',href2+'&totalWeight='+totalWeight+'&totalMailId='+totalMailId);
+			$('a#href3').attr('href',now_href+'&totalWeight='+totalWeight+'&totalMailId='+totalMailId);
+			for(var i = 0; i < pageLen; i++){
+				$('a#href4').eq(i).attr('href', href4[i]+'&totalWeight='+totalWeight+'&totalMailId='+totalMailId);
+			}
+			$('a#href5').attr('href',href5+'&totalWeight='+totalWeight+'&totalMailId='+totalMailId);
+			$('a#href6').attr('href',end_href+'&totalWeight='+totalWeight+'&totalMailId='+totalMailId);
+			
+			//(페이지 이동시)서버에서 넘어온 데이터(체크한 메일 id) 배열에 ,로 split 
+			var mailIdArr = totalMailId.split(',');
+			
+			//(페이지 이동시)서버에서 넘어온 데이터(체크한 메일 id)랑 현재 페이지 메일 id 비교해서 같으면 체크 true
+			for(var j = 0; j < mailIdArr.length; j++){
+				for(var i = 0; i < totalChkLen; i++){
+					if(mailIdArr[j] == $('input#chk').eq(i).attr('name')){
+						$('input#chk').eq(i).prop("checked", true);
+					}
+				}
+			}
+		});
+		
+		
+		function weight_check(){
+				var intTotalWeight = parseInt(totalWeight);
+				var total_weight = 0;
+				
+				var check = 0;
+				var Wtotal = [intTotalWeight];
+				var Ntotal = [totalMailId];
+				
+				//체크 된 메일(메일 id, 무게) 가져와서 배열에 push
+				$('input:checkbox:checked').each(function(){
+					Wtotal.push(parseInt($(this).attr('value')));
+					Ntotal.push($(this).attr('name'));
+				});
+				
+				
+				//배열에 들어있는 무게 전부 더해서 총 합 추출
+				for(var i = 0; i < Wtotal.length; i++){
+					total_weight += Wtotal[i];
+				}
+				
+				//페이지에 출력
+				$("#total_weight").text(total_weight+'g');
+
+				
+				
+				
+				//현재 페이지에서 추가한 체크 데이터로 파라미터 변경 
+				$('a#href1').attr('href',first_href+'&totalWeight='+total_weight+'&totalMailId='+Ntotal);
+				$('a#href2').attr('href',href2+'&totalWeight='+total_weight+'&totalMailId='+Ntotal);
+				$('a#href3').attr('href',now_href+'&totalWeight='+total_weight+'&totalMailId='+Ntotal);
+				for(var z = 0; z < pageLen; z++){
+					$('a#href4').eq(z).attr('href', href4[z]+'&totalWeight='+total_weight+'&totalMailId='+Ntotal);
+				}
+				$('a#href5').attr('href',href5+'&totalWeight='+total_weight+'&totalMailId='+Ntotal);
+				$('a#href6').attr('href',end_href+'&totalWeight='+total_weight+'&totalMailId='+Ntotal);
+			}
 	</script>
 	
 	</head>
@@ -151,7 +253,10 @@
 							<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
 						</div>
 					</form>
+					<!-- hidden start-->
 					<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
+					<input type = "hidden" id="totalMailId" value="${totalMailId }"/>
+					<!-- hiden end -->
 					<table>
 						<tr>
 							<th scope="col" colspan="5">총 무게</th>					
@@ -197,69 +302,33 @@
 						</div>
 
 						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-						<!-- 11   requestBoarderList?pageNo=1 -->
-								<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-success">처음</a>
-						<!-- 11 -->
+
+								<a href="requestBoarderList?pageNo=1" id = "href1" class="btn btn-success">처음</a>
+
 								<c:if test="${groupNo > 1}">
-									<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-secondary">[이전]</a>
+									<a href="requestBoarderList?pageNo=${startPageNo-1}" id="href2" class="btn btn-secondary">[이전]</a>
 								</c:if>		
 								<div class="btn-group mr-2" role="group" aria-label="First group">
 									<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
 											<c:if test="${pageNo==i }">
-												<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-secondary active">${i}</a>
+												<a href="requestBoarderList?pageNo=${i}" id="href3" class="btn btn-secondary active">${i}</a>
 											</c:if>
 											<c:if test="${pageNo!=i }">
-												<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test3" class="btn btn-secondary">${i}</a>
+												<a href="requestBoarderList?pageNo=${i}" id="href4" class="btn btn-secondary">${i}</a>
 											</c:if>
 							    	</c:forEach>
 							    <c:if test="${groupNo<totalGroupNum }">
-							    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-success">다음</a>
+							    	<a href="requestBoarderList?pageNo=${endPageNo+1}" id="href5" class="btn btn-success">다음</a>
 							    </c:if>
 							  </div>
-							  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-success">맨끝</a>
+							  <a href="requestBoarderList?pageNo=${totalPageNum}" id="href6" class="btn btn-success">맨끝</a>
 						</div>					
 					</div>			
 				</div>
 			</div>		
 		</body>
 		<script type="text/javascript">
-		var testLen = $('a#test3').length;
-		console.log('leg :' + testLen);
 		
-		function weight_check(){
-				var intTotal = parseInt($("#totalWeight").val());
-				var check = 0;
-				var total = [intTotal];
-				
-				console.log(total);	
-
-				
-				$('input:checkbox:checked').each(function(){
-					total.push(parseInt($(this).attr('value')));
-				});
-				
-				var total_weight = 0;
-				
-				for(var i = 0; i < total.length; i++){
-					total_weight += total[i];
-				}
-				
-				$("#total_weight").text(total_weight+'g');
-				console.log($("#total_weight").text());
-				
-			
-				for(var i = 0; i < testLen; i++){
-					$('a#test3').eq(i).attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
-				}
-				
-				//$('#test3').attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
-				
-				$('#first').attr('href','requestBoarderList?pageNo=1&totalWeight='+total_weight);
-				$('#test1').attr('href','requestBoarderList?pageNo=${startPageNo-1}&totalWeight='+total_weight);
-				$('#test2').attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
-				//$('#test3').attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);	
-				$('#test4').attr('href','requestBoarderList?pageNo=${endPageNo+1}&totalWeight='+total_weight);
-				$('#test5').attr('href','requestBoarderList?pageNo=${totalPageNum}&totalWeight='+total_weight);
-			}
+		
 	</script>
 	</html>

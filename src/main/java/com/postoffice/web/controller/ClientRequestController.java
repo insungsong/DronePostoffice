@@ -58,10 +58,11 @@ public class ClientRequestController {
 	@RequestMapping("/requestBoarderList")
 	public String requestBoarderList(Model model,HttpSession session,
 					@RequestParam(defaultValue = "1") int pageNo, 
-					@RequestParam String totalWeight){
+					@RequestParam(defaultValue = "0") String totalWeight,
+					@RequestParam(defaultValue = "garbage") String totalMailId){
 		
 		System.out.println("TESTESTESR : " + totalWeight);
-		
+		System.out.println("testttttttttttt : " + totalMailId);
 		session.setAttribute("pageNo", pageNo);
 
 		String sessioninfo = (String)session.getAttribute("lid");
@@ -110,6 +111,7 @@ public class ClientRequestController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
 		model.addAttribute("totalWeight", totalWeight);
+		model.addAttribute("totalMailId", totalMailId);
 		return "client/requestBoarderList";
 	}
 
