@@ -98,9 +98,30 @@
 		}
 	</script>
 	<script type="text/javascript">
+		function packaging(){
+			var Array = [];
+			
+			$('input:checkbox:checked').each(function(){
+				check = $(this).attr('name');
+				Array.push(check);
+			});
+			
+			for(var i= 0; i < Array.length; i++){
+				console.log('array' + Array[i]);
+			};
+			$.ajax({
+				url:"mailpackaging",
+				data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
+				success:function(data){
+					location.reload();
+				}
+			});
+		}
 	</script>
+	
 	</head>
 	<body>
+	<h5>${mailpackaginList}</h5>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
@@ -130,6 +151,14 @@
 							<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
 						</div>
 					</form>
+					<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
+					<table>
+						<tr>
+							<th scope="col" colspan="5">총 무게</th>					
+							<th scope="col" id="total_weight">${totalWeight}</th>
+							<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="packaging()">패키징</button></th>
+						</tr>
+					</table>
 					<div class="client_content_content">
 								<table class="table">
 									<thead class="thead-dark">
@@ -143,7 +172,8 @@
 									     <th scope="col">메일 무게</th>
 									     <th scope="col">배송 상태</th>
 									     <th scope="col">마을 분류</th>
-									     <th scope="col">요청 취소</th>
+									     <th scope="col">취소</th>
+									     <td scope="col" id="total_weight"></td>
 									   </tr>
 									  </thead>
 									  <tbody>
@@ -159,33 +189,77 @@
 													<td id="Mail_state_name"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.stateList.get(0).state_name}</a></td>
 													<td id="Mail_vname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.villageList.get(0).vname}</a></td>
 													<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
-												 <tr>
+													<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
+												</tr>
 											</c:forEach>						  
 									</tbody>
 							</table>
 						</div>
+
 						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-								<a href="requestBoarderList?pageNo=1" class="btn btn-success">처음</a>
+						<!-- 11   requestBoarderList?pageNo=1 -->
+								<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-success">처음</a>
+						<!-- 11 -->
 								<c:if test="${groupNo > 1}">
-									<a href="requestBoarderList?pageNo=${startPageNo-1}" class="btn btn-secondary">[이전]</a>
+									<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-secondary">[이전]</a>
 								</c:if>		
 								<div class="btn-group mr-2" role="group" aria-label="First group">
 									<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
 											<c:if test="${pageNo==i }">
-												<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary active">${i}</a>
+												<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-secondary active">${i}</a>
 											</c:if>
 											<c:if test="${pageNo!=i }">
-												<a href="requestBoarderList?pageNo=${i}"class="btn btn-secondary">${i}</a>
+												<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test3" class="btn btn-secondary">${i}</a>
 											</c:if>
 							    	</c:forEach>
 							    <c:if test="${groupNo<totalGroupNum }">
-							    	<a href="requestBoarderList?pageNo=${endPageNo+1}" class="btn btn-success">다음</a>
+							    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-success">다음</a>
 							    </c:if>
 							  </div>
-							  <a href="requestBoarderList?pageNo=${totalPageNum}" class="btn btn-success">맨끝</a>
+							  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-success">맨끝</a>
 						</div>					
 					</div>			
 				</div>
 			</div>		
 		</body>
+		<script type="text/javascript">
+		var testLen = $('a#test3').length;
+		console.log('leg :' + testLen);
+		
+		function weight_check(){
+				var intTotal = parseInt($("#totalWeight").val());
+				var check = 0;
+				var total = [intTotal];
+				
+				console.log(total);	
+
+				
+				$('input:checkbox:checked').each(function(){
+					total.push(parseInt($(this).attr('value')));
+				});
+				
+				var total_weight = 0;
+				
+				for(var i = 0; i < total.length; i++){
+					total_weight += total[i];
+				}
+				
+				$("#total_weight").text(total_weight+'g');
+				console.log($("#total_weight").text());
+				
+			
+				for(var i = 0; i < testLen; i++){
+					$('a#test3').eq(i).attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
+				}
+				
+				//$('#test3').attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
+				
+				$('#first').attr('href','requestBoarderList?pageNo=1&totalWeight='+total_weight);
+				$('#test1').attr('href','requestBoarderList?pageNo=${startPageNo-1}&totalWeight='+total_weight);
+				$('#test2').attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
+				//$('#test3').attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);	
+				$('#test4').attr('href','requestBoarderList?pageNo=${endPageNo+1}&totalWeight='+total_weight);
+				$('#test5').attr('href','requestBoarderList?pageNo=${totalPageNum}&totalWeight='+total_weight);
+			}
+	</script>
 	</html>
