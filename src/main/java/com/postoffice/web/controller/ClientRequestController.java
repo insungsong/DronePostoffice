@@ -57,7 +57,7 @@ public class ClientRequestController {
 	@RequestMapping("/requestBoarderList")
 	public String requestBoarderList(Model model,HttpSession session,
 					@RequestParam(defaultValue = "1") int pageNo, 
-					@RequestParam String totalWeight){
+					@RequestParam(defaultValue = "0") String totalWeight){
 		
 		System.out.println("TESTESTESR : " + totalWeight);
 		

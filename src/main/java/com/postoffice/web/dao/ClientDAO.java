@@ -125,8 +125,6 @@ public class ClientDAO {
 	}
 
 	public int mailPackaging(PackageDTO packageDTO) {
-
-		
 		int packageNum = sqlSessionTemplate.insert("ClientBoard.insertMailPackaging",packageDTO);
 		return packageNum;
 	}

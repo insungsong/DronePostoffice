@@ -12,78 +12,10 @@
 			<script type= "text/javascript" src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
 			<link rel="stylesheet" type = "text/css" href ="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>
 			<script type= "text/javascript" src ="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+			<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
+	
 	<style type="text/css">
-		.request_board_area{
-			/* border-top:1px solid red; */
-			border-top: 2px solid red;
-			height:909px;
-		}
-		.request_board_second{
-			margin:20px;
-			border: solid 1px black;
-    		height: 873px;
-		}
-		.request_text{
-			margin:10px;
-			margin-bottom:20px;
-			/* border: solid 1px black; */
-			height:30px;
-			text-align:center;
-		}
-		.request_content{
-			margin: 10px;
-			/* border: solid 1px black; */
-			height: 740px;
-		}
-		.request_serch{
-			margin:10px;
-			/* border: solid 1px black; */
-			height: 22px;
-			margin-top: 40px;
-    		margin-left: 22px;
-		}
-		.request_box{
-			margin:5px;
-			border: solid 1px black;
-			height:50px;
-			float: right;
-		}
-		.serch_keyword{
-			border: solid 1px black;
-			float: right;
-    		margin-top: 13px;
-    		margin-right: 7px;
-		}
-		.client_content_ul{
-			display:inline-flex;
-			list-style:none;
-		}
-		.client_content_num{
-			margin-right: 280px;
-    		margin-left: 85px;
-		}
-		.client_content_title{
-			margin-right: 320px;
-		}
-		.client_content_Writer{
-			margin-right: 170px;
-		}
-		.client_content_village{
-			margin-right: 170px;;
-		}
 		
-		.client_content_content{
-			margin:10px;
-			height:595px;
-			border: solid 1px black;
-		}
-		.btn{
-			margin-left: 10px;
-   			margin-top: 10px;
-		}
-		.btn-toolbar{
-			margin-left: 41%;
-		}
 	</style>
 	<script type="text/javascript">
 		function requestDelete(name){
@@ -114,7 +46,7 @@
 				url:"mailpackaging",
 				data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
 				success:function(data){
-					console.log('성공');
+					console.log("성공");
 					location.reload();
 				}
 			});
@@ -129,41 +61,25 @@
 				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href = "logout" style=display:inline>로그아웃</a>
 			</ul>
 		</div>
-		<div class="request_board_area">
+		<div class="request_board_area" style="width:90%;margin: auto;">
 			<div class="request_board_second">
-				<div class="request_text">
-				<div class="alert alert-danger" role="alert">
-				<a href="#" class="alert-link">요청 게시판</a>
-				</div>
-				</div>
-				<div class="request_serch">
+				<div class="request_serch" style="float:right; maring-top:15px">
+					<div style="height:20px"></div>
 					  <form id="searchForm" action="searchBoard" method="get">
 							<select id="searchType" name="searchType">
 								<option value="from_name">보내는 사람 조회</option>
 								<option value="to_name">받는 사람 조회</option>
 							</select>
-							<input type="text" id="keyWord" name="keyword" style="height: 25px">
-							<button>검색</button>
+							<input type="text" id="keyWord" name="keyword" style="height: 25px; border:#F32C28 1px solid;">
+							<button id="search_btn" style="height: 28px; text-align:center; font-size:15px; background-color:#F32C28; border:#F32C28 1px solid;color:white;">검색</button>
 					  </form>
 				</div>
-				<div class="request_content">
-					<form action="requestWrite">
-						<div class="client_write_button">
-							<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
-						</div>
-					</form>
-					<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
-					<table>
-						<tr>
-							<th scope="col" colspan="5">총 무게</th>					
-							<th scope="col" id="total_weight">${totalWeight}</th>
-							<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
-						</tr>
-					</table>
+				<div>
+					<div class="subject" style="maring-top:5px;">우편 요청</div>
 					<div class="client_content_content">
-								<table class="table">
+								<table border="1" class="frt_tbl_type" style="width:100%;">
 									<thead class="thead-dark">
-									   <tr>
+									   <tr style="height: 39px">
 									     <th scope="col">요청 번호</th>
 									     <th scope="col">요청 날짜</th>
 									     <th scope="col">보내는 사람</th>
@@ -174,12 +90,13 @@
 									     <th scope="col">배송 상태</th>
 									     <th scope="col">마을 분류</th>
 									     <th scope="col">취소</th>
-									     <td scope="col" id="total_weight"></td>
+									     <th scope="col" id="total_weight"></th>
 									   </tr>
 									  </thead>
 									  <tbody>
 										  	<c:forEach items="${MailList}" var="MailList">
-												 <tr>
+										  		<c:if test="${MailList.stateList.get(0).state_name eq '접수완료'}"><!-- 접수대기로 바꿔야함 -->
+										  			<tr>
 												    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 												    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
 													<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
@@ -192,15 +109,28 @@
 													<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 													<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
 												</tr>
+										  		</c:if>
 											</c:forEach>						  
 									</tbody>
 							</table>
+							<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
+								<div class="client_write_button">
+									<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
+								</div>
+							</form>
+						</div>
+						<div class="request_content" style="border-top: 2px solid #F32C28;">
+						<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
+							<table style="margin-top:10px; float:right;">
+								<tr>				
+									<%-- <th scope="col" id="total_weight">${totalWeight}</th> --%>
+									<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
+								</tr>
+							</table>
 						</div>
 
-						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-						<!-- 11   requestBoarderList?pageNo=1 -->
+						<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block; float:left;margin-left: 640px;margin-top: 20px;" >
 								<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-success">처음</a>
-						<!-- 11 -->
 								<c:if test="${groupNo > 1}">
 									<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-secondary">[이전]</a>
 								</c:if>		
