@@ -12,24 +12,14 @@
 	</select> -->
 	
 	<update id="updateStateProc" parameterType="com.postoffice.web.dto.MailDTO">
-		update
-			mail
-		set
+		update mail set
 			state_id  = #{state_id}
 		where
 			mail_id = #{mail_id}
+			
 	</update>
-	<!-- <resultMap type="com.postoffice.web.dto.MailDTO" id="result">
-		<result column="mail_id" property="mail_id"/>
-		<result column="from_name" property="from_name"/>
-		<result column="from_address" property="from_address"/>
-		<result column="to_name" property="to_name"/>
-		<result column="to_address" property="to_address"/>
-		<result column="mail_weight" property="mail_weight"/>
-		<result column="state_id" property="state_id"/>
-		<result column="mail_date" property="mail_date"/>
-	</resultMap> -->
-	<select id="selectAll" resultType="com.postoffice.web.dto.MailDTO">
+	
+	<select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		select 
 			a.mail_id,
 			a.from_name,
@@ -47,6 +37,9 @@
 			mail a
 		Left outer join state b on b.state_id = a.state_id
 		Left outer join village c on c.vid = a.vid
+		<!-- where
+			a.vid like '%#{vid}%' -->
+		
 	</select>
 	
 
