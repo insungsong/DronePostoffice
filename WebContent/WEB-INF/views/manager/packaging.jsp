@@ -101,29 +101,24 @@
 				<div class = "mail_list">
 					<table cellspacing="0" border="1" summary="명단관리  리스트" class="frt_tbl_type" style="width:100%;padding-right:15px;">
 						<colgroup>
-							<col width="50" /><col width="80" /><col width="100" /><col width="80" /><col width="*" /><col width="50" />
-							<col width="50"/><col width="15">
+							<col width="50" /><col width="80" /><col width="200" /><col width="80" /><col width="*" /><col width="100" />
+							<col width="50"/><col width="70"><col width="15">
 						</colgroup>
 						<thead>
+						
 							<tr>
-								<th scope="col"></th>
-								<th scope="col"></th>
-								<th scope="col"></th>
-								<th scope="col"></th>
-								<th scope="col"><a href="packagingList?sort=1">마을 정렬</a></th>
-								<th scope="col"></th>
-								<th scope="col"><button type="button" name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()">자동 선택</button></th>
-								<th scope="col"></th>
+								<th scope="col" rowspan="2">NO</th>
+								<th scope="col" colspan="2">발신자</th>
+								<th scope="col" colspan="2">수신자</th>
+								<th scope="col" rowspan="2">도착 마을</th>
+								<th scope="col" rowspan="2">무게</th>
+								<th scope="col" rowspan="2" colspan="2"><button type="button" name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()">자동 선택</button></th>
 							</tr>
 							<tr>
-								<th scope="col">NO</th>
-								<th scope="col">발신자</th>
-								<th scope="col">발신자 주소</th>
-								<th scope="col">수신자</th>
-								<th scope="col">도착 마을</th>
-								<th scope="col">무게</th>
-								<th scope="col"></th>
-								<th scope="col"></th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
+								<th scope="col">이름</th>
+								<th scope="col">주소</th>
 							</tr>
 						</thead>
 					</table>
@@ -131,8 +126,8 @@
 						<table cellspacing="0" id="mailTable" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
 						
 							<colgroup>
-								<col width="50" /><col width="80" /><col width="100" /><col width="80" /><col width="*" /><col width="50" />
-								<col width="50" />
+								<col width="50" /><col width="80" /><col width="200" /><col width="80" /><col width="*" /><col width="100" />
+								<col width="50" /><col width="70">
 							</colgroup>
 							<tbody>	
 								<c:forEach items="${mailList}" var="mail">	
@@ -143,6 +138,7 @@
 											<td class="date">${mail.from_address}</td>
 											<td class="writer">${mail.to_name}</td>
 											<td class="writer">${mail.to_address}</td>
+											<td>도착 마을</td>
 											<td class="writer">${mail.mail_weight}g</td>
 											<td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td>
 										</tr>
@@ -171,7 +167,7 @@
 					<div class="subject">패키지 목록</div>
 				</div>
 				<div class = "mail_list" style="border-bottom:1px solid #999;">
-					<table cellspacing="0" border="1" summary="명단관리  리스트" class="frt_tbl_type" style="width:100%;padding-right:15px;">
+					<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
 						<colgroup>
 							<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100" /><col width="100"><col width="15">
 						</colgroup>
@@ -182,8 +178,7 @@
 								<th scope="col">총 무게</th>
 								<th scope="col">상태</th>
 								<th scope="col">포장 날짜</th>
-								<th scope="col"></th>
-								<th></th>
+								<th scope="col" colspan="2"></th>
 							</tr>
 						</thead>
 					</table>
