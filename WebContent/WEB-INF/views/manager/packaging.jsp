@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
 	
-	
+	//이기능
 	function weight_check(){
 		
 		var total = [];

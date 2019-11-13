@@ -2,6 +2,7 @@ package com.postoffice.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -38,9 +39,29 @@ public class ClientRequestController {
 
 		return "client/index";
 	}
+	
+	@RequestMapping("/mailpackaging")
+	public String mailpackaging(Model model,
+			@RequestParam(value="mailIdList[]")List<String>mailIdList,
+			@RequestParam(value="totalWeight") String totalWeight,HttpSession session,HttpServletRequest request)throws Exception{
+			String vname = (String)session.getAttribute("vname");
+			System.out.println("totalWeight:"+totalWeight);
+			System.out.println("mailIdList:"+mailIdList);
+			System.out.println("vname:"+vname);
+			
+			
+			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vname));
+		
+		return "/requestBoarderList";
+	}
 
 	@RequestMapping("/requestBoarderList")
-	public String requestBoarderList(Model model, @RequestParam(defaultValue = "1") int pageNo , HttpSession session){
+	public String requestBoarderList(Model model,HttpSession session,
+					@RequestParam(defaultValue = "1") int pageNo, 
+					@RequestParam String totalWeight){
+		
+		System.out.println("TESTESTESR : " + totalWeight);
+		
 		session.setAttribute("pageNo", pageNo);
 
 		String sessioninfo = (String)session.getAttribute("lid");
@@ -88,7 +109,7 @@ public class ClientRequestController {
 		model.addAttribute("endPageNo", endPageNo);
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
-		
+		model.addAttribute("totalWeight", totalWeight);
 		return "client/requestBoarderList";
 	}
 
