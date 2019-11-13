@@ -5,15 +5,12 @@ tbody {
 	height : 20px;
 	text-align: center;
 }
-h2{
-	
-}
 .pack_left {
-	width : 46%;
+	width : 55%;
 	float : left;
 }
 .pack_right {
-	width : 46%;
+	width : 40%;
 	float : right;
 }
 
@@ -44,13 +41,12 @@ h2{
 }
 .mail_list {
 	border-left:1px solid #999;
-	border-right:1px solid #999;
 }
 .frt_tbl_type,.frt_tbl_type th,.frt_tbl_type td{border:0;}
 /**.frt_tbl_type a{color:#383838;text-decoration:none}*/
 .frt_tbl_type{width:100%; border-top:2px solid #F32C28; border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed; margin:0 0 0 0;}
 .frt_tbl_type caption,.frt_tbl_type .frm label, th label {display:none}
-.frt_tbl_type th{margin:0 0 0 0;padding:5px 0 5px 0;border-bottom:solid 1px #b2b2b2;background-color:#f1f1f4;color:#333;font-weight:bold;line-height:14px;vertical-align:middle; height:25px; text-align:center;}
+.frt_tbl_type th{margin:0 0 0 0;padding:5px 0 5px 0;border-bottom:solid 1px #b2b2b2;background-color:#f1f1f4;color:#333;font-weight:bold;line-height:14px;vertical-align:middle; height:25px; text-align:center; border-right: solid 1px #b2b2b2;}
 .frt_tbl_type td{padding:8px 0 5px;border-bottom:solid 1px #d2d2d2;text-align:center;color:#383838; _padding:7px 0 5px;}
 .frt_tbl_type td span a{color:#383838;}
 .frt_tbl_type td span a:hover {color:#383838;}

@@ -5,6 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<script type="text/javascript"
+		src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+	<script type="text/javascript"
+		src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="resources/css/index.css">
 </head>
 <body>
@@ -26,8 +32,8 @@
 				</div>
 				<div class="notice">
 					<div class="title_box">
-						<a href="">공지사항</a>
-						<a href="" class="more">more</a>
+						<a href="noticeList">공지사항</a>
+						<a href="noticeList" class="more">more</a>
 					</div>
 				</div>
 			</div>

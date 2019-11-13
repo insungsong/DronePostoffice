@@ -57,17 +57,17 @@
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
-								<td><input type="text" name="notice_name" value="${memberInfo.mname}" style="border:0;width: 98%;"></td>
+								<td><input type="text" name="notice_name" value="${sessionScope.mname}" style="border:0;width: 98%;"></td>
 								<th scope="col">부서</th>
-								<td><input type="text" name="dept_id" value="${memberInfo.dept_id}" style="border:0;width: 98%;"></td>
+								<td><input type="text" name="dept_name" value="${sessionScope.dept_name}" style="border:0;width: 98%;"></td>
 								<th scope="col">작성일</th>
 								<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
 							</tr>
 							<tr>
 								<th scope="col">첨부파일</th>
 								<td colspan="3">
-									<input type="text" id="notice_attach_file" name="notice_attach_file" value="${notice.notice_attach_file}">
-									<input type="file" name="updateFile" id="updateFile">
+									<input type="text" id="notice_attach_file" name="notice_attach_file" value="${notice.notice_attach_file}" style="border:0" readonly>
+									<input type="file" name="attachFile" id="attachFile">
 								</td>
 							</tr>
 							<tr>

@@ -15,102 +15,99 @@
 			href="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
 			<script type="text/javascript" 
 			src="<%=application.getContextPath() %>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>		
-			<style type="text/css">
-			.noticeList_area{
-				border:1px solid black;
-				height:909px;
-			}
-			.noticeList_sub_area{
-				margin:20px;
-				border: solid 1px black;
-    			height: 873px;
-			}
-			.noticeList_title{
-				margin:10px;
-				border: solid 1px black;
-				height:30px;
-				text-align:center;
-			}
-			.noticeList_search{
-				margin:10px;
-				border: solid 1px black;
-				height:50px;
-			}
-			.noticeList_content{
-				margin: 10px;
-				border: solid 1px black;
-				height: 740px;
-			}
+			<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
 			
-			.noticeWirte_btn{
-				margin:5px;
-				height:45px;
-				flex-direction:column;
-				width:99%;
-				padding:3px;
-			}
 			
-			.notice_table{
-				margin:10px;
-				height:600px;
-				border: solid 1px black;
-			}
+		<style type="text/css">
 			.notice_page{
 				margin-left: 41%;
 				padding-top: 8px;
 			}
 			
+			
+			.search_div{
+				float:right;
+				width:305px;
+				
+			}
+			
+			.wbtn_div{
+				float:left;
+				
+				
+			}
+			
+			
 			</style>
 		
 	</head>
 	<body>
+
 			<jsp:include page="../common/manageHeader.jsp"/>
 			<div class="body">
 				<div class="body_sub">
+
 				
-					<div class="noticeList_area">
-					<div class="noticeList_sub_area">
-					<div class="noticeList_title">공지사항 목록</div>
+				<div class="mail_list">
+				<div class="bor_title">
+					<div class="subject">공지사항</div>
 					
-					<div class="noticeList_search">
+					<div class="search_div">
 						<form id="noticeSearchForm" method="get" action="noticeSearch">
-							<select id="searchNotice" name="searchNotice">
+							<select id="searchNotice" name="searchNotice" style="height: 25px;border:#F32C28 1px solid;">
 								<option value="notice_title">제목</option>
-								<option value="mid">작성자</option>
+								<option value="mname">작성자</option>
 							</select>
-							<input type="text" id="searchWord" name="searchWord" style="height: 25px">
-							<button>검색</button>
-						</form>
-					</div>
+							<input type="text" id="searchWord" name="searchWord" style="height: 25px; border:#F32C28 1px solid;">
+							<button id="search_btn" style="height: 28px; text-align:center; font-size:15px; background-color:#F32C28; border:#F32C28 1px solid;color:white;">검색</button>
+						</form>	
+					</div>	
+				</div>
+		
+				
 					
-					<div class="noticeList_content">
-						<div class=noticeWirte_btn>
-							<a href="noticeWrite" class="btn btn-warning">글쓰기</a>
-						</div>
-						<div class="notice_table">
-							<table class="table table-sm" >
-								<thead>
-									<tr style="background:gray">
-										<th scope="col">글번호</th>
-										<th scope="col">제목</th>
-										<th scope="col">작성자</th>
-										
-										<th scope="col">작성일</th>
-									</tr>
+				<div class="mail_list">				
+					<table border="1" class="frt_tbl_type" style="width:100%;">
+						
+						<colgroup>
+							<col width="15%"/><col width="21%"/><col width="21%"/>
+							<col width="21%"/><col width="22%"/>
+						</colgroup>
+						<thead>
+							
+							
+							
+							
+							
+							<tr style="height: 39px">
+								<th scope="col">글번호</th>
+								<th scope="col">제목</th>
+								<th scope="col">작성자</th>
+								<th scope="col">부서</th>
+								<th scope="col">작성일</th>
+							</tr>
+									
+						<tbody>
+							<c:forEach var="notice" items="${noticeList}">	
+								<tr style="height: 34px;">
+									<th scope="row" style="background-color:white;">${notice.notice_id}</th>
+									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
 								
-								<tbody>
-									<c:forEach var="notice" items="${noticeList}">	
-										<tr>
-											<th scope="row">${notice.notice_id}</th>
-											<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
-											<td>${notice.mid}</td>
-											
-											<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</div>
+									<td>${notice.memberList.get(0).mname}</td>
+									<td>${notice.deptList.get(0).dept_name}</td>
+										
+									<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					
+					<div class="wbtn_div">
+								<a href="noticeWrite" class="btn btn-warning">글쓰기</a>
+							</div>
+					
+							</div>
+						
 						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
 							<a href="noticeList?pageNum=1" class="btn btn-primary">처음</a>
@@ -141,12 +138,8 @@
 					
 					</div>
 				
-					</div>
-					</div>
-
-
 				</div>
-			
 			</div>
+	
 	</body>
 </html>

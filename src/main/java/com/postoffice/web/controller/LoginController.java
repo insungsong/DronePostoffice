@@ -92,6 +92,9 @@ public class LoginController {
 			//로그인 성공했을 때 실행
 			session.setAttribute("lid", lid); //세션에 로그인 정보 저장
 			String dept_name = loginService.getDeptName(lid);
+			String mname = loginService.getMname(lid);
+			session.setAttribute("mname", mname);
+
 			session.setAttribute("dept_name", dept_name);
 			session.setAttribute("lauthority", lauthority);	//세션에 로그인 정보 저장
 			if(lauthority.equals("manager")) {
