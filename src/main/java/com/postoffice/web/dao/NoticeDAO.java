@@ -33,27 +33,14 @@ public class NoticeDAO {
 		
 		
 		List<NoticeDTO> list = sqlSessionTemplate.selectList("notice.noticeList", map);
-
-		//join 테스트
-		for(int i = 0; i <list.size(); i++) {
-			NoticeDTO dto = list.get(i);
-			
-			System.out.println("id : " + dto.getNotice_id());
-			System.out.println("title : " + dto.getNotice_title());
-			System.out.println("content : " + dto.getNotice_content());
-			System.out.println("mid : " + dto.getMid());
-			System.out.println("size : " + dto.getMemberList().size());
-			
-			MemberDTO memberDto = dto.getMemberList().get(0);
-			System.out.println("dept_id : " + memberDto.getDept_id());
-			System.out.println("membername : " + memberDto.getMname());
-			
-			DeptDTO deptDto = dto.getDeptList().get(0);
-			System.out.println("deptid:" + deptDto.getDept_id());
-			System.out.println("deptname : " + deptDto.getDept_name());
-			
-		}
 		
+		return list;
+	}
+	
+	public NoticeDTO selectDetail(NoticeDTO noticeDTO){
+		System.out.println(noticeDTO.getNotice_id());
+		
+		NoticeDTO list = sqlSessionTemplate.selectOne("notice.noticeDetail",noticeDTO);
 		return list;
 	}
 	
@@ -69,6 +56,7 @@ public class NoticeDAO {
 		NoticeDTO noticeDTO = sqlSessionTemplate.selectOne("notice.selectnotice", notice_id);
 		return noticeDTO;
 	}
+	
 	public MemberDTO selectmember(NoticeDTO dto) {
 		MemberDTO memberDTO = sqlSessionTemplate.selectOne("notice.selectMember",dto);
 		return memberDTO;
@@ -91,10 +79,10 @@ public class NoticeDAO {
 		map.put("endRowNum", endRowNum);
 		
 		if(searchNotice.equals("notice_title")) {
-			List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.noticeidSearch",map);
+			List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.noticeTitleSearch",map);
 			return noticeSearch;
 		}
-		List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.midSearch",map);
+		List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.mnameSearch",map);
 		return noticeSearch;
 	}
 	
@@ -107,7 +95,6 @@ public class NoticeDAO {
 	public void noticeupdate(NoticeDTO noticeDTO) {
 		sqlSessionTemplate.update("notice.noticeupdate", noticeDTO);
 	}
-	
 	
 	//테스트 코드/
 	public List<MemberDTO> testMember() {

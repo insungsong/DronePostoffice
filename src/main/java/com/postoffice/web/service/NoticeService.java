@@ -38,11 +38,19 @@ public class NoticeService {
 	SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
 	
+	//noticeDetail(수정테스트)
+	public NoticeDTO noticeDetail(NoticeDTO noticeDTO){
+		NoticeDTO noticeList = noticeDAO.selectDetail(noticeDTO);
+		return noticeList;
+	}
+	
+	
 	public void noticeWrite(NoticeDTO noticeDTO) {	
 		noticeDAO.noticeinsert(noticeDTO);
 			
 	}
 	
+	//공지사항 세부정보 가져오기
 	public NoticeDTO getnotice(int notice_id) {
 		NoticeDTO noticeDTO = noticeDAO.selectNotice(notice_id);
 		return noticeDTO;
@@ -66,7 +74,6 @@ public class NoticeService {
 	//공지사항 수정
 	public void noticeupdate(NoticeDTO noticeDTO) {
 		noticeDAO.noticeupdate(noticeDTO);
-		
 	}
 	
 	

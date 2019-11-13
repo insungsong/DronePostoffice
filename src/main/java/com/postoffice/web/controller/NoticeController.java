@@ -73,6 +73,7 @@ public class NoticeController {
 		
 		
 		List<NoticeDTO>noticeList =noticeService.getNoticeList(startRowNum,endRowNum);
+		
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);
@@ -83,6 +84,8 @@ public class NoticeController {
 		
 		model.addAttribute("noticeList",noticeList);		 
 
+		
+		
 		
 	return "manager/noticeList";
 	}
@@ -118,24 +121,17 @@ public class NoticeController {
 		int endRowNum = pageNum * rowsPerPage;
 		if(pageNum == totalPageNum) endRowNum = totalRowNum;
 			 
-
-		 List<NoticeDTO> noticeSearch = noticeService.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
-		
-		 for(int i = 0; i < noticeSearch.size(); i++) {
-			 NoticeDTO dto = noticeSearch.get(i);
-			 System.out.println("Dddddd");
-			 System.out.println(dto.getNotice_title());
-			 System.out.println(dto.getMid());
-		 }
-		 model.addAttribute("pagesPerGroup", pagesPerGroup);
-		 model.addAttribute("totalPageNum", totalPageNum);
-		 model.addAttribute("totalGroupNum", totalGroupNum);
-		 model.addAttribute("groupNum", groupNum); 
-		 model.addAttribute("startPageNum",startPageNum);
-		 model.addAttribute("endPageNum", endPageNum);
-		 model.addAttribute("pageNum", pageNum); 
+		List<NoticeDTO> noticeSearch = noticeService.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
 		 
-		 model.addAttribute("noticeList",noticeSearch);		
+		model.addAttribute("pagesPerGroup", pagesPerGroup);
+		model.addAttribute("totalPageNum", totalPageNum);
+		model.addAttribute("totalGroupNum", totalGroupNum);
+		model.addAttribute("groupNum", groupNum); 
+		model.addAttribute("startPageNum",startPageNum);
+		model.addAttribute("endPageNum", endPageNum);
+		model.addAttribute("pageNum", pageNum); 
+		 
+		model.addAttribute("noticeList",noticeSearch);		
 
 		return"manager/noticeList";
 	}
@@ -143,18 +139,18 @@ public class NoticeController {
 	// 공지사항 작성 폼
 	@GetMapping("/noticeWrite")
 	public String noticeWriteForm(Model model, HttpSession session) {
-		MemberDTO dto = new MemberDTO();
-		//DeptDTO deptdto = new DeptDTO(); 
+		//MemberDTO dto = new MemberDTO();
 		
-		//session에서 mid가져오기
-		String mid = (String)session.getAttribute("lid");
+		//session에서 mname(직원이름), dept_name(부서명)가져오기
+		String mname = (String)session.getAttribute("mname");
+		String dept_name = (String)session.getAttribute("dept_name");
 		
-		if(mid == null) {
+		if(mname == null) {
 			return "redirect:/";
 		}
-		dto.setMid(mid);
+		//dto.setMid(mname);
 		
-		model.addAttribute("memberInfo",noticeService.showMember(dto));
+		//model.addAttribute("memberInfo",noticeService.showMember(dto));
 		return "manager/noticeWrite";
 	}
 
@@ -180,15 +176,23 @@ public class NoticeController {
 		return "redirect:/noticeList";
 	}
 	
+	/*
+	 * @RequestMapping("/noticeDetail") public String noticeDetailForm(int
+	 * notice_id, Model model, HttpSession session) { NoticeDTO notice =
+	 * noticeService.getnotice(notice_id); MemberDTO member =
+	 * noticeService.selectMember(notice); DeptDTO dept =
+	 * noticeService.selectDept(member);
+	 * 
+	 * model.addAttribute("member",member); model.addAttribute("notice", notice);
+	 * model.addAttribute("dept", dept); return "manager/noticeDetail"; }
+	 */
+	
 	@RequestMapping("/noticeDetail")
-	public String noticeDetailForm(int notice_id, Model model) {
-		NoticeDTO notice = noticeService.getnotice(notice_id);
-		MemberDTO member = noticeService.selectMember(notice);
-		DeptDTO dept = noticeService.selectDept(member);
-
-		model.addAttribute("member",member);
-		model.addAttribute("notice", notice);
-		model.addAttribute("dept", dept);
+	public String noticeDetailForm(Model model, HttpSession session, NoticeDTO noticeDTO) {
+		NoticeDTO noticedetail = noticeService.noticeDetail(noticeDTO);
+		model.addAttribute("noticedetail", noticedetail);
+		
+		
 		return "manager/noticeDetail";
 	}
 	
@@ -235,43 +239,41 @@ public class NoticeController {
 	
 	
 	@GetMapping("/noticeUpdate")
-	public String noticeUpdateForm( NoticeDTO noticeDTO, Model model, HttpSession session) {
-		//임시로 mid값 set
-		MemberDTO dto = new MemberDTO();
-		dto.setMid((String)session.getId());
+	public String noticeUpdateForm(NoticeDTO noticeDTO, Model model, HttpSession session) {
 		NoticeDTO notice = noticeService.getnotice(noticeDTO.getNotice_id());
-		MemberDTO member = noticeService.selectMember(notice);
-		DeptDTO dept = noticeService.selectDept(member);
-		model.addAttribute("member",member);
+
 		model.addAttribute("notice", notice);
-		model.addAttribute("dept", dept);
-		
-		
-		
-		
-		model.addAttribute("memberInfo",noticeService.showMember(dto));
 		return "manager/noticeUpdate";
 	}
 	
 	@PostMapping("/noticeUpdate")
-	public String noticeUpdate(NoticeDTO noticeDTO, HttpSession session,HttpServletRequest request, @RequestParam("updateFile")MultipartFile updateFile)throws Exception {
-		noticeService.noticeupdate(noticeDTO);	
+	public String noticeUpdate(NoticeDTO noticeDTO, HttpSession session,HttpServletRequest request, @RequestParam("attachFile")MultipartFile attachFile)throws Exception {
+		
 		MemberDTO dto = new MemberDTO();
 		dto.setMid((String)session.getId());
-
+		
 		//첨부파일 업로드
+		//기존 파일 명 불러오기
+		String oldFileName = attachFile.getOriginalFilename();
+		//새로 저장될 파일 명
+		String saveFileName = null;
+		//저장 경로
 		String savePath =request.getServletContext().getRealPath("/resources/");
-		  
-		if(!updateFile.isEmpty()) { 
-		String saveFileName = new Date().getTime() +"-"+ updateFile.getOriginalFilename();
 		 
-		updateFile.transferTo(new File(savePath + saveFileName));
+		if(oldFileName == null || oldFileName.equals("")) {
+			saveFileName = noticeDTO.getNotice_attach_file();
+		}
+		
+		else if(!attachFile.isEmpty()) { 
+			saveFileName = new Date().getTime() +"-"+ oldFileName;
+		
+			attachFile.transferTo(new File(savePath + saveFileName));
 		  
-		noticeDTO.setNotice_attach_file(saveFileName);
+			noticeDTO.setNotice_attach_file(saveFileName);
 		 
 		}
-		 
 		
+		noticeService.noticeupdate(noticeDTO);
 		return "redirect:/noticeDetail?notice_id=" +noticeDTO.getNotice_id();
 	}
 	

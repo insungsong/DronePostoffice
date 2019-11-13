@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,19 +14,20 @@
 				function checkForm(){
 					var result= true;
 					
+					$(".error").text("");
+					
 					if($("#notice_title").val()==""){
-						$("noticetitleError").text("*제목을 입력해주세요.");
+						$("#noticetitleError").text("*제목을 입력해주세요.");
+						result = false;
 					}
 					if($("#notice_content").val()==""){
-						$("noticecontentError").text("*내용을 입력해주세요.");
+						$("#noticecontentError").text("*내용을 입력해주세요.");
+						result = false;
 					}
 					
 					return result;
 				}
-				
-					
-					
-					
+		
 			</script>		
 	</head>
 	<body>
@@ -48,17 +50,17 @@
 							<tr>
 								<th scope="col">제목</th>
 								<td colspan="5">
-									<input type="text" name="notice_title" style="border:0;width: 98%;">
+									<input type="text" id="notice_title" name="notice_title" style="border:0;width: 98%;">
 									<span id="noticetitleError" class="error" style="color:red"></span>
 								</td>
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
-								<td>${memberInfo.mname}</td>
+								<td>${sessionScope.mname}</td>
 								<th scope="col">부서</th>
-								<td>${memberInfo.dept_id}</td>
+								<td>${sessionScope.dept_name}</td>
 								<th scope="col">작성일</th>
-								<td></td>
+								<td><fmt:formatDate value="<%=new java.util.Date() %>" pattern="yyyy-MM-dd" /></td>
 								
 							</tr>
 							<tr>
@@ -69,13 +71,13 @@
 							</tr>
 							<tr>
 							<td colspan="6">
-								<textarea name="notice_content" rows="30" cols="5" style="width: 100%;"></textarea>
+								<textarea id="notice_content" name="notice_content" rows="30" cols="5" style="width: 100%;"></textarea>
 								<span id="noticecontentError" class="error" style="color:red"></span>
 							</td>
 							</tr>
 					</table>
 						<input type="hidden" name="mid" value="${memberInfo.mid}"/>
-						<input type="submit" value="저장" onClick="checkForm()"></input>
+						<input type="submit" value="저장" onclick="checkForm()"></input>
 					</div>
 				</form> 
 			</div>

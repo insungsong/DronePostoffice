@@ -37,39 +37,42 @@
 						</colgroup>
 							<tr>
 								<th scope="col">제목</th>
-								<td colspan="5"><input type="text" name="wtitle" style="border:0;width: 98%;" value="${notice.notice_title}"readonly></td>
+								<td colspan="5"><input type="text" name="wtitle" style="border:0;width: 98%;" value="${noticedetail.notice_title}"readonly></td>
 							
 							</tr>
 							<tr>
 								<th scope="col">작성자</th>
-								<td><input type="text" name="writer" value="${member.mname }" style="border:0; width: 100%; text-align: center" readonly></td>
+								<td><input type="text" name="mname" value="${noticedetail.memberList.get(0).mname}" style="border:0; width: 100%; text-align: center" readonly></td>
 								<th scope="col">부서</th>
-								<td><input type="text" name="wdept" value="${dept.dept_name}" style="border:0; width: 100%; text-align: center" readonly></td>
+								<td><input type="text" name="dept_name" value="${noticedetail.deptList.get(0).dept_name}" style="border:0; width: 100%; text-align: center" readonly></td>
 								<th scope="col">작성일</th>
-								<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>
+								<td><fmt:formatDate value="${noticedetail.notice_date}" pattern="yyyy-MM-dd" /></td>
 								
 							</tr>
 							<tr>
 								<th scope="col">첨부파일</th>
 								<td colspan="5">
-								<c:if test="${not empty notice.notice_attach_file}">
+								<c:if test="${not empty noticedetail.notice_attach_file}">
 								<form action="filedownload" method="post"enctype="nultipart/form-data">
-									<input type="hidden" value="${notice.notice_id}" id="notice_id" name="notice_id"/>
-									<input type="submit" id= "NFileName" name="NFileName" value="${notice.notice_attach_file}"/>
+									<input type="hidden" value="${noticedetail.notice_id}" id="notice_id" name="notice_id"/>
+									<input type="submit" id= "NFileName" name="NFileName" value="${noticedetail.notice_attach_file}" style="border:0;background-color:white"/>
 								</form>								
 								</c:if>
 								</td>
 							</tr>
 							<tr>
-							<td colspan="6"><textarea rows="30" cols="5" style="width: 100%;"readonly>${notice.notice_content}</textarea></td>
+							<td colspan="6"><textarea rows="30" cols="5" style="width: 100%;"readonly>${noticedetail.notice_content}</textarea></td>
 							</tr>
 					</table>
 						
 					</div>
 		
 				<a href="noticeList?pageNum=${PageNum}" class="btn btn-info" id="listBtn">목록</a>	
-				<a href="noticeUpdate?notice_id=${notice.notice_id}" class="btn btn-danger" id="updateBtn">수정</a>	
-				<a href="noticeDelete?notice_id=${notice.notice_id}" class="btn btn-danger" id="deleteBtn">삭제</a>
+				<!-- 관리자가 아니라면 수정 삭제 불가(해당글을 작성한 사람 = 관리자) -->
+				<c:if test="${noticedetail.mid eq sessionScope.lid}">
+					<a href="noticeUpdate?notice_id=${noticedetail.notice_id}" class="btn btn-danger" id="updateBtn">수정</a>	
+					<a href="noticeDelete?notice_id=${noticedetail.notice_id}" class="btn btn-danger" id="deleteBtn">삭제</a>
+				</c:if>
 			</div>
 		</div>
 	</body>

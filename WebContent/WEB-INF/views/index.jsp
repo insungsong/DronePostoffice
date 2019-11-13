@@ -26,8 +26,8 @@
 				</div>
 				<div class="notice">
 					<div class="title_box">
-						<a href="">공지사항</a>
-						<a href="" class="more">more</a>
+						<a href="noticeList">공지사항</a>
+						<a href="noticeList" class="more">more</a>
 					</div>
 				</div>
 			</div>
