@@ -17,11 +17,13 @@
 	
 	<link rel="stylesheet" type="text/css" href="resources/css/droneManagement.css">
 	
+	
 </head>
 <body>
 	<jsp:include page = "../common/manageHeader.jsp"/>
-		<div class="body">
-			<div class="body_sub">
+	<div class="body">
+		<div class="body_sub">
+			<div class="left">
 				<div class="drone_left">
 					<div class="bor_title">
 						<div class="subject">드론 현황</div>
@@ -35,7 +37,7 @@
 								<tr>
 									<th scope="col">드론명</th>
 									<th scope="col">상태</th>
-									<th scope="col">등록 날짜</th>
+									<th scope="col">배터리</th>
 									<th scope="col"></th>
 								</tr>
 							</thead>
@@ -51,7 +53,7 @@
 										<tr>
 											<td class="num">${drone.drone_id}</td>
 											<td class="title">${drone.stateList.get(0).state_name}</td>
-											<td class="title">${drone.add_date}</td> 
+											<td class="title">100%</td> 
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -59,6 +61,48 @@
 						</div>
 					</div>
 				</div>
+				<div class="dron_left_down">
+					<div class="bor_title">
+						<div class="subject">드론 관리</div>
+					</div>
+					<div class = "mail_list" style="border-bottom:1px solid #999;">
+						<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
+							<colgroup>
+								<col width="70"/><col width="50"/><col width="*" /><col width="100"/>
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="col" colspan="2">드론명</th>
+									<td colspan="2">dd</td>
+								</tr>
+							</thead>
+						</table>
+						<div style="max-height:500px; width:100%;">
+							<table cellspacing="0" border="1" id="droneList" class="frt_tbl_type" style="border-top:0px;">
+								<colgroup>
+									<col width="70"/><col width="50"/><col width="*" /><col width="90"/>
+								</colgroup>
+								<tbody>											
+									<tr>
+										<th scope="col">배터리</th>
+										<td class="title">100%</td>
+										<th scope="col">현재 상태</th>
+										<td class="title">대기중</td> 
+									</tr>
+									<tr>
+										<th scope="col" colspan="2">등록 일자 일자</th>
+										<td class="title" colspan="2">2018-04-12</td> 
+									</tr>
+									<tr>
+										<th scope="col" colspan="2">최근 운용 일자</th>
+										<td class="title" colspan="2">2018-04-12 14:22</td> 
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 				<div class="drone_center">
 					<div class="bor_title">
 						<div class="subject">드론 현재 위치</div>
@@ -125,7 +169,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
+	</div>
 </body>
 </html>
