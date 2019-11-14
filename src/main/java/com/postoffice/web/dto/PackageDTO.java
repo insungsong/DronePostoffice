@@ -9,9 +9,12 @@ public class PackageDTO {
 	private int package_weight;
 	private String state_id;
 	private Date arrival_date;
-	private String package_division;
+	private String vid;
+	
 	private List<StateDTO> stateList;
 	private List<VillageDTO> villageList;
+
+
 	
 	public int getPackage_id() {
 		return package_id;
@@ -44,12 +47,16 @@ public class PackageDTO {
 	public void setArrival_date(Date arrival_date) {
 		this.arrival_date = arrival_date;
 	}
-	public String getPackage_division() {
-		return package_division;
+	public String getVid() {
+		return vid;
+
 	}
-	public void setPackage_division(String package_division) {
-		this.package_division = package_division;
+
+	public void setVid(String vid) {
+		this.vid = vid;
+
 	}
+	
 	public List<StateDTO> getStateList() {
 		return stateList;
 	}
@@ -58,9 +65,6 @@ public class PackageDTO {
 	}
 	public List<VillageDTO> getVillageList() {
 		return villageList;
-	}
-	public void setVillageList(List<VillageDTO> villageList) {
-		this.villageList = villageList;
 	}	
-	
+
 }

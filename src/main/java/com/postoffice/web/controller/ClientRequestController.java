@@ -42,12 +42,12 @@ public class ClientRequestController {
 	public String mailpackaging(Model model,
 			@RequestParam(value="mailIdList[]")List<String>mailIdList,
 			@RequestParam(value="totalWeight") String totalWeight,HttpSession session)throws Exception{
-			String vname = (String)session.getAttribute("lid");
+			String vid = (String)session.getAttribute("vid");
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
-			System.out.println("vname:"+vname);
+			System.out.println("vid:"+vid);
 
-			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vname));
+			requestService.mailPackaging(mailIdList,totalWeight,vid);
 		
 		return "redirect:/requestBoarderList";
 	}
@@ -95,7 +95,6 @@ public class ClientRequestController {
 		
 		String vid = (String)session.getAttribute("vid");
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo ,vid);
-		
 		// JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
 															// 씀

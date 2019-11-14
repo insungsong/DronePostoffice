@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/index.css">
 </head>
 <body>
-	<jsp:include page = "common/manageHeader.jsp"/>
 	
 	<div class="body">
 		<div class="body_sub">

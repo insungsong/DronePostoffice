@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 	
+	<resultMap type="com.postoffice.web.dto.PackageDTO" id="Package">
+		<result column="package_id" property="package_id"/>
+		<result column="package_weight" property="package_weight"/>
+		<result column="state_id" property="state_id"/>
+		<result column="arrival_date" property="arrival_date"/>
+		<result column="vid" property="vid"/>
+<collection property="stateList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.StateDTO">
+			<result column="state_id" property="state_id"/>
+			<result column="state_name" property="state_name"/>
+</collection>
+<collection property="villageList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.VillageDTO">
+			<result column="vid" property="vid"/>
+			<result column="vname" property="vname"/>
+</collection>
+	</resultMap>
+	
 	<!-- <select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		select m.mail_id , m.from_name , m.from_address,m.to_name,m.to_address
 		,m.mail_weight,s.state_name,m.package_num,m.mail_date 
@@ -15,8 +31,7 @@
 		update mail set
 			state_id  = #{state_id}
 		where
-			mail_id = #{mail_id}
-			
+			mail_id = #{mail_id}	
 	</update>
 	
 	<select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
@@ -37,11 +52,28 @@
 			mail a
 		Left outer join state b on b.state_id = a.state_id
 		Left outer join village c on c.vid = a.vid
-		<!-- where
-			a.vid like '%#{vid}%' -->
 		
 	</select>
 	
-
 	
+	
+	<select id="packageCheck" resultMap="Package">
+		select
+			p.package_id,
+			p.package_weight,
+			p.state_id,
+			s.state_name,
+			p.arrival_date,
+			v.vname
+			
+			from package p ,state s ,village v
+				where s.state_id = p.state_id
+				and p.vid=v.vid
+			
+	</select>
+	
+	<delete id="cancel" parameterType="int" >
+		delete from package where package_id=#{package_id}
+	</delete>
+
 </mapper>

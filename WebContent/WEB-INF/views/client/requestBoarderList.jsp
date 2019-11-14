@@ -97,9 +97,15 @@
 											   </tr>
 											  </thead>
 											  <tbody>
+											  <c:choose>
+											  	<c:when test="${MailList.size() lt 1}">
+											  		<tr>
+												  		<td colspan="11" style="height:30px; background:#fbfbf9;">메일 요청이 없습니다.</td>
+												  	</tr>
+											  	</c:when>
+												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
-												  		<c:if test="${MailList.stateList.get(0).state_name eq '접수대기'}"><!-- 접수대기로 바꿔야함 -->
-												  			<tr>
+												  		<tr>
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
 															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
@@ -112,13 +118,14 @@
 															<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 															<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
 														</tr>
-												  		</c:if>
-													</c:forEach>						  
+													</c:forEach>	
+													</c:otherwise>
+												 </c:choose>					  
 											</tbody>
 									</table>
 									<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
 										<div class="client_write_button">
-											<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true">글쓰기</button>
+											<button class="btn btn-danger" role="button" aria-pressed="true">글쓰기</button>
 										</div>
 									</form>
 								</div>
@@ -133,24 +140,24 @@
 								</div>
 		
 								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block; float:left;margin-left: 640px;margin-top: 20px;" >
-										<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-success">처음</a>
+										<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-danger">처음</a>
 										<c:if test="${groupNo > 1}">
-											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-secondary">[이전]</a>
+											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">[이전]</a>
 										</c:if>		
 										<div class="btn-group mr-2" role="group" aria-label="First group">
 											<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
 													<c:if test="${pageNo==i }">
-														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-secondary active">${i}</a>
+														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-danger active" style="opacity: 0.5;">${i}</a>
 													</c:if>
 													<c:if test="${pageNo!=i }">
-														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test3" class="btn btn-secondary">${i}</a>
+														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test3" class="btn btn-danger" style="opacity: 0.3;">${i}</a>
 													</c:if>
 									    	</c:forEach>
 									    <c:if test="${groupNo<totalGroupNum }">
-									    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-success">다음</a>
+									    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-danger">다음</a>
 									    </c:if>
 									  </div>
-									  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-success">맨끝</a>
+									  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-danger">맨끝</a>
 								</div>					
 							</div>			
 						</div>

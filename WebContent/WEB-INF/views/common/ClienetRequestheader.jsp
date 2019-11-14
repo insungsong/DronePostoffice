@@ -5,12 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" type="text/css" href="resources/css/index.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/header.css">
 </head>
 <body>
 	<div class="header">
 		<div class="logo">
-			<a href="/FinalWebProject/clientIndex"><img src="resources/images/logo.PNG" height=100%></a>
+			<a href="index"><img src="resources/images/logo.PNG" height=100%></a>
+		</div>
+		<div class="menubar">
 		</div>
 	</div>
 </body>
