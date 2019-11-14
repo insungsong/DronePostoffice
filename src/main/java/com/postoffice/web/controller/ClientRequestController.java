@@ -42,12 +42,12 @@ public class ClientRequestController {
 	public String mailpackaging(Model model,
 			@RequestParam(value="mailIdList[]")List<String>mailIdList,
 			@RequestParam(value="totalWeight") String totalWeight,HttpSession session)throws Exception{
-			String vname = (String)session.getAttribute("lid");
+			String vid = (String)session.getAttribute("vid");
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
-			System.out.println("vname:"+vname);
+			System.out.println("vid:"+vid);
 
-			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vname));
+			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vid));
 		
 		return "redirect:/requestBoarderList";
 	}
