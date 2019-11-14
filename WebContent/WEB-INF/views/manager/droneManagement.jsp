@@ -17,7 +17,21 @@
 	
 	<link rel="stylesheet" type="text/css" href="resources/css/droneManagement.css">
 	
-	
+	<script type="text/javascript">
+		function drone_click(){
+			var url = 'delivery_Popup';
+			window.open(url,"","width=800,height=700,right=300");
+		}
+		function drone_info(){
+			var url = 'delivery_Popup';
+			window.open(url,"","width=800,height=700,right=300")
+		}
+	</script>
+	<style type="text/css">
+		#droneList tr:hover{
+                background-color: chocolate;
+            }
+	</style>
 </head>
 <body>
 	<jsp:include page = "../common/manageHeader.jsp"/>
@@ -43,14 +57,14 @@
 							</thead>
 						</table>
 						<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
-							<table cellspacing="0" border="1" id="droneList" class="frt_tbl_type" style="border-top:0px;">
+							<table cellspacing="0" border="1" class="frt_tbl_type" style="border-top:0px;">
 							
 								<colgroup>
 									<col width="100" /><col width="*" /><col width="100" />
 								</colgroup>
-								<tbody>		
+								<tbody id = "droneList">		
 									<c:forEach items="${droneList}" var="drone">										
-										<tr>
+										<tr onclick="drone_click()" style="cursor: pointer;">
 											<td class="num">${drone.drone_id}</td>
 											<td class="title">${drone.stateList.get(0).state_name}</td>
 											<td class="title">100%</td> 

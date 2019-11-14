@@ -13,6 +13,8 @@ public class PackageDTO {
 	
 	private List<StateDTO> stateList;
 	private List<VillageDTO> villageList;
+
+
 	
 	public int getPackage_id() {
 		return package_id;
@@ -47,9 +49,12 @@ public class PackageDTO {
 	}
 	public String getVid() {
 		return vid;
+
 	}
+
 	public void setVid(String vid) {
 		this.vid = vid;
+
 	}
 	
 	public List<StateDTO> getStateList() {
@@ -61,4 +66,5 @@ public class PackageDTO {
 	public List<VillageDTO> getVillageList() {
 		return villageList;
 	}	
+
 }

@@ -97,9 +97,15 @@
 											   </tr>
 											  </thead>
 											  <tbody>
+											  <c:choose>
+											  	<c:when test="${MailList.size() lt 1}">
+											  		<tr>
+												  		<td colspan="11" style="height:30px; background:#fbfbf9;">메일 요청이 없습니다.</td>
+												  	</tr>
+											  	</c:when>
+												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
-												  		<c:if test="${MailList.stateList.get(0).state_name eq '접수대기'}"><!-- 접수대기로 바꿔야함 -->
-												  			<tr>
+												  		<tr>
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
 															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
@@ -112,8 +118,9 @@
 															<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 															<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
 														</tr>
-												  		</c:if>
-													</c:forEach>						  
+													</c:forEach>	
+													</c:otherwise>
+												 </c:choose>					  
 											</tbody>
 									</table>
 									<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
