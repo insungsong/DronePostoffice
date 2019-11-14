@@ -81,6 +81,13 @@ public class ClientCheckController {
 		model.addAttribute("beforeList",beforeList);
 		return "client/beforeCheckList";
 	}
+	
+	@RequestMapping("/cancel")
+	public String cancel(int package_id) {
+		checkService.cancel(package_id);
+		return "redirect:/packageCheck";
+		
+	}
 }
 
 

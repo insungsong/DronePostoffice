@@ -62,11 +62,18 @@
 			p.package_id,
 			p.package_weight,
 			p.state_id,
-			s.state_name
+			s.state_name,
+			p.arrival_date,
+			v.vname
 			
-			from package p ,state s 
+			from package p ,state s ,village v
 				where s.state_id = p.state_id
+				and p.vid=v.vid
 			
 	</select>
+	
+	<delete id="cancel" parameterType="int" >
+		delete from package where package_id=#{package_id}
+	</delete>
 
 </mapper>

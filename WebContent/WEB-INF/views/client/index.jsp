@@ -47,6 +47,7 @@
 	</head>
 	<body>
 		<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
+		
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
 				<li><!-- <img src="vmemeberphoto" style="width: 76px;height: 41px;margin: 0;"> -->${vmname}님 환영합니다.<a href ="clientTouch?lid=${vmlid}" style=display:inline>개인정보수정</a></li>

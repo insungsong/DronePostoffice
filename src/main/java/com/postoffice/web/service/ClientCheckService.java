@@ -35,6 +35,12 @@ public class ClientCheckService {
 	public List beforeSelectAll() {
 		return checkDAO.beforeSelectAll();
 	}
+	
+	public int cancel(int package_id) {
+		return checkDAO.cancel(package_id);
+		
+		
+	}
 
 	
 }

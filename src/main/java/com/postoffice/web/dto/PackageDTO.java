@@ -10,8 +10,10 @@ public class PackageDTO {
 	private String state_id;
 	private Date arrival_date;
 	private String vid;
+	
 	private List<StateDTO> stateList;
 	private List<VillageDTO> villageList;
+
 
 	
 	public int getPackage_id() {
@@ -47,12 +49,14 @@ public class PackageDTO {
 	}
 	public String getVid() {
 		return vid;
+
 	}
 
 	public void setVid(String vid) {
 		this.vid = vid;
-	}
 
+	}
+	
 	public List<StateDTO> getStateList() {
 		return stateList;
 	}
@@ -61,9 +65,6 @@ public class PackageDTO {
 	}
 	public List<VillageDTO> getVillageList() {
 		return villageList;
-	}
-	public void setVillageList(List<VillageDTO> villageList) {
-		this.villageList = villageList;
 	}	
 
 }
