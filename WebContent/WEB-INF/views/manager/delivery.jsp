@@ -20,66 +20,33 @@
 
 <script type="text/javascript">
 	
-	
-	function weight_check(){
+	$(function(){
+		var index;
 		
-		var total = [];
-		var check = 0;
-		
-		$('input:checkbox:checked').each(function(){
-			total.push(parseInt($(this).attr('value')));
-		});
-		
-		total_weight = 0;
-		
-		for(var i = 0; i < total.length; i++){
-			total_weight += total[i];
-		}
-	
-		$("#total_weight").text(total_weight+'g');
-		console.log($("#total_weight").text());
-	}
-	
-	function Auto_weight_check(){
-			//if($("#chk_auto").prop("checked")){
-				//if(parseInt($("input[name='chk_auto']:checked")) < parseInt($("#total_weight"))){
-					var len = $(("#mailTable tr").length)-1;
-					for(var i = 0; i < len; i++) {
-						$("#chk"+i).prop("checked",true);
-					}
-				//}
-			//}
-			
-			//if{
-			//	$("#chk").prop("checked",false);
-			//}
-	}
-	
-	function packaging(){
-		var Array = [];
-		
-		$('input:checkbox:checked').each(function(){
-			check = $(this).attr('name');
-			Array.push(check);
-		});
-		
-		for(var i= 0; i < Array.length; i++){
-			console.log('array' + Array[i]);
-		};
-		
-		
-		$.ajax({
-			url:"packaging",
-			data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
-			success:function(data){
-				location.reload();
+		var buttonLen = $('button.delivery').length;
+		for(var i = 0; i < buttonLen; i++){
+			if($('.delivery').eq(i).attr('value') != null){
+				console.log($('.delivery').eq(i).val());
+				index = i;
 			}
-		});
-	}
+		}
+		$('.delivery').eq(index).prop('disabled',false);
+		console.log(index);
+	});
+	
 	
 	function pack_mailList(value){
 		var url = 'pack_mailList?package_id='+value;
 		window.open(url,"","width=800,height=700,right=300")
+	}
+	
+	function drone_info(){
+		var url = 'delivery_Popup';
+		window.open(url,"","width=800,height=700,right=300")
+	}
+	function drone_go(value, id){
+		
+		console.log(value,id);
 	}
 </script>
 </head>
@@ -92,9 +59,9 @@
 					<div class="subject">패키지 목록</div>
 				</div>
 				<div class = "mail_list" style="border-bottom:1px solid #999;">
-					<table cellspacing="0" border="1" summary="명단관리  리스트" class="frt_tbl_type" style="width:100%;padding-right:15px;">
+					<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
 						<colgroup>
-							<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100" /><col width="100"><col width="15">
+							<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100" /><col width="100"><col width="100"><col width="100"><col width="15">
 						</colgroup>
 						<thead>
 							<tr>
@@ -103,8 +70,9 @@
 								<th scope="col">총 무게</th>
 								<th scope="col">상태</th>
 								<th scope="col">포장 날짜</th>
-								<th scope="col"></th>
-								<th></th>
+								<th scope="col">우편</th>
+								<th scope="col">드론</th>
+								<th scope="col" colspan="2"></th>
 							</tr>
 						</thead>
 					</table>
@@ -112,17 +80,19 @@
 						<table cellspacing="0" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
 						
 							<colgroup>
-								<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100"><col width="100" />
+								<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100"><col width="100"/><col width="100"><col width="100">
 							</colgroup>
 							<tbody>		
 								<c:forEach items="${packageList}" var="pack">										
 									<tr>
 										<td class="num">${pack.package_id}</td>
-										<td class="title" >${pack.village}</td>
-										<td class="date">${pack.package_weight}</td>
-										<td class="writer">${pack.state_id}</td>
+										<td class="title" >${pack.villageList.get(0).vname}</td>
+										<td class="date">${pack.package_weight}g</td>
+										<td class="writer">${pack.stateList.get(0).state_name}</td>
 										<td class="writer">${pack.arrival_date}</td>
 										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
+										<td class="title"><button type="button" value="${pack.package_id}" onclick="drone_info()">드론 목록</button></td>
+										<td class="title"><button type="button" id="${pack.villageList.get(0).send_path},${pack.villageList.get(0).return_path},${pack.package_id}" onclick="drone_go(value,id)" class="delivery" disabled="disabled">확인</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>

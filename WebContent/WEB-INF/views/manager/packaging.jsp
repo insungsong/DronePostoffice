@@ -132,7 +132,7 @@
 							</colgroup>
 							<tbody>	
 							<c:choose>
-								<c:when test="${empty mail.mail_id}">									
+								<c:when test="${mailList.size() lt 1}">									
 									<tr>
 										<td class="num" colspan="8" style="height:30px; background:#fbfbf9;">우편이 없습니다.</td>
 									</tr>

@@ -22,7 +22,6 @@ public class PackageController {
 	public String packagingList(Model model,
 				@RequestParam(defaultValue="0") String sort) {
 		
-		
 		model.addAttribute("mailList",packageService.mailList(sort));
 		model.addAttribute("packageList",packageService.packageList());
 		
