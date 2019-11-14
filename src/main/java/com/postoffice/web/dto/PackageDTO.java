@@ -9,13 +9,10 @@ public class PackageDTO {
 	private int package_weight;
 	private String state_id;
 	private Date arrival_date;
-<<<<<<< HEAD
 	private String vid;
-=======
-	private String package_division;
 	private List<StateDTO> stateList;
 	private List<VillageDTO> villageList;
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+
 	
 	public int getPackage_id() {
 		return package_id;
@@ -51,14 +48,11 @@ public class PackageDTO {
 	public String getVid() {
 		return vid;
 	}
-<<<<<<< HEAD
+
 	public void setVid(String vid) {
 		this.vid = vid;
 	}
-=======
-	public void setPackage_division(String package_division) {
-		this.package_division = package_division;
-	}
+
 	public List<StateDTO> getStateList() {
 		return stateList;
 	}
@@ -71,6 +65,5 @@ public class PackageDTO {
 	public void setVillageList(List<VillageDTO> villageList) {
 		this.villageList = villageList;
 	}	
-	
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+
 }
