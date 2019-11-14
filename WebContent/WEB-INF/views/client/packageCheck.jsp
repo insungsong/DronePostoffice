@@ -33,8 +33,8 @@
 											  <tr style="height: 39px">
 											     <th scope="col">패키지 번호</th>
 											     <th scope="col">패키지 무게</th>
-											     <th scope="col">요청 상태</th>
 											     <th scope="col">요청 날짜</th>
+											     <th scope="col">요청 상태</th>
 											     <th scope="col">마을 이름</th>
 											     <th scope="col">접수 요청</th>
 											     <th scope="col">요청 취소</th>
@@ -44,8 +44,8 @@
 											<tr>
 													<td>${pack.package_id}</td>
 													<td>${pack.package_weight}</td>
-													<td>${pack.stateList.get(0).state_name}</td>
 													<td>${pack.arrival_date}</td>
+													<td>${pack.stateList.get(0).state_name}</td>
 													<td>${pack.villageList.get(0).vname}</td>
 													<td><input type="button" value="요청취소" onclick="cancel(${pack.package_id})"/></td>
 													

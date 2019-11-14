@@ -34,6 +34,7 @@
 		        where mail.vid = village.vid 
 		        and mail.state_id = state.state_id
 		        and mail.vid = #{vid}
+		        and mail.state_id = 's005'
 		    )
 		    where rownum &lt;= #{endRowNo}
 		)
@@ -131,8 +132,8 @@
 			select seq_package.currval from dual
 		</selectKey>
 		insert into
-			package(package_id, package_weight, state_id, vid)					
-		values (seq_package.nextval, #{package_weight},'s005',#{vid})
+			package(package_id, package_weight, state_id,arrival_date, vid)					
+		values (seq_package.nextval, #{package_weight},'s001',sysdate,#{vid})
 	</insert>
 	
 	<update id="updateMail" parameterType="map">

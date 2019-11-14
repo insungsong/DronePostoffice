@@ -13,34 +13,19 @@
 		src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 	<style type="text/css">
 		.body{
+			width:80%;
 			height:100%;
 			background-color: white;
 		}
 		.request{	
-			width: 24%;
-			height: 40%;
-			background-color: blue;
-			margin-top: 14%;
-			margin-left: 349px;
-			width: 20%;
-			height: 45%;
-			background-color: #F32C28;
-			margin-top: 10%;
-			margin-left: 550px;
-			margin-right: 80px;
 			display: inline-block;
 		}
 		.check{
-			width: 20%;
-		    height: 45%;
-		    margin-top: 10%;
-		    background-color: #F32C28;
 		    display: inline-block;
 		}
 		img{
 			vertical-align: middle;
 		    border-style: none;
-		    margin: 34px;
 		    background-color: white;
    		 }
 	</style>
@@ -55,8 +40,14 @@
 			</ul>
 		</div>
 		<div class="body">
-			<a href="requestBoarderList?pageNo=1&totalWeight=0"><div class="request"><img src = "./resources/images/one-finger-tap-outlined-symbol-of-a-hand_icon-icons.com_57978.png" style="width:200px;"/><h6>요청</h6></div></a>
-			<a href="packageCheck"><div class="check"><img src = "./resources/images/thumb-up-stroke_icon-icons.com_57954.png "style="width:200px;"/><h6>확인</h6></div></a>
+			<div class="request" style="width:250px;margin-left:500px;margin-top: 85px;">
+				<a href="requestBoarderList?pageNo=1&totalWeight=0"><img src = "./resources/images/mail_request.png" style="width:400px;height:380px;"/></a>
+				<a href="requestBoarderList?pageNo=1&totalWeight=0"><button type="button" class="btn btn-outline-danger" style="width:400px;">우편 작성</button></a>
+			</div>
+			<div class="check" style="width:250px;margin-left:230px;margin-top: 85px;">
+				<a href="packageCheck"><img src = "./resources/images/mail_check.png "style="width:400px;height:380px;"/></a>
+				<a href="packageCheck"><button type="button" class="btn btn-outline-success" style="width:400px;">우편 확인</button></a>
+			</div>
 		</div>
 	</body>
 </html>
