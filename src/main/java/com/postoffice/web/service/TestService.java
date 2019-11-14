@@ -83,11 +83,15 @@ private static final Logger logger = LoggerFactory.getLogger(TestService.class);
 				VillageDTO villageDto = new VillageDTO();
 				villageDto.setVid(vid);
 				if(vpathid.equals("sendPath")) {
+					logger.debug("villageDao.updateSendPath 실행");
 					villageDto.setSend_path(path);
 					villageDao.updateSendPath(villageDto);
+					logger.debug("villageDao.updateSendPath 실행");
 				} else {
+					logger.debug("villageDao.updateReturnPath 실행");
 					villageDto.setReturn_path(path);
 					villageDao.updateReturnPath(villageDto);
+					logger.debug("villageDao.updateReturnPath 실행");
 				}
 				
 				

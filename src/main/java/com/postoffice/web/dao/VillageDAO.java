@@ -18,12 +18,16 @@ public class VillageDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	public int updateSendPath(VillageDTO villageDto) {
+		logger.debug("실행");
 		int rows = sqlSessionTemplate.update("village.updateSendPath", villageDto);
+		logger.debug(""+rows);
 		return rows;
 	}
 	
 	public int updateReturnPath(VillageDTO villageDto) {
+		logger.debug("실행");
 		int rows = sqlSessionTemplate.update("village.updateReturnPath", villageDto);
+		logger.debug(""+rows);
 		return rows;
 	}
 }
