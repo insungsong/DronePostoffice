@@ -123,15 +123,25 @@
 	
 	<insert id="answerdto" parameterType="com.postoffice.web.dto.MailDTO">
 		insert into mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,mail_date,vid)
-			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s001',sysdate, #{vid})
+			values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s005',sysdate, #{vid})
 	</insert>
 		
-	<insert id="insertMailPackaging" parameterType="map">
+	<insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">
 		<selectKey keyProperty="package_id" resultType="int" order="AFTER">
 			select seq_package.currval from dual
 		</selectKey>
 		insert into
 			package(package_id, package_weight, state_id, PACKAGE_DIVISION)					
-		values (seq_package.nextval, #{pakageDTO},'s006',#{vname})
+		values (seq_package.nextval, #{package_weight},'s005',#{package_division})
 	</insert>
+	
+	<update id="updateMail" parameterType="map">
+		update
+			mail
+		set
+			package_num=#{package_num},
+			state_id = 's006'
+		where
+			mail_id=#{mail_id}
+	</update>
 </mapper>

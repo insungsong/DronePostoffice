@@ -124,12 +124,18 @@ public class ClientDAO {
 		return maildto2;
 	}
 
-	public int mailPackaging(PackageDTO packageDTO,String vname) {
-		Map<String,Object>map = new HashMap<String, Object>();
-		map.put("pakageDTO", packageDTO.getPackage_weight());
-		map.put("vname", vname);
-		
-		int packageNum = sqlSessionTemplate.insert("ClientBoard.insertMailPackaging",map);
+	public int mailPackaging(PackageDTO packageDTO) {
+		int packageNum = sqlSessionTemplate.insert("ClientBoard.insertMailPackaging",packageDTO);
 		return packageNum;
+	}
+
+	public int mailUpdate(MailDTO mailDTO, PackageDTO packageDTO) {
+		Map<String, Object>map = new HashMap<String, Object>();
+		map.put("mail_id",mailDTO.getMail_id());
+		map.put("state_id", mailDTO.getState_id());
+		System.out.println("adsadadda ad ae:"+packageDTO.getPackage_id());
+		map.put("package_num",packageDTO.getPackage_id());
+		
+		return sqlSessionTemplate.update("ClientBoard.updateMail",map);
 	}
 }

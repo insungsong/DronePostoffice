@@ -72,6 +72,7 @@
 			url:"packaging",
 			data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
 			success:function(data){
+				console.log('성공');
 				location.reload();
 			}
 		});

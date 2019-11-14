@@ -10,7 +10,7 @@
 <body>
 	<div class="header">
 		<div class="logo">
-			<a href="index"><img src="resources/images/logo.PNG" height=100%></a>
+			<a href="/FinalWebProject/clientIndex"><img src="resources/images/logo.PNG" height=100%></a>
 		</div>
 	</div>
 </body>

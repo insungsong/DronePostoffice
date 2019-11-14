@@ -2,7 +2,6 @@ package com.postoffice.web.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
-import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.ClientRequestService;
 import com.postoffice.web.service.LoginService;
 
@@ -43,16 +41,15 @@ public class ClientRequestController {
 	@RequestMapping("/mailpackaging")
 	public String mailpackaging(Model model,
 			@RequestParam(value="mailIdList[]")List<String>mailIdList,
-			@RequestParam(value="totalWeight") String totalWeight,HttpSession session,HttpServletRequest request)throws Exception{
-			String vname = (String)session.getAttribute("vname");
+			@RequestParam(value="totalWeight") String totalWeight,HttpSession session)throws Exception{
+			String vname = (String)session.getAttribute("lid");
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
 			System.out.println("vname:"+vname);
-			
-			
+
 			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vname));
 		
-		return "/requestBoarderList";
+		return "redirect:/requestBoarderList";
 	}
 
 	@RequestMapping("/requestBoarderList")
