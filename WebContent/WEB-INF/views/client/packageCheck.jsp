@@ -56,6 +56,7 @@
 											     <th scope="col">마을 이름</th>
 											     <th scope="col">접수 요청</th>
 											     <th scope="col">요청 취소</th>
+											     
 											   </tr>
 								</thead>
 											<c:forEach items="${packageList}" var="pack">
