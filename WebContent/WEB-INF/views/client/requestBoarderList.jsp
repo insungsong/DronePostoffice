@@ -110,7 +110,7 @@
 											  	</c:when>
 												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
-												  		<tr>
+												  		<tr >
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
 															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
