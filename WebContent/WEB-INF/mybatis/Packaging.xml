@@ -33,6 +33,8 @@
 		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
 			<id column="vid" property="vid"/>
 			<result column="vname" property="vname"/>
+			<result column="send_path" property="send_path"/>
+			<result column="return_path" property="return_path"/>
 		</collection>
 	</resultMap>
 	
@@ -73,7 +75,7 @@
 
 	<select id="selectPackageList" resultMap="packageInfo">
 		SELECT
-			package.package_id, package.package_weight, package.arrival_date, state.*, village.vid, village.vname
+			package.package_id, package.package_weight, package.arrival_date, state.*, village.*
 		FROM
 			package, state, village
 		WHERE
@@ -93,7 +95,7 @@
 			mail.state_id = state.state_id
 		AND
 			mail.vid = village.vid
-		WHERE
+		AND
 			package_num = #{package_id}
 	</select>
 </mapper>

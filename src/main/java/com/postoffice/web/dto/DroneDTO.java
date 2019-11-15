@@ -8,6 +8,7 @@ public class DroneDTO {
 	private String state_id;
 	private Date add_date;
 	private List<StateDTO> stateList;
+	private List<VillageDTO> villageList;
 	
 	public String getDrone_id() {
 		return drone_id;
@@ -32,6 +33,12 @@ public class DroneDTO {
 	}
 	public void setStateList(List<StateDTO> stateList) {
 		this.stateList = stateList;
+	}
+	public List<VillageDTO> getVillageList() {
+		return villageList;
+	}
+	public void setVillageList(List<VillageDTO> villageList) {
+		this.villageList = villageList;
 	}
 	
 	

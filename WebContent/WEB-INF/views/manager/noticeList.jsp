@@ -78,7 +78,7 @@
 							
 							
 							
-							
+							s
 							<tr style="height: 39px">
 								<th scope="col">글번호</th>
 								<th scope="col">제목</th>

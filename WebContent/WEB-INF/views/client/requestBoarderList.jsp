@@ -141,12 +141,12 @@
 		
 								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block; float:left;margin-left: 640px;margin-top: 20px;" >
 										<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-danger">처음</a>
-										<c:if test="${groupNo > 1}">
-											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">[이전]</a>
+										<c:if test="${pageNo > 1}">
+											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">이전</a>
 										</c:if>		
 										<div class="btn-group mr-2" role="group" aria-label="First group">
 											<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
-													<c:if test="${pageNo==i }">
+													<c:if test="${pageNo ==i }">
 														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-danger active" style="opacity: 0.5;">${i}</a>
 													</c:if>
 													<c:if test="${pageNo!=i }">
@@ -163,9 +163,10 @@
 						</div>
 					</div>
 				</div>
+				s
 		</body>
 		<script type="text/javascript">
-		var testLen = $('a#test3').length;
+		var testLen = $('a#test2').length;
 		console.log('leg :' + testLen);
 		
 		function weight_check(){
