@@ -9,6 +9,19 @@
 			<result column="state_name" property="state_name"/>
 		</collection>
 	</resultMap>
+	
+	<resultMap type="com.postoffice.web.dto.DeliveryDTO" id="droneLog">
+		<result column="delivery_date" property="delivery_date"/>
+		<collection property="packageList" javaType="java.util.List" ofType="com.postoffice.web.dto.PackageDTO">
+			<id column="package_id" property="package_id"/>
+			<result column="package_weight" property="package_weight"/>
+		</collection>
+		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
+			<id column="vid" property="vid"/>
+			<result column="vname" property="vname"/>
+		</collection>
+	</resultMap>
+	
 	<select id="selectDroneList" resultMap="droneInfo">
 		SELECT
 			drone.*, state.*
@@ -16,5 +29,18 @@
 			drone, state
 		WHERE
 			drone.state_id = state.state_id
+	</select>
+	
+	<select id="selectDroneLog" parameterType="com.postoffice.web.dto.DroneDTO" resultMap="droneLog">
+		SELECT
+			delivery.delivery_date, package.package_id, package.package_weight, village.vid, village.vname
+		FROM
+			delivery, package ,village
+		WHERE
+			delivery.package_id = package.package_id
+		AND
+			package.vid = village.vid
+		AND
+			drone_id = #{drone_id}
 	</select>
 </mapper>

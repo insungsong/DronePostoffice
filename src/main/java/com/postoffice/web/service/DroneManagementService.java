@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.postoffice.web.dao.DroneManagementDAO;
+import com.postoffice.web.dto.DeliveryDTO;
 import com.postoffice.web.dto.DroneDTO;
 
 @Service
@@ -16,5 +17,9 @@ public class DroneManagementService {
 	
 	public List<DroneDTO> selectDroneList(){
 		return droneManagementDAO.selectDroneList();
+	}
+	
+	public List<DeliveryDTO> selectDroneLog(DroneDTO dto){
+		return droneManagementDAO.selectDroneLog(dto);
 	}
 }
