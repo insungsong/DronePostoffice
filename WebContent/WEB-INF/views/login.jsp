@@ -87,6 +87,7 @@
 								<input id="lpassword" name="lpassword" type="password" placeholder="비밀번호">
 							</div>
 							<div class="lbutton">
+							//
 								<input type="submit" value="로그인">
 							</div>
 							<input type="hidden" id="lauthority" name="lauthority" value ="">
