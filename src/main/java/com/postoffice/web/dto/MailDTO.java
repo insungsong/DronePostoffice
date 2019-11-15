@@ -10,7 +10,6 @@ public class MailDTO {
 	private String to_name;
 	private String to_address;
 	private int mail_weight;
-	
 	private String state_id;
 	private String state_name;
 

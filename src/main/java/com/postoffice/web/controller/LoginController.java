@@ -37,11 +37,12 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+	
 	@RequestMapping("/")
 	public String login(Model model, HttpSession session) {
 		String error = (String) session.getAttribute("error");
 		String lauthority = (String) session.getAttribute("lauthority");
-			
+		
 		//아이디 또는 비밀번호 틀렸을 때 실행 
 		if(error != null) {
 			if(error.equals("fail_lid")) {
@@ -132,7 +133,9 @@ public class LoginController {
 			session.setAttribute("vmname", vmname);
 			
 			String vmlid = loginService.vmnlid(lid);
-			
+			VMemberDTO vmember=new VMemberDTO();
+			String grade = vmember.getGrade();
+			System.out.println(grade+"=+++++++++++++++++++++++++++++++++++@@@@@@@+!#!#");
 			return "redirect:clientIndex"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
 	}
@@ -201,6 +204,8 @@ public class LoginController {
 	public String join(String lid, String lname, String lpassword, String ltel,
 			MultipartFile lphoto, String lauthority, String vname, String deptName,
 			HttpServletRequest request, Model model) throws Exception {
+		
+		
 		logger.debug(lid);
 		logger.debug(lname);
 		logger.debug(lpassword);
@@ -211,7 +216,9 @@ public class LoginController {
 		logger.debug(vname);
 		logger.debug(deptName);
 		MemberDTO member = new MemberDTO();
+		
 		VMemberDTO vmember = new VMemberDTO();
+		
 		ServletContext application = request.getServletContext();
 		String savePath = application.getRealPath("/WEB-INF/views/images/");
 		
@@ -244,7 +251,14 @@ public class LoginController {
 			vmember.setVmpassword(lpassword);
 			vmember.setVmtel(ltel);
 			vmember.setVid(vname);
+			
+				//첫번째 문제점:우리는 회원가입할때 정보를 저장한다. 근데 ???? grade 는 매퍼에서 고정값으로 준거라 폼에서 넘겨지지가 않으니 여기서 매개변수로 저장을 받을수 없다
+				//인풋타입을 써야함 인풋타입을쓰면? 흐름타고 가서 할거 ㅈㄴ많음
+				
+				//인풋타입을 안쓰면? 값을 넘겨서 지금 저장하는게 힘듬  명상이형은 뷰에 뿌려질정보가 없기때문이다~!~##~$#
+				
 			loginService.cJoin(vmember);
+			
 			return "redirect:/";
 		}
 		

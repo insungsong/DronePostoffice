@@ -21,7 +21,7 @@
 				} else if($("#lpassword").val() == "") {
 					alert("*비밀번호를 입력하세요.")
 					result = false;
-				}
+				} 
 				return result;
 			}
 			
@@ -78,17 +78,19 @@
 					</ul>
 				</div>
 				<div class="loginForm">
-					<form method="post" action="login" onsubmit="return check()">
-						<div class="lid">
-							<input id="lid" name="lid" type="text" placeholder="아이디">
-						</div>
-						<div class="lpassword">
-							<input id="lpassword" name="lpassword" type="password" placeholder="비밀번호">
-						</div>
-						<div class="lbutton">
-							<input type="submit" value="로그인">
-						</div>
-						<input type="hidden" id="lauthority" name="lauthority" value ="">
+					
+						<form method="post" action="login" onsubmit="return check()">
+							<div class="lid">
+								<input id="lid" name="lid" type="text" placeholder="아이디">
+							</div>
+							<div class="lpassword">
+								<input id="lpassword" name="lpassword" type="password" placeholder="비밀번호">
+							</div>
+							<div class="lbutton">
+								<input type="submit" value="로그인">
+							</div>
+							<input type="hidden" id="lauthority" name="lauthority" value ="">
+					
 					</form>	 
 					<div class="jbutton">
 						<a href="join">회원가입</a>

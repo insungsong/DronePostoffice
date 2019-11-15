@@ -207,7 +207,7 @@ public class ClientRequestController {
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("MailList", MailList);
 		model.addAttribute("stateName", dto.getState_name());
-
+		System.out.println(" : " + dto.getState_name());
 		
 		return "client/requestBoarderList";
 	}

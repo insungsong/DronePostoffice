@@ -46,11 +46,11 @@
 		</div>
 		<div class="body">
 			<div class="request">
-				<a href="requestBoarderList?pageNo=1&totalWeight=0"><img src = "./resources/images/mail_request.png" style="width:400px;height:380px;"/></a>
+				<a href="requestBoarderList?pageNo=1&totalWeight=0"style="display:block;"><img src = "./resources/images/mail_request.png" style="width:400px;height:380px;"/></a>
 				<a href="requestBoarderList?pageNo=1&totalWeight=0"><button type="button" class="btn btn-outline-danger" style="width:400px;">우편 작성</button></a>
 			</div>
 			<div class="check">
-				<a href="packageCheck"><img src = "./resources/images/mail_check.png "style="width:400px;height:380px;"/></a>
+				<a href="packageCheck"style="display:block;" ><img src = "./resources/images/mail_check.png "style="width:400px;height:380px;"/></a>
 				<a href="packageCheck"><button type="button" class="btn btn-outline-success" style="width:400px;">우편 확인</button></a>
 			</div>
 		</div>
