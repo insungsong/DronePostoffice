@@ -35,5 +35,9 @@ public class ClientCheckDAO {
 	public int cancel(int package_id) {
 		return sqlSessionTemplate.delete("board.cancel",package_id);
 	}
+
+	public PackageDTO packageDetail(int package_id) {
+		return sqlSessionTemplate.selectOne("board.packageDetail",package_id);
+	}
 }
 

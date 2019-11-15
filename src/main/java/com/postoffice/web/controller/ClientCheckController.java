@@ -86,7 +86,17 @@ public class ClientCheckController {
 	public String cancel(int package_id) {
 		checkService.cancel(package_id);
 		return "redirect:/packageCheck";
-		
+	}
+	@RequestMapping("packageDetail")
+	public String packageDetail(int package_id,Model model) {
+		PackageDTO detailList=checkService.packageDetail(package_id);
+		/*
+		 * for(int i=0; i<detailList.getMailList().size(); i++) {
+		 * System.out.println(detailList.getMailList().get(i).getFrom_name() + "/" +
+		 * detailList.getMailList().get(i).getMail_id()); }
+		 */
+		model.addAttribute("detail",detailList);
+		return "client/packageDetail";
 	}
 }
 
