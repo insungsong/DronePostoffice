@@ -11,6 +11,7 @@
 	<result column="mail_weight" property="mail_weight"/>
 	<result column="package_Num" property="package_num"/>
 	<result column="mail_date" property="mail_date"/>
+	
 <collection property="stateList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.StateDTO">
 	<result column="state_id" property="state_id"/>
 	<result column="state_name" property="state_name"/>

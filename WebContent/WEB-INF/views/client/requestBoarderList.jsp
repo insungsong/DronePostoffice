@@ -52,6 +52,11 @@
 				}
 			});
 		}
+		
+		
+		function check(){
+			location.href="check";
+		}
 	</script>
 	
 	</head>
@@ -105,7 +110,7 @@
 											  	</c:when>
 												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
-												  		<tr>
+												  		<tr >
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
 															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
@@ -135,6 +140,7 @@
 										<tr>				
 											<%-- <sth scope="col" id="total_weight">${totalWeight}</th> --%>
 											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
+											<th><input type="button" value="확인" onclick="check()"></th>
 										</tr>
 									</table>
 								</div>

@@ -106,7 +106,6 @@
 							<col width="50"/><col width="70"><col width="15">
 						</colgroup>
 						<thead>
-						
 							<tr>
 								<th scope="col" rowspan="2">NO</th>
 								<th scope="col" colspan="2">발신자</th>

@@ -13,15 +13,20 @@
 		src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 	<style type="text/css">
 		.body{
-			width:80%;
-			height:100%;
 			background-color: white;
+			display: flex;
 		}
 		.request{	
-			display: inline-block;
+			width: 50%;
+			margin-top: 85px;
+			text-align: center;
+			padding-left: 100px;
 		}
 		.check{
-		    display: inline-block;
+		    width: 50%;
+			margin-top: 85px;
+			text-align: center;
+			padding-right: 100px;
 		}
 		img{
 			vertical-align: middle;
@@ -40,12 +45,12 @@
 			</ul>
 		</div>
 		<div class="body">
-			<div class="request" style="width:250px;margin-left:500px;margin-top: 85px;">
-				<a href="requestBoarderList?pageNo=1&totalWeight=0"><img src = "./resources/images/mail_request.png" style="width:400px;height:380px;"/></a>
+			<div class="request">
+				<a href="requestBoarderList?pageNo=1&totalWeight=0"style="display:block;"><img src = "./resources/images/mail_request.png" style="width:400px;height:380px;"/></a>
 				<a href="requestBoarderList?pageNo=1&totalWeight=0"><button type="button" class="btn btn-outline-danger" style="width:400px;">우편 작성</button></a>
 			</div>
-			<div class="check" style="width:250px;margin-left:230px;margin-top: 85px;">
-				<a href="packageCheck"><img src = "./resources/images/mail_check.png "style="width:400px;height:380px;"/></a>
+			<div class="check">
+				<a href="packageCheck"style="display:block;" ><img src = "./resources/images/mail_check.png "style="width:400px;height:380px;"/></a>
 				<a href="packageCheck"><button type="button" class="btn btn-outline-success" style="width:400px;">우편 확인</button></a>
 			</div>
 		</div>

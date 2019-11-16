@@ -25,22 +25,17 @@ public class ClientCheckService {
 	}
 	public List packageSelect() {
 		return checkDAO.packageSelect();
-		
 	}
-
 	public int updateStateProc(MailDTO mailDTO) {
 		return checkDAO.updateStateProc(mailDTO);
 	}
-	
 	public List beforeSelectAll() {
 		return checkDAO.beforeSelectAll();
 	}
-	
 	public int cancel(int package_id) {
-		return checkDAO.cancel(package_id);
-		
-		
+		return checkDAO.cancel(package_id);	
 	}
-
-	
+	public PackageDTO packageDetail(int package_id) {
+		return checkDAO.packageDetail(package_id);
+	}
 }

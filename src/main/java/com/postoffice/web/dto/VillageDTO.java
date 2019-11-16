@@ -31,6 +31,4 @@ public class VillageDTO {
 		this.return_path = return_path;
 	}
 	
-	
-	
 }

@@ -9,6 +9,7 @@ public class VMemberDTO {
 	private String vmtel;
 	private String vmphoto;
 	private String vid;
+	private String grade;
 	private List<VillageDTO> villageList;
 	
 	public String getVmid() {
@@ -36,6 +37,12 @@ public class VMemberDTO {
 		return vmtel;
 	}
 	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public void setVmtel(String vmtel) {
 		this.vmtel = vmtel;
 	}
