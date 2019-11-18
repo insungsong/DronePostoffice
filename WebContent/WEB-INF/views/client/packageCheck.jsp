@@ -21,15 +21,16 @@
 			}
 			
 		}
-		function click(){
-			$(".tr").click(function(){
-				alert("d");
-			});
-		}
 		
-		$.ajax(function(){
-			
-		});
+		function regist(package_id){
+			var result=confirm("접수 요청 하시겠습니까?");
+			if(result==true){
+				location.href="registRequest?package_id="+package_id;
+				alert("접수요청 되었습니다.");
+			}else{
+				alert("취소 하셨습니다.")
+			}
+		}
 		
 	</script>
 	<style>
@@ -67,7 +68,7 @@
 													<td>${pack.arrival_date}</td>
 													<td>${pack.stateList.get(0).state_name}</td>
 													<td>${pack.villageList.get(0).vname}</td>
-													<td><input type="button" value="접수 요청" onClick="regist()"/></td>
+													<td><input type="button" value="접수 요청" onClick="regist(${pack.package_id})"/></td>
 													<td><input type="button" value="요청취소" onclick="cancel(${pack.package_id})"/></td>
 												<tr>
 											</c:if>
@@ -78,5 +79,6 @@
 									<table style="margin-top:10px; float:right;">
 									</table>
 								</div>
+					
 	</body>
 </html>

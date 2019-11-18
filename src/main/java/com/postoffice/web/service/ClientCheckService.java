@@ -38,4 +38,8 @@ public class ClientCheckService {
 	public PackageDTO packageDetail(int package_id) {
 		return checkDAO.packageDetail(package_id);
 	}
+	public int registRequest(int package_id) {
+		return checkDAO.registRequest(package_id);
+		
+	}
 }
