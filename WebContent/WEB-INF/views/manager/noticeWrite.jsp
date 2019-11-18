@@ -85,7 +85,7 @@
 							</tr>
 					</table>
 						<input type="hidden" name="mid" value="${memberInfo.mid}"/>
-						<input type="submit" value="저장" onclick="checkForm()"></input>
+						<input type="submit" value="저장" onclick="checkForm()" class="btn btn-outline-danger"></input>
 					</div>
 				</form> 
 			</div>

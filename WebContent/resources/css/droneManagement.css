@@ -8,8 +8,17 @@ tbody {
 h2{
 	
 }
+.left{
+	
+}
 .drone_left {
 	width: 16%;
+	float : left;
+}
+.dron_left_down{
+	position: absolute;
+    top: 390px;
+    width: 16%;
 	float : left;
 }
 .drone_center{

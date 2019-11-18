@@ -2,7 +2,6 @@ package com.postoffice.web.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
-import com.postoffice.web.dto.VMemberDTO;
 import com.postoffice.web.service.ClientRequestService;
 import com.postoffice.web.service.LoginService;
 
@@ -43,16 +41,15 @@ public class ClientRequestController {
 	@RequestMapping("/mailpackaging")
 	public String mailpackaging(Model model,
 			@RequestParam(value="mailIdList[]")List<String>mailIdList,
-			@RequestParam(value="totalWeight") String totalWeight,HttpSession session,HttpServletRequest request)throws Exception{
-			String vname = (String)session.getAttribute("vname");
+			@RequestParam(value="totalWeight") String totalWeight,HttpSession session)throws Exception{
+			String vid = (String)session.getAttribute("vid");
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
-			System.out.println("vname:"+vname);
-			
-			
-			model.addAttribute("mailpackaginList", requestService.mailPackaging(mailIdList,totalWeight,vname));
+			System.out.println("vid:"+vid);
+
+			requestService.mailPackaging(mailIdList,totalWeight,vid);
 		
-		return "/requestBoarderList";
+		return "redirect:/requestBoarderList";
 	}
 
 	@RequestMapping("/requestBoarderList")
@@ -98,7 +95,6 @@ public class ClientRequestController {
 		
 		String vid = (String)session.getAttribute("vid");
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo ,vid);
-		
 		// JSP로 페이지 정보 넘기기
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
 															// 씀

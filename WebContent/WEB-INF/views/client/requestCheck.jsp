@@ -14,6 +14,7 @@
 <script
 	src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 <style>
+
 #customers {
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
@@ -39,6 +40,31 @@
 	text-align: left;
 	background-color: #4CAF50;
 	color: white;
+}
+
+#img {
+	width:150px;
+	height:35px;
+	
+}
+
+#checkHead{
+	width:100%;
+	height:50px;
+	background-color:red;
+}
+#checkSession{
+	text-align:center;
+}
+
+.client_content_content{
+	margin:10px;
+	border:solid 1px black;
+}
+
+#btn2{
+	position: absolute;
+	right:10px;
 }
 </style>
 <script>
@@ -100,15 +126,25 @@
 		$("#btn").hide();
 	} */
 
+	function beforeCheckList(){
+		location.href="beforeCheckList";
+	}
+	
 </script>
 </head>
 <body>
 <jsp:include page="../common/manageHeader.jsp"></jsp:include>
-
-	<form id="form1">
-	<table id="customers" class="table">
-		<thead class="thead-dark">
-		${vmname} 님 환영합니다.
+	
+	
+		
+		<div id="checkHead">
+		
+			<div id="checkSession" class="alert alert-danger">${vmname} 님 요청 확인 페이지 입니다.
+				
+			</div>
+		
+		 <table id="customers" class="table">
+			<thead class="thead-dark">
 		<tr>
 			<th>요청 번호</th>
 			<th>보내는 사람</th>
@@ -140,16 +176,13 @@
 				<c:if test="${check.state_id eq 's005' or check.state_id eq 's002'}">
 					<td>접수 요청완료!</td>
 				</c:if>
-				
-				
+						
 				<c:if test="${check.state_id ne 's005' or check.state_id eq 's002'}">
 					<td><input id="btn" type="button"  value="접수 요청하기" onClick="check('s005','${check.mail_id}')"/></td>
 				</c:if>
-				
-				
-				
-				
-				
+				<c:if test="${check.state_id ne 's005' or check.state_id eq 's002'}">
+					<td><input id="img" type="image"  value="접수 요청하기" onClick="check('s005','${check.mail_id}')" img src="./resources/images/message.png"/></td>
+				</c:if>
 				
 				</c:if>
 				<%-- <select name="state"> 
@@ -158,13 +191,16 @@
 					</c:forEach>
 				</select> --%>
 			</tr>
-		</c:forEach>
-		
-	</tbody>
-	</table>
-	</form>
+				</c:forEach>	
+			</tbody>
+		</table>
+	</div> 
+	
+	<div id="checkFooter">
 	<input id="btn1" type="button"  value="메인으로" onClick="main()" class="btn btn-primary " />
+	<input id="btn2" type="button" value="이전 요청 내역" onClick="beforeCheckList()" class="btn btn-danger"/>
+	</div>
 	
 	
-		</body>
+	</body>
 	</html>

@@ -91,7 +91,7 @@
 							</tr>
 					</table>
 						<input type="hidden" name="notice_id" value="${notice.notice_id}">
-						<input type="submit" value="수정" onClick="checkForm()"></input>
+						<input type="submit" value="저장" onClick="checkForm()" class="btn btn-danger"></input>
 					</div>
 					
 				</form> 

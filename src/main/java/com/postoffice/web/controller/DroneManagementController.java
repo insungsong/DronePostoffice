@@ -20,5 +20,8 @@ public class DroneManagementController {
 		
 		return "manager/droneManagement";
 	}
-	
+	//@RequestMapping("/clientManagement")
+	//public String clientstateChange() {
+		
+	//}
 }

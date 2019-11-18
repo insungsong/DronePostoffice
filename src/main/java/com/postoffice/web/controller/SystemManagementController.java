@@ -45,11 +45,11 @@ public class SystemManagementController {
 
 		String vid = villageDTO.getVid();
 		String vname = villageDTO.getVname();
-		int lat = villageDTO.getVlat();
-		int lng = villageDTO.getVlng();
+		//int lat = villageDTO.getVlat();
+		//int lng = villageDTO.getVlng();
 
 		System.out.println("=========================------------------\\\\\\\"");
-		System.out.println(sid + sname + did + dname + vid + vname + lat + lng);
+		System.out.println(sid + sname + did + dname + vid + vname );
 
 		return "manager/systemManagement";
 	}

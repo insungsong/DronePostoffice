@@ -27,31 +27,19 @@
 				$("#fromaddressError").text("*보내는 사람주소를 입력하세요.");
 				result = false;
 			}
-			if($("#toaddress").val()==""){
+			if($("#searchto_address").val()==""){
 				$("#toaddressError").text("*받는 사람주소를 입력하세요");
 				result = false;
 			}
-			if($("#fromname").val()==""){
+			if($("#from_name").val()==""){
 				$("#fromnameError").text("*보내는 사람이름을 입력하세요");
 				result = false;
 			}
-			if($("#toname").val()==""){
+			if($("#to_name").val()==""){
 				$("#tonameError").text("*받는 사람이름을 입력하세요");
 				result = false;
 			}
-			if($("#mailweight").val()==""){
-				$("#mailweightError").text("*우편무게를 입력하세요");
-				result = false;
-			}
-			if($("#mailweight").val()==""){
-				$("#mailweightError").text("*우편무게를 입력하세요");
-				result = false;
-			}
-			if($("#mailweight").val()==""){
-				$("#mailweightError").text("*우편무게를 입력하세요");
-				result = false;
-			}
-			if($("#mailweight").val()==""){
+			if($("#mail_weight").val()==""){
 				$("#mailweightError").text("*우편무게를 입력하세요");
 				result = false;
 			}
@@ -125,12 +113,6 @@
 		    <span id="toaddressError" class="error" style="color:red">${toaddressError}</span>
 		  </div>
 		  <div class="form-group">
-		    <label for="formGroupExampleInput2">마을 이름</label>
-		    
-		    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
-		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
-		  </div>
-		   <div class="form-group">
 		    <label for="formGroupExampleInput">우편물 무게</label>
 		    <input type="text" class="form-control" name="mail_weight" id="mail_weight" placeholder="우편물 무게를 입력하세요" >
 		  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
@@ -142,6 +124,12 @@
 		    <input type="hidden" name="vid" value="${vid }">
 		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
 		  </div>
+		  <div class="form-group">
+		    <label for="formGroupExampleInput2">마을 이름</label>
+		    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
+		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
+		  </div>
+		  
 		  <button class="btn btn-danger">요청 저장</button>
 		</form>
 	</div>

@@ -185,7 +185,6 @@
 							<label for="lphoto" onclick="uploadclick()">사진업로드</label>
 							<input id="lphoto" name="lphoto" type="file">
 							<div class="upload_picture">
-									
 							</div>
 						</div>
 						
@@ -206,6 +205,7 @@
 								<option value="d003">전산관리부</option>
 							</select>
 						</div>
+						
 						<div class="joinButton">
 							<input type="submit" value="회원가입">
 						</div>

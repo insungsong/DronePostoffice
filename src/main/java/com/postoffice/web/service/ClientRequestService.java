@@ -86,7 +86,7 @@ public class ClientRequestService {
 	}
 
 
-	public int mailPackaging(List<String> mailIdList, String totalWeight,String vname) {
+	public int mailPackaging(List<String> mailIdList, String totalWeight,String vid) {
 		String rep = totalWeight.replace("g", "");
 		int total = Integer.parseInt(rep);
 		
@@ -94,7 +94,17 @@ public class ClientRequestService {
 		packageDTO.setPackage_weight(total);
 		
 		//insert
-		int mailpackaginList = clientdao.mailPackaging(packageDTO,vname);
+		packageDTO.setVid(vid);
+		
+		int mailpackaginList = clientdao.mailPackaging(packageDTO);
+		System.out.println(mailpackaginList);
+		MailDTO mailDTO = new MailDTO();
+		System.out.println("Daddadadad :"+packageDTO.getPackage_id());
+		//update
+		for(int i =0; i<mailIdList.size(); i++) {
+			mailDTO.setMail_id(Integer.parseInt(mailIdList.get(i)));
+			clientdao.mailUpdate(mailDTO,packageDTO);
+		}
 		
 		return mailpackaginList;
 	}

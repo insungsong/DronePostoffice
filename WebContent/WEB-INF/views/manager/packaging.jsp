@@ -72,6 +72,7 @@
 			url:"packaging",
 			data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
 			success:function(data){
+				console.log('성공');
 				location.reload();
 			}
 		});
@@ -105,7 +106,6 @@
 							<col width="50"/><col width="70"><col width="15">
 						</colgroup>
 						<thead>
-						
 							<tr>
 								<th scope="col" rowspan="2">NO</th>
 								<th scope="col" colspan="2">발신자</th>
@@ -130,20 +130,28 @@
 								<col width="50" /><col width="70">
 							</colgroup>
 							<tbody>	
-								<c:forEach items="${mailList}" var="mail">	
-									<c:if test="${mail.state_id eq 's001'}">									
+							<c:choose>
+								<c:when test="${mailList.size() lt 1}">									
+									<tr>
+										<td class="num" colspan="8" style="height:30px; background:#fbfbf9;">우편이 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${mailList}" var="mail">							
 										<tr>
 											<td class="num">${mail.mail_id}</td>
 											<td class="title" >${mail.from_name}</td>
 											<td class="date">${mail.from_address}</td>
 											<td class="writer">${mail.to_name}</td>
 											<td class="writer">${mail.to_address}</td>
-											<td>도착 마을</td>
+											<td>마을명</td>
 											<td class="writer">${mail.mail_weight}g</td>
 											<td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td>
 										</tr>
-									</c:if>
-								</c:forEach>
+	
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							</tbody>
 						</table>
 					</div>
@@ -174,10 +182,10 @@
 						<thead>
 							<tr>
 								<th scope="col">NO</th>
-								<th scope="col">도착 마을</th>
+								<th scope="col">마을 이름</th>
 								<th scope="col">총 무게</th>
 								<th scope="col">상태</th>
-								<th scope="col">포장 날짜</th>
+								<th scope="col" style="border-right:0;">포장 날짜</th>
 								<th scope="col" colspan="2"></th>
 							</tr>
 						</thead>
@@ -192,9 +200,9 @@
 								<c:forEach items="${packageList}" var="pack">										
 									<tr>
 										<td class="num">${pack.package_id}</td>
-										<td class="title" >${pack.village}</td>
+										<td class="title">${pack.villageList.get(0).vname}</td>
 										<td class="date">${pack.package_weight}</td>
-										<td class="writer">${pack.state_id}</td>
+										<td class="writer">${pack.stateList.get(0).state_name}</td>
 										<td class="writer">${pack.arrival_date}</td>
 										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
 									</tr>

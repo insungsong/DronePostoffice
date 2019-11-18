@@ -1,6 +1,7 @@
 package com.postoffice.web.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 public class PackageDTO {
 	private int package_id;
@@ -8,8 +9,16 @@ public class PackageDTO {
 	private int package_weight;
 	private String state_id;
 	private Date arrival_date;
-	private String package_division;
+	private String vid;
 	
+	private List<StateDTO> stateList;
+	private List<VillageDTO> villageList;
+	private List<MailDTO> mailList;
+
+	
+	public void setVillageList(List<VillageDTO> villageList) {
+		this.villageList = villageList;
+	}
 	public int getPackage_id() {
 		return package_id;
 	}
@@ -41,10 +50,27 @@ public class PackageDTO {
 	public void setArrival_date(Date arrival_date) {
 		this.arrival_date = arrival_date;
 	}
-	public String getPackage_division() {
-		return package_division;
+	public String getVid() {
+		return vid;
+
 	}
-	public void setPackage_division(String package_division) {
-		this.package_division = package_division;
+	public void setVid(String vid) {
+		this.vid = vid;
+
+	}
+	public List<StateDTO> getStateList() {
+		return stateList;
+	}
+	public void setStateList(List<StateDTO> stateList) {
+		this.stateList = stateList;
+	}
+	public List<VillageDTO> getVillageList() {
+		return villageList;
 	}	
+	public List<MailDTO> getMailList() {
+		return mailList;
+	}
+	public void setMailList(List<MailDTO> mailList) {
+		this.mailList = mailList;
+	}
 }

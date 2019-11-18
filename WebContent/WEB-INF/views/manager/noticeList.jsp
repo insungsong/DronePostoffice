@@ -74,11 +74,6 @@
 							<col width="21%"/><col width="22%"/>
 						</colgroup>
 						<thead>
-							
-							
-							
-							
-							
 							<tr style="height: 39px">
 								<th scope="col">글번호</th>
 								<th scope="col">제목</th>
@@ -103,35 +98,35 @@
 					</table>
 					
 					<div class="wbtn_div">
-								<a href="noticeWrite" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;">글쓰기</a>
+								<a href="noticeWrite" class="btn btn-outline-danger" style="margin-top:10px;">글쓰기</a>
 							</div>
 					
 							</div>
 						
 						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
-							<a href="noticeList?pageNum=1" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;"><<</a>
+							<a href="noticeList?pageNum=1" class="btn btn-outline-danger" style="margin-top:5px;"><<</a>
 							<c:if test="${groupNum >1}">
-								<a href="noticeList?pageNum=${startPageNum-1}" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;"><</a>
+								<a href="noticeList?pageNum=${startPageNum-1}" class="btn btn-outline-danger" style="margin-top:5px;"><</a>
 							</c:if>
 								<div style="display: inline-block;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 								 
-								 <div class="btn-group mr-2" role="group" aria-label="First group">
+								 <div class="btn-group mr-2" role="group" aria-label="First group" style="margin-top:5px;">
 								 	<c:forEach begin="${startPageNum}" end="${endPageNum}" var="i">
 								 		<c:if test="${pageNum==i}">
-								 			<a href="noticeList?pageNum=${i}" class="btn btn-secondary active">${i}</a>
+								 			<a href="noticeList?pageNum=${i}" class="btn btn-danger active" >${i}</a>
 								 		</c:if>
 								 		<c:if test="${pageNum!=i}">
-								 			<a href="noticeList?pageNum=${i}" class="btn btn-secondary">${i}</a>
+								 			<a href="noticeList?pageNum=${i}" class="btn btn-danger" style="opacity: 0.5;">${i}</a>
 								 		</c:if>
 								 	</c:forEach>
 								  </div>
 								
 								</div>	
 								<c:if test="${groupNum <totalGroupNum}">
-									<a href="noticeList?pageNum=${endPageNum+1}" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;">></a>
+									<a href="noticeList?pageNum=${endPageNum+1}" class="btn btn-outline-danger" style="margin-top:5px;">></a>
 								</c:if>
-								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;">>></a>
+								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-outline-danger" style="margin-top:5px;">>></a>
 							</div>
 						</c:if>
 						

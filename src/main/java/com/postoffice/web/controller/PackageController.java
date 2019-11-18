@@ -22,11 +22,11 @@ public class PackageController {
 	public String packagingList(Model model,
 				@RequestParam(defaultValue="0") String sort) {
 		
-		
 		model.addAttribute("mailList",packageService.mailList(sort));
 		model.addAttribute("packageList",packageService.packageList());
 		
 		List<PackageDTO> list = packageService.packageList();
+		System.out.println(list.size());
 		for(int i = 0; i < list.size(); i++) {
 			PackageDTO dto = list.get(i);
 			System.out.println("------------------------------------------");
