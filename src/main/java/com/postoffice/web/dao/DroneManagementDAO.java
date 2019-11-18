@@ -1,6 +1,8 @@
 package com.postoffice.web.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +31,16 @@ public class DroneManagementDAO {
 	public VillageDTO selectDroneDeliveryState(DroneDTO dto) {
 		return sqlSessionTemplate.selectOne("drone.selectDroneDeliveryState", dto);
 	}
-	
-	public void updateDroneState(DeliveryDTO dto) {
-		sqlSessionTemplate.update("drone.updateDroneState",dto);
+	public void insertDroneDelivery(DeliveryDTO dto) {
+		sqlSessionTemplate.insert("drone.insertDroneDelivery",dto);
 	}
-	
+	public void updateDroneState(DeliveryDTO dto, String state_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("drone_id",dto.getDrone_id());
+		map.put("state_id",state_id);
+		sqlSessionTemplate.update("drone.updateDroneStateDelivery",map);
+	}
+	public void updatePackageDelivery(DeliveryDTO dto) {
+		sqlSessionTemplate.update("drone.updatePackageDelivery",dto);
+	}
 }

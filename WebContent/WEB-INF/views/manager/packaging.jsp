@@ -82,82 +82,59 @@ function pack_mailList(value){
 
 </script>
 <script type="text/javascript">
-function mailReceive(){
-   var clientToname = new Array();
-   var clientFromname = new Array();
-   var clientToaddress = new Array();
-   var clientFromaddress = new Array();
-   var clentMailweight = new Array();
-   
-   var array = new Array();
-   
-   var ranNum =Math.random()*10+4;
-   
-   var num= parseInt(ranNum);
-   
-   
-   
-   clientToname = ['송인성','양관우','안소영','이명상','김현수','신용권','이상엽','염현지','이민호','김태희','김민지','김갑수','김영희','김남수'];
-   clientFromname=['송인성','양관우','안소영','이명상','김현수','신용권','이상엽','염현지','이민호','김태희','김민지','김갑수','김영희','김남수'];
-   clientToaddress=[
-            '경기도 의정부시',
-            '경기도 남양주시',
-            '서울특별시 면목동',
-            '서울특별시 망우동',
-            '서울특별시 상봉동',
-            '서울특별시 중계동',
-            '서울특별시 대치동',
-            '서울특별시 양서구',
-            '강원도 양구',
-            '경기도 파주',
-            '경기도 하남시',
-            '경기도 성남',
-            '경기도 수원',
-            '강원도 철원군'
-            
-         ];
-   clientFromaddress=[
-         '경기도 의정부시',
-         '경기도 남양주시',
-         '서울특별시 면목동',
-         '서울특별시 망우동',
-         '서울특별시 상봉동',
-         '서울특별시 중계동',
-         '서울특별시 대치동',
-         '서울특별시 양서구',
-         '강원도 양구',
-         '경기도 파주',
-         '경기도 하남시',
-         '경기도 성남',
-         '경기도 수원',
-         '강원도 철원군'
-      ];
-   
-   clientMailweight=[
-                     30,20,40,50,60,80,100,200,300,1,2,3,4,5
-                     ];
-   
-   clientVillageName=['v001','v002','v003',
-								  'v001','v002','v003',
-		  						  'v001','v002','v003',
-		  						  'v001','v002','v003',
-		      					  'v001','v002','v003'
-		  						];
-   
-   for(i = 0; i < 5; i++){
-   $.ajax({
-      url:"clientInfo",
-      data:{"to_name":clientToname[num],"from_name":clientFromname[num],"to_address":clientToaddress[num],"from_address":clientFromaddress[num],"vid":clientVillageName[num],"mail_weight":clientMailweight[num]},   
-      success:function(){
-     	 location.href="mailCheck"
-         
-      }
-   });
-    ranNum =Math.random()*10+4;
-    num= parseInt(ranNum);
-   }
-}
+	function mailReceive() {
+		var clientToname = new Array();
+		var clientFromname = new Array();
+		var clientToaddress = new Array();
+		var clientFromaddress = new Array();
+		var clentMailweight = new Array();
 
+		var array = new Array();
+
+		var ranNum = Math.random() * 10 + 4;
+
+		var num = parseInt(ranNum);
+
+		clientToname = [ '송인성', '양관우', '안소영', '이명상', '김현수', '신용권', '이상엽',
+				'염현지', '이민호', '김태희', '김민지', '김갑수', '김영희', '김남수' ];
+		clientFromname = [ '송인성', '양관우', '안소영', '이명상', '김현수', '신용권', '이상엽',
+				'염현지', '이민호', '김태희', '김민지', '김갑수', '김영희', '김남수' ];
+		clientToaddress = [ '경기도 의정부시', '경기도 남양주시', '서울특별시 면목동', '서울특별시 망우동',
+				'서울특별시 상봉동', '서울특별시 중계동', '서울특별시 대치동', '서울특별시 양서구', '강원도 양구',
+				'경기도 파주', '경기도 하남시', '경기도 성남', '경기도 수원', '강원도 철원군'
+
+		];
+		clientFromaddress = [ '경기도 의정부시', '경기도 남양주시', '서울특별시 면목동', '서울특별시 망우동',
+				'서울특별시 상봉동', '서울특별시 중계동', '서울특별시 대치동', '서울특별시 양서구', '강원도 양구',
+				'경기도 파주', '경기도 하남시', '경기도 성남', '경기도 수원', '강원도 철원군' ];
+
+		clientMailweight = [ 30, 20, 40, 50, 60, 80, 100, 200, 300, 1, 2, 3, 4,
+				5 ];
+
+		clientVillageName = [ 'v001', 'v002', 'v003', 'v001', 'v002', 'v003',
+				'v001', 'v002', 'v003', 'v001', 'v002', 'v003', 'v001', 'v002',
+				'v003' ];
+
+		for (i = 0; i < 5; i++) {
+			$.ajax({
+				url : "clientInfo",
+				data : {
+					"to_name" : clientToname[num],
+					"from_name" : clientFromname[num],
+					"to_address" : clientToaddress[num],
+					"from_address" : clientFromaddress[num],
+					"vid" : clientVillageName[num],
+					"mail_weight" : clientMailweight[num]
+				},
+				success : function() {
+					location.href = "mailCheck"
+
+				}
+			});
+			ranNum = Math.random() * 10 + 4;
+			num = parseInt(ranNum);
+		}
+	}
 </script>
 </head>
 <body>

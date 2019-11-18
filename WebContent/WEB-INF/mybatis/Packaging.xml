@@ -74,6 +74,20 @@
          mail_id=#{mail_id}
    </update>
 
+<!--  
+   <select id="selectPackageList" resultMap="packageInfo">
+      SELECT
+         package.package_id, package.package_weight, package.arrival_date, state.*, village.*
+      FROM
+         package, state, village
+      WHERE
+         package.state_id = state.state_id
+      AND
+         package.vid = village.vid
+      ORDER BY
+            package_id asc
+   </select>
+-->
    <select id="selectPackageList" resultMap="packageInfo">
       SELECT
          package.package_id, package.package_weight, package.arrival_date, state.*, village.*
@@ -121,5 +135,5 @@
 			where v.vid=m.vid 
 		ORDER BY mail_id asc
 	</select>
-
 </mapper> 
+

@@ -22,7 +22,6 @@ public class PackageDAO {
       return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
    }
 
-
 	//우편 패키징
 	public int mailPackaging(PackageDTO dto) {
 		int pack_num = sqlSessionTemplate.insert("packaging.insertMailPackaging",dto);

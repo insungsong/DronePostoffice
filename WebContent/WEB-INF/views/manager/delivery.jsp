@@ -55,12 +55,19 @@
 				$('.pack_droneList').html(data);
 			}
 		});
-		//var url = 'delivery_Popup?package_id='+value+'&index='+index;
-		//window.open(url,"","width=800,height=700,right=300")
 	}
-	function drone_send(id,value){
+	
+	$(function(){
+		var len = $('.returnDrone').length;
 		
-	}
+		for(var i = 0; i < len; i++){
+			if($('.returnDrone').eq(i).attr('id') == 's003'){
+				$('.returnDrone').eq(i).prop('disabled',false);
+			}
+		}
+		
+	})
+
 	
 </script>
 </head>
@@ -117,9 +124,9 @@
 										<td class="title">
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).return_path}'>
-												<input type="hidden" name="package_id" value="${pack.package_id}">
-												<input type="hidden" name="drone_id" id="droneId">
-												<input type="submit" class="delivery" value="복귀" disabled>
+												<input type="hidden" name="package_id" value="${pack.package_id}" id="test">
+												<input type="hidden" name="drone_id" id="return_droneId">
+												<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
 											</form>
 										</td>
 									</tr>

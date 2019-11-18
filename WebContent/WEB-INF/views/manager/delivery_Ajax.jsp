@@ -55,7 +55,7 @@
 			var sp = data.split(',');
 			var drone_id = sp[0];
 			var state_id = sp[1];
-			
+			console.log(state_id);
 			var len = ('tr#droneTr').length;
 			var indexTr;
 			
@@ -83,18 +83,26 @@
 				}
 			});
 			
-			$('#ok').attr('value',drone_id);
+			$('#ok').attr('value',drone_id+','+state_id);
 		}
 		
 		function drone_ok(value){
+			
+			var sp = value.split(',');
+			var drone_id = sp[0];
+			var state_id = sp[1];
+			
 			var index = ${index};
 			//value 는 drone_id
 			//package_id
-			
+
+			console.log(index);
 			//$('.delivery',opener.document).eq(index).prop("disabled",false);
 			//$( "#drone_id",opener.document).val(value);
 			$('.delivery').eq(index).prop("disabled",false);
-			$("#drone_id").val(value);
+			$("input#droneId").attr('value',drone_id);
+			$("input#stateId").attr('value',state_id);
+			$('button#drone').eq(index).text(drone_id);
 			$('.pack_droneList').hide();
 			//$('').hide();
 			//window.self.close();
@@ -129,7 +137,7 @@
 					</colgroup>
 					<tbody id = "droneList">		
 						<c:forEach items="${droneInfo}" var="drone">										
-							<tr id="${drone.drone_id},${drone.stateList.get(0).state_id}" class="droneTr" onclick="drone_click(id)">
+							<tr id="${drone.drone_id},${drone.state_id}" class="droneTr" onclick="drone_click(id)">
 								<td class="num" id="droneId">${drone.drone_id}</td>
 								<td class="title">${drone.stateList.get(0).state_name}</td>
 								<td class="title">100%</td> 
