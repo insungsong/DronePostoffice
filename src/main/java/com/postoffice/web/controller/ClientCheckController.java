@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,16 +63,31 @@ public class ClientCheckController {
 	
 	}
 		
-	@RequestMapping("/stateCheck")
-	public String stateCheck(Model model, HttpServletRequest request) {
-		MailDTO mailDTO=new MailDTO();
-		mailDTO.setMail_id(Integer.parseInt(request.getParameter("mail_id")));
-		mailDTO.setState_id(request.getParameter("state_id"));
-		
-		int result = checkService.updateStateProc(mailDTO);
-		System.out.println(mailDTO.getState_id());
-		
-		return "redirect:/check";
+	
+	  @RequestMapping("/stateCheck")
+	  public String stateCheck(Model model,HttpServletRequest request) {
+	  MailDTO mailDTO=new MailDTO();
+	  mailDTO.setMail_id(Integer.parseInt(request.getParameter("mail_id")));
+	  mailDTO.setState_id(request.getParameter("state_id"));
+	  
+	  int result = checkService.updateStateProc(mailDTO);
+	  System.out.println(mailDTO.getState_id());
+	  
+	  
+	  return "redirect:/check";
+	  
+	  }
+	 
+	//접수요청임 ㅇㅋ?
+	@RequestMapping("/registRequest")
+	public String registRequest(int package_id,HttpServletRequest request) {
+		/*
+		 * PackageDTO pack=new PackageDTO();
+		 * pack.setState_id(request.getParameter("state_id"));
+		 */
+		System.out.println(package_id);
+		checkService.registRequest(package_id);
+		return "redirect:/packageCheck";
 	}
 	
 	@RequestMapping("/beforeCheckList")

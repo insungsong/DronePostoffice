@@ -39,5 +39,9 @@ public class ClientCheckDAO {
 	public PackageDTO packageDetail(int package_id) {
 		return sqlSessionTemplate.selectOne("board.packageDetail",package_id);
 	}
+
+	public int registRequest(int package_id) {
+		return sqlSessionTemplate.update("board.registRequest",package_id);
+	}
 }
 

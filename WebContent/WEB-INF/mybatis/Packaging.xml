@@ -2,89 +2,126 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="packaging">
- 	
-	<resultMap type="com.postoffice.web.dto.MailDTO" id="mainInfo">
-		<id column="mail_id" property="mail_id"/>
-		<result column="mail_id" property="mail_id"/>
-		<result column="from_name" property="from_name"/>
-		<result column="from_address" property="from_address"/>
-		<result column="to_name" property="to_name"/>
-		<result column="to_address" property="to_address"/>
-		<result column="package_num" property="package_num"/>
-		<result column="mail_date" property="mail_date"/>
-		<collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
-			<id column="state_id" property="state_id"/>
-			<result column="state_name" property="state_name"/>
-		</collection>
-		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
-			<id column="vid" property="vid"/>
-			<result column="vname" property="vname"/>
-		</collection>
-	</resultMap>
-	
-	<resultMap type="com.postoffice.web.dto.PackageDTO" id="packageInfo">
-		<id column="package_id" property="package_id"/>
-		<result column="package_weight" property="package_weight"/>
-		<result column="arrival_date" property="arrival_date"/>
-		<collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
-			<id column="state_id" property="state_id"/>
-			<result column="state_name" property="state_name"/>
-		</collection>
-		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
-			<id column="vid" property="vid"/>
-			<result column="vname" property="vname"/>
-			<result column="send_path" property="send_path"/>
-			<result column="return_path" property="return_path"/>
-		</collection>
-	</resultMap>
-	
-	<select id="selectMailList" parameterType="string" resultMap="mainInfo">
-		SELECT
-			mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
-		FROM
-			mail, state, village
-		WHERE
-			mail.state_id = state.state_id
-		AND
-			mail.vid = village.vid
-		AND
-			mail.state_id = 's005'
-			
-	</select>
-	
-	<insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">
-		<selectKey keyProperty="package_id" resultType="int" order="AFTER">
-			SELECT SEQ_PACKAGE.currval FROM dual
-		</selectKey>
-		INSERT INTO
-			package(package_id, village, package_weight, state_id, arrival_date)
-		VALUES 
-			(SEQ_PACKAGE.nextval, '자바마을', #{package_weight}, 's002', sysdate)
-	</insert>
-	
-  	
-	<update id="updateMail" parameterType="map">
-		UPDATE
-			mail
-		SET
-			package_num=#{package_id},
-			state_id='s006'
-		WHERE
-			mail_id=#{mail_id}
-	</update>
+    
+   <resultMap type="com.postoffice.web.dto.MailDTO" id="mainInfo">
+      <id column="mail_id" property="mail_id"/>
+      <result column="mail_id" property="mail_id"/>
+      <result column="from_name" property="from_name"/>
+      <result column="from_address" property="from_address"/>
+      <result column="to_name" property="to_name"/>
+      <result column="to_address" property="to_address"/>
+      <result column="package_num" property="package_num"/>
+      <result column="mail_weight" property="mail_weight"/>
+      <result column="mail_date" property="mail_date"/>
+      <collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
+         <id column="state_id" property="state_id"/>
+         <result column="state_name" property="state_name"/>
+      </collection>
+      <collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
+         <id column="vid" property="vid"/>
+         <result column="vname" property="vname"/>
+      </collection>
+   </resultMap>
+   
+   <resultMap type="com.postoffice.web.dto.PackageDTO" id="packageInfo">
+      <id column="package_id" property="package_id"/>
+      <result column="package_weight" property="package_weight"/>
+      <result column="arrival_date" property="arrival_date"/>
+      <collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
+         <id column="state_id" property="state_id"/>
+         <result column="state_name" property="state_name"/>
+      </collection>
+      <collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
+         <id column="vid" property="vid"/>
+         <result column="vname" property="vname"/>
+         <result column="send_path" property="send_path"/>
+         <result column="return_path" property="return_path"/>
+      </collection>
+   </resultMap>
+   
+   <select id="selectMailList" parameterType="string" resultMap="mainInfo">
+      SELECT
+         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
+      FROM
+         mail, state, village
+      WHERE
+         mail.state_id = state.state_id
+      AND
+         mail.vid = village.vid
+      AND
+         mail.state_id = 's005'
+         
+   </select>
+   
+   <insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">
+      <selectKey keyProperty="package_id" resultType="int" order="AFTER">
+         SELECT SEQ_PACKAGE.currval FROM dual
+      </selectKey>
+      INSERT INTO
+         package(package_id, village, package_weight, state_id, arrival_date)
+      VALUES 
+         (SEQ_PACKAGE.nextval, '자바마을', #{package_weight}, 's002', sysdate)
+   </insert>
+   
+     
+   <update id="updateMail" parameterType="map">
+      UPDATE
+         mail
+      SET
+         package_num=#{package_id},
+         state_id='s006'
+      WHERE
+         mail_id=#{mail_id}
+   </update>
 
-	<select id="selectPackageList" resultMap="packageInfo">
-		SELECT
-			package.package_id, package.package_weight, package.arrival_date, state.*, village.*
-		FROM
-			package, state, village
-		WHERE
-			package.state_id = state.state_id
-		AND
-			package.vid = village.vid
-		ORDER BY
-   			package_id asc
+   <select id="selectPackageList" resultMap="packageInfo">
+      SELECT
+         package.package_id, package.package_weight, package.arrival_date, state.*, village.*
+      FROM
+         package, state, village
+      WHERE
+         package.state_id = state.state_id
+      AND
+         package.vid = village.vid
+      ORDER BY
+            package_id asc
+   </select>
+   
+   <select id="selectPackageMailList" parameterType="com.postoffice.web.dto.PackageDTO" resultMap="mainInfo">
+      SELECT
+         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
+      FROM
+         mail, state, village
+      WHERE
+         mail.state_id = state.state_id
+      AND
+         mail.vid = village.vid
+      AND
+         package_num = #{package_id}
+   </select>
+   
+   <insert id="clientInfo" parameterType="map">
+      insert into
+         mail(mail_id,from_name,from_address,to_name,to_address,vid,mail_weight,state_id,package_num,mail_date)
+      values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{vid},#{mail_weight},'s005',seq_package.nextval,sysdate)
+   </insert>
+   
+	<select id="mailCheck" resultMap="mainInfo">
+		select
+			m.mail_id,
+			m.from_name,
+			m.from_address,
+			m.to_name,
+			m.to_address,
+			v.vname,
+			m.mail_weight
+			
+		from mail m, village v 
+		
+			where v.vid=m.vid 
+		ORDER BY mail_id asc
 	</select>
+<<<<<<< HEAD
 	
 	<select id="selectPackageMailList" parameterType="com.postoffice.web.dto.PackageDTO" resultMap="mainInfo">
 		SELECT
@@ -98,4 +135,14 @@
 		AND
 			package_num = #{package_id}
 	</select>
+	
+	<insert id="clientInfo" parameterType="map">
+		insert into
+			mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,package_num,mail_date,vid)
+		values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s005',seq_package.nextval,sysdate,'v000')
+	</insert>
+=======
+   
+   
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 </mapper>
