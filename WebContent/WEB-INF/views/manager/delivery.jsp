@@ -19,6 +19,14 @@
 
 <script type="text/javascript">
 	
+	// GCS dialog WebView 창 닫기
+	function windowClose() {
+		var result = true;
+		try{
+			java.windowClose();
+			return result;
+		} catch(err) {}
+	}
 	
 	
 	
@@ -94,7 +102,7 @@
 										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
 										<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info(value)">드론 목록</button></td>
 										<td>
-											<form action="drone_delivery" method="post">
+											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="send_path" value='${pack.villageList.get(0).send_path}'>
 												<input type="hidden" name="package_id" value="${pack.package_id}">
 												<input type="hidden" name="drone_id" id="droneId">

@@ -12,30 +12,31 @@ import com.postoffice.web.dto.PackageDTO;
 @Service
 public class PackageService {
 
-	@Autowired
-	PackageDAO packageDAO;
-	
-	public List<MailDTO> mailList(String sort){
-		
-		return packageDAO.mailList(sort);
-	}
-	public List<PackageDTO> packageList(){
-		return packageDAO.packageList();
-	}
-	
-	public List<PackageDTO> mailPackaging(String totalWeight, List<String> mailIdList) {
-		//총 무게 g 자르고 int 변환
-		String rep = totalWeight.replace("g", "");
-		int total = Integer.parseInt(rep);
+   @Autowired
+   PackageDAO packageDAO;
+   
+   public List<MailDTO> mailList(String sort){
+      
+      return packageDAO.mailList(sort);
+   }
+   public List<PackageDTO> packageList(){
+      return packageDAO.packageList();
+   }
+   
+   public List<PackageDTO> mailPackaging(String totalWeight, List<String> mailIdList) {
+      //총 무게 g 자르고 int 변환
+      String rep = totalWeight.replace("g", "");
+      int total = Integer.parseInt(rep);
 
-		
-		PackageDTO packageDTO = new PackageDTO();
-		packageDTO.setPackage_weight(total);
-		
-		//패키지 insert
-		packageDAO.mailPackaging(packageDTO);
-		
+      
+      PackageDTO packageDTO = new PackageDTO();
+      packageDTO.setPackage_weight(total);
+      
+      //패키지 insert
+      packageDAO.mailPackaging(packageDTO);
+      
 
+<<<<<<< HEAD
 		MailDTO mailDTO = new MailDTO();
 		
 		//우편 update
@@ -54,3 +55,30 @@ public class PackageService {
 	}
 	
 }
+=======
+      MailDTO mailDTO = new MailDTO();
+      
+      
+      //우편 update
+      for(int i = 0; i < mailIdList.size(); i++) {
+         mailDTO.setMail_id(Integer.parseInt(mailIdList.get(i)));
+         packageDAO.mailUpdate(mailDTO, packageDTO);
+      }
+      
+      //패키지 목록 select
+      return packageDAO.packageList();
+   }
+   
+   public List<MailDTO> pack_mailList(PackageDTO dto){
+      
+      return packageDAO.pack_mailList(dto);
+   }
+   public int clientInfo(String to_name, String from_name, String to_address, String from_address,String vid, int mail_weight) {
+      return packageDAO.clientInfo(to_name,from_name,to_address,from_address,vid,mail_weight);
+   }
+   public List<MailDTO> mailCheck() {
+      return packageDAO.mailCheck();
+      
+   }
+}
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git

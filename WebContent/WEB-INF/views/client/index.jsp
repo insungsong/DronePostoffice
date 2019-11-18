@@ -34,6 +34,10 @@
 		    background-color: white;
    		 }
 	</style>
+	<script>
+		
+		
+	</script>
 	</head>
 	<body>
 		<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
@@ -54,5 +58,6 @@
 				<a href="packageCheck"><button type="button" class="btn btn-outline-success" style="width:400px;">우편 확인</button></a>
 			</div>
 		</div>
+		
 	</body>
 </html>
