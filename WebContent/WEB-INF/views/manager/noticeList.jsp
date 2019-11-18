@@ -103,16 +103,16 @@
 					</table>
 					
 					<div class="wbtn_div">
-								<a href="noticeWrite" class="btn btn-warning">글쓰기</a>
+								<a href="noticeWrite" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;">글쓰기</a>
 							</div>
 					
 							</div>
 						
 						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
-							<a href="noticeList?pageNum=1" class="btn btn-primary">처음</a>
+							<a href="noticeList?pageNum=1" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;"><<</a>
 							<c:if test="${groupNum >1}">
-								<a href="noticeList?pageNum=${startPageNum-1}" class="btn btn-success">이전</a>
+								<a href="noticeList?pageNum=${startPageNum-1}" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;"><</a>
 							</c:if>
 								<div style="display: inline-block;" class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 								 
@@ -129,9 +129,9 @@
 								
 								</div>	
 								<c:if test="${groupNum <totalGroupNum}">
-									<a href="noticeList?pageNum=${endPageNum+1}" class="btn btn-success">다음</a>
+									<a href="noticeList?pageNum=${endPageNum+1}" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;">></a>
 								</c:if>
-								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-primary">맨끝</a>
+								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-default" style="border:#dee2e6 1px solid; background-color:#dee2e6; margin-top:5px;">>></a>
 							</div>
 						</c:if>
 						
