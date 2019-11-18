@@ -35,8 +35,6 @@ public class PackageService {
       //패키지 insert
       packageDAO.mailPackaging(packageDTO);
       
-
-<<<<<<< HEAD
 		MailDTO mailDTO = new MailDTO();
 		
 		//우편 update
@@ -44,31 +42,10 @@ public class PackageService {
 			mailDTO.setMail_id(Integer.parseInt(mailIdList.get(i)));
 			packageDAO.mailUpdate(mailDTO, packageDTO);
 		}
-		
 		//패키지 목록 select
 		return packageDAO.packageList();
 	}
-	
-	public List<MailDTO> pack_mailList(PackageDTO dto){
-		
-		return packageDAO.pack_mailList(dto);
-	}
-	
-}
-=======
-      MailDTO mailDTO = new MailDTO();
-      
-      
-      //우편 update
-      for(int i = 0; i < mailIdList.size(); i++) {
-         mailDTO.setMail_id(Integer.parseInt(mailIdList.get(i)));
-         packageDAO.mailUpdate(mailDTO, packageDTO);
-      }
-      
-      //패키지 목록 select
-      return packageDAO.packageList();
-   }
-   
+
    public List<MailDTO> pack_mailList(PackageDTO dto){
       
       return packageDAO.pack_mailList(dto);
@@ -80,5 +57,6 @@ public class PackageService {
       return packageDAO.mailCheck();
       
    }
+   
 }
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+

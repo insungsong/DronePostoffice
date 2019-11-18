@@ -22,7 +22,7 @@ public class PackageDAO {
       return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
    }
 
-<<<<<<< HEAD
+
 	//우편 패키징
 	public int mailPackaging(PackageDTO dto) {
 		int pack_num = sqlSessionTemplate.insert("packaging.insertMailPackaging",dto);
@@ -51,36 +51,6 @@ public class PackageDAO {
 		return sqlSessionTemplate.selectList("packaging.selectPackageMailList", dto);
 	}
 
-}
-=======
-   //우편 패키징
-   public int mailPackaging(PackageDTO dto) {
-      int pack_num = sqlSessionTemplate.insert("packaging.insertMailPackaging",dto);
-      return pack_num;
-   }
-   
-   //패키징된 우편 업데이트(상태,패키징 번호)
-   public int mailUpdate(MailDTO mailDTO, PackageDTO packageDTO) {
-      
-      Map<String, Integer> map = new HashMap<>();
-      map.put("mail_id", mailDTO.getMail_id());
-      map.put("package_id", packageDTO.getPackage_id());
-      
-      return sqlSessionTemplate.update("packaging.updateMail", map);
-   }
-   
-   //패키지 목록
-   public List<PackageDTO> packageList(){
-      
-      return sqlSessionTemplate.selectList("packaging.selectPackageList");
-   }
-   
-   //패키징된 우편 목록
-   public List<MailDTO> pack_mailList(PackageDTO dto){
-      
-      return sqlSessionTemplate.selectList("packaging.selectPackageMailList", dto);
-   }
-
    public int clientInfo(String to_name, String from_name, String to_address, String from_address,String vid,int mail_weight) {
       Map<String,Object>map = new HashMap<String, Object>();
       map.put("to_name", to_name);
@@ -88,7 +58,6 @@ public class PackageDAO {
       map.put("to_address", to_address);
       map.put("from_address", from_address);
       map.put("vid",vid);
-      //System.out.println(map.get("vid"));
       map.put("mail_weight", mail_weight);
       return sqlSessionTemplate.insert("packaging.clientInfo",map);
    }
@@ -97,4 +66,4 @@ public class PackageDAO {
 	 return sqlSessionTemplate.selectList("packaging.mailCheck");
    }
 }
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+
