@@ -63,8 +63,8 @@
 				return false;
 			}
 			
-				var plusStateId = plusStateId = $("#plusStateId").val();
-				var plusStateName = plusStateName = $("#plusStateName").val();
+				var plusStateId =  $("#plusStateId").val();
+				var plusStateName = $("#plusStateName").val();
 				var rowItem="<tr>"
 					rowItem += "<tr><td>"+plusStateId+"</td>"
 					rowItem += "<td>"+ plusStateName +"</td>"
@@ -97,16 +97,17 @@
 			$("#SMStateUpdate").show();
 			$("#SInfoUpdate").hide();
 			
-			if($("#updateStateId").val() == null){
+			if($("#updateStateId").val() == ''){
 				//$("#updateStateId").attr("placeholder","*상태코드를 입력해주세요");
 				alert("*상태코드를 입력해주세요.");
 				return false;
 			}
-			if($("#updateStateName").val() == null){
-				$("#updateStateName").attr("placeholder","*상태명을 입력해주세요");
+			if($("#updateStateName").val() == ''){
+				alert("*상태명을 입력해주세요.");
+				//$("#updateStateName").attr("placeholder","*상태명을 입력해주세요");
 				return false;
 			}
-			else{
+			
 			
 			
 			var updateStateId = $("#updateStateId").val();
@@ -120,7 +121,7 @@
 			$("#stateList").append(rowItem)
 
 			return true;
-			}
+			
 	
 		}
 		//취소버튼 눌렀을 때
@@ -223,8 +224,9 @@
 				$("#updateDeptId").attr("placeholder","*상태코드를 입력해주세요");
 				return false;
 			}
-			if($("#updateDeptName").val() == null){
-				$("#updateDeptName").attr("placeholder","*상태명을 입력해주세요");
+			if($("#updateDeptName").val()==''){
+				//$("#plusStateName").attr("placeholder","*상태명을 입력해주세요.");
+				alert("*부서명을 입력해주세요.");
 				return false;
 			}
 			else{
@@ -299,8 +301,9 @@
 				$("#updateVillageId").attr("placeholder","*마을코드를 입력해주세요");
 				return false;
 			}
-			if($("#updateVillageName").val() == null){
-				$("#updateVillageName").attr("placeholder","*마을명을 입력해주세요");
+			if($("#updateVillageName").val()==''){
+				//$("#plusStateName").attr("placeholder","*상태명을 입력해주세요.");
+				alert("*마을명을 입력해주세요.");
 				return false;
 			}
 			else{
@@ -458,7 +461,7 @@
 					</form>
 					
 					<!-- 상태 정보 수정 -->
-					<form method="post" action="stateupdate" >
+					<form method="post" action="stateupdate" onsubmit="return sysStateUpdate();">
 					<div id="SInfoUpdate" style="display:none;">
 						<h4 style="margin-top: 30px;">상태 정보 수정</h4>
 						<table cellspacing="0" border="1" id="stateUpdate" class="frt_tbl_type" style="border-top:0px;">
@@ -477,7 +480,7 @@
 								<tr>
 									<td><input type="text" id="updateStateId" name="state_id" class="updateeStateId" style="width=55px;" readonly/></td>
 									<td><input type="text" id="updateStateName" name="state_name" class="updateStateName"/></td>
-									<td><input id="stateUpdate" type="submit" value="수정" onclick="sysStateUpdate()" style="border:0; width=30px;"></td>
+									<td><input id="stateUpdate" type="submit" value="수정" style="border:0; width=30px;"></td>
 									<td><input id="sUpdateCancel" type="button" value="취소" onclick="suCancel()" style="border:0; width=30px;"></td>					
 								</tr>
 							</tbody>
@@ -569,7 +572,7 @@
 						<!-- 부서정보 수정 -->
 						<div id="DInfoUpdate" style="display:none; ">
 							<h4 style="margin-top: 30px;">부서 정보 수정</h4>
-							<form method="post" action="deptupdate" >
+							<form method="post" action="deptupdate" onsubmit="return sysDeptUpdate()">
 								<div class="DInfoUpdate">
 									<table cellspacing="0" border="1" id="deptupdate" class="frt_tbl_type" style="border-top:0px;">
 										<colgroup>
@@ -587,7 +590,7 @@
 											<tr>
 												<td><input type="text" id="updateDeptId" name="dept_id" readonly></td>
 												<td><input type="text" id="updateDeptName" name="dept_name"></td>
-												<td><input id="deptUpdate" type="submit" value="수정" onclick="sysDeptUpdate()" style="border:0;"></td>
+												<td><input id="deptUpdate" type="submit" value="수정" style="border:0;"></td>
 												<td><input id="dUpdateCancel" type="button" value="취소" onclick="duCancel()" style="border:0; width=30px;"></td>					
 												
 											</tr>
@@ -675,7 +678,7 @@
 							</div>
 						</form>
 					<!-- 마을 정보 수정 -->
-					<form method="post" action="villageupdate" >
+					<form method="post" action="villageupdate" onsubmit="return sysVillageUpdate()">
 							<div id="VInfoUpdate" style="display:none; ">
 								<h4 style="margin-top: 30px;">마을 추가</h4>
 								<table cellspacing="0" border="1" id="villageupdate" class="frt_tbl_type" style="border-top:0px;">
@@ -694,7 +697,7 @@
 										<tr>
 											<td><input type="text" id="updateVillageId" name="vid" class="updateVillageId" style="width=55px;" readonly/></td>
 											<td><input type="text" id="updateVillageName" name="vname" class="updateVillageName"/></td>
-											<td><input id="villageUpdate" type="submit" value="수정" onclick="sysVillageUpdate()" style="border:0;"></td>	
+											<td><input id="villageUpdate" type="submit" value="수정" style="border:0;"></td>	
 											<td><input id="vUpdateCancel" type="button" value="취소" onclick="vuCancel()" style="border:0; width=30px;"></td>									
 										</tr>
 									</tbody>
