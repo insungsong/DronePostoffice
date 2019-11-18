@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientRequestService;
+import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.LoginService;
 
 @Controller
@@ -25,7 +26,8 @@ public class ClientRequestController {
 	private ClientRequestService requestService;
 	@Autowired
 	private LoginService loginService;
-	
+	@Autowired
+	private GcsService gcsService;
 
 	
 	@RequestMapping("/client_index")
@@ -46,7 +48,7 @@ public class ClientRequestController {
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
 			System.out.println("vid:"+vid);
-
+			gcsService.sendMessageToGcs("requestDrone");
 			requestService.mailPackaging(mailIdList,totalWeight,vid);
 		
 		return "redirect:/requestBoarderList";
