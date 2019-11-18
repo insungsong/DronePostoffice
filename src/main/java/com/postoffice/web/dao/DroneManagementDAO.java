@@ -30,4 +30,8 @@ public class DroneManagementDAO {
 		return sqlSessionTemplate.selectOne("drone.selectDroneDeliveryState", dto);
 	}
 	
+	public void updateDroneState(DeliveryDTO dto) {
+		sqlSessionTemplate.update("drone.updateDroneState",dto);
+	}
+	
 }

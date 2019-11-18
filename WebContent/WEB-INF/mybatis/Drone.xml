@@ -94,4 +94,34 @@
 			</when>
 		</choose>
 	</select>
+	
+	<insert id="insertDroneDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
+		INSERT INTO
+			delivery(package_id, drone_id, delivery_date)
+		VALUES
+			(#{package_id},#{drone_id},SYSDATE)
+	</insert>
+	
+	<update id="updateDroneStateDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
+		<choose>
+			<when test="state_id.equals('sd001')">
+				UPDATE
+					drone
+				SET
+					state_id = 'sd002'
+				WHERE
+					drone_id = #{drone_id}
+			</when>
+			<when test="state_id.equals('sd002')">
+				UPDATE
+					drone
+				SET
+					state_id = 'sd005'
+				WHERE
+					drone_id = #{drone_id}
+			</when>
+		</choose>
+	</update>
+	
+
 </mapper>
