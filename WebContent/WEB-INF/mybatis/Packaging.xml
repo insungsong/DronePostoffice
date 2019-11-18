@@ -74,6 +74,20 @@
          mail_id=#{mail_id}
    </update>
 
+<!--  
+   <select id="selectPackageList" resultMap="packageInfo">
+      SELECT
+         package.package_id, package.package_weight, package.arrival_date, state.*, village.*
+      FROM
+         package, state, village
+      WHERE
+         package.state_id = state.state_id
+      AND
+         package.vid = village.vid
+      ORDER BY
+            package_id asc
+   </select>
+-->
    <select id="selectPackageList" resultMap="packageInfo">
       SELECT
          package.package_id, package.package_weight, package.arrival_date, state.*, village.*
@@ -121,28 +135,5 @@
 			where v.vid=m.vid 
 		ORDER BY mail_id asc
 	</select>
-<<<<<<< HEAD
-	
-	<select id="selectPackageMailList" parameterType="com.postoffice.web.dto.PackageDTO" resultMap="mainInfo">
-		SELECT
-			mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
-		FROM
-			mail, state, village
-		WHERE
-			mail.state_id = state.state_id
-		AND
-			mail.vid = village.vid
-		AND
-			package_num = #{package_id}
-	</select>
-	
-	<insert id="clientInfo" parameterType="map">
-		insert into
-			mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,package_num,mail_date,vid)
-		values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s005',seq_package.nextval,sysdate,'v000')
-	</insert>
-=======
-   
-   
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+
 </mapper>

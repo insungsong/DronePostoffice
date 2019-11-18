@@ -20,6 +20,8 @@ public class PackageController {
 
    @Autowired
    private PackageService packageService;
+   @Autowired
+	private GcsService gcsService;
    
    @RequestMapping("/packagingList")
    public String packagingList(Model model,
@@ -71,50 +73,4 @@ public class PackageController {
 	   return "manager/packaging";
    }
    
-}
-
-	@Autowired
-	private PackageService packageService;
-	@Autowired
-	private GcsService gcsService;
-	
-	@RequestMapping("/packagingList")
-	public String packagingList(Model model,
-				@RequestParam(defaultValue="0") String sort) {
-		
-		model.addAttribute("mailList",packageService.mailList(sort));
-		model.addAttribute("packageList",packageService.packageList());
-		
-		List<PackageDTO> list = packageService.packageList();
-		System.out.println(list.size());
-		for(int i = 0; i < list.size(); i++) {
-			PackageDTO dto = list.get(i);
-			System.out.println("------------------------------------------");
-			System.out.println(dto.getPackage_id());
-			System.out.println(dto.getPackage_weight());
-			System.out.println("------------------------------------------");
-		}
-		return "manager/packaging";
-	}
-	
-	@RequestMapping("/packaging")
-	public String packaging(Model model,
-			@RequestParam(value="mailIdList[]") List<String> mailIdList,
-			@RequestParam(value="totalWeight") String totalWeight) throws IOException {
-			
-			gcsService.sendMessageToGcs("requestDelivery");
-			model.addAttribute("packagingList", packageService.mailPackaging(totalWeight, mailIdList));
-			
-			return "redirect:/packagingList";
-	}
-	
-	@RequestMapping("/pack_mailList")
-	public String pack_mailList(Model model, PackageDTO dto) {
-			
-			model.addAttribute("pack_num",dto.getPackage_id());
-			model.addAttribute("pack_mailList",packageService.pack_mailList(dto));
-			return "manager/packageMailList_popup";
-	}
-
-}
 }

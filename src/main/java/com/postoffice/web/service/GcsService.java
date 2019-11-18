@@ -57,7 +57,7 @@ public class GcsService {
 	
 	
 	
-	public void sendMessage(DeliveryDTO dto, String path) {
+	public void sendMessage(DeliveryDTO dto, String state_id, String path) {
 		String topic = "/drone/web/pub";
 		JSONArray jsonArray = new JSONArray(path);
 		JSONObject jsonObject = new JSONObject();
@@ -69,7 +69,9 @@ public class GcsService {
 		String message = jsonObject.toString();
 		try {
 			client.publish(topic, message.getBytes(), 0, false);
-			droneManagementDAO.updateDroneState(dto);
+			droneManagementDAO.insertDroneDelivery(dto);
+			droneManagementDAO.updatePackageDelivery(dto);
+			droneManagementDAO.updateDroneState(dto, state_id);
 		} catch (Exception e) {
 			
 			e.printStackTrace();

@@ -48,10 +48,10 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping("/drone_delivery")
-	public String drone_delivery(DeliveryDTO dto, @RequestParam String path) {
+	public String drone_delivery(DeliveryDTO dto, @RequestParam String state_id, @RequestParam String path) {
 		System.out.println(path);
 		System.out.println(dto.getDrone_id());
-		gcsService.sendMessage(dto, path);
+		gcsService.sendMessage(dto,state_id,path);
 		return "redirect:/delivery";
 	}
 }
