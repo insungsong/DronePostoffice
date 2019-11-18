@@ -98,4 +98,10 @@
 		AND
 			package_num = #{package_id}
 	</select>
+	
+	<insert id="clientInfo" parameterType="map">
+		insert into
+			mail(mail_id,from_name,from_address,to_name,to_address,mail_weight,state_id,package_num,mail_date,vid)
+		values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{mail_weight},'s005',seq_package.nextval,sysdate,'v000')
+	</insert>
 </mapper>

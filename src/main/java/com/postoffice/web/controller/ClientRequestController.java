@@ -157,7 +157,6 @@ public class ClientRequestController {
 		requestService.update(board);
 		
 		int pageNo = (Integer)session.getAttribute("pageNo");
-		System.out.println("----------------------------" + pageNo);
 		return "redirect:/requestBoarderList";
 	}
 	
@@ -166,8 +165,6 @@ public class ClientRequestController {
 	public String searchBoard(String searchType,String keyword,
 						Model model,@RequestParam(defaultValue = "1") int pageNo, HttpSession session) {
 		session.setAttribute("pageNo", pageNo);
-		System.out.println(searchType+"++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(keyword);
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
 

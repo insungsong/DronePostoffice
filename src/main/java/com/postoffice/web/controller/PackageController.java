@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.PackageService;
 
@@ -54,5 +55,5 @@ public class PackageController {
 			model.addAttribute("pack_mailList",packageService.pack_mailList(dto));
 			return "manager/packageMailList_popup";
 	}
-	
+
 }

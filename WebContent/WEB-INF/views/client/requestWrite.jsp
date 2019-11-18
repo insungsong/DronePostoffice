@@ -81,61 +81,71 @@
 	</style>
 	</head>
 	<body>
-	<div class="title"><h5>우편 작성 페이지</h5></div>
-	<div class="mailWrite">
-		<form id="mailWrite" name="answer" method="post" action="requestanswer" onsubmit="return checkForm()">
-		 <div class="form-group">
-		    <!-- 메일 고유 값 -->
-		    <input type="hidden" class="form-control" id="mail_id" name="mail_id" value="${num}" >
-		  </div>
-		   <div class="form-group">
-		    <label for="formGroupExampleInput">보내는 사람 이름</label>
-		    <input type="text" class="form-control" id="from_name" name="from_name" placeholder="보내는 이름을 입력하세요">
-		  	<span id="fromnameError" class="error" style="color:red">${fromnameError}</span>
-		  </div>
-		  <div class="form-group">
-		  
-		    <label for="formGroupExampleInput2">보내는 사람 주소</label><br>
-		    <input type="text" id="searchfrom_address" placeholder="주소 검색" name="from_address" style="width:300px" onfocus="this.blur()">
-		    <input type="text" id="searchfrom_address" placeholder="상세주소 입력" name="from_address" style="width:200px">
-			<input type="button" onclick="searchfromaddress()" value="주소 검색"><br>
-			<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
-		    <!-- <input type="text" class="form-control" name="from_address" id="from_address" placeholder="받는 사람이름을 입력하세요"> -->
-		    <span id="fromaddressError" class="error" style="color:red">${fromaddressError}</span>
-		  </div>
-		 
-		  <div class="form-group">
-		    <label for="formGroupExampleInput2">받는 사람이름</label>
-		    <input type="text" class="form-control" name="to_name" id="to_name" placeholder="보내는 사람주소를 입력하세요">
-		    <span id="tonameError" class="error" style="color:red">${tonameError}</span>
-		  </div>
-		  <div class="form-group">
-		    <label for="formGroupExampleInput2">받는 사람주소</label><br>
-		    <input type="text" id="searchto_address" placeholder="주소 검색" name="to_address" style="width:300px" onfocus="this.blur()">
-		    <input type="text" id="searchto_address" placeholder="상세주소 입력" name="to_address" style="width:200px">
-			<input type="button" onclick="searchtoaddress()" value="주소 검색"><br>
-		    <!-- <input type="text" class="form-control" name="to_address" id="to_address" placeholder="받는 사람주소 입력하세요"> -->
-		    <span id="toaddressError" class="error" style="color:red">${toaddressError}</span>
-		  </div>
-		  <div class="form-group">
-		    <label for="formGroupExampleInput">우편물 무게</label>
-		    <input type="text" class="form-control" name="mail_weight" id="mail_weight" placeholder="우편물 무게를 입력하세요" >
-		  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
-		  </div>
-		  <div class="form-group">
-		    <!-- 배송 상태전달값 -->
-		    <!-- hidden zone -->
-		    <input type="hidden" class="form-control" name="state_id" id="state_name" value="${state_id }">
-		    <input type="hidden" name="vid" value="${vid }">
-		  	<span id="stateError" class="error" style="color:red">${stateError}</span>
-		  </div>
-		  <div class="form-group">
-		    <label for="formGroupExampleInput2">마을 이름</label>
-		    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
-		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
-		  </div>
-		  <button class="btn btn-danger">요청 저장</button>
-		</form>
+		<jsp:include page = "../common/ClienetRequestheader.jsp"/>
+			<div class="body">
+				<div class="body_sub">
+							<div class="mailWrite">
+								<div class="alert alert-danger" role="alert">
+								  <h4 class="alert-heading">메일 요청페이지 입니다!</h4>
+								  <p>해당 순서에 맞게 개인의 메일정보를 기입해주시면 감사하겠습니다.</p>
+								  <hr>
+								  <p class="mb-0">불편사항은 연락부탁드립니다.</p>
+							</div>
+						<form id="mailWrite" name="answer" method="post" action="requestanswer" onsubmit="return checkForm()">
+						 <div class="form-group">
+						    <!-- 메일 고유 값 -->
+						    <input type="hidden" class="form-control" id="mail_id" name="mail_id" value="${num}" >
+						  </div>
+						   <div class="form-group">
+						    <label for="formGroupExampleInput">보내는 사람 이름</label>
+						    <input type="text" class="form-control" id="from_name" name="from_name" placeholder="보내는 이름을 입력하세요">
+						  	<span id="fromnameError" class="error" style="color:red">${fromnameError}</span>
+						  </div>
+						  <div class="form-group">
+						  
+						    <label for="formGroupExampleInput2">보내는 사람 주소</label><br>
+						    <input type="text" id="searchfrom_address" placeholder="주소 검색" name="from_address" style="width:300px" onfocus="this.blur()">
+						    <input type="text" id="searchfrom_address" placeholder="상세주소 입력" name="from_address" style="width:200px">
+							<input type="button" onclick="searchfromaddress()" value="주소 검색"><br>
+							<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+						    <!-- <input type="text" class="form-control" name="from_address" id="from_address" placeholder="받는 사람이름을 입력하세요"> -->
+						    <span id="fromaddressError" class="error" style="color:red">${fromaddressError}</span>
+						  </div>
+						 
+						  <div class="form-group">
+						    <label for="formGroupExampleInput2">받는 사람이름</label>
+						    <input type="text" class="form-control" name="to_name" id="to_name" placeholder="보내는 사람주소를 입력하세요">
+						    <span id="tonameError" class="error" style="color:red">${tonameError}</span>
+						  </div>
+						  <div class="form-group">
+						    <label for="formGroupExampleInput2">받는 사람주소</label><br>
+						    <input type="text" id="searchto_address" placeholder="주소 검색" name="to_address" style="width:300px" onfocus="this.blur()">
+						    <input type="text" id="searchto_address" placeholder="상세주소 입력" name="to_address" style="width:200px">
+							<input type="button" onclick="searchtoaddress()" value="주소 검색"><br>
+						    <!-- <input type="text" class="form-control" name="to_address" id="to_address" placeholder="받는 사람주소 입력하세요"> -->
+						    <span id="toaddressError" class="error" style="color:red">${toaddressError}</span>
+						  </div>
+						  <div class="form-group">
+						    <label for="formGroupExampleInput">우편물 무게</label>
+						    <input type="text" class="form-control" name="mail_weight" id="mail_weight" placeholder="우편물 무게를 입력하세요" >
+						  	<span id="mailweightError" class="error" style="color:red">${mailweightError}</span>
+						  </div>
+						  <div class="form-group">
+						    <!-- 배송 상태전달값 -->
+						    <!-- hidden zone -->
+						    <input type="hidden" class="form-control" name="state_id" id="state_name" value="${state_id }">
+						    <input type="hidden" name="vid" value="${vid }">
+						  	<span id="stateError" class="error" style="color:red">${stateError}</span>
+						  </div>
+						  <div class="form-group">
+						    <label for="formGroupExampleInput2">마을 이름</label>
+						    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
+						    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
+						  </div>
+						  <button class="btn btn-danger">요청 저장</button>
+						</form>
+					</div>
+				</div>
 		</div>
 	</body>
 </html>
