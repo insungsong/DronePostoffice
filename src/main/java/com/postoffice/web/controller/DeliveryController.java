@@ -52,6 +52,6 @@ public class DeliveryController {
 		System.out.println(send_path);
 		System.out.println(dto.getDrone_id());
 		gcsService.sendMessage(send_path);
-		return "manager/delivery";
+		return "redirect:/delivery";
 	}
 }

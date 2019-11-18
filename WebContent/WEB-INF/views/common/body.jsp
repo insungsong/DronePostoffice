@@ -9,7 +9,6 @@
 <body>
 	<div class="body">
 		<div class="body_sub">
-		
 		</div>
 	</div>
 </body>

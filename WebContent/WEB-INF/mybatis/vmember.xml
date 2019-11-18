@@ -33,8 +33,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="com.postoffice.web.dto.VMemberDTO">
-		insert into vmember (vmid, vmname, vmpassword, vmtel, vmphoto, vid, grade)
-		values (#{vmid}, #{vmname}, #{vmpassword}, #{vmtel}, #{vmphoto, jdbcType=VARCHAR}, (select vid from village where vid = #{vid}),'0')
+		insert into vmember (vmid, vmname, vmpassword, vmtel, vmphoto, vid)
+		values (#{vmid}, #{vmname}, #{vmpassword}, #{vmtel}, #{vmphoto, jdbcType=VARCHAR}, (select vid from village where vid = #{vid}))
 		<!-- nullable인 컬럼이 있으면 jdbcType 지정해줘야 null값이 들어갈 수 있다. -->	
 	</insert>
 	

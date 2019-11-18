@@ -14,7 +14,7 @@
 		.mailWrite{
 			width:100%;
 			height:2000px;
-			border:solid 1px black;
+			/* border:solid 1px black; */
 			float:left;
 		}
 	</style>
@@ -74,9 +74,14 @@
 	        }).open();
 	    }
 	</script>
-
+	<style>
+		.form-control{
+			width:31%;
+		}
+	</style>
 	</head>
 	<body>
+	<div class="title"><h5>우편 작성 페이지</h5></div>
 	<div class="mailWrite">
 		<form id="mailWrite" name="answer" method="post" action="requestanswer" onsubmit="return checkForm()">
 		 <div class="form-group">
@@ -129,9 +134,8 @@
 		    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
 		    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
 		  </div>
-		  
 		  <button class="btn btn-danger">요청 저장</button>
 		</form>
-	</div>
+		</div>
 	</body>
 </html>

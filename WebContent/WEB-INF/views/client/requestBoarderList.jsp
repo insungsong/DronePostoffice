@@ -13,10 +13,6 @@
 			<link rel="stylesheet" type = "text/css" href ="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>
 			<script type= "text/javascript" src ="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 			<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
-	
-	<style type="text/css">
-		
-	</style>
 	<script type="text/javascript">
 		function requestDelete(name){
 			console.log(name);
@@ -58,11 +54,9 @@
 			location.href="check";
 		}
 	</script>
-	
 	</head>
 	<body>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
-	
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
 				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href = "logout" style=display:inline>로그아웃</a>
@@ -130,7 +124,7 @@
 									</table>
 									<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
 										<div class="client_write_button">
-											<button class="btn btn-danger" role="button" aria-pressed="true">글쓰기</button>
+											<button class="btn btn-danger" onclick="clickwrite()" role="button" aria-pressed="true">글쓰기</button>
 										</div>
 									</form>
 								</div>
@@ -151,7 +145,7 @@
 											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">[이전]</a>
 										</c:if>		
 										<div class="btn-group mr-2" role="group" aria-label="First group">
-											<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
+											<c:forEach begin="${startPageNo }" end="${endPageNo-1 }" var="i">
 													<c:if test="${pageNo==i }">
 														<a href="requestBoarderList?pageNo=${i}&totalWeight=${totalWeight}" id="test2" class="btn btn-danger active" style="opacity: 0.5;">${i}</a>
 													</c:if>

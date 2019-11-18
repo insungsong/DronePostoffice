@@ -3,6 +3,9 @@
 
 /* body start */
 /*공통 타이틀 양식*/
+.body{
+	height:845px;
+}
 .title_box{
 	width:100%;
 	height: 27px;
