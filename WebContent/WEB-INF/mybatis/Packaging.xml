@@ -22,7 +22,7 @@
          <result column="vname" property="vname"/>
       </collection>
    </resultMap>
-   
+
    <resultMap type="com.postoffice.web.dto.PackageDTO" id="packageInfo">
       <id column="package_id" property="package_id"/>
       <result column="package_weight" property="package_weight"/>
@@ -38,7 +38,7 @@
          <result column="return_path" property="return_path"/>
       </collection>
    </resultMap>
-   
+
    <select id="selectMailList" parameterType="string" resultMap="mainInfo">
       SELECT
          mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
@@ -50,9 +50,9 @@
          mail.vid = village.vid
       AND
          mail.state_id = 's005'
-         
+
    </select>
-   
+
    <insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">
       <selectKey keyProperty="package_id" resultType="int" order="AFTER">
          SELECT SEQ_PACKAGE.currval FROM dual
@@ -62,8 +62,8 @@
       VALUES 
          (SEQ_PACKAGE.nextval, '자바마을', #{package_weight}, 's002', sysdate)
    </insert>
-   
-     
+
+
    <update id="updateMail" parameterType="map">
       UPDATE
          mail
@@ -100,7 +100,7 @@
       ORDER BY
             package_id asc
    </select>
-   
+
    <select id="selectPackageMailList" parameterType="com.postoffice.web.dto.PackageDTO" resultMap="mainInfo">
       SELECT
          mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
@@ -113,13 +113,13 @@
       AND
          package_num = #{package_id}
    </select>
-   
+
    <insert id="clientInfo" parameterType="map">
       insert into
          mail(mail_id,from_name,from_address,to_name,to_address,vid,mail_weight,state_id,package_num,mail_date)
       values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{vid},#{mail_weight},'s005',seq_package.nextval,sysdate)
    </insert>
-   
+
 	<select id="mailCheck" resultMap="mainInfo">
 		select
 			m.mail_id,
@@ -129,11 +129,11 @@
 			m.to_address,
 			v.vname,
 			m.mail_weight
-			
+
 		from mail m, village v 
-		
+
 			where v.vid=m.vid 
 		ORDER BY mail_id asc
 	</select>
+</mapper> 
 
-</mapper>

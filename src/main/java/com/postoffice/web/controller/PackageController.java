@@ -71,6 +71,7 @@ public class PackageController {
 	  
 	  model.addAttribute("checkList",checkList);
 	   return "manager/packaging";
+
    }
    
 }

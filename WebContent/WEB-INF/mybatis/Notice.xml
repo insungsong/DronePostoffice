@@ -65,7 +65,7 @@
 	where rn &gt;=#{startRowNum}
 	</select>
 	
-	<select id="mnamedSearch" parameterType="map" resultMap="notice">
+	<select id="mnameSearch" parameterType="map" resultMap="notice">
 	select rn, notice_id, notice_title, notice_date, dept_id, mid, mname, dept_name
 	from
 	(
@@ -75,7 +75,7 @@
 			from notice n, member m, dept d
 			where n.mid = m.mid
 				and m.dept_id = d.dept_id
-				and mname like #{searchWord}
+				and m.mname like #{searchWord}
 				order by notice_id desc
 		)
 		where rownum &lt;=#{endRowNum}

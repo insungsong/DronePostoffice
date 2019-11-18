@@ -16,6 +16,10 @@
 <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
 
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+<style>
+  
+</style>
+
 
 <script type="text/javascript">
 	
@@ -63,6 +67,24 @@
 		}
 		
 	})
+
+	
+	function checkStatename(id){
+		
+		var stateID = $("#stateId").val(id);
+		System.out.println("################################" + stateID);
+		if(stateID == "s001"){
+			$("#packageListId").ready(function(){
+				$("#packageListId").css({"background-color":"red"})
+			});
+		}
+		else if(stateID == "s002"){
+			$("#packageListId").ready(function(){
+				$("#packageListId").css({"background-color":"blue"})
+			});
+		}
+	} 
+
 	
 </script>
 </head>
@@ -99,9 +121,9 @@
 							</colgroup>
 							<tbody>
 									
-								<c:forEach items="${packageList}" var="pack">										
-
-									<tr>
+								<c:forEach items="${packageList}" var="pack">
+																	
+									<tr id="packageListId?state_id="${pack.stateList.get(0).state_id}>
 										<td class="num" id="pack">${pack.package_id}</td>
 										<td class="title" >${pack.villageList.get(0).vname}</td>
 										<td class="date">${pack.package_weight}g</td>
@@ -113,6 +135,7 @@
 												<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
 												<input type="hidden" name="state_id" id="stateId">
 												<input type="hidden" name="package_id" value="${pack.package_id}">
+												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(id)" value="${pack.stateList.get(0).state_id}">
 												<input type="hidden" name="drone_id" id="droneId">
 												<input type="submit" class="delivery" value="출발" disabled>
 											</form>
@@ -127,7 +150,7 @@
 											</form>
 										</td>
 									</tr>
-					
+									
 								</c:forEach>
 							</tbody>
 							

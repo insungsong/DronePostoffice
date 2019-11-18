@@ -57,7 +57,6 @@ public class PackageDAO {
       map.put("to_address", to_address);
       map.put("from_address", from_address);
       map.put("vid",vid);
-      //System.out.println(map.get("vid"));
       map.put("mail_weight", mail_weight);
       return sqlSessionTemplate.insert("packaging.clientInfo",map);
    }

@@ -67,11 +67,13 @@
 						
 					</div>
 		
-				<a href="noticeList?pageNum=${PageNum}" class="btn btn-info" id="listBtn">목록</a>	
+				<a href="noticeList?pageNum=${PageNum}" class="btn btn-warning" style="border:1px solid #ffc107;float:left;"id="listBtn">목록으로</a>	
 				<!-- 관리자가 아니라면 수정 삭제 불가(해당글을 작성한 사람 = 관리자) -->
 				<c:if test="${noticedetail.mid eq sessionScope.lid}">
+					<div class="buttonBox" style="float:right;">
 					<a href="noticeUpdate?notice_id=${noticedetail.notice_id}" class="btn btn-danger" id="updateBtn">수정</a>	
 					<a href="noticeDelete?notice_id=${noticedetail.notice_id}" class="btn btn-danger" id="deleteBtn">삭제</a>
+					</div>
 				</c:if>
 			</div>
 		</div>
