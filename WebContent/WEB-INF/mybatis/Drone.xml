@@ -22,6 +22,7 @@
 		</collection>
 	</resultMap>
 	
+	
 	<select id="selectDroneList" resultMap="droneInfo">
 		SELECT
 			drone.*, state.*
@@ -29,6 +30,19 @@
 			drone, state
 		WHERE
 			drone.state_id = state.state_id
+		ORDER BY
+			drone_id
+	</select>
+	
+	<select id="selectDroneInfo" parameterType="com.postoffice.web.dto.DroneDTO" resultMap="droneInfo">
+		SELECT
+			drone.*, state.*
+		FROM
+			drone, state
+		WHERE
+			drone.state_id = state.state_id
+		AND
+			drone_id = #{drone_id}
 	</select>
 	
 	<select id="selectDroneLog" parameterType="com.postoffice.web.dto.DroneDTO" resultMap="droneLog">
@@ -43,4 +57,71 @@
 		AND
 			drone_id = #{drone_id}
 	</select>
+	
+	<select id="selectDroneDeliveryState" parameterType="com.postoffice.web.dto.DroneDTO" resultType="com.postoffice.web.dto.VillageDTO">
+		<choose>
+			<when test="state_id.equals('sd002')">
+				SELECT
+					village.send_path
+				FROM
+					delivery, package, village, drone
+				WHERE
+					delivery.package_id = package.package_id
+				AND
+		            delivery.drone_id = drone.drone_id
+		        AND
+					package.vid = village.vid
+				AND
+					delivery.drone_id = #{drone_id}
+				AND
+					drone.state_id = 'sd002'
+			</when>
+			<when test="state_id.equals('sd005')">
+				SELECT
+					village.return_path
+				FROM
+					delivery, package, village, drone
+				WHERE
+					delivery.package_id = package.package_id
+				AND
+		            delivery.drone_id = drone.drone_id
+		        AND
+					package.vid = village.vid
+				AND
+					delivery.drone_id = #{drone_id}
+				AND
+					drone.state_id = 'sd005'
+			</when>
+		</choose>
+	</select>
+	
+	<insert id="insertDroneDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
+		INSERT INTO
+			delivery(package_id, drone_id, delivery_date)
+		VALUES
+			(#{package_id},#{drone_id},SYSDATE)
+	</insert>
+	
+	<update id="updateDroneStateDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
+		<choose>
+			<when test="state_id.equals('sd001')">
+				UPDATE
+					drone
+				SET
+					state_id = 'sd002'
+				WHERE
+					drone_id = #{drone_id}
+			</when>
+			<when test="state_id.equals('sd002')">
+				UPDATE
+					drone
+				SET
+					state_id = 'sd005'
+				WHERE
+					drone_id = #{drone_id}
+			</when>
+		</choose>
+	</update>
+	
+
 </mapper>

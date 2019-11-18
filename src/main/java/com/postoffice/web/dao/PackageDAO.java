@@ -14,13 +14,14 @@ import com.postoffice.web.dto.PackageDTO;
 @Repository
 public class PackageDAO {
 
-	@Autowired
-	private SqlSessionTemplate sqlSessionTemplate;
-	
-	//우편 목록
-	public List<MailDTO> mailList(String sort){
-		return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
-	}
+   @Autowired
+   private SqlSessionTemplate sqlSessionTemplate;
+   
+   //우편 목록
+   public List<MailDTO> mailList(String sort){
+      return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
+   }
+
 
 	//우편 패키징
 	public int mailPackaging(PackageDTO dto) {
@@ -49,4 +50,20 @@ public class PackageDAO {
 		
 		return sqlSessionTemplate.selectList("packaging.selectPackageMailList", dto);
 	}
+
+   public int clientInfo(String to_name, String from_name, String to_address, String from_address,String vid,int mail_weight) {
+      Map<String,Object>map = new HashMap<String, Object>();
+      map.put("to_name", to_name);
+      map.put("from_name",from_name);
+      map.put("to_address", to_address);
+      map.put("from_address", from_address);
+      map.put("vid",vid);
+      map.put("mail_weight", mail_weight);
+      return sqlSessionTemplate.insert("packaging.clientInfo",map);
+   }
+
+   public List<MailDTO> mailCheck() {
+	 return sqlSessionTemplate.selectList("packaging.mailCheck");
+   }
 }
+

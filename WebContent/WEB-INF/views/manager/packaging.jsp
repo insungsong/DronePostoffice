@@ -8,84 +8,160 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="resources/css/packaging.css">
 
-	<script type="text/javascript"
-		src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
-	<link rel="stylesheet" type="text/css"
-		href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
-	<script type="text/javascript"
-		src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-<link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
-
-<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+   <script type="text/javascript"
+      src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
+   <link rel="stylesheet" type="text/css"
+      href="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+   <script type="text/javascript"
+      src="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-	
-	//이기능
-	function weight_check(){
-		
-		var total = [];
-		var check = 0;
-		
-		$('input:checkbox:checked').each(function(){
-			total.push(parseInt($(this).attr('value')));
-		});
-		
-		total_weight = 0;
-		
-		for(var i = 0; i < total.length; i++){
-			total_weight += total[i];
-		}
-	
-		$("#total_weight").text(total_weight+'g');
-		console.log($("#total_weight").text());
-	}
-	
-	function Auto_weight_check(){
-			//if($("#chk_auto").prop("checked")){
-				//if(parseInt($("input[name='chk_auto']:checked")) < parseInt($("#total_weight"))){
-					var len = $(("#mailTable tr").length)-1;
-					for(var i = 0; i < len; i++) {
-						$("#chk"+i).prop("checked",true);
-					}
-				//}
-			//}
-			
-			//if{
-			//	$("#chk").prop("checked",false);
-			//}
-	}
-	
-	function packaging(){
-		var Array = [];
-		
-		$('input:checkbox:checked').each(function(){
-			check = $(this).attr('name');
-			Array.push(check);
-		});
-		
-		for(var i= 0; i < Array.length; i++){
-			console.log('array' + Array[i]);
-		};
-		
-		
-		$.ajax({
-			url:"packaging",
-			data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
-			success:function(data){
-				console.log('성공');
-				location.reload();
-			}
-		});
-	}
-	
-	function pack_mailList(value){
-		var url = 'pack_mailList?package_id='+value;
-		window.open(url,"","width=800,height=700,right=300")
-	}
-	
+   
+//이기능
+function weight_check(){
+   
+   var total = [];
+   var check = 0;
+   
+   $('input:checkbox:checked').each(function(){
+      total.push(parseInt($(this).attr('value')));
+   });
+   
+   total_weight = 0;
+   
+   for(var i = 0; i < total.length; i++){
+      total_weight += total[i];
+   }
+
+   $("#total_weight").text(total_weight+'g');
+   console.log($("#total_weight").text());
+}
+
+function Auto_weight_check(){
+      //if($("#chk_auto").prop("checked")){
+         //if(parseInt($("input[name='chk_auto']:checked")) < parseInt($("#total_weight"))){
+            var len = $(("#mailTable tr").length)-1;
+            for(var i = 0; i < len; i++) {
+               $("#chk"+i).prop("checked",true);
+            }
+         //}
+      //}
+      
+      //if{
+      //   $("#chk").prop("checked",false);
+      //}
+}
+
+function packaging(){
+   var Array = [];
+   
+   $('input:checkbox:checked').each(function(){
+      check = $(this).attr('name');
+      Array.push(check);
+   });
+   
+   for(var i= 0; i < Array.length; i++){
+      console.log('array' + Array[i]);
+   };
+   
+   
+   $.ajax({
+      url:"packaging",
+      data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
+      success:function(data){
+         console.log('성공');
+         location.reload();
+      }
+   });
+}
+
+function pack_mailList(value){
+   var url = 'pack_mailList?package_id='+value;
+   window.open(url,"","width=800,height=700,right=300")
+}
+
+</script>
+<script type="text/javascript">
+function mailReceive(){
+   var clientToname = new Array();
+   var clientFromname = new Array();
+   var clientToaddress = new Array();
+   var clientFromaddress = new Array();
+   var clentMailweight = new Array();
+   
+   var array = new Array();
+   
+   var ranNum =Math.random()*10+4;
+   
+   var num= parseInt(ranNum);
+   
+   
+   
+   clientToname = ['송인성','양관우','안소영','이명상','김현수','신용권','이상엽','염현지','이민호','김태희','김민지','김갑수','김영희','김남수'];
+   clientFromname=['송인성','양관우','안소영','이명상','김현수','신용권','이상엽','염현지','이민호','김태희','김민지','김갑수','김영희','김남수'];
+   clientToaddress=[
+            '경기도 의정부시',
+            '경기도 남양주시',
+            '서울특별시 면목동',
+            '서울특별시 망우동',
+            '서울특별시 상봉동',
+            '서울특별시 중계동',
+            '서울특별시 대치동',
+            '서울특별시 양서구',
+            '강원도 양구',
+            '경기도 파주',
+            '경기도 하남시',
+            '경기도 성남',
+            '경기도 수원',
+            '강원도 철원군'
+            
+         ];
+   clientFromaddress=[
+         '경기도 의정부시',
+         '경기도 남양주시',
+         '서울특별시 면목동',
+         '서울특별시 망우동',
+         '서울특별시 상봉동',
+         '서울특별시 중계동',
+         '서울특별시 대치동',
+         '서울특별시 양서구',
+         '강원도 양구',
+         '경기도 파주',
+         '경기도 하남시',
+         '경기도 성남',
+         '경기도 수원',
+         '강원도 철원군'
+      ];
+   
+   clientMailweight=[
+                     30,20,40,50,60,80,100,200,300,1,2,3,4,5
+                     ];
+   
+   clientVillageName=['v001','v002','v003',
+								  'v001','v002','v003',
+		  						  'v001','v002','v003',
+		  						  'v001','v002','v003',
+		      					  'v001','v002','v003'
+		  						];
+   
+   for(i = 0; i < 5; i++){
+   $.ajax({
+      url:"clientInfo",
+      data:{"to_name":clientToname[num],"from_name":clientFromname[num],"to_address":clientToaddress[num],"from_address":clientFromaddress[num],"vid":clientVillageName[num],"mail_weight":clientMailweight[num]},   
+      success:function(){
+     	 location.href="mailCheck"
+         
+      }
+   });
+    ranNum =Math.random()*10+4;
+    num= parseInt(ranNum);
+   }
+}
+
 </script>
 </head>
 <body>
+
 	<jsp:include page = "../common/manageHeader.jsp"/>
 	<div class="body">
 		<div class="body_sub">
@@ -137,21 +213,25 @@
 									</tr>
 								</c:when>
 								<c:otherwise>
-									<c:forEach items="${mailList}" var="mail">							
-										<tr>
-											<td class="num">${mail.mail_id}</td>
-											<td class="title" >${mail.from_name}</td>
-											<td class="date">${mail.from_address}</td>
-											<td class="writer">${mail.to_name}</td>
-											<td class="writer">${mail.to_address}</td>
-											<td>마을명</td>
-											<td class="writer">${mail.mail_weight}g</td>
-											<td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td>
+									
+							<c:forEach items="${checkList}" var="checkList">                     
+                              <tr>
+                                 <td class="num">${checkList.mail_id}</td>
+                                 <td class="num">${checkList.from_name}</td>
+                                 <td class="num">${checkList.from_address}</td>
+                                 <td class="num">${checkList.to_name}</td>
+                                 <td class="num">${checkList.to_address}</td>
+                                 <td class="num">${checkList.villageList.get(0).vname}</td>
+                                 <td class="num">${checkList.mail_weight}</td>
+                                 <%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
+                              </tr>
+   
+                         </c:forEach>
+											<%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
 										</tr>
-	
-									</c:forEach>
 								</c:otherwise>
-							</c:choose>
+								
+							</c:choose> 
 							</tbody>
 						</table>
 					</div>
@@ -163,6 +243,7 @@
 							<tr>
 								<th scope="col" colspan="5">총 무게</th>
 								<th scope="col" id="total_weight"></th>
+								<th scope="col"><button type="button"  onclick="mailReceive()">우편물 받기</button></th>
 								<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="packaging()">패키징</button></th>
 							</tr>
 						</thead>
@@ -214,6 +295,6 @@
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 </html>

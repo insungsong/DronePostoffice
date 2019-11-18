@@ -13,10 +13,6 @@
 			<link rel="stylesheet" type = "text/css" href ="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css"/>
 			<script type= "text/javascript" src ="<%=application.getContextPath()%>/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
 			<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
-	
-	<style type="text/css">
-		
-	</style>
 	<script type="text/javascript">
 		function requestDelete(name){
 			console.log(name);
@@ -33,36 +29,34 @@
 	<script type="text/javascript">
 		function clientpackaging(){
 			var Array = [];
-			
 			$('input:checkbox:checked').each(function(){
 				check = $(this).attr('name');
 				Array.push(check);
 			});
-			
 			for(var i= 0; i < Array.length; i++){
 				console.log('array' + Array[i]);
 			};
-			
-			$.ajax({
-				url:"mailpackaging",
-				data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
-				success:function(data){
-					console.log("성공");
-					location.reload();
-				}
-			});
+			if(Array.length == 0){
+				alert("*패키징된 메일이 없습니다. 확인부탁드립니다.");
+			}
+			else{
+				$.ajax({
+					url:"mailpackaging",
+					data:{"mailIdList":Array,"totalWeight":$("#total_weight").text()},
+					success:function(data){
+						console.log("성공");
+						location.reload();
+					}
+				});
+			}
 		}
-		
-		
 		function check(){
 			location.href="check";
 		}
 	</script>
-	
 	</head>
 	<body>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
-	
 		<div class="menubar">
 			<ul style=margin-bottom:5px>
 				<li style="position: absolute;right: 7px; border:0;">${vmname}님 환영합니다.<a href = "logout" style=display:inline>로그아웃</a>
@@ -110,6 +104,7 @@
 											  	</c:when>
 												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
+												  		<c:if test="${MailList.stateList.get(0).state_id eq s005}">
 												  		<tr >
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
@@ -123,6 +118,7 @@
 															<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 															<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
 														</tr>
+														</c:if>
 													</c:forEach>	
 													</c:otherwise>
 												 </c:choose>					  
@@ -130,25 +126,23 @@
 									</table>
 									<form action="requestWrite"style="display:inline-block; float:left; margin-top: 20px;">
 										<div class="client_write_button">
-											<button class="btn btn-danger" role="button" aria-pressed="true">글쓰기</button>
+											<button class="btn btn-danger" onclick="clickwrite()" role="button" aria-pressed="true">글쓰기</button>
 										</div>
 									</form>
 								</div>
 								<div class="request_content" style="border-top: 2px solid #F32C28;">
 								<input type = "hidden" id="totalWeight" value="${totalWeight }"/>
 									<table style="margin-top:10px; float:right;">
-										<tr>				
-											<%-- <sth scope="col" id="total_weight">${totalWeight}</th> --%>
-											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()">패키징</button></th>
-											<th><input type="button" value="확인" onclick="check()"></th>
+										<tr>		
+											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()" class="btn btn-outline-danger">패키징</button></th>
 										</tr>
 									</table>
 								</div>
 		
-								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block; float:left;margin-left: 640px;margin-top: 20px;" >
+								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block;margin-left: 700px;margin-top: 18px;" >
 										<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-danger">처음</a>
-										<c:if test="${groupNo > 1}">
-											<a href="requestBoarderList?pageNo=${startPageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">[이전]</a>
+										<c:if test="${pageNo > 1}">
+											<a href="requestBoarderList?pageNo=${pageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">이전</a>
 										</c:if>		
 										<div class="btn-group mr-2" role="group" aria-label="First group">
 											<c:forEach begin="${startPageNo }" end="${endPageNo }" var="i">
@@ -160,10 +154,10 @@
 													</c:if>
 									    	</c:forEach>
 									    <c:if test="${groupNo<totalGroupNum }">
-									    	<a href="requestBoarderList?pageNo=${endPageNo+1}&totalWeight=${totalWeight}" id="test4" class="btn btn-danger">다음</a>
+									    	<a href="requestBoarderList?pageNo=${endPageNo}&totalWeight=${totalWeight}" id="test4" class="btn btn-danger">다음</a>
 									    </c:if>
 									  </div>
-									  <a href="requestBoarderList?pageNo=${totalPageNum}&totalWeight=${totalWeight}" id="test5" class="btn btn-danger">맨끝</a>
+									  <a href="requestBoarderList?pageNo=${endPageNo}&totalWeight=${totalWeight}" id="test5" class="btn btn-danger">맨끝</a>
 								</div>					
 							</div>			
 						</div>

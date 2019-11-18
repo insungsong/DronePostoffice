@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientRequestService;
+import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.LoginService;
 
 @Controller
@@ -25,7 +26,8 @@ public class ClientRequestController {
 	private ClientRequestService requestService;
 	@Autowired
 	private LoginService loginService;
-	
+	@Autowired
+	private GcsService gcsService;
 
 	
 	@RequestMapping("/client_index")
@@ -46,7 +48,7 @@ public class ClientRequestController {
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
 			System.out.println("vid:"+vid);
-
+			gcsService.sendMessageToGcs("requestDrone");
 			requestService.mailPackaging(mailIdList,totalWeight,vid);
 		
 		return "redirect:/requestBoarderList";
@@ -157,7 +159,6 @@ public class ClientRequestController {
 		requestService.update(board);
 		
 		int pageNo = (Integer)session.getAttribute("pageNo");
-		System.out.println("----------------------------" + pageNo);
 		return "redirect:/requestBoarderList";
 	}
 	
@@ -166,8 +167,6 @@ public class ClientRequestController {
 	public String searchBoard(String searchType,String keyword,
 						Model model,@RequestParam(defaultValue = "1") int pageNo, HttpSession session) {
 		session.setAttribute("pageNo", pageNo);
-		System.out.println(searchType+"++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println(keyword);
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
 

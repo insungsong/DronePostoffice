@@ -43,6 +43,13 @@
 			mail_id = #{mail_id}	
 	</update>
 	
+	<update id="registRequest" parameterType="int">
+		update package set
+			state_id ='s005'
+		where
+			package_id=#{package_id}
+	</update>
+	
 	<select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		select 
 			a.mail_id,
@@ -72,7 +79,7 @@
 			p.arrival_date,
 			v.vid,
 			v.vname
-			from package p ,state s ,village v
+		from package p ,state s ,village v
 				where s.state_id = p.state_id
 				and p.vid=v.vid		
 	</select>

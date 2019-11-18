@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.postoffice.web.dao.DroneManagementDAO;
 import com.postoffice.web.dto.DeliveryDTO;
 import com.postoffice.web.dto.DroneDTO;
+import com.postoffice.web.dto.VillageDTO;
 
 @Service
 public class DroneManagementService {
@@ -18,12 +19,16 @@ public class DroneManagementService {
 	public List<DroneDTO> selectDroneList(){
 		return droneManagementDAO.selectDroneList();
 	}
+	public DroneDTO selectDroneInfo(DroneDTO dto){
+		return droneManagementDAO.selectDroneInfo(dto);
+	}
 	
 	public List<DeliveryDTO> selectDroneLog(DroneDTO dto){
 		return droneManagementDAO.selectDroneLog(dto);
 	}
 	
-	public void GCS(String send_path) {
-		
+	public VillageDTO selectDroneDeliveryState(DroneDTO dto) {
+		return droneManagementDAO.selectDroneDeliveryState(dto);
 	}
+
 }

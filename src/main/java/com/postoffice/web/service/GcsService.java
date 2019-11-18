@@ -7,12 +7,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.postoffice.web.dao.DroneManagementDAO;
+import com.postoffice.web.dto.DeliveryDTO;
 
 @Service
 public class GcsService {
 
 	private final static Logger logger = LoggerFactory.getLogger(GcsService.class);
+	
+	@Autowired
+	private DroneManagementDAO droneManagementDAO;
 	
 	private MqttClient client;
 	
@@ -50,21 +57,35 @@ public class GcsService {
 	
 	
 	
-	public void sendMessage(String send_path) {
-		String topic = "/drone/fc/pub";
-		JSONArray jsonArray = new JSONArray(send_path);
+	public void sendMessage(DeliveryDTO dto, String path) {
+		String topic = "/drone/web/pub";
+		JSONArray jsonArray = new JSONArray(path);
 		JSONObject jsonObject = new JSONObject();
 		
 		
-		jsonObject.put("msgid", "MISSION_ITEMS");
-		jsonObject.put("items", jsonArray);
+		jsonObject.put("msgid", "path");
+		jsonObject.put("path", jsonArray);
 		//jsonObject.put("msgid", "MAVJSON_MSG_ID_MISSION_ITEMS");
 		String message = jsonObject.toString();
 		try {
 			client.publish(topic, message.getBytes(), 0, false);
+			droneManagementDAO.updateDroneState(dto);
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}
+	}
+
+	public void sendMessageToGcs(String string) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("msgid", string);
+		String message = jsonObject.toString();
+		logger.debug("실행");
+		try {
+			client.publish("/drone/web/pub", message.getBytes(), 0, false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

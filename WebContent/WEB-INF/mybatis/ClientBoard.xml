@@ -3,7 +3,7 @@
 <mapper namespace="ClientBoard">
 
 <resultMap type="com.postoffice.web.dto.MailDTO" id="Mail" >
-	<result column="mail_id" property="mail_id"/>
+<result column="mail_id" property="mail_id"/>
 	<result column="from_name" property="from_name"/>
 	<result column="from_address" property="from_address"/>
 	<result column="to_name" property="to_name"/>
@@ -134,7 +134,7 @@
 		</selectKey>
 		insert into
 			package(package_id, package_weight, state_id,arrival_date, vid)					
-		values (seq_package.nextval, #{package_weight},'s001',sysdate,#{vid})
+		values (seq_package.nextval, #{package_weight},'s001',sysdate,'v001')
 	</insert>
 	
 	<update id="updateMail" parameterType="map">
