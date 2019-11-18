@@ -1,5 +1,10 @@
 package com.postoffice.web.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +30,13 @@ public class DeliveryController {
 	
 	@RequestMapping("/delivery")
 	public String delibery(Model model) {
-		//model.addAttribute("mailList",packageService.mailList());
+
+		
+		model.addAttribute("droneDeliveryList", droneManagementService.selectDeliveryDrone());
 		model.addAttribute("packageList",packageService.packageList());
 		return "manager/delivery";
 	}
+	
 	
 	@RequestMapping("/delivery_Ajax")
 	public String delivery_Ajax(Model model, PackageDTO dto, @RequestParam String index) {

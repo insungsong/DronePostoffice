@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 					<div class="bor_title">
-						<div class="subject">배송 기록</div>
+						<div class="subject" style="color:#ada8a8;">배송 기록</div>
 					</div>
 					<div class = "mail_list" style="border-bottom:1px solid #999;">
 						<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">

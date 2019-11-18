@@ -30,5 +30,8 @@ public class DroneManagementService {
 	public VillageDTO selectDroneDeliveryState(DroneDTO dto) {
 		return droneManagementDAO.selectDroneDeliveryState(dto);
 	}
+	public List<DeliveryDTO> selectDeliveryDrone(){
+		return droneManagementDAO.selectDeliveryDrone();
+	}
 
 }

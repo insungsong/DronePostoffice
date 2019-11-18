@@ -40,7 +40,14 @@ public class DroneManagementDAO {
 		map.put("state_id",state_id);
 		sqlSessionTemplate.update("drone.updateDroneStateDelivery",map);
 	}
-	public void updatePackageDelivery(DeliveryDTO dto) {
-		sqlSessionTemplate.update("drone.updatePackageDelivery",dto);
+	public void updatePackageState(DeliveryDTO dto, String state_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("package_id",dto.getPackage_id());
+		map.put("state_id",state_id);
+		System.out.println("test : " + state_id);
+		sqlSessionTemplate.update("drone.updatePackageState",map);
+	}
+	public List<DeliveryDTO> selectDeliveryDrone(){
+		return sqlSessionTemplate.selectList("drone.selectDeliveryDrone");
 	}
 }

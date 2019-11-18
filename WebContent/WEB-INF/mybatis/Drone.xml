@@ -25,7 +25,7 @@
 	
 	<select id="selectDroneList" resultMap="droneInfo">
 		SELECT
-			drone.*, state.*
+			drone.*, state.state_name
 		FROM
 			drone, state
 		WHERE
@@ -112,7 +112,7 @@
 				WHERE
 					drone_id = #{drone_id}
 			</when>
-			<when test="state_id.equals('sd002')">
+			<when test="state_id.equals('s003')">
 				UPDATE
 					drone
 				SET
@@ -123,13 +123,31 @@
 		</choose>
 	</update>
 	
-	<update id="updatePackageDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
-		UPDATE
-			package
-		SET
-			state_id = 's003'
-		WHERE
-			package_id = #{package_id}
+	<update id="updatePackageState" parameterType="map">
+		<choose>
+			<when test="state_id.equals('sd001')">
+				UPDATE
+					package
+				SET
+					state_id = 's003'
+				WHERE
+					package_id = #{package_id}
+			</when>
+			<when test="state_id.equals('s003')">
+				UPDATE
+					package
+				SET
+					state_id = 's004'
+				WHERE
+					package_id = #{package_id}
+			</when>
+		</choose>
 	</update>
 
+	<select id="selectDeliveryDrone" resultType="com.postoffice.web.dto.DeliveryDTO">
+		SELECT
+			drone_id, package_id
+		FROM
+			delivery
+	</select>
 </mapper>

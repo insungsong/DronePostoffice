@@ -69,8 +69,10 @@ public class GcsService {
 		String message = jsonObject.toString();
 		try {
 			client.publish(topic, message.getBytes(), 0, false);
-			droneManagementDAO.insertDroneDelivery(dto);
-			droneManagementDAO.updatePackageDelivery(dto);
+			if(state_id.equals("sd001")) {
+				droneManagementDAO.insertDroneDelivery(dto);
+			}
+			droneManagementDAO.updatePackageState(dto, state_id);
 			droneManagementDAO.updateDroneState(dto, state_id);
 		} catch (Exception e) {
 			

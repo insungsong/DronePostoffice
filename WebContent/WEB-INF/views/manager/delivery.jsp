@@ -17,7 +17,21 @@
 
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
 <style>
-  
+	body {
+		background: #17181B;
+	}
+	.frt_tbl_type td {
+		font-size: 13px;
+		color : #9e9595;
+	}
+	
+	.frt_tbl_type th {
+		font-size: 13px;
+		background:#7d7d86;
+	}
+	.frt_tbl_type {
+		border-top: 2px solid #1d32ca;
+	}
 </style>
 
 
@@ -57,6 +71,8 @@
 		});
 	}
 	
+
+	
 	$(function(){
 		var len = $('.returnDrone').length;
 		
@@ -65,10 +81,23 @@
 				$('.returnDrone').eq(i).prop('disabled',false);
 			}
 		}
+			
+		//복귀 버튼에 드론 id 추가
+		var tdLen = $('td#pack').length;
+		var hiLen = $('input#packId').length;
 		
+		for(var i = 0; i < hiLen; i++){
+			for(var j = 0; j < tdLen; j++){	
+				if($('input#packId').eq(i).val() == $('td#pack').eq(j).text()){
+					$('input#return_droneId').eq(j).attr('value',$('input#dronId').eq(i).val());
+				}
+			}
+		}
 	})
 
-	
+		
+
+		
 	function checkStatename(value){
 		var len = $('td#pack').length;
 		var stateid ='';
@@ -89,11 +118,17 @@
 </script>
 </head>
 <body>
+
+	<c:forEach items="${droneDeliveryList}" var="droneList">
+		<input type = "hidden" id = "packId" value="${droneList.package_id}">
+		<input type = "hidden" id = "dronId" value="${droneList.drone_id}">
+	</c:forEach>
+	
 	<div class="body">
 		<div class="body_sub">
 			<div class="pack_deli">
 				<div class="bor_title">
-					<div class="subject">패키지 목록</div>
+					<div class="subject" style="color:#ada8a8;">배송 목록</div>
 				</div>
 				<div class = "mail_list" style="border-bottom:1px solid #999;">
 					<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
@@ -114,7 +149,7 @@
 						</thead>
 					</table>
 					<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
-						<table cellspacing="0" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
+						<table cellspacing="0" border="1" class="frt_tbl_type" style="border-top:0px;">
 						
 							<colgroup>
 								<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100"/><col width="100"><col width="100"><col width="100">
@@ -133,7 +168,6 @@
 										<td>
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
-												<input type="hidden" name="state_id" id="stateId">
 												<input type="hidden" name="package_id" value="${pack.package_id}">
 												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(value)" value="${pack.stateList.get(0).state_id}">
 												<input type="hidden" name="drone_id" id="droneId">

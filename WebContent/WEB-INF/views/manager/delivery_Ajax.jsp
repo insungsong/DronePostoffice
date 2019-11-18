@@ -18,23 +18,40 @@
 	<link rel="stylesheet" type="text/css" href="resources/css/droneManagement.css">
 	
 	<style type="text/css">
+
+		body {
+			background:#17181B;
+		}
+		.frt_tbl_type td {
+			font-size: 13px;
+			color : #9e9595;
+		}
+		.frt_tbl_type th {
+			font-size: 13px;
+			background:#7d7d86;
+		}
+		.frt_tbl_type {
+			border-top: 2px solid #1d32ca;
+		}
 		.drone{
 			width: 100%;
 			height: 200px;
+			margin-top: 15px;
 		}
 		#droneList tr {
 			cursor: pointer;
 		}
 		#droneList tr:hover{
-            background-color: #fbb;
+            background-color: rgb(61, 104, 199);
         }
         #droneList tr:visited{
-        	 background-color: #fbb;
+        	background-color: rgb(61, 104, 199);
         }
         .drone_log{
         	width: 100%;
-		    height: 300px;
-		    margin-top: 50px;
+		    height: 100px;
+		    margin-top: 15px;
+		    max-height: 300px;
         }
         .ok_button{
         	float: right;
@@ -66,7 +83,7 @@
 			}
 			
 			$('tr.droneTr').css('background','none');
-			$('tr.droneTr').eq(indexTr).css('background','#fdd');
+			$('tr.droneTr').eq(indexTr).css('background','rgb(61, 104, 199)');
 			
 			if(state_id == 'sd001'){
 				$('#ok').prop('disabled',false);
@@ -112,7 +129,7 @@
 <body>
 	<div class="drone">
 		<div class="bor_title">
-			<div class="subject">드론 목록</div>
+			<div class="subject" style="color:#ada8a8;">드론 목록</div>
 		</div>
 		<div class = "mail_list" style="border-bottom:1px solid #999;">
 			<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
