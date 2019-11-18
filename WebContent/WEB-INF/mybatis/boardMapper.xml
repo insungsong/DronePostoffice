@@ -79,7 +79,7 @@
 			p.arrival_date,
 			v.vid,
 			v.vname
-			from package p ,state s ,village v
+		from package p ,state s ,village v
 				where s.state_id = p.state_id
 				and p.vid=v.vid		
 	</select>

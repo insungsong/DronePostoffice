@@ -22,4 +22,8 @@ public class DroneManagementService {
 	public List<DeliveryDTO> selectDroneLog(DroneDTO dto){
 		return droneManagementDAO.selectDroneLog(dto);
 	}
+	
+	public void GCS(String send_path) {
+		
+	}
 }

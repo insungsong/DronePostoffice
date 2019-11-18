@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	
+	<script type="text/javascript" src="<%=application.getContextPath() %>/resources/js/paho-mqtt-min.js"></script>
 	<script type="text/javascript"
 		src="<%=application.getContextPath()%>/resources/js/jquery-3.4.1.min.js"></script>
 	<link rel="stylesheet" type="text/css"
@@ -26,7 +28,10 @@
 			var url = 'delivery_Popup';
 			window.open(url,"","width=800,height=700,right=300")
 		}
+		
+		
 	</script>
+	
 	<style type="text/css">
 		#droneList tr:hover{
                 background-color: chocolate;
@@ -99,9 +104,9 @@
 								<tbody>											
 									<tr>
 										<th scope="col">배터리</th>
-										<td class="title">100%</td>
+										<td class="title" id="battery"></td>
 										<th scope="col">현재 상태</th>
-										<td class="title">대기중</td> 
+										<td class="title" id="arm"></td> 
 									</tr>
 									<tr>
 										<th scope="col" colspan="2">등록 일자 일자</th>
@@ -110,6 +115,24 @@
 									<tr>
 										<th scope="col" colspan="2">최근 운용 일자</th>
 										<td class="title" colspan="2">2018-04-12 14:22</td> 
+									</tr>
+									<tr>
+										<th scope="col">높이</th>
+										<td class="title" id="alt"></td>
+										<th scope="col">속도</th>
+										<td class="title" id="speed"></td> 
+									</tr>
+									<tr>
+										<th scope="col">위도</th>
+										<td class="title" id="currLat"></td>
+										<th scope="col">경도</th>
+										<td class="title" id="currLng"></td> 
+									</tr>
+									<tr>
+										<th scope="col">roll</th>
+										<td class="title" id="roll"></td>
+										<th scope="col">pitch</th>
+										<td class="title" id="pitch"></td> 
 									</tr>
 								</tbody>
 							</table>
@@ -127,7 +150,9 @@
 						</div>
 							<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=05852697430c6a36aa2521201b5d17b6">
 							</script>
+							
 							<script>
+							
 									var container = document.getElementById('map');
 									var options = {
 										center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -135,7 +160,87 @@
 									};
 							
 									var map = new kakao.maps.Map(container, options);
+									
+									//mqtt broker와 연결
+									$(function() {
+										//MQTT Broker와 연결하기
+										client = new Paho.MQTT.Client(location.hostname, 61623, "clientId"); //location.hostname: 자동으로 호스트네임 가져옴
+										client.onMessageArrived = onMessageArrived;
+										client.connect({onSuccess:onConnect});
+									});
+									
+									//연결이 완료되었을 때 자동으로 실행(콜백)되는 함수
+									function onConnect() {
+										console.log("Connect");
+										client.subscribe("/drone/fc/pub");
+									}
+									
+									var marker = null;
+									//메시지를 수신했을 때 자동으로 실행(콜백)되는 함수
+									function onMessageArrived(message) {
+										var json = message.payloadString;
+										
+										var obj = JSON.parse(json);
+										
+										if(obj.msgid=="GLOBAL_POSITION_INT") {
+											var currLat = obj.currLat;
+											var currLng = obj.currLng;
+											var alt = obj.alt;
+											
+											$('#currLat').text(currLat);
+											$('#currLng').text(currLng);
+											$('#alt').text(alt+'m');
+											
+											
+											// 마커가 표시될 위치입니다 
+											var markerPosition  = new kakao.maps.LatLng(currLat, currLng); 
+											
+											
+											if(marker != null) {
+												marker.setMap(null);
+												marker.setPosition(markerPosition);
+											} else {
+												// 마커를 생성합니다
+												marker = new kakao.maps.Marker({
+												    position: markerPosition
+												});
+											}
+											
+											
+											// 마커가 지도 위에 표시되도록 설정합니다
+											marker.setMap(map);
+											map.setCenter(markerPosition);
+										}	
+											
+										if(obj.msgid == "ATTITUDE") {
+											var roll = obj.roll;
+											var pitch = obj.pitch;
+											var yaw = obj.yaw
+											
+											$('#roll').text(roll);
+											$('#pitch').text(pitch);
+										}
+										if(obj.msgid == "VFR_HUD"){
+											var groundSpeed = obj.groundSpeed;
+											$("#speed").text(groundSpeed+'m/s');
+										}
+										if(obj.msgid == "SYS_STATUS"){
+											var battery = obj.batteryRemaining;
+											$("#battery").text(battery+'%');
+										}
+										
+										if(obj.msgid == "HEARTBEAT"){
+											var arm = obj.arm;
+											if(arm == true){
+												$("#arm").text('정상');
+											}else if(arm == false){
+												$("#arm").text('시동 꺼짐');
+											}
+										}
+									}
+									
 							</script>
+							
 					</div>
 				</div>
 				<div class="drone_right">
@@ -162,7 +267,7 @@
 							</thead>
 						</table>
 						<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
-							<table cellspacing="0" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
+							<table cellspacing="0" border="1" class="frt_tbl_type" style="border-top:0px;">
 							
 								<colgroup>
 									<col width="50" /><col width="*" /><col width="60" /><col width="70" /><col width="100">

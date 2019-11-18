@@ -33,33 +33,47 @@
         }
         .drone_log{
         	width: 100%;
-		    height: 350px;
+		    height: 300px;
 		    margin-top: 50px;
         }
-        .click_color{
-        	background:#fdd;
+        .ok_button{
+        	float: right;
+		    margin-right: 30px;
+		    background: #F32C28;
+		    border: 0;
+		    color: white;
+		    width: 65px;
+		    font-size: 14px;
         }
 	</style>
 	
 	<script type="text/javascript">
-		$(function(){
-			var stateLen = $('input#state_id').length;
-			for(var i = 0; i < stateLen; i++){
-				if($('input#state_id').eq(i).val() != 'sd001'){
-					$('input#state_id').eq(i).attr('disabled');
-				}
-			}
-		})
+		var package_id = ${package_id};
+
 		
 		function drone_click(data){
 			var sp = data.split(',');
 			var drone_id = sp[0];
 			var state_id = sp[1];
 			
+			var len = ('tr#droneTr').length;
+			var indexTr;
+			
+			for(var i = 0; i < len; i++){
+				if($('tr td#droneId').eq(i).text() == drone_id){
+					var indexTr = i;
+				}
+			}
+			
+			$('tr.droneTr').css('background','none');
+			$('tr.droneTr').eq(indexTr).css('background','#fdd');
+			
 			if(state_id == 'sd001'){
 				$('#ok').prop('disabled',false);
+				$('#ok').css('background','#F32C28');
 			}else{
 				$('#ok').prop('disabled',true);
+				$('#ok').css('background','#ffc3c1');
 			}
 			
 			$.ajax({
@@ -73,23 +87,17 @@
 		}
 		
 		function drone_ok(value){
-			$(".delivery",opener.document).val(value);
+			var index = ${index};
+			//value 는 drone_id
+			//package_id
 			
-			var index;
-			
-			var buttonLen = $('button.delivery').length;
-			for(var i = 0; i < buttonLen; i++){
-				if($('.delivery').eq(i).attr('value') != null){
-					console.log($('.delivery').eq(i).val());
-					index = i;
-				}
-			}
-			
-			$('.delivery').eq(index).prop('disabled',false);
-			console.log(index);
-			
-			window.opener.parent.location.reload();
-			window.self.close();
+			//$('.delivery',opener.document).eq(index).prop("disabled",false);
+			//$( "#drone_id",opener.document).val(value);
+			$('.delivery').eq(index).prop("disabled",false);
+			$("#drone_id").val(value);
+			$('.pack_droneList').hide();
+			//$('').hide();
+			//window.self.close();
 		}
 	</script>
 </head>
@@ -121,8 +129,8 @@
 					</colgroup>
 					<tbody id = "droneList">		
 						<c:forEach items="${droneInfo}" var="drone">										
-							<tr id="${drone.drone_id},${drone.stateList.get(0).state_id}" onclick="drone_click(id)">
-								<td class="num">${drone.drone_id}</td>
+							<tr id="${drone.drone_id},${drone.stateList.get(0).state_id}" class="droneTr" onclick="drone_click(id)">
+								<td class="num" id="droneId">${drone.drone_id}</td>
 								<td class="title">${drone.stateList.get(0).state_name}</td>
 								<td class="title">100%</td> 
 								<td class="title">2018-04-12 14:22</td> 
@@ -137,7 +145,7 @@
 	
 	</div>
 	<div>
-		<button type="button" id="ok" onclick="drone_ok(value)" disabled="disabled">확인</button>
+		<button type="button" class="ok_button" id="ok" onclick="drone_ok(value)" disabled="disabled">선택</button>
 	</div>
 </body>
 </html>

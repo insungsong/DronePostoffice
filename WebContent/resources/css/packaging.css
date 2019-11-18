@@ -5,6 +5,9 @@ tbody {
 	height : 20px;
 	text-align: center;
 }
+.pack_deli{
+	width:100%;
+}
 .pack_left {
 	width : 55%;
 	float : left;
