@@ -62,20 +62,20 @@
 		
 	}
 	
-	function checkStatename(id){
-		
-		var stateID = $("#stateId").val(id);
-		System.out.println("################################" + stateID);
-		if(stateID == "s001"){
-			$("#packageListId").ready(function(){
-				$("#packageListId").css({"background-color":"red"})
-			});
+	function checkStatename(value){
+		var len = $('td#pack').length;
+		var stateid ='';
+		for(var i=0; i < len; i++){
+			stateid = $('td#stateId').eq(i).val();
+			if($('td#stateId').eq(i).val());
+			if(stateid == value){
+				$('td#pack').css('background-color','red');
+			}
+			else if(stateid == 's002'){
+				$('td#pack').css('background-color','blue');
+			}
 		}
-		else if(stateID == "s002"){
-			$("#packageListId").ready(function(){
-				$("#packageListId").css({"background-color":"blue"})
-			});
-		}
+
 	} 
 	
 </script>
@@ -115,7 +115,7 @@
 									
 								<c:forEach items="${packageList}" var="pack">
 																	
-									<tr id="packageListId?state_id="${pack.stateList.get(0).state_id}>
+									<tr id="packageListId">
 										<td class="num" id="pack">${pack.package_id}</td>
 										<td class="title" >${pack.villageList.get(0).vname}</td>
 										<td class="date">${pack.package_weight}g</td>
@@ -126,7 +126,7 @@
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
 												<input type="hidden" name="package_id" value="${pack.package_id}">
-												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(id)" value="${pack.stateList.get(0).state_id}">
+												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(value)" value="${pack.stateList.get(0).state_id}">
 												<input type="hidden" name="drone_id" id="droneId">
 												<input type="submit" class="delivery" value="출발" disabled>
 											</form>
