@@ -96,8 +96,6 @@
 	})
 
 		
-
-		
 	function checkStatename(value){
 		var len = $('td#pack').length;
 		var stateid ='';
@@ -114,7 +112,6 @@
 
 	} 
 
-	
 </script>
 </head>
 <body>
@@ -162,14 +159,13 @@
 										<td class="num" id="pack">${pack.package_id}</td>
 										<td class="title" >${pack.villageList.get(0).vname}</td>
 										<td class="date">${pack.package_weight}g</td>
-										<td class="writer">${pack.stateList.get(0).state_name}</td>
+										<td class="writer" id="stateName">${pack.stateList.get(0).state_name}</td>
 										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
 										<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info(value)">드론 목록</button></td>
 										<td>
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
 												<input type="hidden" name="package_id" value="${pack.package_id}">
-												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(value)" value="${pack.stateList.get(0).state_id}">
 												<input type="hidden" name="drone_id" id="droneId">
 												<input type="submit" class="delivery" value="출발" disabled>
 											</form>
@@ -177,14 +173,12 @@
 										<td class="title">
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).return_path}'>
-												<input type="hidden" name="state_id" value='${pack.stateList.get(0).state_id}'>
 												<input type="hidden" name="package_id" value="${pack.package_id}" id="test">
 												<input type="hidden" name="drone_id" id="return_droneId">
 												<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
 											</form>
 										</td>
 									</tr>
-									
 								</c:forEach>
 							</tbody>
 							
