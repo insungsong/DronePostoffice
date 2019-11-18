@@ -51,13 +51,13 @@ public class GcsService {
 	
 	
 	public void sendMessage(String send_path) {
-		String topic = "/drone/fc/pub";
+		String topic = "/drone/web/pub";
 		JSONArray jsonArray = new JSONArray(send_path);
 		JSONObject jsonObject = new JSONObject();
 		
 		
-		jsonObject.put("msgid", "MISSION_ITEMS");
-		jsonObject.put("items", jsonArray);
+		jsonObject.put("msgid", "send_path");
+		jsonObject.put("path", jsonArray);
 		//jsonObject.put("msgid", "MAVJSON_MSG_ID_MISSION_ITEMS");
 		String message = jsonObject.toString();
 		try {
@@ -66,5 +66,18 @@ public class GcsService {
 			
 			e.printStackTrace();
 		}
+	}
+
+	public void sendMessageToGcs(String string) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("msgid", string);
+		String message = jsonObject.toString();
+		logger.debug("실행");
+		try {
+			client.publish("/drone/web/pub", message.getBytes(), 0, false);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
