@@ -66,7 +66,7 @@
 								</colgroup>
 								<tbody id = "droneList">		
 									<c:forEach items="${droneList}" var="drone">										
-										<tr id="${drone.drone_id},${drone.stateList.get(0).state_id}" onclick="drone_click(id)" style="cursor: pointer;">
+										<tr id="${drone.drone_id},${drone.state_id}" onclick="drone_click(id)" style="cursor: pointer;">
 											<td class="num">${drone.drone_id}</td>
 											<td class="title">${drone.stateList.get(0).state_name}</td>
 											<td class="title">100%</td> 
@@ -194,7 +194,7 @@
 					   
 					    
 					    // 마커가 표시될 위치입니다 
-				          var markerPosition  = new kakao.maps.LatLng(37.5475225, 127.119988); 
+				          var markerPosition  = new kakao.maps.LatLng(lat, lng); 
 				          
 				          
 				          if(marker != null) {
