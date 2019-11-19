@@ -106,9 +106,9 @@
 														<td><input type="button"  value="요청취소" onclick="cancel(${pack.package_id})"/></td>
 													</c:if>
 													
-													<c:if test="${pack.stateList.get(0).state_id eq 's007'}">
+													<%-- <c:if test="${pack.stateList.get(0).state_id eq 's007'}">
 														<td></td>
-													</c:if>
+													</c:if> --%>
 												<tr>
 											</c:if>
 											</c:forEach>

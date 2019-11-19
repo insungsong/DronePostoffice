@@ -44,15 +44,16 @@
 			text-align:center;
 		}
 		#checkSession{
-			font-size: 40px;
+			font-size: 20px;
+			text-align:left;
 		}
 	</style>
 	</head>
 	<body>	
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 				
-			<div id="checkHead">
-				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 요청 확인내역 입니다.</div>
+			<div id="checkHead" class="alert alert-dnager">
+				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 요청 확인내역 입니다.패키지 클릭시 상세 확인</div>
 			</div>
 				
 				<table border="1" class="frt_tbl_type" style="width:100%;">	
