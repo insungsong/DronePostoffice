@@ -23,7 +23,7 @@
 			<div class="left">
 				<div class="board">
 					<div class="title_box">
-						<a href="">게시판</a>
+						<a href="">우편 목록</a>
 						<a href="" class="more">more</a>
 						<div class="boardwrite" style="margin-top:10px;height: 1409%;; border:solid black 1px;">
 							<iframe src="http://localhost:8080/FinalWebProject/delivery" style="width:100%;height:100%;"></iframe>
@@ -73,7 +73,7 @@
 			<div class="right">
 				<div class="calendar">
 					<div class="title_box">
-						<a href="">사내일정</a>
+						<a href="">마을 요청 목록</a>
 						<a href="" class="more">more</a>
 						<div class="boardwrite" style="margin-top:10px;height: 1409%;; border:solid black 1px;">
 							<iframe src="http://localhost:8080/FinalWebProject/delivery" style="width:100%;height:100%;"></iframe>
@@ -82,7 +82,7 @@
 				</div>
 				<div class="restaurant">
 					<div class="title_box">
-						<a href="">오늘의 식단</a>
+						<a href="">배송 내역</a>
 						<a href="" class="more">more</a>
 						<div class="boardwrite" style="margin-top:10px;height: 1409%;; border:solid black 1px;">
 							<iframe src="http://localhost:8080/FinalWebProject/delivery" style="width:100%;height:100%;"></iframe>

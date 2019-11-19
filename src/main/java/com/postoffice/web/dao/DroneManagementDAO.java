@@ -38,6 +38,9 @@ public class DroneManagementDAO {
 	public void insertDroneDelivery(DeliveryDTO dto) {
 		sqlSessionTemplate.insert("drone.insertDroneDelivery",dto);
 	}
+	public void updateDroneDelivery(DeliveryDTO dto) {
+		sqlSessionTemplate.update("drone.updateDroneDelivery", dto);
+	}
 	public void updateDroneState(DeliveryDTO dto, String state_id) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("drone_id",dto.getDrone_id());
