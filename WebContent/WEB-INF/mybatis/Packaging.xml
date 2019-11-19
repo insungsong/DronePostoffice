@@ -65,9 +65,9 @@
          SELECT SEQ_PACKAGE.currval FROM dual
       </selectKey>
       INSERT INTO
-         package(package_id, package_weight, state_id, arrival_date, vid)
+         package(package_id, package_weight, state_id, vid)
       VALUES 
-         (SEQ_PACKAGE.nextval, #{package_weight}, 's002', sysdate, #{vid})
+         (SEQ_PACKAGE.nextval, #{package_weight}, 's002', #{vid})
    </insert>
 
 

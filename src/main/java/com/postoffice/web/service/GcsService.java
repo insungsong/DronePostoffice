@@ -71,6 +71,8 @@ public class GcsService {
 			client.publish(topic, message.getBytes(), 0, false);
 			if(state_id.equals("sd001")) {
 				droneManagementDAO.insertDroneDelivery(dto);
+			}else {
+				droneManagementDAO.updateDroneDelivery(dto);
 			}
 			droneManagementDAO.updatePackageState(dto, state_id);
 			droneManagementDAO.updateDroneState(dto, state_id);
