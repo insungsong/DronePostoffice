@@ -66,7 +66,7 @@
 								</colgroup>
 								<tbody id = "droneList">		
 									<c:forEach items="${droneList}" var="drone">										
-										<tr id="${drone.drone_id},${drone.stateList.get(0).state_id}" onclick="drone_click(id)" style="cursor: pointer;">
+										<tr id="${drone.drone_id},${drone.state_id}" onclick="drone_click(id)" style="cursor: pointer;">
 											<td class="num">${drone.drone_id}</td>
 											<td class="title">${drone.stateList.get(0).state_name}</td>
 											<td class="title">100%</td> 
@@ -192,9 +192,9 @@
 					
 					    var map = new kakao.maps.Map(container, options); 
 					   
-					    
+					    var marker = null;
 					    // 마커가 표시될 위치입니다 
-				          var markerPosition  = new kakao.maps.LatLng(37.5475225, 127.119988); 
+				          
 				          
 				          
 				          if(marker != null) {
@@ -217,7 +217,7 @@
 					    //mqtt broker와 연결
 					    $(function() {
 					       //MQTT Broker와 연결하기
-					       client = new Paho.MQTT.Client(location.hostname, 61623, "clientId"); //location.hostname: 자동으로 호스트네임 가져옴
+					       client = new Paho.MQTT.Client("106.253.56.124", 61623, "clientId"+new Date().getTime()); //location.hostname: 자동으로 호스트네임 가져옴
 					       client.onMessageArrived = onMessageArrived;
 					       client.connect({onSuccess:onConnect});
 					    });
@@ -228,7 +228,7 @@
 					       client.subscribe("/drone/fc/pub");
 					    }
 					    
-					    var marker = null;
+					    
 					    //메시지를 수신했을 때 자동으로 실행(콜백)되는 함수
 					    function onMessageArrived(message) {
 					       var json = message.payloadString;
@@ -240,6 +240,7 @@
 					          var currLng = obj.currLng;
 					          var alt = obj.alt;
 					          
+					          var markerPosition = new kakao.maps.LatLng(currLat, currLng);
 					          $('#currLat').text(currLat);
 					          $('#currLng').text(currLng);
 					          $('#alt').text(alt+'m');

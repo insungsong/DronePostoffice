@@ -58,14 +58,6 @@
 		   package.state_id = state.state_id
 		AND
 		   package.vid = village.vid
-		AND
-		   package.state_id = 's001'
-		OR
-		   package.state_id = 's002'
-		OR
-		   package.state_id = 's003'
-		OR
-		   package.state_id = 's007'
 		ORDER BY
 		   package_id asc
    </select>

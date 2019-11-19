@@ -39,10 +39,10 @@ private static final Logger logger = LoggerFactory.getLogger(TestService.class);
 	
 	private void mqttConnect() {
 		try {
-			client = new MqttClient("tcp://localhost:1883", MqttClient.generateClientId(), null);
+			client = new MqttClient("tcp://106.253.56.124:1883", MqttClient.generateClientId(), null);
 			client.connect();
 			receiveMessage();
-			logger.debug("MQTT Broker 연결 성공: tcp://localhost:1883");
+			logger.debug("MQTT Broker 연결 성공: tcp://106.253.56.124:1883");
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
