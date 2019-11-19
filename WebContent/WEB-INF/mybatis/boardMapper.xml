@@ -50,6 +50,12 @@
 			package_id=#{package_id}
 	</update>
 	
+	<update id="villageArrive" parameterType="int">
+		update package set state_id ='s007'
+		
+		where package_id=#{package_id}
+	</update>
+	
 	<select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		select 
 			a.mail_id,
@@ -81,7 +87,8 @@
 			v.vname
 		from package p ,state s ,village v
 				where s.state_id = p.state_id
-				and p.vid=v.vid		
+				and p.vid=v.vid
+			order by package_id asc	
 	</select>
 	
 	<delete id="cancel" parameterType="int" >

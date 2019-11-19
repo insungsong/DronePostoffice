@@ -230,6 +230,17 @@ function pack_mailList(value){
 									
 							<c:forEach items="${mailList}" var="mail">                     
                               <tr>
+
+                              	<%-- <td class="num">${checkList.state_id}</td>
+                                 <td class="num">${checkList.mail_id}</td>
+                                 <td class="num">${checkList.from_name}</td>
+                                 <td class="num">${checkList.from_address}</td>
+                                 <td class="num">${checkList.to_name}</td>
+                                 <td class="num">${checkList.to_address}</td>
+                                 <td class="num">${checkList.villageList.get(0).vname}</td>
+                                 <td class="num">${checkList.mail_weight}</td> --%>
+                                 <%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
+
                                  <td class="num">${mail.mail_id}</td>
                                  <td class="num">${mail.from_name}</td>
                                  <td class="num">${mail.from_address}</td>
@@ -238,6 +249,7 @@ function pack_mailList(value){
                                  <td class="num" id="villName">${mail.villageList.get(0).vname}</td>
                                  <td class="num" id="mail_weight">${mail.mail_weight}</td>
                                  <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td>
+
                               </tr>
    								<input type="hidden" id ="${mail.villageList.get(0).vid}">
                          </c:forEach>
@@ -298,7 +310,7 @@ function pack_mailList(value){
 										<td class="writer">${pack.stateList.get(0).state_name}</td>
 										<td class="writer">${pack.arrival_date}</td>
 										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
-									</tr>
+									</tr> 
 								</c:forEach>
 							</tbody>
 						</table>

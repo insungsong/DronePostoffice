@@ -43,5 +43,10 @@ public class ClientCheckDAO {
 	public int registRequest(int package_id) {
 		return sqlSessionTemplate.update("board.registRequest",package_id);
 	}
+
+	public int villageArrive(int package_id) {
+
+		return sqlSessionTemplate.update("board.villageArrive",package_id);
+	}
 }
 
