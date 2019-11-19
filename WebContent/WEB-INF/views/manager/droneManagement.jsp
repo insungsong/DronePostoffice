@@ -192,26 +192,7 @@
 					
 					    var map = new kakao.maps.Map(container, options); 
 					   
-					    var marker = null;
-					    // 마커가 표시될 위치입니다 
-				         // var markerPosition  = new kakao.maps.LatLng(lat, lng); 
-
-				          
-				          
-				          if(marker != null) {
-				             marker.setMap(null);
-				             marker.setPosition(markerPosition);
-				          } else {
-				             // 마커를 생성합니다
-				             marker = new kakao.maps.Marker({
-				                 position: markerPosition
-				             });
-				          }
-				          
-				          
-				          // 마커가 지도 위에 표시되도록 설정합니다
-				          marker.setMap(map);
-				          map.setCenter(markerPosition);
+				
 				          
 				          
 				          
@@ -241,7 +222,28 @@
 					          var currLng = obj.currLng;
 					          var alt = obj.alt;
 					          
-					          var markerPosition = new kakao.maps.LatLng(currLat, currLng);
+					         
+					          var marker = null;
+						      // 마커가 표시될 위치입니다 
+					          var markerPosition  = new kakao.maps.LatLng(currLat, currLng); 
+						
+					          
+					          
+					          if(marker != null) {
+					             marker.setMap(null);
+					             marker.setPosition(markerPosition);
+					          } else {
+					             // 마커를 생성합니다
+					             marker = new kakao.maps.Marker({
+					                 position: markerPosition
+					             });
+					          }
+					          
+					          
+					          // 마커가 지도 위에 표시되도록 설정합니다
+					          marker.setMap(map);
+					          map.setCenter(markerPosition);
+						          
 					          $('#currLat').text(currLat);
 					          $('#currLng').text(currLng);
 					          $('#alt').text(alt+'m');

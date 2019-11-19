@@ -37,7 +37,8 @@ public class DroneManagementService {
 	public List<DeliveryDTO> selectDeliveryDrone(){
 		return droneManagementDAO.selectDeliveryDrone();
 	}
-	public void updateDeliveryClear(DroneDTO dto) {
+	public void updateDeliveryClear(DeliveryDTO dto) {
+		droneManagementDAO.updatePackageClearState(dto);
 		droneManagementDAO.updateDeliveryClear(dto);
 	}
 

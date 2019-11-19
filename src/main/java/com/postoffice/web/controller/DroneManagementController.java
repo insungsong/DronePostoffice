@@ -59,6 +59,10 @@ public class DroneManagementController {
 		
 		JSONObject jsonObject = new JSONObject();
 		VillageDTO villageDTO = droneManagementService.selectDroneDeliveryState(dto);
+		
+		System.out.println(villageDTO.getSend_path());
+		System.out.println(villageDTO.getReturn_path());
+		
 		String send_path = villageDTO.getSend_path();
 		String return_path = villageDTO.getReturn_path();
 		

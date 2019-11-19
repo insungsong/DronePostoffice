@@ -45,7 +45,15 @@
 			return result;
 		} catch(err) {}
 	}
-	
+	$(function(){
+		var len = $('.returnDrone').length;
+		
+		for(var i = 0; i < len; i++){
+			if($('input#return_state').eq(i).val() == 's007'){
+				$('.returnDrone').eq(i).prop('disabled',false);
+				$('button#del_clear').eq(i).prop('disabled',false);
+			}
+		}
 	
 	function drone_info(value){
 		var len = $('td#pack').length;
@@ -66,16 +74,6 @@
 	}
 	
 
-	
-	$(function(){
-		var len = $('.returnDrone').length;
-		
-		for(var i = 0; i < len; i++){
-			if($('input#return_state').eq(i).val() == 's007'){
-				$('.returnDrone').eq(i).prop('disabled',false);
-				$('button#del_clear').eq(i).prop('disabled',false);
-			}
-		}
 			
 		//복귀 버튼에 드론 id 추가
 		var tdLen = $('td#pack').length;
@@ -86,6 +84,7 @@
 				if($('input#packId').eq(i).val() == $('td#pack').eq(j).text()){
 					$('input#return_droneId').eq(j).attr('value',$('input#dronId').eq(i).val());
 					$('button#del_clear').eq(j).attr('value',$('input#dronId').eq(i).val());
+					$('button#del_clear').eq(j).attr('name',$('td#pack').eq(j).text());
 				}
 			}
 		}
@@ -107,8 +106,8 @@
 		}
 
 	} 
-	function delivery_clear(value){
-		location.href='drone_delivery_clear?drone_id='+value;
+	function delivery_clear(value, name){
+		location.href='drone_delivery_clear?drone_id='+value+'&package_id='+name;
 	}
 
 </script>
@@ -178,7 +177,7 @@
 													<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
 												</form>
 											</td>
-											<td class="title"><button type="button" onclick="delivery_clear()" id="del_clear" disabled="disabled">도착완료</button>
+											<td class="title"><button type="button" onclick="delivery_clear(value,name)" id="del_clear" disabled="disabled">도착완료</button>
 										</tr>
 									</c:if>
 								</c:forEach>
