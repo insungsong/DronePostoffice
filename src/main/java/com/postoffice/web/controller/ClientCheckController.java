@@ -16,6 +16,7 @@ import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.ClientCheckService;
 import com.postoffice.web.service.ClientStateCheckService;
+import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.LoginService;
 import com.postoffice.web.service.PackageService;
 
@@ -30,6 +31,8 @@ public class ClientCheckController {
 	private LoginService loginService;
 	@Autowired
 	private PackageService packageService;
+	@Autowired
+	private GcsService gcsService;
 	
 	
 	@RequestMapping("/check")
@@ -73,7 +76,7 @@ public class ClientCheckController {
 	  int result = checkService.updateStateProc(mailDTO);
 	  System.out.println(mailDTO.getState_id());
 	  
-	  
+	 
 	  return "redirect:/check";
 	  
 	  }
@@ -87,6 +90,7 @@ public class ClientCheckController {
 		 */
 		System.out.println(package_id);
 		checkService.registRequest(package_id);
+		gcsService.sendMessageToGcs("attachFinish");
 		return "redirect:/packageCheck";
 	}
 	
@@ -101,6 +105,7 @@ public class ClientCheckController {
 	@RequestMapping("/cancel")
 	public String cancel(int package_id) {
 		checkService.cancel(package_id);
+		gcsService.sendMessageToGcs("requestCancel");
 		return "redirect:/packageCheck";
 	}
 	@RequestMapping("packageDetail")
@@ -114,6 +119,18 @@ public class ClientCheckController {
 		model.addAttribute("detail",detailList);
 		return "client/packageDetail";
 	}
+	@RequestMapping("/registList")
+	public String registList(Model model) {
+		List packageList=checkService.packageSelect();
+		model.addAttribute("packageList",packageList);
+		return "client/beforePackagingList";
+	}
+	@RequestMapping("/villageArrive")
+	public String villageArrive(int package_id) {
+		checkService.villageArrive(package_id);
+		return "redirect:/packageCheck";
+	}
+	
 }
 
 

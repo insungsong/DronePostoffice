@@ -42,4 +42,8 @@ public class ClientCheckService {
 		return checkDAO.registRequest(package_id);
 		
 	}
+	public int villageArrive(int package_id) {
+		return checkDAO.villageArrive(package_id);
+		
+	}
 }

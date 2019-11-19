@@ -50,6 +50,12 @@
 			package_id=#{package_id}
 	</update>
 	
+	<update id="villageArrive" parameterType="int">
+		update package set state_id ='s007'
+		
+		where package_id=#{package_id}
+	</update>
+	
 	<select id="selectAll" parameterType="string" resultType="com.postoffice.web.dto.MailDTO">
 		select 
 			a.mail_id,

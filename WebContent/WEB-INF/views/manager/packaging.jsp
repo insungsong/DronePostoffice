@@ -216,6 +216,7 @@ function mailReceive(){
 									
 							<c:forEach items="${checkList}" var="checkList">                     
                               <tr>
+                              	<td class="num">${checkList.state_id}</td>
                                  <td class="num">${checkList.mail_id}</td>
                                  <td class="num">${checkList.from_name}</td>
                                  <td class="num">${checkList.from_address}</td>

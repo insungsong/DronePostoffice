@@ -38,17 +38,13 @@
 		function registList(){
 			location.href="registList";
 		}
-		
-		function villageArrive(package_id){
-			var result=confirm("접수 요청 하시겠습니까?");
-			if(result==true){
-				location.href="villageArrive?package_id="+package_id;
-			}
-		}
 	</script>
 	<style>
 		#checkHead{
 			text-align:center;
+		}
+		#checkSession{
+			font-size: 40px;
 		}
 	</style>
 	</head>
@@ -56,7 +52,7 @@
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 				
 			<div id="checkHead">
-				<div id="checkSession" class="alert alert-danger">${vmname} 님 요청 확인 페이지 입니다.
+				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 요청 확인내역 입니다.</div>
 			</div>
 				
 				<table border="1" class="frt_tbl_type" style="width:100%;">	
@@ -68,15 +64,12 @@
 											     <th scope="col">요청 날짜</th>
 											     <th scope="col">요청 상태</th>
 											     <th scope="col">마을 이름</th>
-											     <th scope="col">접수 요청</th>
-											     <th scope="col">요청 취소</th>
-											     
 											   </tr>
 								</thead>
 											<c:forEach items="${packageList}" var="pack">
-											<c:if test="${vid eq pack.villageList.get(0).vid and pack.stateList.get(0).state_id ne 's004'}">
-											<tr class="tr" <%-- onclick="location.href='packageDetail?package_id=${pack.package_id}'"  style="cursor:pointer;"--%> onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'"/>
-													<td><a href="packageDetail?package_id=${pack.package_id}">${pack.package_id}</a></td>
+											<c:if test="${vid eq pack.villageList.get(0).vid and pack.stateList.get(0).state_id eq 's004'}">
+											<tr class="tr" onclick="location.href='packageDetail?package_id=${pack.package_id}'"  style="cursor:pointer;" onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'"/>
+													<td>${pack.package_id}</td>
 													<td>${pack.package_weight}</td>
 													<td>${pack.arrival_date}</td>
 													<td>${pack.stateList.get(0).state_name}</td>
@@ -87,43 +80,17 @@
 													<c:if test="${pack.stateList.get(0).state_id eq 's005'}">
 														<td>접수 완료!!!</td>
 													</c:if>
-													<c:if test="${pack.stateList.get(0).state_id eq 's007'}">
-														<td>마을 도착 완료</td>
-														<td>마을 도착 완료</td>
-													</c:if>
 													
-													<c:if test="${pack.stateList.get(0).state_id eq 's004'}">
-														<td>접수가 완료된</td>
-														<td>요청입니다.</td>
-														
-													</c:if>
-													<c:if test="${pack.stateList.get(0).state_id eq 's003'}">
-														<td><input type="button" value="접수 요청" onclick="villageArrive(${pack.package_id})" /></td>
-													</c:if>
-												
-													
-													<c:if test="${pack.stateList.get(0).state_id ne 's004' and pack.stateList.get(0).state_id ne 's007'}">
+													<c:if test="${pack.stateList.get(0).state_id ne 's004'}">
 														<td><input type="button"  value="요청취소" onclick="cancel(${pack.package_id})"/></td>
-													</c:if>
-													
-													<c:if test="${pack.stateList.get(0).state_id eq 's007'}">
-														<td></td>
 													</c:if>
 												<tr>
 											</c:if>
 											</c:forEach>
 									</table>
-								<div class="request_content" style="border-top: 2px solid #F32C28;">
-								
-									<table style="margin-top:10px; float:right;">
-									</table>
-								</div>
 								
 								<div>
 									<input id="btn_back" type="button" value="이전 페이지로" class="btn btn-danger" onclick="back()" style="margin-top:10px; float:left;"/>
-									
-									<input type="button" value="이전 요청완료 내역" class="btn btn-danger" onclick="registList()" style="margin-top:10px; float:right;" />
-									
 								</div>
 					
 	</body>
