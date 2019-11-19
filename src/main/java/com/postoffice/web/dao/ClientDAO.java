@@ -102,15 +102,17 @@ public class ClientDAO {
 		return rows;
 	}
 
-	public List<MailDTO> fromSearch(String searchType, String keyword,int startRowNo, int endRowNo) {
+	public List<MailDTO> fromSearch(String searchType, String keyword,int startRowNo, int endRowNo,String vid) {
 		Map<String, Object>map = new HashMap<String, Object>();
 		map.put("searchType",searchType );
 		map.put("keyword", keyword);
 		map.put("startRowNo",startRowNo);
 		map.put("endRowNo",endRowNo);
+		map.put("vid",vid);
 
 		if(searchType.equals("from_name")) {
 			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
+			
 			return listdto;
 		}
 		
@@ -139,5 +141,10 @@ public class ClientDAO {
 		map.put("package_num",packageDTO.getPackage_id());
 		
 		return sqlSessionTemplate.update("ClientBoard.updateMail",map);
+	}
+
+	public int selectTotalRowNum(String searchType) {
+		int totalRowNums = sqlSessionTemplate.selectOne("ClientBoard.selectTotalRowNum2",searchType);
+		return totalRowNums;
 	}
 }
