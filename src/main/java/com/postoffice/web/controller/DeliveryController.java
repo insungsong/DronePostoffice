@@ -1,10 +1,5 @@
 package com.postoffice.web.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +11,10 @@ import com.postoffice.web.dto.DroneDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.DroneManagementService;
 import com.postoffice.web.service.GcsService;
-import com.postoffice.web.service.PackageService;
 
 @Controller
 public class DeliveryController {
 
-	@Autowired
-	private PackageService packageService;
 	@Autowired
 	private DroneManagementService droneManagementService;
 	@Autowired
@@ -33,7 +25,7 @@ public class DeliveryController {
 
 		
 		model.addAttribute("droneDeliveryList", droneManagementService.selectDeliveryDrone());
-		model.addAttribute("packageList",packageService.packageList());
+		model.addAttribute("packageList",droneManagementService.packageList());
 		return "manager/delivery";
 	}
 	
@@ -60,6 +52,12 @@ public class DeliveryController {
 		System.out.println(path);
 		System.out.println(dto.getDrone_id());
 		gcsService.sendMessage(dto,state_id,path);
+		return "redirect:/delivery";
+	}
+	
+	@RequestMapping("/drone_delivery_clear")
+	public String droneDeliveryClear(DroneDTO dto) {
+		droneManagementService.updateDeliveryClear(dto);
 		return "redirect:/delivery";
 	}
 }

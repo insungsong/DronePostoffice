@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.postoffice.web.dto.DeliveryDTO;
 import com.postoffice.web.dto.DroneDTO;
+import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.dto.VillageDTO;
 
 @Repository
@@ -20,6 +21,9 @@ public class DroneManagementDAO {
 	
 	public List<DroneDTO> selectDroneList(){
 		return sqlSessionTemplate.selectList("drone.selectDroneList");
+	}
+	public List<PackageDTO> packageList(){
+		return sqlSessionTemplate.selectList("drone.selectPackageList");
 	}
 	public DroneDTO selectDroneInfo(DroneDTO dto){
 		return sqlSessionTemplate.selectOne("drone.selectDroneInfo",dto);
@@ -49,5 +53,8 @@ public class DroneManagementDAO {
 	}
 	public List<DeliveryDTO> selectDeliveryDrone(){
 		return sqlSessionTemplate.selectList("drone.selectDeliveryDrone");
+	}
+	public void updateDeliveryClear(DroneDTO dto){
+		sqlSessionTemplate.update("drone.updateDeliveryClear",dto);
 	}
 }

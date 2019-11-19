@@ -127,7 +127,7 @@ function pack_mailList(value){
 					"mail_weight" : clientMailweight[num]
 				},
 				success : function() {
-					location.href = "mailCheck"
+					window.location.reload();
 
 				}
 			});
@@ -191,21 +191,19 @@ function pack_mailList(value){
 								</c:when>
 								<c:otherwise>
 									
-							<c:forEach items="${checkList}" var="checkList">                     
+							<c:forEach items="${mailList}" var="mail">                     
                               <tr>
-                                 <td class="num">${checkList.mail_id}</td>
-                                 <td class="num">${checkList.from_name}</td>
-                                 <td class="num">${checkList.from_address}</td>
-                                 <td class="num">${checkList.to_name}</td>
-                                 <td class="num">${checkList.to_address}</td>
-                                 <td class="num">${checkList.villageList.get(0).vname}</td>
-                                 <td class="num">${checkList.mail_weight}</td>
-                                 <%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
+                                 <td class="num">${mail.mail_id}</td>
+                                 <td class="num">${mail.from_name}</td>
+                                 <td class="num">${mail.from_address}</td>
+                                 <td class="num">${mail.to_name}</td>
+                                 <td class="num">${mail.to_address}</td>
+                                 <td class="num">${mail.villageList.get(0).vname}</td>
+                                 <td class="num">${mail.mail_weight}</td>
+                                 <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td>
                               </tr>
    
                          </c:forEach>
-											<%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
-										</tr>
 								</c:otherwise>
 								
 							</c:choose> 

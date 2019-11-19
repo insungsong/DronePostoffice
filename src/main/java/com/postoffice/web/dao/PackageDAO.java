@@ -60,9 +60,5 @@ public class PackageDAO {
       map.put("mail_weight", mail_weight);
       return sqlSessionTemplate.insert("packaging.clientInfo",map);
    }
-
-   public List<MailDTO> mailCheck() {
-	 return sqlSessionTemplate.selectList("packaging.mailCheck");
-   }
 }
 

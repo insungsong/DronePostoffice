@@ -57,10 +57,5 @@ public class PackageService {
 		return packageDAO.clientInfo(to_name, from_name, to_address, from_address, vid, mail_weight);
 	}
 
-	public List<MailDTO> mailCheck() {
-		return packageDAO.mailCheck();
-
-	}
-
 }
 

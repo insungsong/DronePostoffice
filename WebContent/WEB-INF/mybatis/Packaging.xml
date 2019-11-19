@@ -11,10 +11,10 @@
       <result column="to_name" property="to_name"/>
       <result column="to_address" property="to_address"/>
       <result column="package_num" property="package_num"/>
+      <result column="state_id" property="state_id"/>
       <result column="mail_weight" property="mail_weight"/>
       <result column="mail_date" property="mail_date"/>
       <collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
-         <id column="state_id" property="state_id"/>
          <result column="state_name" property="state_name"/>
       </collection>
       <collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
@@ -41,7 +41,7 @@
 
    <select id="selectMailList" parameterType="string" resultMap="mainInfo">
       SELECT
-         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
+         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, mail.state_id, state.state_name, village.vid, village.vname
       FROM
          mail, state, village
       WHERE
@@ -119,21 +119,5 @@
          mail(mail_id,from_name,from_address,to_name,to_address,vid,mail_weight,state_id,package_num,mail_date)
       values(seq_mail.nextval,#{from_name},#{from_address},#{to_name},#{to_address},#{vid},#{mail_weight},'s005',seq_package.nextval,sysdate)
    </insert>
-
-	<select id="mailCheck" resultMap="mainInfo">
-		select
-			m.mail_id,
-			m.from_name,
-			m.from_address,
-			m.to_name,
-			m.to_address,
-			v.vname,
-			m.mail_weight
-
-		from mail m, village v 
-
-			where v.vid=m.vid 
-		ORDER BY mail_id asc
-	</select>
 </mapper> 
 

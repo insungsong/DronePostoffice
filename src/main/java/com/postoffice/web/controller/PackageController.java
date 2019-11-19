@@ -65,13 +65,4 @@ public class PackageController {
          return "redirect:/mailCheck";
    }
    
-   @RequestMapping("/mailCheck")
-   public String clientInfoList(Model model) {
-	  List<MailDTO> checkList=packageService.mailCheck();
-	  
-	  model.addAttribute("checkList",checkList);
-	   return "manager/packaging";
-
-   }
-   
 }
