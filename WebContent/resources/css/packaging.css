@@ -38,7 +38,7 @@ tbody {
 	font-size: 12px;
     height: 20px;
     border: 1px;
-    line-height: 21px;
+    line-height: 18px;
 	background: #F32C28;
 	color: white;
 }
@@ -50,7 +50,7 @@ tbody {
 .frt_tbl_type{width:100%; border-top:2px solid #F32C28; border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed; margin:0 0 0 0;}
 .frt_tbl_type caption,.frt_tbl_type .frm label, th label {display:none}
 .frt_tbl_type th{margin:0 0 0 0;padding:5px 0 5px 0;border-bottom:solid 1px #b2b2b2;background-color:#f1f1f4;color:#333;font-weight:bold;line-height:14px;vertical-align:middle; height:25px; text-align:center; border-right: solid 1px #b2b2b2;}
-.frt_tbl_type td{padding:8px 0 5px;border-bottom:solid 1px #d2d2d2;text-align:center;color:#383838; _padding:7px 0 5px;}
+.frt_tbl_type td{padding:8px 0 5px;border-bottom:solid 1px #d2d2d2;text-align:center;color:#383838; _padding:7px 0 5px;font-size: 12px;}
 .frt_tbl_type td span a{color:#383838;}
 .frt_tbl_type td span a:hover {color:#383838;}
 .frt_tbl_type td a{font-size:12px; color:#0084b4;}
@@ -69,7 +69,7 @@ tbody {
 .frt_tbl_type td ul.right li span img {margin:0; padding:0;}
 .frt_tbl_type .frm{padding:0;text-align:center}
 .frt_tbl_type .frm input{margin:0}
-.frt_tbl_type .num,.frt_tbl_type .date,.frt_tbl_type .hit{padding:0;font-size:11px;line-height:normal}
+.frt_tbl_type .num,.frt_tbl_type .date,.frt_tbl_type .hit{padding:0;font-size:12px;line-height:normal}
 .frt_tbl_type .key{line-height:normal;}
 .frt_tbl_type .title{padding:6px 0 7px;}
 .frt_tbl_type .title .pic,.frt_tbl_type .title .new , .frt_tbl_type .title .data {margin:0 0 2px;vertical-align:middle}

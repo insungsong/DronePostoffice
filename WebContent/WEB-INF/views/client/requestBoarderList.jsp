@@ -53,6 +53,9 @@
 		function check(){
 			location.href="check";
 		}
+		function packageCheck(){
+			location.href="packageCheck";
+		}
 	</script>
 	</head>
 	<body>
@@ -105,7 +108,7 @@
 												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
 												  		<c:if test="${MailList.stateList.get(0).state_id eq s005}">
-												  		<tr >
+												  		<tr>
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
 															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
@@ -135,11 +138,11 @@
 									<table style="margin-top:10px; float:right;">
 										<tr>		
 											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="clientpackaging()" class="btn btn-outline-danger">패키징</button></th>
+											<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="packageCheck()" class="btn btn-outline-success">확인</button></th>
 										</tr>
 									</table>
 								</div>
-		
-								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block;margin-left: 700px;margin-top: 18px;" >
+								<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="display:inline-block;margin-left: 615px;margin-top: 18px;" >
 										<a href="requestBoarderList?pageNo=1&totalWeight=${totalWeight}" id = "first" class="btn btn-danger">처음</a>
 										<c:if test="${pageNo > 1}">
 											<a href="requestBoarderList?pageNo=${pageNo-1}&totalWeight=${totalWeight}" id="test1" class="btn btn-danger">이전</a>

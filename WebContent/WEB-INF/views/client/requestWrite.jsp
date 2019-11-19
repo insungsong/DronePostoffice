@@ -75,8 +75,22 @@
 	    }
 	</script>
 	<style>
-		.form-control{
-			width:31%;
+		.form-group {
+			    margin-bottom: 1rem;
+			    margin: auto;
+			    margin-bottom: 20px;
+			    width:35%;
+			}
+			
+			element.style {
+			display:inline-block;
+			width: 301px;
+			margin:auto;
+		    }
+		    div.filebox{
+		    	display: inline-block;
+    			margin-left: 93px;
+		    }
 		}
 	</style>
 	</head>
@@ -84,13 +98,13 @@
 		<jsp:include page = "../common/ClienetRequestheader.jsp"/>
 			<div class="body">
 				<div class="body_sub">
-							<div class="mailWrite">
-								<div class="alert alert-danger" role="alert">
-								  <h4 class="alert-heading">메일 요청페이지 입니다!</h4>
-								  <p>해당 순서에 맞게 개인의 메일정보를 기입해주시면 감사하겠습니다.</p>
-								  <hr>
-								  <p class="mb-0">불편사항은 연락부탁드립니다.</p>
-							</div>
+						<div class="mailWrite">
+							<div class="alert alert-danger" role="alert" style="width: 600px;margin:auto;">
+								<h4 class="alert-heading">메일 요청페이지 입니다!</h4>
+								<p>해당 순서에 맞게 개인의 메일정보를 기입해주시면 감사하겠습니다.</p>
+								<hr>
+								<p class="mb-0">불편사항은 연락부탁드립니다.</p>
+						</div>
 						<form id="mailWrite" name="answer" method="post" action="requestanswer" onsubmit="return checkForm()">
 						 <div class="form-group">
 						    <!-- 메일 고유 값 -->
@@ -142,7 +156,7 @@
 						    <input type="text" class="form-control" name="vname" id="vname" value="${vname }" disabled="disabled">
 						    <span id="villagenameError" class="error" style="color:red">${villagenameError}</span>
 						  </div>
-						  <button class="btn btn-danger">요청 저장</button>
+						  <button class="btn btn-danger" style="display:block;margin: auto;width: 600px;">요청 저장</button>
 						</form>
 					</div>
 				</div>

@@ -71,7 +71,7 @@
 		var len = $('.returnDrone').length;
 		
 		for(var i = 0; i < len; i++){
-			if($('.returnDrone').eq(i).attr('id') == 's007'){
+			if($('input#return_state').eq(i).val() == 's007'){
 				$('.returnDrone').eq(i).prop('disabled',false);
 				$('button#del_clear').eq(i).prop('disabled',false);
 			}
@@ -153,33 +153,34 @@
 							<tbody>
 									
 								<c:forEach items="${packageList}" var="pack">
-																	
-									<tr id="packageListId">
-										<td class="num" id="pack">${pack.package_id}</td>
-										<td class="title" >${pack.villageList.get(0).vname}</td>
-										<td class="date">${pack.package_weight}g</td>
-										<td class="writer" id="stateName">${pack.stateList.get(0).state_name}</td>	
-										<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info(value)">드론 목록</button></td>
-										<td>
-											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
-												<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
-												<input type="hidden" name="package_id" value="${pack.package_id}">
-												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(value)" value="${pack.stateList.get(0).state_id}">
-												<input type="hidden" name="drone_id" id="droneId">
-												<input type="submit" class="delivery" value="출발" disabled>
-											</form>
-										</td>
-										<td class="title">
-											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
-												<input type="hidden" name="path" value='${pack.villageList.get(0).return_path}'>
-												<input type="hidden" name="package_id" value="${pack.package_id}" id="test">
-												<input type="hidden" name="state_id" value='${pack.stateList.get(0).state_id}'>
-												<input type="hidden" name="drone_id" id="return_droneId">
-												<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
-											</form>
-										</td>
-										<td class="title"><button type="button" onclick="delivery_clear()" id="del_clear" disabled="disabled">도착완료</button>
-									</tr>
+									<c:if test="${pack.state_id ne 's004'}">								
+										<tr id="packageListId">
+											<td class="num" id="pack">${pack.package_id}</td>
+											<td class="title" >${pack.villageList.get(0).vname}</td>
+											<td class="date">${pack.package_weight}g</td>
+											<td class="writer" id="stateName">${pack.stateList.get(0).state_name}</td>	
+											<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info(value)">드론 목록</button></td>
+											<td>
+												<form action="drone_delivery" method="post" onsubmit="return windowClose()">
+													<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
+													<input type="hidden" name="package_id" value="${pack.package_id}">
+													<input type="hidden" name="state_id" id="stateId" onload="checkStatename(value)" value="${pack.stateList.get(0).state_id}">
+													<input type="hidden" name="drone_id" id="droneId">
+													<input type="submit" class="delivery" value="출발" disabled>
+												</form>
+											</td>
+											<td class="title">
+												<form action="drone_delivery" method="post" onsubmit="return windowClose()">
+													<input type="hidden" name="path" value='${pack.villageList.get(0).return_path}'>
+													<input type="hidden" name="package_id" value="${pack.package_id}" id="test">
+													<input type="hidden" name="state_id" value='${pack.state_id}' id="return_state">
+													<input type="hidden" name="drone_id" id="return_droneId">
+													<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
+												</form>
+											</td>
+											<td class="title"><button type="button" onclick="delivery_clear()" id="del_clear" disabled="disabled">도착완료</button>
+										</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 							

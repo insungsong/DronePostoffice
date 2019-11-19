@@ -58,14 +58,6 @@
 		   package.state_id = state.state_id
 		AND
 		   package.vid = village.vid
-		AND
-		   package.state_id = 's001'
-		OR
-		   package.state_id = 's002'
-		OR
-		   package.state_id = 's003'
-		OR
-		   package.state_id = 's007'
 		ORDER BY
 		   package_id asc
    </select>
@@ -110,6 +102,8 @@
 				AND
 					delivery.drone_id = #{drone_id}
 				AND
+					delivery.state_id = 'd003'
+				AND
 					drone.state_id = 'sd002'
 			</when>
 			<when test="state_id.equals('sd005')">
@@ -126,6 +120,8 @@
 				AND
 					delivery.drone_id = #{drone_id}
 				AND
+					delivery.state_id = 'd003'
+				AND
 					drone.state_id = 'sd005'
 			</when>
 		</choose>
@@ -133,11 +129,19 @@
 	
 	<insert id="insertDroneDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
 		INSERT INTO
-			delivery(package_id, drone_id, delivery_date)
+			delivery(package_id, drone_id, delivery_date,state_id)
 		VALUES
-			(#{package_id},#{drone_id},SYSDATE)
+			(#{package_id},#{drone_id},SYSDATE,'s003')
 	</insert>
 	
+	<update id="updateDroneDelivery" parameterType="com.postoffice.web.dto.DeliveryDTO">
+		UPDATE
+			delivery
+		SET
+			state_id = 's004'
+		WHERE
+			package_id = #{package_id}
+	</update>
 	<update id="updateDroneStateDelivery" parameterType="map">
 		<choose>
 			<when test="state_id.equals('sd001')">
@@ -148,7 +152,7 @@
 				WHERE
 					drone_id = #{drone_id}
 			</when>
-			<when test="state_id.equals('s003')">
+			<when test="state_id.equals('s007')">
 				UPDATE
 					drone
 				SET
@@ -165,15 +169,17 @@
 				UPDATE
 					package
 				SET
-					state_id = 's003'
+					state_id = 's003',
+					start_date = 'SYSDATE'
 				WHERE
 					package_id = #{package_id}
 			</when>
-			<when test="state_id.equals('s003')">
+			<when test="state_id.equals('s007')">
 				UPDATE
 					package
 				SET
-					state_id = 's007'
+					state_id = 's004',
+					arrival_date = 'SYSDATE'
 				WHERE
 					package_id = #{package_id}
 			</when>
@@ -182,7 +188,7 @@
 
 	<select id="selectDeliveryDrone" resultType="com.postoffice.web.dto.DeliveryDTO">
 		SELECT
-			drone_id, package_id
+			drone_id, package_id, state_id
 		FROM
 			delivery
 	</select>

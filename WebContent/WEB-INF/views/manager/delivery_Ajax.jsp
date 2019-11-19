@@ -50,7 +50,7 @@
         .drone_log{
         	width: 100%;
 		    height: 100px;
-		    margin-top: 15px;
+		    margin-top: 35px;
 		    max-height: 300px;
         }
         .ok_button{
@@ -65,6 +65,16 @@
 	</style>
 	
 	<script type="text/javascript">
+
+		$(function(){
+			var len = $('input#hidden_state').length;
+			for(var i = 0; i < len; i++){
+				if($('input#hidden_state').eq(i).val() == 'sd001'){
+					$('td#droneStateName').eq(i).css('color','green');
+				}
+			}
+		})
+
 		var package_id = ${package_id};
 
 		
@@ -154,9 +164,10 @@
 					</colgroup>
 					<tbody id = "droneList">		
 						<c:forEach items="${droneInfo}" var="drone">										
+							<input type="hidden" id = "hidden_state" value="${drone.state_id}">
 							<tr id="${drone.drone_id},${drone.state_id}" class="droneTr" onclick="drone_click(id)">
 								<td class="num" id="droneId">${drone.drone_id}</td>
-								<td class="title">${drone.stateList.get(0).state_name}</td>
+								<td class="title" id="droneStateName">${drone.stateList.get(0).state_name}</td>
 								<td class="title">100%</td> 
 								<td class="title">2018-04-12 14:22</td> 
 							</tr>

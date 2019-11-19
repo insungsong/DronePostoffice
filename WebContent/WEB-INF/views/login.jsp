@@ -18,7 +18,7 @@
 				} else if($("#lid").val() == "") {
 					alert("*아이디를 입력하세요.")
 					result = false;
-				} else if($("#lpassword").val() == "") {s
+				} else if($("#lpassword").val() == "") {
 					alert("*비밀번호를 입력하세요.")
 					result = false;
 				} 
@@ -78,7 +78,6 @@
 					</ul>
 				</div>
 				<div class="loginForm">
-					
 						<form method="post" action="login" onsubmit="return check()">
 							<div class="lid">
 								<input id="lid" name="lid" type="text" placeholder="아이디">
