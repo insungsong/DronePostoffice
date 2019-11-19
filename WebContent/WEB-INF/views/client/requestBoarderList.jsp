@@ -107,7 +107,6 @@
 											  	</c:when>
 												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
-												  		<c:if test="${MailList.stateList.get(0).state_id eq s005}">
 												  		<tr>
 														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
 														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
@@ -121,7 +120,6 @@
 															<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 															<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
 														</tr>
-														</c:if>
 													</c:forEach>	
 													</c:otherwise>
 												 </c:choose>					  

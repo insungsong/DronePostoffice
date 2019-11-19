@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 	
-	<resultMap type="com.postoffice.web.dto.NoticeDTO" id="notice">
+ <resultMap type="com.postoffice.web.dto.NoticeDTO" id="notice">
 		<id column="notice_id" property="notice_id"/>
 		<result column="notice_title" property="notice_title"/>
 		<result column="notice_content" property="notice_content"/>
@@ -111,8 +111,6 @@
 	<!-- 공지사항 리스트에 페이지 처리를 하기 위해 최종 열 갯수 가져오기 -->
 	<select id="selectTotalRowNum" resultType="int">
 		select count(*) from notice
-		
-		
 	</select>
 
 	<!-- 공지사항 검색시 페이징 처리 -->
