@@ -11,13 +11,10 @@ import com.postoffice.web.dto.DroneDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.DroneManagementService;
 import com.postoffice.web.service.GcsService;
-import com.postoffice.web.service.PackageService;
 
 @Controller
 public class DeliveryController {
 
-	@Autowired
-	private PackageService packageService;
 	@Autowired
 	private DroneManagementService droneManagementService;
 	@Autowired
@@ -25,10 +22,13 @@ public class DeliveryController {
 	
 	@RequestMapping("/delivery")
 	public String delibery(Model model) {
-		//model.addAttribute("mailList",packageService.mailList());
-		model.addAttribute("packageList",packageService.packageList());
+
+		
+		model.addAttribute("droneDeliveryList", droneManagementService.selectDeliveryDrone());
+		model.addAttribute("packageList",droneManagementService.packageList());
 		return "manager/delivery";
 	}
+	
 	
 	@RequestMapping("/delivery_Ajax")
 	public String delivery_Ajax(Model model, PackageDTO dto, @RequestParam String index) {
@@ -48,10 +48,16 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping("/drone_delivery")
-	public String drone_delivery(DeliveryDTO dto, @RequestParam String path) {
+	public String drone_delivery(DeliveryDTO dto, @RequestParam String state_id, @RequestParam String path) {
 		System.out.println(path);
 		System.out.println(dto.getDrone_id());
-		gcsService.sendMessage(dto, path);
+		gcsService.sendMessage(dto,state_id,path);
+		return "redirect:/delivery";
+	}
+	
+	@RequestMapping("/drone_delivery_clear")
+	public String droneDeliveryClear(DroneDTO dto) {
+		droneManagementService.updateDeliveryClear(dto);
 		return "redirect:/delivery";
 	}
 }

@@ -16,6 +16,24 @@
 <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
 
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+<style>
+	body {
+		background: #17181B;
+	}
+	.frt_tbl_type td {
+		font-size: 13px;
+		color : #9e9595;
+	}
+	
+	.frt_tbl_type th {
+		font-size: 13px;
+		background:#7d7d86;
+	}
+	.frt_tbl_type {
+		border-top: 2px solid #1d32ca;
+	}
+</style>
+
 
 <script type="text/javascript">
 	
@@ -28,12 +46,6 @@
 		} catch(err) {}
 	}
 	
-	
-	
-	function pack_mailList(value){
-		var url = 'pack_mailList?package_id='+value;
-		window.open(url,"","width=800,height=700,right=300")
-	}
 	
 	function drone_info(value){
 		var len = $('td#pack').length;
@@ -51,20 +63,68 @@
 				$('.pack_droneList').html(data);
 			}
 		});
-		//var url = 'delivery_Popup?package_id='+value+'&index='+index;
-		//window.open(url,"","width=800,height=700,right=300")
 	}
-	function drone_send(id,value){
+	
+
+	
+	$(function(){
+		var len = $('.returnDrone').length;
 		
+		for(var i = 0; i < len; i++){
+			if($('.returnDrone').eq(i).attr('id') == 's007'){
+				$('.returnDrone').eq(i).prop('disabled',false);
+				$('button#del_clear').eq(i).prop('disabled',false);
+			}
+		}
+			
+		//복귀 버튼에 드론 id 추가
+		var tdLen = $('td#pack').length;
+		var hiLen = $('input#packId').length;
+		
+		for(var i = 0; i < hiLen; i++){
+			for(var j = 0; j < tdLen; j++){	
+				if($('input#packId').eq(i).val() == $('td#pack').eq(j).text()){
+					$('input#return_droneId').eq(j).attr('value',$('input#dronId').eq(i).val());
+					$('button#del_clear').eq(j).attr('value',$('input#dronId').eq(i).val());
+				}
+			}
+		}
+	})
+
+		
+	function checkStatename(value){
+		var len = $('td#pack').length;
+		var stateid ='';
+		for(var i=0; i < len; i++){
+			stateid = $('td#stateId').eq(i).val();
+			if($('td#stateId').eq(i).val());
+			if(stateid == value){
+				$('td#pack').css('background-color','red');
+			}
+			else if(stateid == 's002'){
+				$('td#pack').css('background-color','blue');
+			}
+		}
+
+	} 
+	function delivery_clear(value){
+		location.href='drone_delivery_clear?drone_id='+value;
 	}
+
 </script>
 </head>
 <body>
+
+	<c:forEach items="${droneDeliveryList}" var="droneList">
+		<input type = "hidden" id = "packId" value="${droneList.package_id}">
+		<input type = "hidden" id = "dronId" value="${droneList.drone_id}">
+	</c:forEach>
+	
 	<div class="body">
 		<div class="body_sub">
 			<div class="pack_deli">
 				<div class="bor_title">
-					<div class="subject">패키지 목록</div>
+					<div class="subject" style="color:#ada8a8;">배송 목록</div>
 				</div>
 				<div class = "mail_list" style="border-bottom:1px solid #999;">
 					<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
@@ -77,34 +137,34 @@
 								<th scope="col">마을 이름</th>
 								<th scope="col">총 무게</th>
 								<th scope="col">상태</th>
-								<th scope="col">우편</th>
 								<th scope="col">드론</th>
+								<th scope="col"></th>
 								<th scope="col"></th>
 								<th scope="col" colspan="2"></th>
 							</tr>
 						</thead>
 					</table>
 					<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
-						<table cellspacing="0" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
+						<table cellspacing="0" border="1" class="frt_tbl_type" style="border-top:0px;">
 						
 							<colgroup>
 								<col width="100" /><col width="*" /><col width="80" /><col width="100" /><col width="100"/><col width="100"><col width="100"><col width="100">
 							</colgroup>
 							<tbody>
 									
-								<c:forEach items="${packageList}" var="pack">										
-
-									<tr>
+								<c:forEach items="${packageList}" var="pack">
+																	
+									<tr id="packageListId">
 										<td class="num" id="pack">${pack.package_id}</td>
 										<td class="title" >${pack.villageList.get(0).vname}</td>
 										<td class="date">${pack.package_weight}g</td>
-										<td class="writer">${pack.stateList.get(0).state_name}</td>
-										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
+										<td class="writer" id="stateName">${pack.stateList.get(0).state_name}</td>	
 										<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info(value)">드론 목록</button></td>
 										<td>
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>
 												<input type="hidden" name="package_id" value="${pack.package_id}">
+												<input type="hidden" name="state_id" id="stateId" onload="checkStatename(value)" value="${pack.stateList.get(0).state_id}">
 												<input type="hidden" name="drone_id" id="droneId">
 												<input type="submit" class="delivery" value="출발" disabled>
 											</form>
@@ -112,12 +172,14 @@
 										<td class="title">
 											<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 												<input type="hidden" name="path" value='${pack.villageList.get(0).return_path}'>
-												<input type="hidden" name="package_id" value="${pack.package_id}">
-												<input type="hidden" name="drone_id" id="droneId">
-												<input type="submit" class="delivery" value="복귀" disabled>
+												<input type="hidden" name="package_id" value="${pack.package_id}" id="test">
+												<input type="hidden" name="state_id" value='${pack.stateList.get(0).state_id}'>
+												<input type="hidden" name="drone_id" id="return_droneId">
+												<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
 											</form>
+										</td>
+										<td class="title"><button type="button" onclick="delivery_clear()" id="del_clear" disabled="disabled">도착완료</button>
 									</tr>
-					
 								</c:forEach>
 							</tbody>
 							

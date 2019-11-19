@@ -24,7 +24,7 @@
 				</li>
 				<li><a href = "delivery">우편물 드론 배송</a></li>
 				<li><a href = "droneManagement">드론 관리</a></li>
-				<li><a href = "systemmanagement">시스템 관리</a></li>
+				<li><a href = "systemManagement">시스템 관리</a></li>
 				<li><a href = "noticeList">공지사항</a></li>
 				<li><a href = "clientManagement">회원 관리</a></li>
 				<li style="position: absolute;right: 7px; border:0;"><a href = "logout">로그아웃</a>

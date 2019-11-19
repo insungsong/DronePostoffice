@@ -18,7 +18,7 @@
 				} else if($("#lid").val() == "") {
 					alert("*아이디를 입력하세요.")
 					result = false;
-				} else if($("#lpassword").val() == "") {
+				} else if($("#lpassword").val() == "") {s
 					alert("*비밀번호를 입력하세요.")
 					result = false;
 				} 
