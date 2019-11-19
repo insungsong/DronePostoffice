@@ -78,6 +78,7 @@
 		//행 추가 취소
 		function sCancel(){
 			$("#plusStateId").val('');
+			$("#plusStateName").val('');
 			$("#SInfoPlus").hide();
 			$("#SMStateUpdate").show();
 			
@@ -199,6 +200,7 @@
 		//추가취소 눌렀을 경우
 		function dCancel(){
 			$("#plusDeptId").val('');
+			$("#plusDeptName").val('');
 			$("#DInfoPlus").hide();
 			$("#SMDeptUpdate").show();
 			
@@ -365,6 +367,7 @@
 		
 		function vCancel(){
 			$("#plusVillageId").val('');
+			$("#plusVillageName").val('');
 			$("#VInfoPlus").hide();
 			$("#SMVillageUpdate").show();
 		}
@@ -373,6 +376,18 @@
 		function VDel_btn_clicked(obj){
 			var tr=$(obj).parent().parent();
 			tr.remove();
+		}
+		
+		window.onload=function sortTable(){
+			var table = $('#stateList');
+			var rows = table[0].rows;
+			for(var i=0; i<(rows.length); i++){
+				var fCell = rows[i].cells[0];
+				var sCell = rows[i+1].cells[0];
+				if(fCell.innerHTML.toLowerCase() > sCell. innerHTML.toLowerCase()){
+					rows[i].parentNode.insertBefore(rows[i+1], rows[i]);
+				}
+			}
 		}
 		
 		

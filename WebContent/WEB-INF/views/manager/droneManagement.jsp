@@ -194,7 +194,8 @@
 					   
 					    var marker = null;
 					    // 마커가 표시될 위치입니다 
-				          
+				         // var markerPosition  = new kakao.maps.LatLng(lat, lng); 
+
 				          
 				          
 				          if(marker != null) {

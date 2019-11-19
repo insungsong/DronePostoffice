@@ -4,15 +4,15 @@
 	
 	
 	<select id="sysGetState" parameterType="com.postoffice.web.dto.StateDTO" resultType="com.postoffice.web.dto.StateDTO">
-		select * from state 
+		select * from state order by state_id asc
 	</select>
 	
 	<select id="sysGetDept" parameterType="com.postoffice.web.dto.DeptDTO" resultType="com.postoffice.web.dto.DeptDTO">
-		select * from dept
+		select * from dept order by dept_id asc
 	</select>
 	
 	<select id="sysGetVillage" parameterType="com.postoffice.web.dto.VillageDTO" resultType="com.postoffice.web.dto.VillageDTO">
-		select vid, vname from village
+		select vid, vname from village order by vid asc
 	</select>
 	
 	<!-- stateId 중복 확인 -->
