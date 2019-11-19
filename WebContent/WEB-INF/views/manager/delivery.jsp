@@ -71,7 +71,7 @@
 		var len = $('.returnDrone').length;
 		
 		for(var i = 0; i < len; i++){
-			if($('.returnDrone').eq(i).attr('id') == 's007'){
+			if($('input#return_state').eq(i).val() == 's007'){
 				$('.returnDrone').eq(i).prop('disabled',false);
 				$('button#del_clear').eq(i).prop('disabled',false);
 			}
@@ -173,7 +173,7 @@
 												<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 													<input type="hidden" name="path" value='${pack.villageList.get(0).return_path}'>
 													<input type="hidden" name="package_id" value="${pack.package_id}" id="test">
-													<input type="hidden" name="state_id" value='${pack.stateList.get(0).state_id}'>
+													<input type="hidden" name="state_id" value='${pack.state_id}' id="return_state">
 													<input type="hidden" name="drone_id" id="return_droneId">
 													<input type="submit" id="${pack.stateList.get(0).state_id}" class="returnDrone" value="복귀" disabled>
 												</form>
