@@ -41,7 +41,7 @@
 
    <select id="selectMailList" parameterType="string" resultMap="mainInfo">
       SELECT
-         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.package_num, mail.mail_date, mail.state_id, state.state_name, village.vid, village.vname
+         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.mail_weight, mail.package_num, mail.mail_date, mail.state_id, state.state_name, village.vid, village.vname
       FROM
          mail, state, village
       WHERE
@@ -53,14 +53,21 @@
 
    </select>
 
+	<select id="selectVillage" resultType="com.postoffice.web.dto.VillageDTO">
+		SELECT
+			vid, vname
+		FROM
+			village	
+	</select>
+	
    <insert id="insertMailPackaging" parameterType="com.postoffice.web.dto.PackageDTO">
       <selectKey keyProperty="package_id" resultType="int" order="AFTER">
          SELECT SEQ_PACKAGE.currval FROM dual
       </selectKey>
       INSERT INTO
-         package(package_id, village, package_weight, state_id, arrival_date)
+         package(package_id, package_weight, state_id, arrival_date, vid)
       VALUES 
-         (SEQ_PACKAGE.nextval, '자바마을', #{package_weight}, 's002', sysdate)
+         (SEQ_PACKAGE.nextval, #{package_weight}, 's002', sysdate, #{vid})
    </insert>
 
 

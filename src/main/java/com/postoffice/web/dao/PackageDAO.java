@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
+import com.postoffice.web.dto.VillageDTO;
 
 @Repository
 public class PackageDAO {
@@ -17,11 +18,15 @@ public class PackageDAO {
    @Autowired
    private SqlSessionTemplate sqlSessionTemplate;
    
-   //우편 목록
-   public List<MailDTO> mailList(String sort){
-      return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
-   }
+	// 우편 목록
+	public List<MailDTO> mailList(String sort) {
+		return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
+	}
 
+	public List<VillageDTO> villageList() {
+		return sqlSessionTemplate.selectList("packaging.selectVillage");
+	}
+   
 	//우편 패키징
 	public int mailPackaging(PackageDTO dto) {
 		int pack_num = sqlSessionTemplate.insert("packaging.insertMailPackaging",dto);

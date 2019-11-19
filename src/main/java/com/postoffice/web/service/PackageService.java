@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.postoffice.web.dao.PackageDAO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
+import com.postoffice.web.dto.VillageDTO;
 
 @Service
 public class PackageService {
@@ -20,6 +21,10 @@ public class PackageService {
 		return packageDAO.mailList(sort);
 	}
 
+	public List<VillageDTO> villageList(){
+		return packageDAO.villageList();
+	}
+	
 	public List<PackageDTO> packageList() {
 		return packageDAO.packageList();
 	}

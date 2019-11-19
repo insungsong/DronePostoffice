@@ -29,19 +29,13 @@ public class PackageController {
       
       model.addAttribute("mailList",packageService.mailList(sort));
       model.addAttribute("packageList",packageService.packageList());
+      model.addAttribute("villages",packageService.villageList());
       
       List<PackageDTO> list = packageService.packageList();
-      System.out.println(list.size());
-      for(int i = 0; i < list.size(); i++) {
-         PackageDTO dto = list.get(i);
-         System.out.println("------------------------------------------");
-         System.out.println(dto.getPackage_id());
-         System.out.println(dto.getPackage_weight());
-         System.out.println("------------------------------------------");
-      }
+
       return "manager/packaging";
    }
-   
+
    @RequestMapping("/packaging")
    public String packaging(Model model,
          @RequestParam(value="mailIdList[]") List<String> mailIdList,
@@ -60,9 +54,11 @@ public class PackageController {
          return "manager/packageMailList_popup";
    }
    @RequestMapping("/clientInfo")
-   public String clientInfo(String to_name,String from_name,String to_address,String from_address,String vid,int mail_weight) {
+   public String clientInfo(String to_name,String from_name,String to_address,String from_address,String vid,String weight) {
+	   int mail_weight = Integer.parseInt(weight);
+	   System.out.println(mail_weight);
          packageService.clientInfo(to_name,from_name,to_address,from_address,vid,mail_weight);
-         return "redirect:/mailCheck";
+         return "redirect:/packagingList";
    }
    
 }

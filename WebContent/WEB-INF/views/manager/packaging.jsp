@@ -37,20 +37,49 @@ function weight_check(){
    console.log($("#total_weight").text());
 }
 
+var index;
+var option_index;
+
+$(function(){
+	index = $('input#chk').length;
+	option_index = $('option').length;
+	
+})
+
 function Auto_weight_check(){
-      //if($("#chk_auto").prop("checked")){
-         //if(parseInt($("input[name='chk_auto']:checked")) < parseInt($("#total_weight"))){
-            var len = $(("#mailTable tr").length)-1;
-            for(var i = 0; i < len; i++) {
-               $("#chk"+i).prop("checked",true);
-            }
-         //}
-      //}
-      
-      //if{
-      //   $("#chk").prop("checked",false);
-      //}
+    var to_weight = 0;
+    console.log($('option').val());
+    console.log($('select').val());
+    
+    	for(var i = 0; i < index; i++) {
+    	//if(($('select').val()) == $('td#villName').text().eq(i)){
+        	var weight_int = parseInt($("td#mail_weight").eq(i).text());
+        	console.log(weight_int);
+        	to_weight += weight_int;
+        	console.log(total_weight);
+        	
+          	if(to_weight < 1000){
+          		$("input#chk").eq(i).prop("checked",true);
+	          }
+	      // }
+	    }
+    	
+	var total = [];
+	   var check = 0;
+	   
+	   $('input:checkbox:checked').each(function(){
+	      total.push(parseInt($(this).attr('value')));
+	   });
+	   
+	   total_weight = 0;
+	   
+	   for(var i = 0; i < total.length; i++){
+	      total_weight += total[i];
+	   }
+	
+	   $("#total_weight").text(total_weight+'g');
 }
+      
 
 function packaging(){
    var Array = [];
@@ -116,6 +145,9 @@ function pack_mailList(value){
 				'v003' ];
 
 		for (i = 0; i < 5; i++) {
+			ranNum = Math.random() * 10 + 4;
+			num = parseInt(ranNum);
+			ranWeight = parseInt((Math.random()*10)+4) 
 			$.ajax({
 				url : "clientInfo",
 				data : {
@@ -124,15 +156,12 @@ function pack_mailList(value){
 					"to_address" : clientToaddress[num],
 					"from_address" : clientFromaddress[num],
 					"vid" : clientVillageName[num],
-					"mail_weight" : clientMailweight[num]
+					"weight" : ranWeight
 				},
 				success : function() {
 					window.location.reload();
-
 				}
 			});
-			ranNum = Math.random() * 10 + 4;
-			num = parseInt(ranNum);
 		}
 	}
 </script>
@@ -165,18 +194,26 @@ function pack_mailList(value){
 								<th scope="col" colspan="2">수신자</th>
 								<th scope="col" rowspan="2">도착 마을</th>
 								<th scope="col" rowspan="2">무게</th>
-								<th scope="col" rowspan="2" colspan="2"><button type="button" name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()">자동 선택</button></th>
+								<th scope="col" colspan="">
+									<select style="width: 66px;font-size: 10px;">
+										<option>마을 선택</option>
+										<c:forEach items="${villages}" var="villList">
+											<option id="${villList.vid}">${villList.vname}</option>
+										</c:forEach>
+									</select>
+								</th>
 							</tr>
 							<tr>
 								<th scope="col">이름</th>
 								<th scope="col">주소</th>
 								<th scope="col">이름</th>
 								<th scope="col">주소</th>
+								<th scope="col"><button type="button" name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()">자동 선택</button></th>
 							</tr>
 						</thead>
 					</table>
 					<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
-						<table cellspacing="0" id="mailTable" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
+						<table cellspacing="0" id="mailTable" border="1" class="frt_tbl_type" style="border-top:0px;">
 						
 							<colgroup>
 								<col width="50" /><col width="80" /><col width="200" /><col width="80" /><col width="*" /><col width="100" />
@@ -198,11 +235,11 @@ function pack_mailList(value){
                                  <td class="num">${mail.from_address}</td>
                                  <td class="num">${mail.to_name}</td>
                                  <td class="num">${mail.to_address}</td>
-                                 <td class="num">${mail.villageList.get(0).vname}</td>
-                                 <td class="num">${mail.mail_weight}</td>
+                                 <td class="num" id="villName">${mail.villageList.get(0).vname}</td>
+                                 <td class="num" id="mail_weight">${mail.mail_weight}</td>
                                  <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td>
                               </tr>
-   
+   								<input type="hidden" id ="${mail.villageList.get(0).vid}">
                          </c:forEach>
 								</c:otherwise>
 								
