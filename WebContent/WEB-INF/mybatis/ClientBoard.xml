@@ -17,6 +17,7 @@
 	<result column="state_name" property="state_name"/>
 </collection>
 <collection property="villageList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.VillageDTO">
+	<result column="vid" property="vid"/>
 	<result column="vname" property="vname"/>
 </collection>
 </resultMap>
@@ -134,7 +135,7 @@
 		</selectKey>
 		insert into
 			package(package_id, package_weight, state_id,arrival_date, vid)					
-		values (seq_package.nextval, #{package_weight},'s001',sysdate,'v001')
+		values (seq_package.nextval, #{package_weight},'s001',sysdate,#{vid})
 	</insert>
 	
 	<update id="updateMail" parameterType="map">

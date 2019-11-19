@@ -131,12 +131,10 @@ public class LoginController {
 			
 			String vmname = loginService.vmnrequest(lid);
 			session.setAttribute("vmname", vmname);
-			
-			String vmlid = loginService.vmnlid(lid);
 			VMemberDTO vmember=new VMemberDTO();
 			String grade = vmember.getGrade();
 			System.out.println(grade+"=+++++++++++++++++++++++++++++++++++@@@@@@@+!#!#");
-			return "redirect:clientIndex"; //이장님이 로그인했을 때 이동하는 페이지
+			return "client/index"; //이장님이 로그인했을 때 이동하는 페이지
 		} 
 	}
 	

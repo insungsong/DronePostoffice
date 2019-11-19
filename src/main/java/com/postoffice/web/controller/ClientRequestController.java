@@ -48,9 +48,9 @@ public class ClientRequestController {
 			System.out.println("totalWeight:"+totalWeight);
 			System.out.println("mailIdList:"+mailIdList);
 			System.out.println("vid:"+vid);
-			gcsService.sendMessageToGcs("requestDrone");
 			requestService.mailPackaging(mailIdList,totalWeight,vid);
-		
+			gcsService.sendMessageToGcs("requestDrone");
+			
 		return "redirect:/requestBoarderList";
 	}
 
@@ -60,8 +60,6 @@ public class ClientRequestController {
 					@RequestParam(defaultValue = "0") String totalWeight,
 					@RequestParam(defaultValue = "garbage") String totalMailId){
 		
-		System.out.println("TESTESTESR : " + totalWeight);
-		System.out.println("testttttttttttt : " + totalMailId);
 		session.setAttribute("pageNo", pageNo);
 
 		String sessioninfo = (String)session.getAttribute("lid");
@@ -98,6 +96,7 @@ public class ClientRequestController {
 		String vid = (String)session.getAttribute("vid");
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo ,vid);
 		// JSP로 페이지 정보 넘기기
+		
 		model.addAttribute("pagesPerGroup", pagesPerGroup);// model의 경우 jsp페이지로 넘길때 해당 페이지가, PL표현식으로 넘겨질수 있기 떄문에 이 표현식을
 															// 씀
 		model.addAttribute("totalPageNum", totalPageNum);

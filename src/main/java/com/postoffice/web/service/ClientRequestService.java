@@ -96,7 +96,7 @@ public class ClientRequestService {
 		//insert
 		packageDTO.setVid(vid);
 		
-		int mailpackaginList = clientdao.mailPackaging(packageDTO);
+		int mailpackaginList = clientdao.mailPackaging(packageDTO,vid);
 		System.out.println(mailpackaginList);
 		MailDTO mailDTO = new MailDTO();
 		System.out.println("Daddadadad :"+packageDTO.getPackage_id());
