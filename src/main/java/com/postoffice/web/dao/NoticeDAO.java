@@ -19,13 +19,31 @@ import com.postoffice.web.dto.NoticeDTO;
 public class NoticeDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-
+	
+	//noticeList에 대한 페이징 처리
 	public int selectTotalRowNum() {
 		int totalRowNum = sqlSessionTemplate.selectOne("notice.selectTotalRowNum");
 		
 		return totalRowNum;
 	}
-
+	
+	//noticeSearch에 대한 페이징 처리
+	public int SearchTitleTotalRowNum(String searchWord) { 
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("searchWord", searchWord);
+		int totalRowNum =  sqlSessionTemplate.selectOne("notice.SearchTitleTotalRowNum",map);
+		return totalRowNum; 
+	}
+	
+	
+	 //noticeSearch(mid)에 대한 페이징 처리 
+	public int MnameSearchTotalRowNum(String searchWord) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("searchWord", searchWord);
+		return sqlSessionTemplate.selectOne("notice.MnameSearchTotalRowNum",map);
+	}
+	 
+	//noticeList
 	public List<NoticeDTO> selectList(int startRowNum, int endRowNum) {	
 		Map<String, Integer> map = new HashMap<>();
 		map.put("startRowNum", startRowNum);
@@ -37,6 +55,23 @@ public class NoticeDAO {
 		return list;
 	}
 	
+	//공지사항 목록 검색
+	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum,int endRowNum) {
+		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("searchNotice", searchNotice);
+		map.put("searchWord", searchWord);
+		map.put("startRowNum", startRowNum);
+		map.put("endRowNum", endRowNum);
+		//map.put("endRowNum2", endRowNum2);
+		
+		if(searchNotice.equals("notice_title")) {
+			List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.noticeTitleSearch",map);
+			return noticeSearch;
+		}
+		List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.mnameSearch",map);
+		return noticeSearch;
+	}
+	//공지사항 세부정보
 	public NoticeDTO selectDetail(NoticeDTO noticeDTO){
 		System.out.println(noticeDTO.getNotice_id());
 		
@@ -70,21 +105,7 @@ public class NoticeDAO {
 	
 	
 	
-	//공지사항 목록 검색
-	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum, int endRowNum) {
-		Map<String,Object>map = new HashMap<String,Object>();
-		map.put("searchNotice", searchNotice);
-		map.put("searchWord", searchWord);
-		map.put("startRowNum", startRowNum);
-		map.put("endRowNum", endRowNum);
-		
-		if(searchNotice.equals("notice_title")) {
-			List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.noticeTitleSearch",map);
-			return noticeSearch;
-		}
-		List<NoticeDTO> noticeSearch = sqlSessionTemplate.selectList("notice.mnameSearch",map);
-		return noticeSearch;
-	}
+
 	
 	//test
 	public MemberDTO showMember(MemberDTO dto) {
@@ -107,6 +128,8 @@ public class NoticeDAO {
 	public void deleteDelete(NoticeDTO noticeDTO) {
 		sqlSessionTemplate.delete("notice.noticedelete", noticeDTO);
 	}
+
+	
 
 
 	

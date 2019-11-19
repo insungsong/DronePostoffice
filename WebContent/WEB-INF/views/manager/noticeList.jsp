@@ -81,11 +81,11 @@
 								<th scope="col">부서</th>
 								<th scope="col">작성일</th>
 							</tr>
-									
+						</thead>
 						<tbody>
 							<c:forEach var="notice" items="${noticeList}">	
 								<tr style="height: 34px;">
-									<th scope="row" style="background-color:white;">${notice.notice_id}</th>
+									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_id}</a></td>
 									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
 								
 									<td>${notice.memberList.get(0).mname}</td>
@@ -103,6 +103,8 @@
 					
 							</div>
 						
+						<!-- noticeList의 페이징 처리 -->
+				
 						<c:if test="${totalPageNum >= 1}">
 							<div class="notice_page">
 							<a href="noticeList?pageNum=1" class="btn btn-outline-danger" style="margin-top:5px;"><<</a>
@@ -129,8 +131,7 @@
 								<a href="noticeList?pageNum=${totalPageNum}" class="btn btn-outline-danger" style="margin-top:5px;">>></a>
 							</div>
 						</c:if>
-						
-					
+
 					</div>
 				
 				</div>

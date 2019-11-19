@@ -23,11 +23,23 @@ public class NoticeService {
 
 	@Autowired
 	private NoticeDAO noticeDAO;
-
+	//noticeList에 대한 페이징 처리
 	public int getTotalRowNum() {
 		int totalRowNum = noticeDAO.selectTotalRowNum();
 		return totalRowNum;
 	}
+	//TitleSearch에 대한 페이징 처리
+	public int SearchTitleTotalRowNum(String searchWord) {
+		int totalRowNum = noticeDAO.SearchTitleTotalRowNum(searchWord);
+		return totalRowNum;
+	}
+	
+	//MidSearch에 대한 페이징 처리 
+	public int MnameSearchTotalRowNum(String searchWord) { 
+		return noticeDAO.MnameSearchTotalRowNum(searchWord); 
+	}
+	 
+	
 
 	public List<NoticeDTO> getNoticeList(int startRowNum, int endRowNum) {
 		List <NoticeDTO> noticeList = noticeDAO.selectList(startRowNum, endRowNum);
@@ -37,6 +49,15 @@ public class NoticeService {
 
 	SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
+	public void noticeDelete(NoticeDTO noticeDTO) {
+		noticeDAO.deleteDelete(noticeDTO);
+		
+	}
+	//noticeList검색부분 리스트 select
+	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum, int endRowNum) {
+		List<NoticeDTO> noticeSearch=noticeDAO.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
+		return noticeSearch;
+	}
 	
 	//noticeDetail(수정테스트)
 	public NoticeDTO noticeDetail(NoticeDTO noticeDTO){
@@ -108,14 +129,7 @@ public class NoticeService {
 		return list;
 	}
 
-	public void noticeDelete(NoticeDTO noticeDTO) {
-		noticeDAO.deleteDelete(noticeDTO);
-		
-	}
-
-	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum, int endRowNum) {
-		List<NoticeDTO> noticeSearch=noticeDAO.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
-		return noticeSearch;
-	}
+	
+	
 	
 }

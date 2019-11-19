@@ -1,3 +1,4 @@
+
 package com.postoffice.web.controller;
 
 import java.io.File;
@@ -95,13 +96,20 @@ public class NoticeController {
 	@RequestMapping("/noticeSearch")
 	public String noticeSearch(String searchNotice, String searchWord, Model model, @RequestParam(defaultValue = "1") int pageNum, HttpSession session) {
 		session.setAttribute("pageNum", pageNum);
-	
+		
+		int totalRowNum=0;
+
 		//페이지당 행 수
 		int rowsPerPage = 10;
 		//이전, 다음을 클릭했을 때 나오는 페이지 수
 		int pagesPerGroup = 5;
-		//전체 게시물 수
-		int totalRowNum = noticeService.getTotalRowNum();
+		//전체 게시물 수			
+		if(searchNotice.equals("notice_title")) {
+			totalRowNum = noticeService.SearchTitleTotalRowNum(searchWord);
+		}
+		else if(searchNotice.equals("mname")) {
+			totalRowNum = noticeService.MnameSearchTotalRowNum(searchWord);
+		}
 		//전체 페이지 수
 		int totalPageNum=totalRowNum / rowsPerPage;
 		if(totalRowNum % rowsPerPage !=0) totalPageNum++;
@@ -116,21 +124,21 @@ public class NoticeController {
 		int endPageNum =startPageNum + pagesPerGroup -1;
 		if(groupNum == totalGroupNum) endPageNum = totalPageNum;
 		//현재 페이지의 시작 행번호
-		int startRowNum = (pageNum-1)*rowsPerPage +1; 
+		int startRowNum = (pageNum-1)*rowsPerPage +1;			
 		//현재 페이지의 끝 행번호
 		int endRowNum = pageNum * rowsPerPage;
 		if(pageNum == totalPageNum) endRowNum = totalRowNum;
-			 
+		
 		List<NoticeDTO> noticeSearch = noticeService.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
-		 
+		
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
 		model.addAttribute("totalGroupNum", totalGroupNum);
 		model.addAttribute("groupNum", groupNum); 
 		model.addAttribute("startPageNum",startPageNum);
+		//title검색
 		model.addAttribute("endPageNum", endPageNum);
 		model.addAttribute("pageNum", pageNum); 
-		 
 		model.addAttribute("noticeList",noticeSearch);		
 
 		return"manager/noticeList";
@@ -139,8 +147,6 @@ public class NoticeController {
 	// 공지사항 작성 폼
 	@GetMapping("/noticeWrite")
 	public String noticeWriteForm(Model model, HttpSession session) {
-		//MemberDTO dto = new MemberDTO();
-		
 		//session에서 mname(직원이름), dept_name(부서명)가져오기
 		String mname = (String)session.getAttribute("mname");
 		String dept_name = (String)session.getAttribute("dept_name");
@@ -148,9 +154,6 @@ public class NoticeController {
 		if(mname == null) {
 			return "redirect:/";
 		}
-		//dto.setMid(mname);
-		
-		//model.addAttribute("memberInfo",noticeService.showMember(dto));
 		return "manager/noticeWrite";
 	}
 
