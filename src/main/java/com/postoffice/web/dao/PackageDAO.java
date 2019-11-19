@@ -19,10 +19,14 @@ public class PackageDAO {
    private SqlSessionTemplate sqlSessionTemplate;
    
 	// 우편 목록
-	public List<MailDTO> mailList(String sort) {
-		return sqlSessionTemplate.selectList("packaging.selectMailList", sort);
+	public List<MailDTO> mailList() {
+		return sqlSessionTemplate.selectList("packaging.selectMailList");
 	}
 
+	public List<MailDTO> village_mailList(String village_name){
+		return sqlSessionTemplate.selectList("packaging.selectMailListVillage", village_name);
+	}
+	
 	public List<VillageDTO> villageList() {
 		return sqlSessionTemplate.selectList("packaging.selectVillage");
 	}
@@ -39,7 +43,9 @@ public class PackageDAO {
 		Map<String, Integer> map = new HashMap<>();
 		map.put("mail_id", mailDTO.getMail_id());
 		map.put("package_id", packageDTO.getPackage_id());
-		
+		System.out.println("--------------------------------------");
+		System.out.println(mailDTO.getMail_id());
+		System.out.println(packageDTO.getPackage_id());
 		return sqlSessionTemplate.update("packaging.updateMail", map);
 	}
 	

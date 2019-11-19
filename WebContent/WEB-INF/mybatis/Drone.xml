@@ -178,7 +178,7 @@
 				UPDATE
 					package
 				SET
-					state_id = 's007',
+					state_id = 's004',
 					arrival_date = 'SYSDATE'
 				WHERE
 					package_id = #{package_id}

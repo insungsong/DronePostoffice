@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.PackageService;
@@ -24,10 +23,9 @@ public class PackageController {
 	private GcsService gcsService;
    
    @RequestMapping("/packagingList")
-   public String packagingList(Model model,
-            @RequestParam(defaultValue="0") String sort) {
+   public String packagingList(Model model) {
       
-      model.addAttribute("mailList",packageService.mailList(sort));
+      model.addAttribute("mailList",packageService.mailList());
       model.addAttribute("packageList",packageService.packageList());
       model.addAttribute("villages",packageService.villageList());
       
@@ -35,13 +33,22 @@ public class PackageController {
 
       return "manager/packaging";
    }
+   
+   @RequestMapping("/pack_search")
+   public String pack_search(@RequestParam String village_name, Model model) {
+		model.addAttribute("mailList",packageService.village_mailList(village_name));
+		model.addAttribute("packageList",packageService.packageList());
+		model.addAttribute("villages",packageService.villageList());
+	   
+		return "manager/packaging";
+   }
 
    @RequestMapping("/packaging")
    public String packaging(Model model,
          @RequestParam(value="mailIdList[]") List<String> mailIdList,
-         @RequestParam(value="totalWeight") String totalWeight) throws IOException {
-         
-         model.addAttribute("packagingList", packageService.mailPackaging(totalWeight, mailIdList));
+         @RequestParam(value="totalWeight") String totalWeight,
+         @RequestParam String vid) throws IOException {
+         model.addAttribute("packagingList", packageService.mailPackaging(totalWeight, mailIdList, vid));
          
          return "redirect:/packagingList";
    }
@@ -53,6 +60,7 @@ public class PackageController {
          model.addAttribute("pack_mailList",packageService.pack_mailList(dto));
          return "manager/packageMailList_popup";
    }
+   
    @RequestMapping("/clientInfo")
    public String clientInfo(String to_name,String from_name,String to_address,String from_address,String vid,String weight) {
 	   int mail_weight = Integer.parseInt(weight);

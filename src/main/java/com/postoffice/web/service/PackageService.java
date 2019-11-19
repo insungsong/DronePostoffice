@@ -16,9 +16,14 @@ public class PackageService {
 	@Autowired
 	PackageDAO packageDAO;
 
-	public List<MailDTO> mailList(String sort) {
+	public List<MailDTO> mailList() {
 
-		return packageDAO.mailList(sort);
+		return packageDAO.mailList();
+	}
+	
+	public List<MailDTO> village_mailList(String village_name){
+		
+		return packageDAO.village_mailList(village_name);
 	}
 
 	public List<VillageDTO> villageList(){
@@ -29,19 +34,20 @@ public class PackageService {
 		return packageDAO.packageList();
 	}
 
-	public List<PackageDTO> mailPackaging(String totalWeight, List<String> mailIdList) {
+	public List<PackageDTO> mailPackaging(String totalWeight, List<String> mailIdList, String vid) {
 		// 총 무게 g 자르고 int 변환
 		String rep = totalWeight.replace("g", "");
 		int total = Integer.parseInt(rep);
-
+		System.out.println("-------------------------------");
+		System.out.println(total);
 		PackageDTO packageDTO = new PackageDTO();
 		packageDTO.setPackage_weight(total);
-
+		packageDTO.setVid(vid);
 		// 패키지 insert
 		packageDAO.mailPackaging(packageDTO);
 
 		MailDTO mailDTO = new MailDTO();
-
+		
 		// 우편 update
 		for (int i = 0; i < mailIdList.size(); i++) {
 			mailDTO.setMail_id(Integer.parseInt(mailIdList.get(i)));
