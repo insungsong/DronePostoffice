@@ -61,7 +61,8 @@ public class GcsService {
 		String topic = "/drone/web/pub";
 		JSONArray jsonArray = new JSONArray(path);
 		JSONObject jsonObject = new JSONObject();
-		
+		System.out.println("test2 : " + path);
+		System.out.println("test : " + jsonArray);
 		
 		jsonObject.put("msgid", "path");
 		jsonObject.put("path", jsonArray);

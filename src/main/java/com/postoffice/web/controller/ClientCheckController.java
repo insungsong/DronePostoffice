@@ -88,9 +88,9 @@ public class ClientCheckController {
 		 * PackageDTO pack=new PackageDTO();
 		 * pack.setState_id(request.getParameter("state_id"));
 		 */
+		gcsService.sendMessageToGcs("attachFinish");
 		System.out.println(package_id);
 		checkService.registRequest(package_id);
-		gcsService.sendMessageToGcs("attachFinish");
 		return "redirect:/packageCheck";
 	}
 	
@@ -131,9 +131,9 @@ public class ClientCheckController {
 		return "redirect:/packageCheck";
 	}
 	//현황 페이지 팝업 메서드
-	@RequestMapping("/current")
+	@RequestMapping("/deliveryMap")
 	public String current() {
-		return "client/index";
+		return "client/deliveryMap";
 	}
 	
 }

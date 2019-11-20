@@ -106,7 +106,7 @@
 				AND
 					drone.state_id = 'sd002'
 			</when>
-			<when test="state_id.equals('sd005')">
+			<otherwise> 
 				SELECT
 					village.return_path
 				FROM
@@ -123,7 +123,7 @@
 					delivery.state_id = 's007'
 				AND
 					drone.state_id = 'sd005'
-			</when>
+			</otherwise>
 		</choose>
 	</select>
 	

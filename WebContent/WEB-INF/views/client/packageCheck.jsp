@@ -47,7 +47,7 @@
 			}
 		}
 		function current(){
-			window.open("/FinalWebProject/current" , width=10, height=100);
+			window.open("deliveryMap" , width=750, height=500);
 		}
 	</script>
 	<style>
