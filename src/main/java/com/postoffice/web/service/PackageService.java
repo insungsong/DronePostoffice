@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.postoffice.web.dao.PackageDAO;
+import com.postoffice.web.dto.DeliveryDTO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.dto.VillageDTO;
@@ -66,6 +67,10 @@ public class PackageService {
 	public int clientInfo(String to_name, String from_name, String to_address, String from_address, String vid,
 			int mail_weight) {
 		return packageDAO.clientInfo(to_name, from_name, to_address, from_address, vid, mail_weight);
+	}
+	
+	public List<DeliveryDTO> deliveryList(){
+		return packageDAO.deliveryList();
 	}
 
 }

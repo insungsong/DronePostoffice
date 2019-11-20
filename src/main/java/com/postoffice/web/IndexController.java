@@ -26,12 +26,10 @@ public class IndexController {
 	
 	@RequestMapping("/index")
 	public String index(Model model) {
-		model.addAttribute("mailList",packageService.mailList());
-		
+		model.addAttribute("mailList",packageService.mailList());	
 		model.addAttribute("noticeList",noticeService.getNoticeListdiv());
-		
 		model.addAttribute("packageList",checkService.packageCheckdiv());
-		
+		model.addAttribute("deliveryList",packageService.deliveryList());
 	
 		return "index";
 	}

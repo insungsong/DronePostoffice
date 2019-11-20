@@ -27,7 +27,7 @@ public class ClientCheckDAO {
 		return sqlSessionTemplate.selectList("board.beforeSelectAll");
 	}
 
-	public List packageSelect() {
+	public List<PackageDTO> packageSelect() {
 		return sqlSessionTemplate.selectList("board.packageCheck");
 		
 	}

@@ -26,7 +26,7 @@ public class ClientCheckService {
 	public List<PackageDTO> packageCheckdiv() {
 		return checkDAO.packageCheckdiv();
 	}
-	public List packageSelect() {
+	public List<PackageDTO> packageSelect() {
 		return checkDAO.packageSelect();
 	}
 	public int updateStateProc(MailDTO mailDTO) {

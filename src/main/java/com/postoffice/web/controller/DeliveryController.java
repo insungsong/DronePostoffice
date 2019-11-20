@@ -10,15 +10,15 @@ import com.postoffice.web.dto.DeliveryDTO;
 import com.postoffice.web.dto.DroneDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.DroneManagementService;
-import com.postoffice.web.service.GcsService;
 
 @Controller
 public class DeliveryController {
 
 	@Autowired
 	private DroneManagementService droneManagementService;
-	@Autowired
-	private GcsService gcsService;
+	/*
+	 * @Autowired private GcsService gcsService;
+	 */
 	
 	@RequestMapping("/delivery")
 	public String delibery(Model model) {
@@ -51,7 +51,7 @@ public class DeliveryController {
 	public String drone_delivery(DeliveryDTO dto, @RequestParam String state_id, @RequestParam String path) {
 		System.out.println(path);
 		System.out.println(dto.getDrone_id());
-		gcsService.sendMessage(dto,state_id,path);
+		//gcsService.sendMessage(dto,state_id,path);
 		return "redirect:/delivery";
 	}
 	

@@ -97,7 +97,7 @@
 		}
 		
 		for(var i = 0; i < len; i++){
-			if($('td#stateName').eq(i).text() == '접수대기'){
+			if($('td#stateName').eq(i).text() == '배송 준비중'){
 				$('td#stateName').eq(i).css('color','#007bff');
 			}else if($('td#stateName').eq(i).text() == '드론 요청'){
 				$('td#stateName').eq(i).css('color','#20c997');

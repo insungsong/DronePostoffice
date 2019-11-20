@@ -35,7 +35,7 @@
 		}
 		.drone{
 			width: 100%;
-			height: 200px;
+			height: 230px;
 			margin-top: 15px;
 		}
 		#droneList tr {
@@ -49,18 +49,20 @@
         }
         .drone_log{
         	width: 100%;
-		    height: 100px;
 		    margin-top: 35px;
 		    max-height: 300px;
+		    min-height: 100px;
         }
         .ok_button{
         	float: right;
+        	margin-top:20px;
 		    margin-right: 30px;
 		    background: #F32C28;
 		    border: 0;
 		    color: white;
 		    width: 65px;
 		    font-size: 14px;
+		    border-radius: 9px;
         }
 	</style>
 	
@@ -164,7 +166,7 @@
 					</tr>
 				</thead>
 			</table>
-			<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
+			<div style="max-height:333px; width:100%; overflow-x:hidden; overflow-y:scroll;">
 				<table cellspacing="0" border="1" class="frt_tbl_type" style="border-top:0px;">
 				
 					<colgroup>

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;width: 183px;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
 .customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #d95050;background: #d95050 url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
@@ -36,9 +36,20 @@
 			var marker = null;
 			var customOverlay = null;
 	  		
+			//시간 계산
+			String.prototype.toHHMMSS = function () {
+			    var myNum = parseInt(this, 10);
+			    var hours   = Math.floor(myNum / 3600);
+			    var minutes = Math.floor((myNum - (hours * 3600)) / 60);
+			    var seconds = myNum - (hours * 3600) - (minutes * 60);
 
-	  		
-	  		
+			    if (hours   < 10) {hours   = "0"+hours;}
+			    if (minutes < 10) {minutes = "0"+minutes;}
+			    if (seconds < 10) {seconds = "0"+seconds;}
+			    return hours+':'+minutes+':'+seconds;
+			}
+			
+			
 		 $(function() {
 	       //MQTT Broker와 연결하기
 	       client = new Paho.MQTT.Client("106.253.56.124", 61623, "clientId"+new Date().getTime()); //location.hostname: 자동으로 호스트네임 가져옴
@@ -96,14 +107,20 @@
 			          marker.setMap(map);
 			          map.setCenter(markerPosition);
 			          
+			          
+			          var total_length = Math.floor(polyline.getLength());
+						$('#distance').text('남은 거리 ' + total_length+'m'); 
+						
 	
 				      // 커스텀 오버레이에 표시할 내용입니다     
 				      // HTML 문자열 또는 Dom Element 입니다 
 				      var content = '<div class="customoverlay">' +
-				          '    <span class="title" id="start"></span>' +
-				          '    <span class="first" id="time"></span>' +
-				          '    <span class="first" id="distance"></span>' +
-				          '</div>';
+			   		   '    <a href="">' +
+			          '    <span class="title" id="start"></span>' +
+			          '    <span class="title" id="time"></span>' +
+			          '    <span class="title" id="distance"></span>' +
+			          '    <a>' +
+			          '</div>';
 	
 				      // 커스텀 오버레이가 표시될 위치입니다 
 				      var position = new kakao.maps.LatLng(currLat, currLng);  
@@ -117,7 +134,7 @@
 						      customOverlay = new kakao.maps.CustomOverlay({
 						          position: position,
 						          content: content,
-						          xAnchor: 0.4,
+						          xAnchor: 0.5,
 						       	  yAnchor: 1.1
 						      });
 			           }
@@ -132,28 +149,23 @@
 			               
 			     }
 		       if(obj.msgid == "VFR_HUD"){
-			          var groundSpeed = obj.groundSpeed;
-			          $("#speed").text(groundSpeed+'m/s');
 			         	
 			          //예상 시간 구하기
 			          var len = parseFloat($('#total_length').text());
 			          var speed = parseFloat(groundSpeed);
 			          
 			         
-			          if(speed == 0){
-			        	  $('#time').text('속력 측정 불가');
-			        	  $('#time').css('color','red');
-			          } else {
 				          var expectancy_time = (len/speed)/60;
 				          var MathFloor = Math.floor(expectancy_time);
 				          
-				          var cho = expectancy_time - MathFloor;
-				          var banalo = cho.toFixed(2);
-				          var finalCho = banalo*100;
-				          $('#distance').text(MathFloor+'분'+finalCho+'초');
+				           var finalCho = Math.Floor.toHHMMSS();
+				          //var cho = expectancy_time - MathFloor;
+				          //var banalo = cho.toFixed(2);
+				          //var finalCho = banalo*100;
+				          //$('#distance').text('예상 시간 '+MathFloor+'분'+finalCho+'초');
+				          $('#distance').text('예상 시간 '+finalCho);
 				          $('#distance').css('color','black');
-			          }
-			          
+
 			       }
 		       	
 		       }

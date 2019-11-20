@@ -11,14 +11,12 @@ public class PackageDTO {
 	private Date arrival_date;
 	private String vid;
 	
+	private List<PackageDTO> packageList;
 	private List<StateDTO> stateList;
 	private List<VillageDTO> villageList;
 	private List<MailDTO> mailList;
 
 	
-	public void setVillageList(List<VillageDTO> villageList) {
-		this.villageList = villageList;
-	}
 	public int getPackage_id() {
 		return package_id;
 	}
@@ -56,7 +54,13 @@ public class PackageDTO {
 	}
 	public void setVid(String vid) {
 		this.vid = vid;
-
+	}
+	
+	public List<PackageDTO> getPackageList() {
+		return packageList;
+	}
+	public void setPackageList(List<PackageDTO> packageList) {
+		this.packageList = packageList;
 	}
 	public List<StateDTO> getStateList() {
 		return stateList;
@@ -66,7 +70,10 @@ public class PackageDTO {
 	}
 	public List<VillageDTO> getVillageList() {
 		return villageList;
-	}	
+	}
+	public void setVillageList(List<VillageDTO> villageList) {
+		this.villageList = villageList;
+	}
 	public List<MailDTO> getMailList() {
 		return mailList;
 	}

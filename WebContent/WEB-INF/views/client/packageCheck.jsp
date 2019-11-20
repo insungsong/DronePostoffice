@@ -61,11 +61,7 @@
 			
 		}
 		function current(){
-<<<<<<< HEAD
 			window.open("deliveryMap" , width=750, height=500);
-=======
-			window.open("/FinalWebProject/current" , width=100, height=100);
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 		}
 	</script>
 	<style>
@@ -82,7 +78,7 @@
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 				
 			<div id="checkHead">
-				<div id="checkSession" class="alert alert-danger">${vmname} 님 요청 확인 페이지 입니다.
+				<div id="checkSession" class="alert alert-danger">${vmname} 님 요청 확인 페이지 입니다.</div>
 			</div>
 				
 				<div style="width:100%; height:500px; overflow:auto">
@@ -154,7 +150,7 @@
 													<%-- <c:if test="${pack.stateList.get(0).state_id eq 's007'}">
 														<td></td>
 													</c:if> --%>
-												</tr>
+								
 											</c:if>
 											</c:forEach>
 									</table>
