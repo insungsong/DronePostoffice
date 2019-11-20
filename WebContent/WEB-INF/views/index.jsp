@@ -65,7 +65,8 @@
 						<a href="noticeList">공지사항</a>
 						<a href="noticeList" class="more">more</a>
 						<div class="boardwrite" style="margin-top:10px;height: 1409%;; border:solid black 1px;">
-							<iframe src="http://localhost:8080/FinalWebProject/delivery" style="width:100%;height:100%;"></iframe>
+							<!-- <iframe src="http://localhost:8080/FinalWebProject/delivery" style="width:100%;height:100%;"></iframe> -->
+							
 						</div>
 					</div>
 				</div>

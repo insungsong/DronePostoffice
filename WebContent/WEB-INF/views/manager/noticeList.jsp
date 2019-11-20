@@ -105,9 +105,9 @@
 					
 					<div class="wbtn_div">
 								<a href="noticeWrite" class="btn btn-outline-danger" style="margin-top:10px;">글쓰기</a>
-							</div>
+					</div>
 					
-							</div>
+					</div>
 						
 						<!-- noticeList의 페이징 처리 -->
 				

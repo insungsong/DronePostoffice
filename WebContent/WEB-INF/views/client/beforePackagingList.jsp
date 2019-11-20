@@ -15,9 +15,9 @@
 			var result=confirm("삭제하시겠습니까?");
 			if(result==true){
 				location.href = "cancel?package_id=" + package_id;
-				alert("삭제되었습니다.")
+				alert("삭제되었습니다.");
 			}else{
-				alert("취소하셨습니다.")
+				alert("취소하셨습니다.");
 			}
 			
 		}
@@ -28,7 +28,7 @@
 				location.href="registRequest?package_id="+package_id;
 				alert("접수요청 되었습니다.");
 			}else{
-				alert("취소 하셨습니다.")
+				alert("취소 하셨습니다.");
 			}
 		}
 		
@@ -84,14 +84,18 @@
 													<td>${pack.stateList.get(0).state_name}</td>
 													<td>${pack.villageList.get(0).vname}</td>
 													<c:if test="${pack.stateList.get(0).state_id eq 's001'}">
-														<td><input type="button" value="접수 요청" onClick="regist(${pack.package_id})"/></td>
+														<td>
+															<input type="button" value="접수 요청" onClick="regist(${pack.package_id})"/>
+														</td>
 													</c:if>
 													<c:if test="${pack.stateList.get(0).state_id eq 's005'}">
 														<td>접수 완료!!!</td>
 													</c:if>
 													
 													<c:if test="${pack.stateList.get(0).state_id ne 's004'}">
-														<td><input type="button"  value="요청취소" onclick="cancel(${pack.package_id})"/></td>
+														<td>
+															<input type="button"  value="요청취소" onclick="cancel(${pack.package_id})"/>
+														</td>
 													</c:if>
 												<tr>
 											</c:if>
