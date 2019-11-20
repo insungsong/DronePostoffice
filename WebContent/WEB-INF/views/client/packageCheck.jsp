@@ -22,6 +22,7 @@
 			
 		}
 		
+		
 		function regist(package_id){
 			var result=confirm("접수 요청 하시겠습니까?");
 			if(result==true){
@@ -59,6 +60,7 @@
 				<div id="checkSession" class="alert alert-danger">${vmname} 님 요청 확인 페이지 입니다.
 			</div>
 				
+				<div style="width:100%; height:500px; overflow:auto">
 				<table border="1" class="frt_tbl_type" style="width:100%;">	
 				
 								<thead class="thead-dark">
@@ -73,6 +75,7 @@
 											     
 											   </tr>
 								</thead>
+								
 											<c:forEach items="${packageList}" var="pack">
 											<c:if test="${vid eq pack.villageList.get(0).vid and pack.stateList.get(0).state_id ne 's004'}">
 											<tr class="tr" <%-- onclick="location.href='packageDetail?package_id=${pack.package_id}'"  style="cursor:pointer;"--%> onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'"/>
@@ -113,6 +116,7 @@
 											</c:if>
 											</c:forEach>
 									</table>
+								</div>
 								<div class="request_content" style="border-top: 2px solid #F32C28;">
 								
 									<table style="margin-top:10px; float:right;">

@@ -92,9 +92,15 @@
 						</thead>
 						<tbody>
 							<c:forEach var="notice" items="${noticeList}">	
+<<<<<<< HEAD
 								<tr style="height: 34px;">
 									<td><a href="noticeDetail?notice_id=${notice.notice_id}" style="font-size:16px;">${notice.notice_id}</a></td>
 									<td><a href="noticeDetail?notice_id=${notice.notice_id}" style="font-size:16px;">${notice.notice_title}</a></td>
+=======
+								<tr style="height: 34px;" onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'">
+									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_id}</a></td>
+									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 								
 									<td>${notice.memberList.get(0).mname}</td>
 									<td>${notice.deptList.get(0).dept_name}</td>

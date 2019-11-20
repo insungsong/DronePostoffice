@@ -74,8 +74,8 @@ public class ClientRequestService {
 	}
 
 
-	public List<MailDTO> fromsearch(String searchType,String keyword,int startRowNo, int endRowNo) {
-		List<MailDTO> listdto = clientdao.fromSearch(searchType,keyword,startRowNo, endRowNo);
+	public List<MailDTO> fromsearch(String searchType,String keyword,int startRowNo, int endRowNo,String vid) {
+		List<MailDTO> listdto = clientdao.fromSearch(searchType,keyword,startRowNo, endRowNo, vid);
 		return listdto;
 	}
 
@@ -108,4 +108,12 @@ public class ClientRequestService {
 		
 		return mailpackaginList;
 	}
+
+	
+	//검색눌렀을때 페이징 처리
+	 public int SearchTotalRowNum(String searchType) { 
+		 int totalRowNums =clientdao.selectTotalRowNum(searchType); 
+		 return totalRowNums; 
+	 }
+	 
 }

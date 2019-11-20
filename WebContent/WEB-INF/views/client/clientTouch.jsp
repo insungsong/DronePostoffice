@@ -91,8 +91,8 @@
 							<input id="lphoto" name="lphoto" type="file" value="파일 추가하기">
 					  </div>
 					  <div class="form-group">
-					    <!-- <label for="exampleInputEmail1">마을 정보</label> -->
-					    <input type="hidden" name="vid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${vmemberList.vid }" readonly="readonly">
+					    <label for="exampleInputEmail1">마을 정보</label>
+					    <input type="text" name="vid" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="${vmemberList.vid }" readonly="readonly">
 					  </div>
 					</c:forEach>
 					<button type="submit" class="btn btn-danger" style="display:block;margin: auto;width: 600px;">수정하기</button>

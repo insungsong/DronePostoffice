@@ -192,26 +192,7 @@
 					
 					    var map = new kakao.maps.Map(container, options); 
 					   
-					    var marker = null;
-					    // 마커가 표시될 위치입니다 
-				         // var markerPosition  = new kakao.maps.LatLng(lat, lng); 
-
-				          
-				          
-				          if(marker != null) {
-				             marker.setMap(null);
-				             marker.setPosition(markerPosition);
-				          } else {
-				             // 마커를 생성합니다
-				             marker = new kakao.maps.Marker({
-				                 position: markerPosition
-				             });
-				          }
-				          
-				          
-				          // 마커가 지도 위에 표시되도록 설정합니다
-				          marker.setMap(map);
-				          map.setCenter(markerPosition);
+				
 				          
 				          
 				          
@@ -241,7 +222,29 @@
 					          var currLng = obj.currLng;
 					          var alt = obj.alt;
 					          
-					          var markerPosition = new kakao.maps.LatLng(currLat, currLng);
+					         
+					          
+						      // 마커가 표시될 위치입니다 
+					          var markerPosition  = new kakao.maps.LatLng(currLat, currLng); 
+						
+					          var marker = null;
+					          
+					          if(marker != null) {
+					             marker.setMap(null);
+					             marker.setPosition(markerPosition);
+					          } else {
+					             // 마커를 생성합니다
+					             marker = new kakao.maps.Marker({
+					                 position: markerPosition
+					             });
+					          }
+					          
+					          
+					          
+					          // 마커가 지도 위에 표시되도록 설정합니다
+					          marker.setMap(map);
+					          map.setCenter(markerPosition);
+						          
 					          $('#currLat').text(currLat);
 					          $('#currLng').text(currLng);
 					          $('#alt').text(alt+'m');
@@ -275,7 +278,11 @@
 					          } else {
 						          var expectancy_time = (len/speed)/60;
 						          var MathFloor = Math.floor(expectancy_time);
-						          $('#expectancy_time').text(MathFloor+'분');
+						          
+						          var cho = expectancy_time - MathFloor;
+						          var banalo = cho.toFixed(2);
+						          var finalCho = banalo*100;
+						          $('#expectancy_time').text(MathFloor+'분'+finalCho+'초');
 						          $('#expectancy_time').css('color','black');
 					          }
 					          

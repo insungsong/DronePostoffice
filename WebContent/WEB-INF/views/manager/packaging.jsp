@@ -101,7 +101,7 @@
 		      console.log('array' + Array[i]);
 		   };
 		   
-		   var vid = $('input.hidden_vid').eq(i).attr('id');
+		   var vid = $('input.hidden_vid').eq(0).attr('id');
 		   $.ajax({
 		      url:"packaging",
 		      data:{"mailIdList":Array,"totalWeight":$("#total_weight").text(),"vid":vid},

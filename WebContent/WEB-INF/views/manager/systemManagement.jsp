@@ -443,7 +443,7 @@
 											<td>
 												<a id="${state.state_id}" onclick="StateInfoUpdate(id)"href="#;" style="font-size:15px;">${state.state_id}</a>
 											</td>
-											<td id="statename" class="stateName">${state.state_name}</td>
+											<td id="statename" class="stateName" style="font-size:11px;">${state.state_name}</td>
 											<td class="statedelete">
 												<a id="sdel_btn" href="sysstateDelete?state_id=${state.state_id}"style="font-size:15px;" onclick="SDel_btn_clicked(this);">X</a>
 											</td>
@@ -549,7 +549,7 @@
 												<td>
 													<a id="${dept.dept_id}" onclick="DeptInfoUpdate(id)"href="#;"style="font-size:15px;">${dept.dept_id}</a>
 												</td>
-												<td class="deptName">${dept.dept_name}</td>
+												<td class="deptName" style="font-size:11px;">${dept.dept_name}</td>
 												<td class="deptdelete">
 													<a href="sysdeptDelete?dept_id=${dept.dept_id}" onclick="DDel_btn_clicked(this);"style="font-size:15px;">X</a>
 												</td>
@@ -658,10 +658,15 @@
 								<tbody>		
 									<c:forEach items="${villageList}" var="village">									
 										<tr>
+<<<<<<< HEAD
 											<td class="vid">
 												<a id="${village.vid}" onclick="VillageInfoUpdate(id)" href="#;"style="font-size:15px;">${village.vid}</a>
 											</td>
 											<td class="vname" >${village.vname}</td>
+=======
+											<td class="vid"><a id="${village.vid}" onclick="VillageInfoUpdate(id)" href="#;">${village.vid}</a></td>
+											<td class="vname" style="font-size:11px;">${village.vname}</td>
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 											
 											<td class="vdelete">
 												<a href="sysvillageDelete?vid=${village.vid}" onclick="VDel_btn_clicked(this);"style="font-size:15px;">X</a>

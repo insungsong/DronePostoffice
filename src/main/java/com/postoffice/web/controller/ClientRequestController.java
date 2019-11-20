@@ -165,9 +165,15 @@ public class ClientRequestController {
 	@RequestMapping("/searchBoard")
 	public String searchBoard(String searchType,String keyword,
 						Model model,@RequestParam(defaultValue = "1") int pageNo, HttpSession session) {
+		int totalRowNums = 0;
+		String vid = String.valueOf(session.getAttribute("vid"));
 		session.setAttribute("pageNo", pageNo);
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
+		System.out.println(searchType+"adhlsadlkasdlkdjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+		if(searchType.equals("keyword")) {
+			totalRowNums = requestService.SearchTotalRowNum(searchType);
+		}
 
 		int totalRowNum = requestService.getTotalRowNo();
 		int totalPageNum = totalRowNum / rowsPerPage;
@@ -193,7 +199,8 @@ public class ClientRequestController {
 		if (pageNo == totalPageNum)
 			endRowNo = totalRowNum;
 
-		List<MailDTO> MailList = requestService.fromsearch(searchType,keyword,startRowNo, endRowNo);
+		List<MailDTO> MailList = requestService.fromsearch(searchType,keyword,startRowNo, endRowNo,vid);
+		
 		StateDTO dto = new StateDTO();
 		
 		model.addAttribute("totalPageNum", totalPageNum);

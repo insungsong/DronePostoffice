@@ -50,6 +50,9 @@ public class DroneManagementController {
 		}else if(dto.getState_id().equals("sd004")) {
 			model.addAttribute("droneInfo",droneManagementService.selectDroneInfo(dto));
 			return "manager/droneManagement_Suv/state_Broken_Ajax";
+		}else if(dto.getState_id().equals("sd005")) {
+			model.addAttribute("droneInfo",droneManagementService.selectDroneInfo(dto));
+			return "manager/droneManagement_Suv/state_Return_Ajax";
 		}
 		return null;
 	}
@@ -59,6 +62,10 @@ public class DroneManagementController {
 		
 		JSONObject jsonObject = new JSONObject();
 		VillageDTO villageDTO = droneManagementService.selectDroneDeliveryState(dto);
+		
+		System.out.println(villageDTO.getSend_path());
+		System.out.println(villageDTO.getReturn_path());
+		
 		String send_path = villageDTO.getSend_path();
 		String return_path = villageDTO.getReturn_path();
 		
