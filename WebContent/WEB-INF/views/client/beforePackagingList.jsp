@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
 	
 	<script>
+<<<<<<< HEAD
 		function cancel(package_id){
 			var result=confirm("삭제하시겠습니까?");
 			if(result==true){
@@ -31,6 +32,8 @@
 				alert("취소 하셨습니다.");
 			}
 		}
+=======
+>>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 		
 		function back(){
 			history.back();
@@ -61,7 +64,7 @@
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 				
 			<div id="checkHead" class="alert alert-dnager">
-				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 요청 확인내역 입니다.패키지 클릭시 상세 확인</div>
+				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 우편 수령 내역 입니다. 패키지 클릭시 상세 확인</div>
 			</div>
 				
 				<table border="1" class="frt_tbl_type" style="width:100%;">	

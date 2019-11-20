@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.postoffice.web.dto.DeliveryDTO;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.dto.VillageDTO;
@@ -70,6 +71,10 @@ public class PackageDAO {
       map.put("vid",vid);
       map.put("mail_weight", mail_weight);
       return sqlSessionTemplate.insert("packaging.clientInfo",map);
+   }
+   
+   public List<DeliveryDTO> deliveryList(){
+	   return sqlSessionTemplate.selectList("board.deliveryList");
    }
 }
 

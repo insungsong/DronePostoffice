@@ -21,8 +21,8 @@
 </collection>
 </resultMap>
 
-	<select id="selectTotalRowNum" resultType="int">
-		select count(*) from mail
+	<select id="selectTotalRowNum" resultType="int" parameterType="string">
+		select count(*) from mail where vid = #{sessionvid} and state_id='s005'
 		
 	</select>
 	<!-- 마을 이름 join해서 받아와야함 -->

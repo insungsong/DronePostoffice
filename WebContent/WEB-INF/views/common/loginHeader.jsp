@@ -10,7 +10,7 @@
 <body>
 	<div class="header" style="border-bottom: 2px solid #F32C28">
 		<div class="logo">
-			<img src="resources/images/logo.PNG" style="height=100%;text-align: center;">
+			<img src="resources/images/logo.PNG" style="height:100%;text-align: center;margin-left: 37%;">
 		</div>
 		<div class="menubar">
 				

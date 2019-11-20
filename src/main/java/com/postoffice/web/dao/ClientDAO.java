@@ -19,8 +19,8 @@ public class ClientDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	public int selectTotalRowNo() {
-		int totalRowNum = sqlSessionTemplate.selectOne("ClientBoard.selectTotalRowNum");
+	public int selectTotalRowNo(String sessionvid) {
+		int totalRowNum = sqlSessionTemplate.selectOne("ClientBoard.selectTotalRowNum",sessionvid);
 		return totalRowNum;
 	} 
 	//게시판 게시물 만들기해야함
@@ -111,8 +111,7 @@ public class ClientDAO {
 		map.put("vid",vid);
 
 		if(searchType.equals("from_name")) {
-			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);
-			
+			List<MailDTO> listdto = sqlSessionTemplate.selectList("ClientBoard.selectsearch", map);	
 			return listdto;
 		}
 		

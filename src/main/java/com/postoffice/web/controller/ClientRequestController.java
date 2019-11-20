@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.StateDTO;
 import com.postoffice.web.service.ClientRequestService;
-import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.LoginService;
 
 @Controller
@@ -26,8 +25,9 @@ public class ClientRequestController {
 	private ClientRequestService requestService;
 	@Autowired
 	private LoginService loginService;
-	@Autowired
-	private GcsService gcsService;
+	/*
+	 * @Autowired private GcsService gcsService;
+	 */
 
 	
 	@RequestMapping("/client_index")
@@ -49,7 +49,7 @@ public class ClientRequestController {
 			System.out.println("mailIdList:"+mailIdList);
 			System.out.println("vid:"+vid);
 			requestService.mailPackaging(mailIdList,totalWeight,vid);
-			gcsService.sendMessageToGcs("requestDrone");
+			//gcsService.sendMessageToGcs("requestDrone");
 			
 		return "redirect:/requestBoarderList";
 	}
@@ -67,7 +67,8 @@ public class ClientRequestController {
 		int rowsPerPage = 10;
 		int pagesPerGroup = 5;
 
-		int totalRowNum = requestService.getTotalRowNo();
+		String vid = (String)session.getAttribute("vid");
+		int totalRowNum = requestService.getTotalRowNo(vid);
 	
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if (totalRowNum % rowsPerPage != 0)
@@ -93,7 +94,7 @@ public class ClientRequestController {
 		if (pageNo == totalPageNum)
 			endRowNo = totalRowNum;
 		
-		String vid = (String)session.getAttribute("vid");
+		String sessionvid = (String)session.getAttribute("vid");
 		List<MailDTO> MailList = requestService.selectMailList(startRowNo, endRowNo ,vid);
 		// JSP로 페이지 정보 넘기기
 		
@@ -118,7 +119,8 @@ public class ClientRequestController {
 		 //ystem.out.println("vmlid:"+vmlid);
 		 //String vname = requestService.getvname(vmid);
 		 
-		 int num = requestService.getTotalRowNo()+1;
+		 String sessionvid = (String)session.getAttribute("vid");
+		 int num = requestService.getTotalRowNo(sessionvid)+1;
 		 model.addAttribute("vmlid",session.getAttribute("lid"));
 		 model.addAttribute("vname", session.getAttribute("vname"));
 		 model.addAttribute("vid", session.getAttribute("vid"));
@@ -163,9 +165,14 @@ public class ClientRequestController {
 	
 	//search기능
 	@RequestMapping("/searchBoard")
-	public String searchBoard(String searchType,String keyword,
-						Model model,@RequestParam(defaultValue = "1") int pageNo, HttpSession session) {
+	public String searchBoard(
+						//@RequestParam(value="mailIdList[]")List<String>mailIdList,
+						//@RequestParam(value="totalWeight") String totalWeight,
+						String searchType,String keyword,
+						Model model,@RequestParam(defaultValue = "1") int pageNo,
+						HttpSession session) {
 		int totalRowNums = 0;
+		session.setAttribute("keyword", keyword);
 		String vid = String.valueOf(session.getAttribute("vid"));
 		session.setAttribute("pageNo", pageNo);
 		int rowsPerPage = 10;
@@ -174,8 +181,9 @@ public class ClientRequestController {
 		if(searchType.equals("keyword")) {
 			totalRowNums = requestService.SearchTotalRowNum(searchType);
 		}
-
-		int totalRowNum = requestService.getTotalRowNo();
+		
+		String sessionvid = (String)session.getAttribute("vid");
+		int totalRowNum = requestService.getTotalRowNo(sessionvid);
 		int totalPageNum = totalRowNum / rowsPerPage;
 		if (totalRowNum % rowsPerPage != 0)
 			totalPageNum++;

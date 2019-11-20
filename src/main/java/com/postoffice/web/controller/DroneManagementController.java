@@ -64,8 +64,8 @@ public class DroneManagementController {
 		VillageDTO villageDTO = droneManagementService.selectDroneDeliveryState(dto);
 		
 		System.out.println(villageDTO.getSend_path());
-		System.out.println(villageDTO.getReturn_path());
-		
+		System.out.println("teeeeee : " + villageDTO.getReturn_path());
+		System.out.println("teaeq : "+dto.getState_id());
 		String send_path = villageDTO.getSend_path();
 		String return_path = villageDTO.getReturn_path();
 		
@@ -91,7 +91,18 @@ public class DroneManagementController {
 			pw.flush();
 			pw.close();
 		}else if(dto.getState_id().equals("sd005")) {
-			jsonObject.put("path", return_path);
+			JSONArray jsonArray = new JSONArray(return_path);
+			
+			List<String> x = new ArrayList<String>();
+			List<String> y = new ArrayList<String>();
+			
+			for(int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonPath = (JSONObject) jsonArray.get(i);
+				x.add(jsonPath.get("x").toString());
+				y.add(jsonPath.get("y").toString());
+			}
+			jsonObject.put("x", x);
+			jsonObject.put("y", y);
 			
 			String json = jsonObject.toString();
 			response.setContentType("application/json; charset=UTF-8");

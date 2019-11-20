@@ -15,7 +15,7 @@
 		<div class="subject">${pack_num}번 패키지</div>
 	</div>
 	<div class = "mail_list" style="border-bottom:1px solid #999;">
-		<table cellspacing="0" border="1" summary="명단관리  리스트" class="frt_tbl_type" style="width:100%;padding-right:15px;">
+		<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;">
 			<colgroup>
 				<col width="50" /><col width="80" /><col width="*" /><col width="80" />
 				<col width="100" /><col width="50"/><col width="15">
@@ -27,17 +27,16 @@
 					<th scope="col">발신자 주소</th>
 					<th scope="col">수신자</th>
 					<th scope="col">수신자 주소</th>
-					<th scope="col">무게</th>
-					<th></th>
+					<th scope="col" colspan="2">무게</th>
 				</tr>
 			</thead>
 		</table>
 		<div style="max-height:500px; width:100%; overflow-x:hidden; overflow-y:scroll;">
-			<table cellspacing="0" border="1" summary="명단관리 리스트" class="frt_tbl_type" style="border-top:0px;">
+			<table cellspacing="0" border="1" class="frt_tbl_type" style="border-top:0px;">
 			
 				<colgroup>
 					<col width="50" /><col width="80" /><col width="*" /><col width="80" />
-					<col width="100" /><col width="50"/><col width="15">
+					<col width="100" /><col width="50"/>
 				</colgroup>
 				<tbody>		
 					<c:forEach items="${pack_mailList}" var="mail">										

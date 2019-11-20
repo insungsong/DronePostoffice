@@ -45,6 +45,32 @@ tbody {
 .mail_list {
 	border-left:1px solid #999;
 }
+.mail_btn{
+	 border: 0;
+    background: #F32C28;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 9px;
+}
+.auto_btn{
+	 border: 0;
+    background: #a5b59a;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 9px;
+}
+.pack_btn{
+	 border: 0;
+    background: #f37328;
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
 .frt_tbl_type,.frt_tbl_type th,.frt_tbl_type td{border:0;}
 /**.frt_tbl_type a{color:#383838;text-decoration:none}*/
 .frt_tbl_type{width:100%; border-top:2px solid #F32C28; border-bottom:1px solid #999;color:#666;font-size:12px;table-layout:fixed; margin:0 0 0 0;}

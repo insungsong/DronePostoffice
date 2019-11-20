@@ -23,10 +23,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.MemberDTO;
 import com.postoffice.web.dto.VMemberDTO;
+import com.postoffice.web.dto.VillageDTO;
 import com.postoffice.web.service.LoginResult;
 import com.postoffice.web.service.LoginService;
 
@@ -194,7 +197,11 @@ public class LoginController {
 	}
 	
 	@GetMapping("/join")
-	public String joinForm() {
+	public String joinForm(Model model) {
+		List<VillageDTO> vlist =  loginService.getVlist();
+		List<DeptDTO> dlist = loginService.getdlist();
+		model.addAttribute("vlist",vlist);
+		model.addAttribute("dlist",dlist);
 		return "joinForm";
 	}
 	

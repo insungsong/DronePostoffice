@@ -16,7 +16,7 @@
 	</head>
 	<body>
 	<div>
-		${vmname} 님의 이전 요청 내역 입니다.
+		${vmname} 님의 이전 우펴 내역 입니다.
 		
 			<table id="customers" class="table">
 			<thead class="thead-dark">

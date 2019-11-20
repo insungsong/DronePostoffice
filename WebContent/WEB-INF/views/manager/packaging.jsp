@@ -208,7 +208,6 @@
 				<div class="bor_title">
 					<div class="subject" style="font-size:22px;">우편 목록</div>
 					<div class="searching">
-						
 						<form action="pack_search" method="post">
 							<select name="village_name" class="vill_search">
 								<option>마을 선택</option>
@@ -235,7 +234,7 @@
 								<th scope="col" rowspan="2">도착 마을</th>
 								<th scope="col" rowspan="2">무게</th>
 								<th scope="col" rowspan="2" colspan="2">
-									<button type="button" name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()">자동 선택</button>
+									<button type="button" class="auto_btn"name="chk_auto" id='chk_auto' value="" onclick="Auto_weight_check()">자동 선택</button>
 								</th>
 							</tr>
 							<tr>
@@ -264,19 +263,9 @@
 								<c:otherwise>
 									
 							<c:forEach items="${mailList}" var="mail">                     
+
                               <tr>
-
-                              	<%-- <td class="num">${checkList.state_id}</td>
-                                 <td class="num">${checkList.mail_id}</td>
-                                 <td class="num">${checkList.from_name}</td>
-                                 <td class="num">${checkList.from_address}</td>
-                                 <td class="num">${checkList.to_name}</td>
-                                 <td class="num">${checkList.to_address}</td>
-                                 <td class="num">${checkList.villageList.get(0).vname}</td>
-                                 <td class="num">${checkList.mail_weight}</td> --%>
-                                 <%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
-
-                                 <td class="num" style="font-size:13px;">${mail.mail_id}</td>
+                                 <td class="num">${mail.mail_id}</td>
                                  <td class="num">${mail.from_name}</td>
                                  <td class="num">${mail.from_address}</td>
                                  <td class="num">${mail.to_name}</td>
@@ -303,7 +292,7 @@
 								<th scope="col" colspan="5">총 무게</th>
 								<th scope="col" id="total_weight"></th>
 								<th scope="col"><button type="button"  onclick="mailReceive()">우편물 받기</button></th>
-								<th scope="col"><button type="button" name="" id='chk_all' value="" onclick="packaging()">패키징</button></th>
+								<th scope="col" style="padding:0;"><button type="button" class="pack_btn" name="" id='chk_all' value="" onclick="packaging()">패키징</button></th>
 							</tr>
 						</thead>
 					</table>
@@ -344,7 +333,7 @@
 										<td class="date">${pack.package_weight}</td>
 										<td class="writer">${pack.stateList.get(0).state_name}</td>
 										<td class="writer">${pack.arrival_date}</td>
-										<td class="title"><button type="button" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
+										<td class="title"><button type="button" class="mail_btn" value="${pack.package_id}" onclick="pack_mailList(value)">우편 목록</button></td>
 									</tr> 
 								</c:forEach>
 							</tbody>

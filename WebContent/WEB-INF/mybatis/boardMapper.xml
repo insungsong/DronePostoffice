@@ -8,22 +8,34 @@
 		<result column="state_id" property="state_id"/>
 		<result column="arrival_date" property="arrival_date"/>
 		<result column="vid" property="vid"/>
-<collection property="stateList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.StateDTO">
+		<collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
 			<result column="state_id" property="state_id"/>
 			<result column="state_name" property="state_name"/>
-</collection>
-<collection property="villageList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.VillageDTO">
+		</collection>
+		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
 			<result column="vid" property="vid"/>
 			<result column="vname" property="vname"/>
-</collection>
-<collection property="mailList" javaType="java.util.ArrayList" ofType="com.postoffice.web.dto.MailDTO">
+		</collection>
+		<collection property="mailList" javaType="java.util.List" ofType="com.postoffice.web.dto.MailDTO">
 			<result column="mail_id" property="mail_id"/>
 			<result column="from_name" property="from_name"/>
 			<result column="from_address" property="from_address"/>
 			<result column="to_name" property="to_name"/>
 			<result column="to_address" property="to_address"/>
 			<result column="mail_weight" property="mail_weight"/>
-</collection>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.postoffice.web.dto.DeliveryDTO" id="deliveryList">
+		<result column="delivery_date" property="delivery_date"/>
+		<collection property="packageList" javaType="java.util.List" ofType="com.postoffice.web.dto.PackageDTO">
+			<id column="package_id" property="package_id"/>
+			<result column="package_weight" property="package_weight"/>
+		</collection>
+		<collection property="villageList" javaType="java.util.List" ofType="com.postoffice.web.dto.VillageDTO">
+			<id column="vid" property="vid"/>
+			<result column="vname" property="vname"/>
+		</collection>
 	</resultMap>
 	
 	
@@ -91,6 +103,22 @@
 			order by package_id asc	
 	</select>
 	
+	<select id="packageCheckdiv" resultMap="Package">
+		SELECT
+			package.package_id,
+			package.package_weight,
+			package.vid,
+			village.vname
+		FROM
+			 package ,village 
+		WHERE
+			 package.vid=village.vid
+		AND
+			 package.state_id ='s001' 
+		ORDER BY
+			 package_id 	
+	</select>
+	
 	<delete id="cancel" parameterType="int" >
 		delete from package where package_id=#{package_id}
 	</delete>
@@ -112,8 +140,16 @@
         where m.package_num = p.package_id
   		and v.vid = m.vid
   		and p.package_id=#{package_id}
-  		
-  		
-	  		
+	</select>
+	
+	<select id="deliveryList" resultMap="deliveryList">
+		SELECT
+			delivery.delivery_date, package.package_id, package.package_weight, village.vid, village.vname
+		FROM
+			delivery, package ,village
+		WHERE
+			delivery.package_id = package.package_id
+		AND
+			package.vid = village.vid
 	</select>
 </mapper>                                                                                                                                                                                                                                                

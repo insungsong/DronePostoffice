@@ -23,7 +23,10 @@ public class ClientCheckService {
 	public List selectAll() {
 		return checkDAO.selectAll();
 	}
-	public List packageSelect() {
+	public List<PackageDTO> packageCheckdiv() {
+		return checkDAO.packageCheckdiv();
+	}
+	public List<PackageDTO> packageSelect() {
 		return checkDAO.packageSelect();
 	}
 	public int updateStateProc(MailDTO mailDTO) {

@@ -20,8 +20,8 @@ public class ClientRequestService {
 	
 	
 	//총 토탈 게시물 row행만큼 가지고 오기
-	public int getTotalRowNo() {
-		int totalRowNum = clientdao.selectTotalRowNo();
+	public int getTotalRowNo(String sessionvid) {
+		int totalRowNum = clientdao.selectTotalRowNo(sessionvid);
 		return totalRowNum;
 	}
 

@@ -12,7 +12,7 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th scope="col">운용 일자</th>
+									<th scope="col">배송 날짜</th>
 									<th scope="col">마을명</th>
 									<th scope="col">패키지 번호</th>
 									<th scope="col" colspan="2">무게</th>

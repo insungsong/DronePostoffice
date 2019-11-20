@@ -129,6 +129,11 @@ public class NoticeDAO {
 		sqlSessionTemplate.delete("notice.noticedelete", noticeDTO);
 	}
 
+	public List<NoticeDTO> getNoticeListdiv() {
+		List<NoticeDTO> noticeList = sqlSessionTemplate.selectList("notice.getNoticeListdiv");
+		return noticeList;
+	}
+
 	
 
 

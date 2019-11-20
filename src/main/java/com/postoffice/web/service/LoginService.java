@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 
 import com.postoffice.web.dao.MemberDAO;
 import com.postoffice.web.dao.VMemberDAO;
+import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.MemberDTO;
 import com.postoffice.web.dto.VMemberDTO;
+import com.postoffice.web.dto.VillageDTO;
 
 @Component
 public class LoginService {
@@ -113,6 +115,16 @@ public class LoginService {
 	public String vmnlid(String lid) {
 		String vmn = vmemberDao.selectvmlid(lid);
 		return vmn;
+	}
+	//마을 리스트 가져오기
+	public List<VillageDTO> getVlist() {
+		List<VillageDTO> vlist = vmemberDao.selectvlist();
+		return vlist;
+	}
+	//부서 리스트 가져오기
+	public List<DeptDTO> getdlist(){
+		List<DeptDTO> dlist = vmemberDao.getdlist();
+		return dlist;
 	}
 	
 	//파일 업로드
