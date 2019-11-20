@@ -393,7 +393,15 @@
 		
 	
 	</script>
-
+	<style>
+		thead{
+			font-size:16px;
+		}
+		tbody{
+			font-size:14px;
+			font-weight:600;
+		}
+	</style>
 
 
 </head>
@@ -433,11 +441,11 @@
 									<c:forEach items="${stateList}" var="state">										
 										<tr id="state">
 											<td>
-												<a id="${state.state_id}" onclick="StateInfoUpdate(id)"href="#;">${state.state_id}</a>
+												<a id="${state.state_id}" onclick="StateInfoUpdate(id)"href="#;" style="font-size:15px;">${state.state_id}</a>
 											</td>
 											<td id="statename" class="stateName">${state.state_name}</td>
 											<td class="statedelete">
-												<a id="sdel_btn" href="sysstateDelete?state_id=${state.state_id}" onclick="SDel_btn_clicked(this);">X</a>
+												<a id="sdel_btn" href="sysstateDelete?state_id=${state.state_id}"style="font-size:15px;" onclick="SDel_btn_clicked(this);">X</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -539,11 +547,11 @@
 										<c:forEach items="${deptList}" var="dept">								
 											<tr>
 												<td>
-													<a id="${dept.dept_id}" onclick="DeptInfoUpdate(id)"href="#;">${dept.dept_id}</a>
+													<a id="${dept.dept_id}" onclick="DeptInfoUpdate(id)"href="#;"style="font-size:15px;">${dept.dept_id}</a>
 												</td>
 												<td class="deptName">${dept.dept_name}</td>
 												<td class="deptdelete">
-													<a href="sysdeptDelete?dept_id=${dept.dept_id}" onclick="DDel_btn_clicked(this);">X</a>
+													<a href="sysdeptDelete?dept_id=${dept.dept_id}" onclick="DDel_btn_clicked(this);"style="font-size:15px;">X</a>
 												</td>
 												
 											</tr>
@@ -650,11 +658,13 @@
 								<tbody>		
 									<c:forEach items="${villageList}" var="village">									
 										<tr>
-											<td class="vid"><a id="${village.vid}" onclick="VillageInfoUpdate(id)" href="#;">${village.vid}</a></td>
+											<td class="vid">
+												<a id="${village.vid}" onclick="VillageInfoUpdate(id)" href="#;"style="font-size:15px;">${village.vid}</a>
+											</td>
 											<td class="vname" >${village.vname}</td>
 											
 											<td class="vdelete">
-												<a href="sysvillageDelete?vid=${village.vid}" onclick="VDel_btn_clicked(this);">X</a>
+												<a href="sysvillageDelete?vid=${village.vid}" onclick="VDel_btn_clicked(this);"style="font-size:15px;">X</a>
 											</td>
 										</tr>
 									</c:forEach>

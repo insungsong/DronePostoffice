@@ -36,6 +36,14 @@
 				
 				
 			}
+			th{
+				font-size:16px;
+				font-weight:700;
+			}
+			td{
+				font-size:15px;
+				font-weight:500;
+			}
 			
 			
 			</style>
@@ -50,7 +58,7 @@
 				
 				<div class="mail_list">
 				<div class="bor_title">
-					<div class="subject">공지사항</div>
+					<div class="subject" style="margin-bottom:5px;"><h3>공지사항</h3></div>
 					
 					<div class="search_div">
 						<form id="noticeSearchForm" method="get" action="noticeSearch">
@@ -85,8 +93,8 @@
 						<tbody>
 							<c:forEach var="notice" items="${noticeList}">	
 								<tr style="height: 34px;">
-									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_id}</a></td>
-									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
+									<td><a href="noticeDetail?notice_id=${notice.notice_id}" style="font-size:16px;">${notice.notice_id}</a></td>
+									<td><a href="noticeDetail?notice_id=${notice.notice_id}" style="font-size:16px;">${notice.notice_title}</a></td>
 								
 									<td>${notice.memberList.get(0).mname}</td>
 									<td>${notice.deptList.get(0).dept_name}</td>
