@@ -21,12 +21,12 @@
 		background: #17181B;
 	}
 	.frt_tbl_type td {
-		font-size: 13px;
+		font-size: 14px;
 		color : #9e9595;
 	}
 	
 	.frt_tbl_type th {
-		font-size: 13px;
+		font-size: 16px;
 		background:#7d7d86;
 	}
 	.frt_tbl_type {

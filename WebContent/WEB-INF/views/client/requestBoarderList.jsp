@@ -57,6 +57,14 @@
 			location.href="packageCheck";
 		}
 	</script>
+	<style type="text/css">
+		.frt_tbl_type {
+		    font-size: 15px;
+
+		}
+	
+	</style>
+	
 	</head>
 	<body>
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
@@ -80,7 +88,7 @@
 							  </form>
 						</div>
 						<div>
-							<div class="subject" style="maring-top:5px;">우편 요청</div>
+							<div class="subject" style="maring-top:5px; font-size:20px;">우편 요청</div>
 							<div class="client_content_content">
 										<table border="1" class="frt_tbl_type" style="width:100%;">
 											<thead class="thead-dark">
@@ -108,15 +116,15 @@
 												<c:otherwise>
 												  	<c:forEach items="${MailList}" var="MailList">
 												  		<tr>
-														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_id }</a></td>
-														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_date}</a></td>
-															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_name}</a></td>
-															<td id="Mail_fromaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.from_address}</a></td>
-															<td id="Mail_toname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_name }</a></td>
-															<td id="Mail_toaddress"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.to_address }</a></td>
-															<td id="Mail_weight"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.mail_weight }</a></td>
-															<td id="Mail_state_name"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.stateList.get(0).state_name}</a></td>
-															<td id="Mail_vname"><a href="boardDetail?mail_id=${MailList.mail_id }">${MailList.villageList.get(0).vname}</a></td>
+														    <td id="Mail_id"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.mail_id }</a></td>
+														    <td id="Mail_mail_date"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.mail_date}</a></td>
+															<td id="Mail_fromname"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.from_name}</a></td>
+															<td id="Mail_fromaddress"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.from_address}</a></td>
+															<td id="Mail_toname"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.to_name }</a></td>
+															<td id="Mail_toaddress"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.to_address }</a></td>
+															<td id="Mail_weight"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.mail_weight }</a></td>
+															<td id="Mail_state_name"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.stateList.get(0).state_name}</a></td>
+															<td id="Mail_vname"><a href="boardDetail?mail_id=${MailList.mail_id }" style="font-size:15px;">${MailList.villageList.get(0).vname}</a></td>
 															<td><button type="button" name="${MailList.mail_id }" id="mail_id" class="btn btn-danger" style="width:58px;height:29px;margin:0px;padding:0px" onclick="requestDelete(name)">취소</button></td>
 															<td class="frm"><input type="checkbox" id="chk" name="${MailList.mail_id}"  value="${MailList.mail_weight}" onclick="weight_check()"/></td>
 														</tr>

@@ -27,6 +27,14 @@
 			font-size: 20px;
 			text-align:left;
 		}
+		
+		.thead-dark{
+			font-size:15px;
+		}
+		.tr{
+			font-size:15px;
+		}
+		
 	</style>
 	</head>
 	<body>	
@@ -39,7 +47,7 @@
 				<table border="1" class="frt_tbl_type" style="width:100%;">	
 				
 								<thead class="thead-dark">
-											  <tr style="height: 39px">
+											  <tr style="height: 39px;">
 											     <th scope="col">패키지 번호</th>
 											     <th scope="col">패키지 무게</th>
 											     <th scope="col">요청 날짜</th>

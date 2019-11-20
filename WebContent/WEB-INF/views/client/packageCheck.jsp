@@ -68,6 +68,10 @@
 		#checkHead{
 			text-align:center;
 		}
+		.frt_tbl_type{
+			font-size:15px;
+		}
+		
 	</style>
 	</head>
 	<body>	
@@ -96,7 +100,7 @@
 											<c:forEach items="${packageList}" var="pack">
 											<c:if test="${vid eq pack.villageList.get(0).vid and pack.stateList.get(0).state_id ne 's004' and pack.stateList.get(0).state_id ne 's002'}">
 											<tr class="tr" <%-- onclick="location.href='packageDetail?package_id=${pack.package_id}'"  style="cursor:pointer;"--%> onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'"/>
-													<td><a href="packageDetail?package_id=${pack.package_id}">${pack.package_id}</a></td>
+													<td><a href="packageDetail?package_id=${pack.package_id}" style="font-size:15px;">${pack.package_id}</a></td>
 													<td>${pack.package_weight}</td>
 													<td>${pack.villageList.get(0).vname}</td>
 													<td>${pack.stateList.get(0).state_name}</td>
@@ -135,9 +139,13 @@
 													
 												
 													
+
 													<c:if test="${pack.stateList.get(0).state_id ne 's004' and pack.stateList.get(0).state_id ne 's007' and pack.stateList.get(0).state_id ne 's003'}">
 														<td><input type="button"  value="요청취소" onclick="cancel(${pack.package_id})"/></td>
-													</c:if>
+
+													
+
+												</c:if>
 													
 													<%-- <c:if test="${pack.stateList.get(0).state_id eq 's007'}">
 														<td></td>
