@@ -98,4 +98,20 @@
 		where
 			vmember.vmid=#{lid}
 	</select>
+	
+	<!-- 회원가입 할때 마을 리스트 -->
+	<select id="selectvlist" resultType="com.postoffice.web.dto.VillageDTO">
+		select 
+			vname,vid
+		from 
+			village
+	</select>
+	
+	<!-- 회원가입할때 부서리스트 -->
+	<select id="selectdlist" resultType="com.postoffice.web.dto.DeptDTO">
+		select
+			dept_name,dept_id
+		from
+			dept
+	</select>
 </mapper>

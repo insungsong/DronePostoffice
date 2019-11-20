@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.postoffice.web.dto.DeptDTO;
 import com.postoffice.web.dto.VMemberDTO;
+import com.postoffice.web.dto.VillageDTO;
 
 @Component
 public class VMemberDAO {
@@ -71,4 +73,13 @@ public class VMemberDAO {
 		return vmphoto;
 	}
 	
+	//마을 정보가져오기
+	public List<VillageDTO> selectvlist() {
+		List<VillageDTO> vlist = sqlSessionTemplate.selectList("vmember.selectvlist");
+		return vlist;
+	}
+	public List<DeptDTO> getdlist(){
+		List<DeptDTO>dlist = sqlSessionTemplate.selectList("vmember.selectdlist");
+		return dlist;
+	}	
 }

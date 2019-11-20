@@ -70,14 +70,17 @@
 					<div class="request_board_second">
 						<div class="request_serch" style="float:right; maring-top:15px">
 							<div style="height:20px"></div>
+								<!-- 추후에 보안 검색기능 
 							  <form id="searchForm" action="searchBoard" method="get">
 									<select id="searchType" name="searchType">
 										<option value="from_name">보내는 사람 조회</option>
 										<option value="to_name">받는 사람 조회</option>
 									</select>
 									<input type="text" id="keyWord" name="keyword" style="height: 25px; border:#F32C28 1px solid;">
-									<button id="search_btn" style="height: 28px; text-align:center; font-size:15px; background-color:#F32C28; border:#F32C28 1px solid;color:white;">검색</button>
-							  </form>
+									
+									<button id="search_btn" style="height: 28px; text-align:center; font-size:15px; background-color:#F32C28; border:#F32C28 1px solid;color:white;">검색</button> 
+							  	
+							  </form>-->
 						</div>
 						<div>
 							<div class="subject" style="maring-top:5px;">우편 요청</div>
@@ -190,7 +193,6 @@
 				$("#total_weight").text(total_weight+'g');
 				console.log($("#total_weight").text());
 				
-			
 				for(var i = 0; i < testLen; i++){
 					$('a#test3').eq(i).attr('href','requestBoarderList?pageNo=${i}&totalWeight='+total_weight);
 				}

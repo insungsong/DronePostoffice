@@ -31,6 +31,9 @@ public class ClientCheckDAO {
 		return sqlSessionTemplate.selectList("board.packageCheck");
 		
 	}
+	public List<PackageDTO> packageCheckdiv() {
+		return sqlSessionTemplate.selectList("board.packageCheckdiv");
+	}
 
 	public int cancel(int package_id) {
 		return sqlSessionTemplate.delete("board.cancel",package_id);

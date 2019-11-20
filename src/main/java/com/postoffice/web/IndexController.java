@@ -1,43 +1,44 @@
 package com.postoffice.web;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
-
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.postoffice.web.dto.NoticeDTO;
+import com.postoffice.web.service.ClientCheckService;
+import com.postoffice.web.service.NoticeService;
+import com.postoffice.web.service.PackageService;
 
 @Controller
 public class IndexController {
-	@Resource(name="dataSource")
-	private DataSource dataSource;
+	@Autowired
+	private PackageService packageService;
+	
+	@Autowired
+	private NoticeService noticeService;
+	
+	@Autowired
+	private ClientCheckService checkService;
+	
 	
 	@RequestMapping("/index")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("mailList",packageService.mailList());
+		
+		model.addAttribute("noticeList",noticeService.getNoticeListdiv());
+		
+		model.addAttribute("packageList",checkService.packageCheckdiv());
+		
+	
 		return "index";
 	}
 	
-	@RequestMapping("/connTest")
-	public void connTest(HttpServletResponse response)  {
-		boolean result = false;
-		
-		try {
-			//커넥션 풀에서 연결된 커넥션 대여
-			Connection conn = dataSource.getConnection();
-			if(conn != null) result = true;
-			System.out.println(result+"연결완료!");
-			
-			//커넥션 풀로 컨넥션을 반납
-			conn.close();
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
+	
+	
 	
 }

@@ -23,6 +23,9 @@ public class ClientCheckService {
 	public List selectAll() {
 		return checkDAO.selectAll();
 	}
+	public List<PackageDTO> packageCheckdiv() {
+		return checkDAO.packageCheckdiv();
+	}
 	public List packageSelect() {
 		return checkDAO.packageSelect();
 	}

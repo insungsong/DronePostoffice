@@ -109,7 +109,7 @@
 													<%-- <c:if test="${pack.stateList.get(0).state_id eq 's007'}">
 														<td></td>
 													</c:if> --%>
-												<tr>
+												</tr>
 											</c:if>
 											</c:forEach>
 									</table>

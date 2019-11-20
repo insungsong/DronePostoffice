@@ -183,7 +183,6 @@
 				<div class="bor_title">
 					<div class="subject">우편 목록</div>
 					<div class="searching">
-						
 						<form action="pack_search" method="post">
 							<select name="village_name" class="vill_search">
 								<option>마을 선택</option>
@@ -240,17 +239,6 @@
 									
 							<c:forEach items="${mailList}" var="mail">                     
                               <tr>
-
-                              	<%-- <td class="num">${checkList.state_id}</td>
-                                 <td class="num">${checkList.mail_id}</td>
-                                 <td class="num">${checkList.from_name}</td>
-                                 <td class="num">${checkList.from_address}</td>
-                                 <td class="num">${checkList.to_name}</td>
-                                 <td class="num">${checkList.to_address}</td>
-                                 <td class="num">${checkList.villageList.get(0).vname}</td>
-                                 <td class="num">${checkList.mail_weight}</td> --%>
-                                 <%-- <td class="frm"><input type="checkbox" id="chk" name="${mail.mail_id}"  value="${mail.mail_weight}" onclick="weight_check()"/></td> --%>
-
                                  <td class="num">${mail.mail_id}</td>
                                  <td class="num">${mail.from_name}</td>
                                  <td class="num">${mail.from_address}</td>

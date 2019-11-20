@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -193,16 +193,16 @@
 						</div>
 						<div>
 							<select id="vname" name="vname">
-								<option value="v001">관우마을</option>
-								<option value="v002">인성마을</option>
-								<option value="v003">소영마을</option>
+								<c:forEach items="${vlist}" var="vlliageList">
+									<option value="${vlliageList.vid}">${vlliageList.vname }</option>
+								</c:forEach>
 							</select>
 						</div>
 						<div>
 							<select id="deptName" name="deptName">
-								<option value="d001">물류지원부</option>
-								<option value="d002">드론운영부</option>
-								<option value="d003">전산관리부</option>
+								<c:forEach items="${dlist }" var="deptList">
+									<option value="${deptList.dept_id }">${deptList.dept_name }</option>
+								</c:forEach>
 							</select>
 						</div>
 						
