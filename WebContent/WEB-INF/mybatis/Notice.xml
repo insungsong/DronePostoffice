@@ -185,5 +185,11 @@
 		where
 			mid = #{mid}
 	</select>
-	
+	<select id="getNoticeListdiv" resultMap="notice">
+		select n.notice_id, n.notice_title, n.notice_date, m.dept_id, n.mid, m.mname, d.dept_name
+				from notice n, member m, dept d
+				where n.mid = m.mid
+				and m.dept_id = d.dept_id
+				order by notice_id desc
+	</select>
 </mapper>

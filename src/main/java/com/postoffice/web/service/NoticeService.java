@@ -128,6 +128,10 @@ public class NoticeService {
 		
 		return list;
 	}
+	public List<NoticeDTO> getNoticeListdiv() {
+		List<NoticeDTO> noticeList = noticeDAO.getNoticeListdiv();
+		return noticeList;
+	}
 
 	
 	

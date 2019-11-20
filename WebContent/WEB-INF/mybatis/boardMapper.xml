@@ -91,6 +91,19 @@
 			order by package_id asc	
 	</select>
 	
+	<select id="packageCheckdiv" resultMap="Package">
+		select
+			p.package_id,
+			p.package_weight,
+			p.arrival_date,
+			v.vid,
+			v.vname
+		from package p ,state s ,village v
+				where p.vid=v.vid
+				and s.state_id ='s001'
+			order by package_id asc	
+	</select>
+	
 	<delete id="cancel" parameterType="int" >
 		delete from package where package_id=#{package_id}
 	</delete>
