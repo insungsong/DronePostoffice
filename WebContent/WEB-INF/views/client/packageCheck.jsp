@@ -24,7 +24,17 @@
 		
 		
 		function regist(package_id){
-			var result=confirm("우편물을 부착 하셨습니까?");
+			var result=confirm("수령 하셨습니까?");
+			if(result==true){
+				location.href="registRequest?package_id="+package_id;
+				alert("요청되었습니다.");
+			}else{
+				alert("취소 하셨습니다.")
+			}
+		}
+		
+		function regist2(package_id){
+			var result=confirm("부착 하셨습니까?");
 			if(result==true){
 				location.href="registRequest?package_id="+package_id;
 				alert("요청되었습니다.");
@@ -41,13 +51,17 @@
 		}
 		
 		function villageArrive(package_id){
-			var result=confirm("접수 요청 하시겠습니까?");
+			var result=confirm("우편 수령 하시겠습니까?");
 			if(result==true){
 				location.href="villageArrive?package_id="+package_id;
+				alert("수령 되었습니다.")
+			}else{
+				alert("우편 수령 후 클릭해 주세요.")
 			}
+			
 		}
 		function current(){
-			window.open("/FinalWebProject/current" , width=10, height=100);
+			window.open("/FinalWebProject/current" , width=100, height=100);
 		}
 	</script>
 	<style>
@@ -80,7 +94,7 @@
 								</thead>
 								
 											<c:forEach items="${packageList}" var="pack">
-											<c:if test="${vid eq pack.villageList.get(0).vid and pack.stateList.get(0).state_id ne 's004'}">
+											<c:if test="${vid eq pack.villageList.get(0).vid and pack.stateList.get(0).state_id ne 's004' and pack.stateList.get(0).state_id ne 's002'}">
 											<tr class="tr" <%-- onclick="location.href='packageDetail?package_id=${pack.package_id}'"  style="cursor:pointer;"--%> onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'"/>
 													<td><a href="packageDetail?package_id=${pack.package_id}">${pack.package_id}</a></td>
 													<td>${pack.package_weight}</td>
@@ -92,12 +106,15 @@
 													<c:if test="${pack.stateList.get(0).state_id ne 's003'}">
 														<td>배송 현황이 없습니다</td>
 													</c:if>
+													<c:if test="${pack.stateList.get(0).state_id eq 's003'}">
+														<td><input type="button" value="우편 수령" onClick="villageArrive(${pack.package_id})"/></td>
+													</c:if>
 													
 													<c:if test="${pack.stateList.get(0).state_id eq 's001'}">
-														<td><input type="button" value="우편 부착" onClick="regist(${pack.package_id})"/></td>
+														<td><input type="button" value="우편 부착" onClick="regist2(${pack.package_id})"/></td>
 													</c:if>
 													<c:if test="${pack.stateList.get(0).state_id eq 's005'}">
-														<td>접수 완료!!!</td>
+														<td>우편 부착 완료!!!</td>
 													</c:if>
 													<c:if test="${pack.stateList.get(0).state_id eq 's007'}">
 														<td>마을 도착 완료</td>
@@ -110,11 +127,15 @@
 														
 													</c:if>
 													<c:if test="${pack.stateList.get(0).state_id eq 's003'}">
-														<td><input type="button" value="우편 부착" onclick="villageArrive(${pack.package_id})" /></td>
+														<td>드론이 배송중입니다</td>
 													</c:if>
+													<%-- <c:if test="${pack.stateList.get(0).state_id eq 's003'}">
+														<td><input type="button" value="우편 부착" onclick="villageArrive(${pack.package_id})" /></td>
+													</c:if> --%>
+													
 												
 													
-													<c:if test="${pack.stateList.get(0).state_id ne 's004' and pack.stateList.get(0).state_id ne 's007'}">
+													<c:if test="${pack.stateList.get(0).state_id ne 's004' and pack.stateList.get(0).state_id ne 's007' and pack.stateList.get(0).state_id ne 's003'}">
 														<td><input type="button"  value="요청취소" onclick="cancel(${pack.package_id})"/></td>
 													</c:if>
 													
