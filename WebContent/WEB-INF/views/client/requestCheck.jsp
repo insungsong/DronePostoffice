@@ -185,11 +185,11 @@
 				</c:if>
 				
 				</c:if>
-				<%-- <select name="state"> 
+				 <select name="state"> 
 					<c:forEach items="${stateList }" var="state">
 						<option value="${state.state_id}">${state.state_name }</option>
 					</c:forEach>
-				</select> --%>
+				</select>
 			</tr>
 				</c:forEach>	
 			</tbody>
