@@ -50,6 +50,9 @@ public class DroneManagementController {
 		}else if(dto.getState_id().equals("sd004")) {
 			model.addAttribute("droneInfo",droneManagementService.selectDroneInfo(dto));
 			return "manager/droneManagement_Suv/state_Broken_Ajax";
+		}else if(dto.getState_id().equals("sd005")) {
+			model.addAttribute("droneInfo",droneManagementService.selectDroneInfo(dto));
+			return "manager/droneManagement_Suv/state_Return_Ajax";
 		}
 		return null;
 	}

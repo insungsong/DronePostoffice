@@ -63,4 +63,8 @@ public class DroneManagementDAO {
 	public void updateDeliveryClear(DeliveryDTO dto){
 		sqlSessionTemplate.update("drone.updateDeliveryClear",dto);
 	}
+	
+	public void updateDroneDeliveryClear(DeliveryDTO dto){
+		sqlSessionTemplate.update("drone.updateDroneDeliveryClear",dto);
+	}
 }

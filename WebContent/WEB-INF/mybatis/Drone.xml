@@ -120,6 +120,8 @@
 				AND
 					delivery.drone_id = #{drone_id}
 				AND
+					delivery.state_id = 's007'
+				AND
 					drone.state_id = 'sd005'
 			</when>
 		</choose>
@@ -136,10 +138,20 @@
 		UPDATE
 			delivery
 		SET
+			state_id = 's007'
+		WHERE
+			package_id = #{package_id}
+	</update>
+	
+	<update id="updateDroneDeliveryClear" parameterType="com.postoffice.web.dto.DeliveryDTO">
+		UPDATE
+			delivery
+		SET
 			state_id = 's004'
 		WHERE
 			package_id = #{package_id}
 	</update>
+	
 	<update id="updateDroneStateDelivery" parameterType="map">
 		<choose>
 			<when test="state_id.equals('sd001')">

@@ -45,17 +45,8 @@
 			return result;
 		} catch(err) {}
 	}
-	$(function(){
-		var len = $('.returnDrone').length;
-		
-		for(var i = 0; i < len; i++){
-			if($('input#return_state').eq(i).val() == 's007'){
-				$('.returnDrone').eq(i).prop('disabled',false);
-				$('button#del_clear').eq(i).prop('disabled',false);
-			}
-		}
 	
-	function drone_info(value){
+	function drone_info2(value){
 		var len = $('td#pack').length;
 		var index;
 		
@@ -73,19 +64,43 @@
 		});
 	}
 	
+	$(function(){
 
 			
 		//복귀 버튼에 드론 id 추가
 		var tdLen = $('td#pack').length;
 		var hiLen = $('input#packId').length;
 		
-		for(var i = 0; i < hiLen; i++){
-			for(var j = 0; j < tdLen; j++){	
-				if($('input#packId').eq(i).val() == $('td#pack').eq(j).text()){
-					$('input#return_droneId').eq(j).attr('value',$('input#dronId').eq(i).val());
-					$('button#del_clear').eq(j).attr('value',$('input#dronId').eq(i).val());
-					$('button#del_clear').eq(j).attr('name',$('td#pack').eq(j).text());
+		for(var i = 0; i < tdLen; i++){
+			for(var j = 0; j < hiLen; j++){	
+				if($('td#pack').eq(i).text() == $('input#packId').eq(j).val()){
+	
+					$('input#return_droneId').eq(i).attr('value',$('input#dronId').eq(j).val());
+					$('button#del_clear').eq(i).attr('value',$('input#dronId').eq(j).val());
+					$('button#del_clear').eq(i).attr('name',$('td#pack').eq(i).text());
 				}
+			}
+		}
+		
+		var len = $('.returnDrone').length;
+		
+		for(var i = 0; i < len; i++){
+			if($('input#return_state').eq(i).val() == 's007'){
+				$('.returnDrone').eq(i).prop('disabled',false);
+			}
+		}
+		
+		for(var i = 0; i < len; i++){
+			if($('input#return_state').eq(i).val() == 's003'){
+				$('button#del_clear').eq(i).prop('disabled',false);
+			}
+		}
+		
+		for(var i = 0; i < len; i++){
+			if($('td#stateName').eq(i).text() == '접수대기'){
+				$('td#stateName').eq(i).css('color','#007bff');
+			}else if($('td#stateName').eq(i).text() == '드론 요청'){
+				$('td#stateName').eq(i).css('color','#20c997');
 			}
 		}
 	})
@@ -158,7 +173,7 @@
 											<td class="title" >${pack.villageList.get(0).vname}</td>
 											<td class="date">${pack.package_weight}g</td>
 											<td class="writer" id="stateName">${pack.stateList.get(0).state_name}</td>	
-											<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info(value)">드론 목록</button></td>
+											<td class="title"><button type="button" id="drone" value="${pack.package_id}" onclick="drone_info2(value)">드론 목록</button></td>
 											<td>
 												<form action="drone_delivery" method="post" onsubmit="return windowClose()">
 													<input type="hidden" name="path" value='${pack.villageList.get(0).send_path}'>

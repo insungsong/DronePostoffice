@@ -39,6 +39,7 @@ public class DroneManagementService {
 	}
 	public void updateDeliveryClear(DeliveryDTO dto) {
 		droneManagementDAO.updatePackageClearState(dto);
+		droneManagementDAO.updateDroneDeliveryClear(dto);
 		droneManagementDAO.updateDeliveryClear(dto);
 	}
 
