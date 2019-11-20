@@ -54,10 +54,17 @@ public class DroneManagementDAO {
 		System.out.println("test : " + state_id);
 		sqlSessionTemplate.update("drone.updatePackageState",map);
 	}
+	public void updatePackageClearState(DeliveryDTO dto) {	
+		sqlSessionTemplate.update("drone.updatePackageClearState", dto);
+	}
 	public List<DeliveryDTO> selectDeliveryDrone(){
 		return sqlSessionTemplate.selectList("drone.selectDeliveryDrone");
 	}
-	public void updateDeliveryClear(DroneDTO dto){
+	public void updateDeliveryClear(DeliveryDTO dto){
 		sqlSessionTemplate.update("drone.updateDeliveryClear",dto);
+	}
+	
+	public void updateDroneDeliveryClear(DeliveryDTO dto){
+		sqlSessionTemplate.update("drone.updateDroneDeliveryClear",dto);
 	}
 }

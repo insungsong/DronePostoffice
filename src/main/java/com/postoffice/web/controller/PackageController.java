@@ -51,6 +51,8 @@ public class PackageController {
          @RequestParam String vid) throws IOException {
          model.addAttribute("packagingList", packageService.mailPackaging(totalWeight, mailIdList, vid));
          
+         gcsService.sendMessageToGcs("requestDelivery");
+         
          return "redirect:/packagingList";
    }
    

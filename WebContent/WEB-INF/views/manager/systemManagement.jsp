@@ -393,7 +393,20 @@
 		
 	
 	</script>
-
+	<style>
+	.frt_tbl_type th{
+		line-height: 22px;
+		
+	}
+		thead{
+			font-size:16px;
+			line-height: 14px;
+		}
+		tbody{
+			font-size:14px;
+			
+		}
+	</style>
 
 
 </head>
@@ -404,7 +417,7 @@
 				<!-- 상태정보 -->
 				<div class="management_left">
 					<div class="bor_title">
-						<div class="subject">상태 코드</div>
+						<div class="subject" style="font-size:20px;">상태 코드</div>
 						<div id = "SMStateUpdate" style="margin-left: 87%;">
 							<input id="stateInsert" type="submit" class="btn btn-outline-danger" value="+ 추가 " onclick="StateInfoPlus();" style="font-size:11pt;padding:1px;">
 						</div> 
@@ -433,11 +446,11 @@
 									<c:forEach items="${stateList}" var="state">										
 										<tr id="state">
 											<td>
-												<a id="${state.state_id}" onclick="StateInfoUpdate(id)"href="#;">${state.state_id}</a>
+												<a id="${state.state_id}" onclick="StateInfoUpdate(id)"href="#;" style="font-size:15px;">${state.state_id}</a>
 											</td>
 											<td id="statename" class="stateName">${state.state_name}</td>
 											<td class="statedelete">
-												<a id="sdel_btn" href="sysstateDelete?state_id=${state.state_id}" onclick="SDel_btn_clicked(this);">X</a>
+												<a id="sdel_btn" href="sysstateDelete?state_id=${state.state_id}"style="font-size:15px;" onclick="SDel_btn_clicked(this);">X</a>
 											</td>
 										</tr>
 									</c:forEach>
@@ -511,7 +524,7 @@
 				<!-- 부서정보 -->
 				<div class="management_center">
 					<div class="bor_title">
-						<div class="subject">부서</div>
+						<div class="subject" style="font-size:20px;">부서</div>
 						<div id = "SMDeptUpdate" style="margin-left: 87%;">
 							<input id="deptInsert" type="submit" value="+ 추가 " class="btn btn-outline-danger" onclick="DeptInfoPlus()" style="font-size:11pt;padding:1px;">
 						</div>
@@ -539,11 +552,11 @@
 										<c:forEach items="${deptList}" var="dept">								
 											<tr>
 												<td>
-													<a id="${dept.dept_id}" onclick="DeptInfoUpdate(id)"href="#;">${dept.dept_id}</a>
+													<a id="${dept.dept_id}" onclick="DeptInfoUpdate(id)"href="#;"style="font-size:15px;">${dept.dept_id}</a>
 												</td>
 												<td class="deptName">${dept.dept_name}</td>
 												<td class="deptdelete">
-													<a href="sysdeptDelete?dept_id=${dept.dept_id}" onclick="DDel_btn_clicked(this);">X</a>
+													<a href="sysdeptDelete?dept_id=${dept.dept_id}" onclick="DDel_btn_clicked(this);"style="font-size:15px;">X</a>
 												</td>
 												
 											</tr>
@@ -622,7 +635,7 @@
 				<!-- 마을 정보 -->
 				<div class="management_right">
 					<div class="bor_title">
-						<div class="subject">마을</div>
+						<div class="subject" style="font-size:20px;">마을</div>
 						<div id = "SMVillageUpdate" style="margin-left:87%;">
 						<input id="villageInsert" type="submit" class="btn btn-outline-danger" value="+ 추가 " onclick="VillageInfoPlus()" style="font-size:11pt;padding:1px;">
 					</div>
@@ -651,10 +664,9 @@
 									<c:forEach items="${villageList}" var="village">									
 										<tr>
 											<td class="vid"><a id="${village.vid}" onclick="VillageInfoUpdate(id)" href="#;">${village.vid}</a></td>
-											<td class="vname" >${village.vname}</td>
-											
+											<td class="vname">${village.vname}</td>							
 											<td class="vdelete">
-												<a href="sysvillageDelete?vid=${village.vid}" onclick="VDel_btn_clicked(this);">X</a>
+												<a href="sysvillageDelete?vid=${village.vid}" onclick="VDel_btn_clicked(this);"style="font-size:15px;">X</a>
 											</td>
 										</tr>
 									</c:forEach>

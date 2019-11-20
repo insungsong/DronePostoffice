@@ -130,6 +130,11 @@ public class ClientCheckController {
 		checkService.villageArrive(package_id);
 		return "redirect:/packageCheck";
 	}
+	//현황 페이지 팝업 메서드
+	@RequestMapping("/current")
+	public String current() {
+		return "client/index";
+	}
 	
 }
 

@@ -71,6 +71,14 @@
 			for(var i = 0; i < len; i++){
 				if($('input#hidden_state').eq(i).val() == 'sd001'){
 					$('td#droneStateName').eq(i).css('color','green');
+				}else if($('input#hidden_state').eq(i).val() == 'sd002'){
+					$('td#droneStateName').eq(i).css('color','blue');
+				}else if($('input#hidden_state').eq(i).val() == 'sd003'){
+					$('td#droneStateName').eq(i).css('color','gray');
+				}else if($('input#hidden_state').eq(i).val() == 'sd004'){
+					$('td#droneStateName').eq(i).css('color','red');
+				}else if($('input#hidden_state').eq(i).val() == 'sd005'){
+					$('td#droneStateName').eq(i).css('color','yellow');
 				}
 			}
 		})

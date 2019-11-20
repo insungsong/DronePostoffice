@@ -11,26 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
 	
 	<script>
-		function cancel(package_id){
-			var result=confirm("삭제하시겠습니까?");
-			if(result==true){
-				location.href = "cancel?package_id=" + package_id;
-				alert("삭제되었습니다.")
-			}else{
-				alert("취소하셨습니다.")
-			}
-			
-		}
-		
-		function regist(package_id){
-			var result=confirm("접수 요청 하시겠습니까?");
-			if(result==true){
-				location.href="registRequest?package_id="+package_id;
-				alert("접수요청 되었습니다.");
-			}else{
-				alert("취소 하셨습니다.")
-			}
-		}
 		
 		function back(){
 			history.back();
@@ -47,19 +27,27 @@
 			font-size: 20px;
 			text-align:left;
 		}
+		
+		.thead-dark{
+			font-size:15px;
+		}
+		.tr{
+			font-size:15px;
+		}
+		
 	</style>
 	</head>
 	<body>	
 	<jsp:include page="../common/ClienetRequestheader.jsp"></jsp:include>
 				
 			<div id="checkHead" class="alert alert-dnager">
-				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 요청 확인내역 입니다.패키지 클릭시 상세 확인</div>
+				<div id="checkSession" class="alert alert-danger">${vmname} 님 이전 우편 수령 내역 입니다. 패키지 클릭시 상세 확인</div>
 			</div>
 				
 				<table border="1" class="frt_tbl_type" style="width:100%;">	
 				
 								<thead class="thead-dark">
-											  <tr style="height: 39px">
+											  <tr style="height: 39px;">
 											     <th scope="col">패키지 번호</th>
 											     <th scope="col">패키지 무게</th>
 											     <th scope="col">요청 날짜</th>

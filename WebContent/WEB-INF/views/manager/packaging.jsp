@@ -18,10 +18,11 @@
 	<style type="text/css">
 		.vill_search{
 			width: 80px;
-		    font-size: 12px;
-		    height: 21px;
+		    font-size: 13px;
+		    height: 22px;
 		    border: 1px solid red;
 		}
+
 	</style>
 	<script type="text/javascript">
 	   
@@ -101,7 +102,7 @@
 		      console.log('array' + Array[i]);
 		   };
 		   
-		   var vid = $('input.hidden_vid').eq(i).attr('id');
+		   var vid = $('input.hidden_vid').eq(0).attr('id');
 		   $.ajax({
 		      url:"packaging",
 		      data:{"mailIdList":Array,"totalWeight":$("#total_weight").text(),"vid":vid},
@@ -173,6 +174,30 @@
 			}
 		}
 	</script>
+	
+	<style type="text/css">
+		.frt_tbl_type .num, .frt_tbl_type .date, .frt_tbl_type .hit {
+    		
+    		font-size: 15px;
+    		line-height: 35px;
+		}
+		.searching .input_submit {
+    		font-size: 14px;
+    		height: 22px;
+    		border: 1px;
+    		line-height: 18px;
+    	}
+    	.frt_tbl_type th{
+    		line-height:20px;
+    		font-size:15px;
+    	}
+    	.frt_tbl_type td {
+		    
+		    font-size: 14px;
+		}
+				
+	</style>
+	
 </head>
 <body>
 
@@ -181,7 +206,7 @@
 		<div class="body_sub">
 			<div class="pack_left">
 				<div class="bor_title">
-					<div class="subject">우편 목록</div>
+					<div class="subject" style="font-size:22px;">우편 목록</div>
 					<div class="searching">
 						<form action="pack_search" method="post">
 							<select name="village_name" class="vill_search">
@@ -238,6 +263,7 @@
 								<c:otherwise>
 									
 							<c:forEach items="${mailList}" var="mail">                     
+
                               <tr>
                                  <td class="num">${mail.mail_id}</td>
                                  <td class="num">${mail.from_name}</td>
@@ -275,7 +301,7 @@
 			
 			<div class="pack_right">
 				<div class="bor_title">
-					<div class="subject">패키지 목록</div>
+					<div class="subject"style="font-size:22px;">패키지 목록</div>
 				</div>
 				<div class = "mail_list" style="border-bottom:1px solid #999;">
 					<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">

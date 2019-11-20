@@ -56,8 +56,10 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping("/drone_delivery_clear")
-	public String droneDeliveryClear(DroneDTO dto) {
+	public String droneDeliveryClear(DeliveryDTO dto) {
+		System.out.println(dto.getPackage_id());
 		droneManagementService.updateDeliveryClear(dto);
+		
 		return "redirect:/delivery";
 	}
 }
