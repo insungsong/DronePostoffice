@@ -84,7 +84,7 @@
 						</thead>
 						<tbody>
 							<c:forEach var="notice" items="${noticeList}">	
-								<tr style="height: 34px;">
+								<tr style="height: 34px;" onMouseOver="this.style.backgroundColor='#DDDDDD';" onMouseOut="this.style.backgroundColor='white'">
 									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_id}</a></td>
 									<td><a href="noticeDetail?notice_id=${notice.notice_id}">${notice.notice_title}</a></td>
 								
