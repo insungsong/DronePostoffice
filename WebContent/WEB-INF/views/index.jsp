@@ -158,12 +158,9 @@
 				<div class="notice">
 					<div class="title_box">
 						<a href="noticeList">공지사항</a>
-<<<<<<< HEAD
+
 						<a href="noticeList" class="more">more</a>
 
-=======
-						<a href="noticeList" class="more">more</a>
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 					</div>
 					<div class="boardwrite">
 					<!-- 공지사항 -->			
