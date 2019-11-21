@@ -31,11 +31,12 @@
 
 .join_body_tag li{
 	float: left; /* 리스트 가로 방향으로 정렬 */
+	width: 50%;
 }
 
 .join_body_tag button{
 	display: block; /* 블럭요소로 지정 */
-	padding: 0px 50px;
+	padding: 5px 50px;
 	text-decoration: none; /* 태그 밑줄 제거 */
 	text-align: center; /* 텍스트 가운데 정렬 */
 	line-height: 40px; /* 블럭 높이 지정 */

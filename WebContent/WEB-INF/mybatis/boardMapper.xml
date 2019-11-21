@@ -7,7 +7,7 @@
 		<result column="package_weight" property="package_weight"/>
 		<result column="state_id" property="state_id"/>
 		<result column="arrival_date" property="arrival_date"/>
-		<result column="vid" property="vid"/>
+		<result  column="vid" property="vid"/>
 		<collection property="stateList" javaType="java.util.List" ofType="com.postoffice.web.dto.StateDTO">
 			<result column="state_id" property="state_id"/>
 			<result column="state_name" property="state_name"/>
