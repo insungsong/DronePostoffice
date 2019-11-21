@@ -14,14 +14,7 @@
 		</div>
 		<div class="menubar">
 			<ul>
-				<li><a href = "packagingList">우편물 현황</a>
-					<ul>
-				     <li><a href="#">Sliders</a></li>
-				     <li><a href="#">Galleries</a></li>
-				     <li><a href="#">Apps</a></li>
-				     <li><a href="#">Extensions</a></li>
-					</ul>
-				</li>
+				<li><a href = "packagingList">우편물 현황</a></li>
 				<li><a href = "delivery">우편물 드론 배송</a></li>
 				<li><a href = "droneManagement">드론 관리</a></li>
 				<li><a href = "systemManagement">시스템 관리</a></li>
