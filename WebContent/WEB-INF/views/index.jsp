@@ -158,7 +158,9 @@
 				<div class="notice">
 					<div class="title_box">
 						<a href="noticeList">공지사항</a>
+
 						<a href="noticeList" class="more">more</a>
+
 					</div>
 					<div class="boardwrite">
 					<!-- 공지사항 -->			
