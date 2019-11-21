@@ -65,7 +65,6 @@ public class ClientCheckController {
 		return "client/packageCheck";
 	
 	}
-		
 	
 	  @RequestMapping("/stateCheck")
 	  public String stateCheck(Model model,HttpServletRequest request) {
