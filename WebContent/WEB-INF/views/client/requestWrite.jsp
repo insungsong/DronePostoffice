@@ -112,7 +112,7 @@
 						  </div>
 						   <div class="form-group">
 						    <label for="formGroupExampleInput">보내는 사람 이름</label>
-						    <input type="text" class="form-control" id="from_name" name="from_name" placeholder="보내는 이름을 입력하세요">
+						    <input type="text" class="form-control" id="from_name" name="from_name" placeholder="보내는 사람 이름을 입력하세요">
 						  	<span id="fromnameError" class="error" style="color:red">${fromnameError}</span>
 						  </div>
 						  <div class="form-group">
@@ -128,7 +128,7 @@
 						 
 						  <div class="form-group">
 						    <label for="formGroupExampleInput2">받는 사람이름</label>
-						    <input type="text" class="form-control" name="to_name" id="to_name" placeholder="보내는 사람주소를 입력하세요">
+						    <input type="text" class="form-control" name="to_name" id="to_name" placeholder="보내는 사람 이름을 입력하세요">
 						    <span id="tonameError" class="error" style="color:red">${tonameError}</span>
 						  </div>
 						  <div class="form-group">
