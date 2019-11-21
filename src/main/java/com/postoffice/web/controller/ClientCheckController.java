@@ -126,6 +126,7 @@ public class ClientCheckController {
 	}
 	@RequestMapping("/villageArrive")
 	public String villageArrive(int package_id) {
+		gcsService.sendMessageToGcs("attachFinish");
 		checkService.villageArrive(package_id);
 		return "redirect:/packageCheck";
 	}
