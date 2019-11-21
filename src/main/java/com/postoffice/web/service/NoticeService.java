@@ -29,14 +29,14 @@ public class NoticeService {
 		return totalRowNum;
 	}
 	//TitleSearch에 대한 페이징 처리
-	public int SearchTitleTotalRowNum(String searchWord) {
-		int totalRowNum = noticeDAO.SearchTitleTotalRowNum(searchWord);
+	public int SearchTitleTotalRowNum(String searchNotice,String searchWord) {
+		int totalRowNum = noticeDAO.SearchTitleTotalRowNum(searchNotice,searchWord);
 		return totalRowNum;
 	}
 	
 	//MidSearch에 대한 페이징 처리 
-	public int MnameSearchTotalRowNum(String searchWord) { 
-		return noticeDAO.MnameSearchTotalRowNum(searchWord); 
+	public int MnameSearchTotalRowNum(String searchNotice,String searchWord) { 
+		return noticeDAO.MnameSearchTotalRowNum(searchNotice,searchWord); 
 	}
 	 
 	
@@ -56,6 +56,7 @@ public class NoticeService {
 	//noticeList검색부분 리스트 select
 	public List<NoticeDTO> noticeSearch(String searchNotice, String searchWord, int startRowNum, int endRowNum) {
 		List<NoticeDTO> noticeSearch=noticeDAO.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
+		
 		return noticeSearch;
 	}
 	

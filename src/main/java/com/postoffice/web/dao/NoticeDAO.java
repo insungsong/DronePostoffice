@@ -28,8 +28,9 @@ public class NoticeDAO {
 	}
 	
 	//noticeSearch에 대한 페이징 처리
-	public int SearchTitleTotalRowNum(String searchWord) { 
+	public int SearchTitleTotalRowNum(String searchNotice,String searchWord) { 
 		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("searchNotice", searchNotice);
 		map.put("searchWord", searchWord);
 		int totalRowNum =  sqlSessionTemplate.selectOne("notice.SearchTitleTotalRowNum",map);
 		return totalRowNum; 
@@ -37,8 +38,9 @@ public class NoticeDAO {
 	
 	
 	 //noticeSearch(mid)에 대한 페이징 처리 
-	public int MnameSearchTotalRowNum(String searchWord) {
+	public int MnameSearchTotalRowNum(String searchNotice,String searchWord) {
 		Map<String,Object>map = new HashMap<String,Object>();
+		map.put("searchNotice", searchNotice);
 		map.put("searchWord", searchWord);
 		return sqlSessionTemplate.selectOne("notice.MnameSearchTotalRowNum",map);
 	}
