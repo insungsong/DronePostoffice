@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.postoffice.web.dto.PackageDTO;
+import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.PackageService;
 
 @Controller
@@ -18,9 +19,9 @@ public class PackageController {
 
    @Autowired
    private PackageService packageService;
-	/*
-	 * @Autowired private GcsService gcsService;
-	 */
+   @Autowired 
+   private GcsService gcsService;
+	
    
    @RequestMapping("/packagingList")
    public String packagingList(Model model) {
@@ -51,7 +52,7 @@ public class PackageController {
          @RequestParam String vid) throws IOException {
          model.addAttribute("packagingList", packageService.mailPackaging(totalWeight, mailIdList, vid));
          
-         //gcsService.sendMessageToGcs("requestDelivery");
+         gcsService.sendMessageToGcs("requestDelivery");
          
          return "redirect:/packagingList";
    }

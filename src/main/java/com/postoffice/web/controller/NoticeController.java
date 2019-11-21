@@ -95,7 +95,36 @@ public class NoticeController {
 	//noticeList(공지사항 목록) 검색기능
 	@RequestMapping("/noticeSearch")
 	public String noticeSearch(String searchNotice, String searchWord, Model model, @RequestParam(defaultValue = "1") int pageNum, HttpSession session) {
+		if (searchNotice != null) {
+			System.out.println("첫번쨰");
+			
+		} else {
+			System.out.println("두번쨰");
+			
+		}
 		session.setAttribute("pageNum", pageNum);
+		System.out.println(session.getAttribute("searchNoticeGet")+"//0000000//////////////////////");
+		System.out.println(session.getAttribute("searchWordGet")+"///00000000000////////////////////");
+
+		
+		//페이징 클릭해서 들어왔을때
+		String searchNotice_get = null;
+		
+		if(searchNotice == null) {
+			searchNotice_get = (String)session.getAttribute("searchNoticeGet");
+		}
+		else {
+			session.setAttribute("searchNoticeGet", searchNotice);
+		}
+		
+		String searchWord_get = null;
+		
+		if(searchWord == null) {
+			searchWord_get = (String)session.getAttribute("searchWordGet");
+		}
+		else {
+			session.setAttribute("searchWordGet", searchWord);
+		}
 		
 		int totalRowNum=0;
 
@@ -103,12 +132,29 @@ public class NoticeController {
 		int rowsPerPage = 10;
 		//이전, 다음을 클릭했을 때 나오는 페이지 수
 		int pagesPerGroup = 5;
-		//전체 게시물 수			
-		if(searchNotice.equals("notice_title")) {
-			totalRowNum = noticeService.SearchTitleTotalRowNum(searchWord);
+		//전체 게시물 수	
+		//페이징이동
+		if(searchWord_get != null) {
+			if(searchNotice_get.equals("notice_title")) {
+				totalRowNum = noticeService.SearchTitleTotalRowNum(searchNotice_get,searchWord_get);
+			}
+			else if(searchNotice_get.equals("mname")) {
+				totalRowNum = noticeService.MnameSearchTotalRowNum(searchNotice_get,searchWord_get);
+				System.out.println(totalRowNum +"이름+++++++++++++++++++++++++++++++++++22222");
+			}
 		}
-		else if(searchNotice.equals("mname")) {
-			totalRowNum = noticeService.MnameSearchTotalRowNum(searchWord);
+		//처음 검색시
+		else {
+			if(searchNotice.equals("notice_title")) {
+				totalRowNum = noticeService.SearchTitleTotalRowNum(searchNotice,searchWord);
+
+				
+			}
+			else if(searchNotice.equals("mname")) {
+				totalRowNum = noticeService.MnameSearchTotalRowNum(searchNotice,searchWord);
+
+				
+			}
 		}
 		//전체 페이지 수
 		int totalPageNum=totalRowNum / rowsPerPage;
@@ -129,7 +175,13 @@ public class NoticeController {
 		int endRowNum = pageNum * rowsPerPage;
 		if(pageNum == totalPageNum) endRowNum = totalRowNum;
 		
-		List<NoticeDTO> noticeSearch = noticeService.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
+		List<NoticeDTO> noticeSearch = null;
+		if(searchWord !=null && searchNotice !=null) {
+			noticeSearch = noticeService.noticeSearch(searchNotice, searchWord, startRowNum, endRowNum);
+		}
+		else {
+			noticeSearch = noticeService.noticeSearch(searchNotice_get,searchWord_get,startRowNum,endRowNum);
+		}
 		
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalPageNum", totalPageNum);
@@ -141,7 +193,7 @@ public class NoticeController {
 		model.addAttribute("pageNum", pageNum); 
 		model.addAttribute("noticeList",noticeSearch);		
 
-		return"manager/noticeList";
+		return"manager/noticeSearch";
 	}
 
 	// 공지사항 작성 폼

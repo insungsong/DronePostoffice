@@ -18,7 +18,7 @@
 <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
 <style>
 	body {
-		background: #17181B;
+		background: white;
 	}
 	.frt_tbl_type td {
 		font-size: 14px;
@@ -27,8 +27,9 @@
 	
 	.frt_tbl_type th {
 		font-size: 16px;
-		background:#7d7d86;
+		background: #E56D29;
 	}
+
 	.frt_tbl_type {
 		border-top: 2px solid #1d32ca;
 	}

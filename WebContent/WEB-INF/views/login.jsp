@@ -70,11 +70,11 @@
 			</div>
 			
 			<div class="login_body">
-				<div class="login_body_tag">
+				<div class="login_body_tag" style="width: 400px;">
 					<ul>
-						<li><button id="manager" onclick="manager()">직원</button></li>
-						<li><button id="client" onclick="client()">이장</button></li>
-						<li><button id="admin" onclick="admin()">관리자</button></li>
+						<li><button id="manager" onclick="manager()" style="width: 100%;">우체국 직원</button></li>
+						<li><button id="client" onclick="client()" style="width: 100%;">마을 이장</button></li>
+						<!-- <li><button id="admin" onclick="admin()">관리자</button></li> -->
 					</ul>
 				</div>
 				<div class="loginForm">
