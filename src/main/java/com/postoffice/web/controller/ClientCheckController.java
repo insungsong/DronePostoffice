@@ -15,6 +15,7 @@ import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
 import com.postoffice.web.service.ClientCheckService;
 import com.postoffice.web.service.ClientStateCheckService;
+import com.postoffice.web.service.GcsService;
 import com.postoffice.web.service.LoginService;
 import com.postoffice.web.service.PackageService;
 
@@ -29,9 +30,9 @@ public class ClientCheckController {
 	private LoginService loginService;
 	@Autowired
 	private PackageService packageService;
-	/*
-	 * @Autowired private GcsService gcsService;
-	 */
+	@Autowired 
+	private GcsService gcsService;
+	 
 	
 	
 	@RequestMapping("/check")
@@ -87,7 +88,7 @@ public class ClientCheckController {
 		 * PackageDTO pack=new PackageDTO();
 		 * pack.setState_id(request.getParameter("state_id"));
 		 */
-		//gcsService.sendMessageToGcs("attachFinish");
+		gcsService.sendMessageToGcs("attachFinish");
 		System.out.println(package_id);
 		checkService.registRequest(package_id);
 		return "redirect:/packageCheck";
@@ -104,7 +105,7 @@ public class ClientCheckController {
 	@RequestMapping("/cancel")
 	public String cancel(int package_id) {
 		checkService.cancel(package_id);
-		//gcsService.sendMessageToGcs("requestCancel");
+		gcsService.sendMessageToGcs("requestCancel");
 		return "redirect:/packageCheck";
 	}
 	@RequestMapping("packageDetail")
