@@ -30,4 +30,8 @@ public class VillageDAO {
 		logger.debug(""+rows);
 		return rows;
 	}
+	
+	public String selectSendPath(String vid) {
+		return sqlSessionTemplate.selectOne("village.selectSendPath", vid);
+	}
 }

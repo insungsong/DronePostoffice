@@ -125,7 +125,7 @@
 
    <select id="selectPackageMailList" parameterType="com.postoffice.web.dto.PackageDTO" resultMap="mainInfo">
       SELECT
-         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address,mail.weight mail.package_num, mail.mail_date, state.*, village.vid, village.vname
+         mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.mail_weight, mail.package_num, mail.mail_date, state.*, village.vid, village.vname
       FROM
          mail, state, village
       WHERE
@@ -133,7 +133,7 @@
       AND
          mail.vid = village.vid
       AND
-         package_num = #{package_id}
+         mail.package_num = #{package_id}
    </select>
 
    <insert id="clientInfo" parameterType="map">

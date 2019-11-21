@@ -37,6 +37,14 @@
 		    font-size: 12px;
 		    border-radius: 9px;
 		}
+		.notice_title{
+			display: inline-block; 
+			width: 200px; 
+			white-space: nowrap; 
+			overflow: hidden; 
+			text-overflow: ellipsis;
+
+		}
 	</style>
 	<script type="text/javascript">
 		function mail_List(value){
@@ -56,8 +64,8 @@
 			<div class="left">
 				<div class="board">
 					<div class="title_box">
-						<a href="">우편 목록</a>
-						<a href="" class="more">more</a>
+						<a href="packagingList">우편 목록</a>
+						<a href="packagingList" class="more">more</a>
 						
 							<div class="boardwrite" style="margin-top:10px;height: 100%;">	
 
@@ -189,7 +197,7 @@
 									<c:forEach var="notice" items="${noticeList}" begin="1" end="10">	
 										<tr style="height: 34px; border-bottom:solid 1px #d2d2d2;">
 											<td><a href="noticeDetail?notice_id=${notice.notice_id}" style="font-size:15px;">${notice.notice_id}</a></td>
-											<td><a href="noticeDetail?notice_id=${notice.notice_id}" style="font-size:15px;">${notice.notice_title}</a></td>
+											<td><a href="noticeDetail?notice_id=${notice.notice_id}" class="notice_title" style="font-size:15px;">${notice.notice_title}</a></td>
 											<td>${notice.memberList.get(0).mname}</td>
 											<td>${notice.deptList.get(0).dept_name}</td>
 											<td><fmt:formatDate value="${notice.notice_date}" pattern="yyyy-MM-dd" /></td>

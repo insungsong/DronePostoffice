@@ -8,5 +8,13 @@
 	<update id="updateReturnPath" parameterType="com.postoffice.web.dto.VillageDTO">
 		update village set return_path = #{return_path} where vid=#{vid}
 	</update>
-
+	
+	<select id="selectSendPath" parameterType="string" resultType="string">
+		SELECT
+			send_path
+		FROM
+			village
+		WHERE
+			vid = #{vid}
+	</select>
 </mapper>

@@ -187,14 +187,14 @@
 						var container = document.getElementById('map');
 					    var options = {
 					       center: new kakao.maps.LatLng(37.5475225, 127.119988),
-					       level: 3
+					       level: 2
 					    };
 					
 					    var map = new kakao.maps.Map(container, options); 
 					   
 					    var marker = null;
 				          
-				          
+					  	
 				          
 					    //mqtt broker와 연결
 					    $(function() {
@@ -214,7 +214,7 @@
 					    //메시지를 수신했을 때 자동으로 실행(콜백)되는 함수
 					    function onMessageArrived(message) {
 					       var json = message.payloadString;
-					       
+					       console.log(json);
 					       var obj = JSON.parse(json);
 					       
 					       if(obj.msgid=="GLOBAL_POSITION_INT") {
@@ -229,7 +229,7 @@
 						
 					          var imageSrc = './resources/box.png', // 마커이미지의 주소입니다    
 							    imageSize = new kakao.maps.Size(34, 35), // 마커이미지의 크기입니다
-							    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+							    imageOption = {offset: new kakao.maps.Point(15, 10)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 							      
 							    
 								// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
@@ -272,25 +272,40 @@
 					       if(obj.msgid == "VFR_HUD"){
 					          var groundSpeed = obj.groundSpeed;
 					          $("#speed").text(groundSpeed+'m/s');
-					         	
+					         	console.log(groundSpeed);	
 					          //예상 시간 구하기
 					          var len = parseFloat($('#total_length').text());
 					          var speed = parseFloat(groundSpeed);
 					          
+					          
 					          console.log('len :' + len);
 					          console.log('speed :' + speed);
 					         
-					          if(speed == 0){
+					          if(groundSpeed == 0){
 					        	  $('#expectancy_time').text('속력 측정 불가');
 					        	  $('#expectancy_time').css('color','red');
 					          } else {
-						          var expectancy_time = (len/speed)/60;
+						          //var expectancy_time = (len/speed)/60;
+						          var expectancy_time = len/speed;
 						          var MathFloor = Math.floor(expectancy_time);
 						          
-						          var cho = expectancy_time - MathFloor;
-						          var banalo = cho.toFixed(2);
-						          var finalCho = banalo*100;
-						          $('#expectancy_time').text(MathFloor+'분'+finalCho+'초');
+						          var myNum = MathFloor;
+							      var hours   = Math.floor(myNum / 3600);
+							      var minutes = Math.floor((myNum - (hours * 3600)) / 60);
+							      var seconds = myNum - (hours * 3600) - (minutes * 60);
+
+							      if (hours   < 10) {hours   = "0"+hours;}
+							      if (minutes < 10) {minutes = "0"+minutes;}
+							      if (seconds < 10) {seconds = "0"+seconds;}
+								    
+								    
+						          //var cho = expectancy_time - MathFloor;
+						          //var banalo = cho.toFixed(2);
+						          //var finalCho = banalo*100;
+						          
+						          //var finalCho = Math.Floor.toHHMMSS();
+						          $('#expectancy_time').text(minutes+'분'+seconds+'초');
+						         // $('#expectancy_time').text('예상 시간 ' + finalCho);
 						          $('#expectancy_time').css('color','black');
 					          }
 					          

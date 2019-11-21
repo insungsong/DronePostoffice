@@ -1,10 +1,16 @@
 package com.postoffice.web.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.postoffice.web.dto.MailDTO;
 import com.postoffice.web.dto.PackageDTO;
+import com.postoffice.web.dto.VillageDTO;
 import com.postoffice.web.service.ClientCheckService;
 import com.postoffice.web.service.ClientStateCheckService;
 import com.postoffice.web.service.GcsService;
@@ -132,7 +139,39 @@ public class ClientCheckController {
 	//현황 페이지 팝업 메서드
 	@RequestMapping("/deliveryMap")
 	public String current() {
+		
 		return "client/deliveryMap";
+	}
+	@RequestMapping("villageSendPath")
+	public void villageSendPath(HttpSession session, HttpServletResponse response, Model model) throws IOException{
+		String vid = (String)session.getAttribute("vid");
+		System.out.println(vid);
+		String path = checkService.selectSendPath(vid);
+		
+		System.out.println(path);
+		response.setContentType("application/json; charset=UTF-8");
+		
+		JSONArray jsonArray = new JSONArray(path);
+		JSONObject jsonObject = new JSONObject();
+		List<String> x = new ArrayList<String>();
+		List<String> y = new ArrayList<String>();
+		
+		for(int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonPath = (JSONObject) jsonArray.get(i);
+			x.add(jsonPath.get("x").toString());
+			y.add(jsonPath.get("y").toString());
+		}
+		jsonObject.put("x", x);
+		jsonObject.put("y", y);
+		
+		String json = jsonObject.toString();
+		
+		PrintWriter pw = response.getWriter();
+		pw.write(json);
+		pw.flush();
+		pw.close();
+		
+
 	}
 	
 }
