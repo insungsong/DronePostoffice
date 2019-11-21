@@ -11,7 +11,6 @@
 		<link rel="stylesheet" type="text/css" href="resources/css/notice.css">
 	
 	<script>
-<<<<<<< HEAD
 		function cancel(package_id){
 			var result=confirm("삭제하시겠습니까?");
 			if(result==true){
@@ -32,8 +31,7 @@
 				alert("취소 하셨습니다.");
 			}
 		}
-=======
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
+
 		
 		function back(){
 			history.back();
