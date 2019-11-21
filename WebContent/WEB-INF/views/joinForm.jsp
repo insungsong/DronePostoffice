@@ -148,15 +148,15 @@
 		<jsp:include page="common/loginHeader.jsp"></jsp:include>
 		<div class="wrapper">
 			<div class="join_header">
-				<h1>Create your account</h1>
+				<h1>회원가입</h1>
 			</div>
 			
-			<div class="join_body">
-				<div class="join_body_tag">
+			<div class="join_body" style="width: 340px;">
+				<div class="join_body_tag" style="width: 340px;">
 					<ul>
-						<li><button id="manager" onclick="manager()">직원</button></li>
-						<li><button id="client" onclick="client()">이장</button></li>
-						<li><button id="admin" onclick="admin()">관리자</button></li>
+						<li><button id="manager" onclick="manager()" style="padding-right: 72px;padding-left: 65px;">직원</button></li>
+						<li><button id="client" onclick="client()"style="padding-right: 72px;padding-left: 65px;">이장</button></li>
+						<!-- <li><button id="admin" onclick="admin()">관리자</button></li> -->
 					</ul>
 				</div>	
 				<div class="joinForm">

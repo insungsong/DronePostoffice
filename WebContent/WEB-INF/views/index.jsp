@@ -159,11 +159,6 @@
 					<div class="title_box">
 						<a href="noticeList">공지사항</a>
 						<a href="noticeList" class="more">more</a>
-<<<<<<< HEAD
-						<div class="boardwrite" style="margin-top:10px;height: 1409%;; border:solid black 1px;">
-							<!-- <iframe src="http://localhost:8080/FinalWebProject/delivery" style="width:100%;height:100%;"></iframe> -->
-							
-=======
 					</div>
 					<div class="boardwrite">
 					<!-- 공지사항 -->			
@@ -200,7 +195,6 @@
 										</c:forEach>
 								</tbody>
 							</table>
->>>>>>> branch 'master' of https://github.com/KingHyunSu/FinalWebProject.git
 						</div>
 					</div>
 					
@@ -212,8 +206,8 @@
 			<div class="right">
 				<div class="calendar">
 					<div class="title_box">
-						<a href="">마을 요청 목록</a>
-						<a href="" class="more">more</a>
+						<a>마을 요청 목록</a>
+						<!-- <a href="" class="more">more</a> -->
 						<div class="boardwrite">
 							<table border="1" class="frt_tbl_type" style="width:100%;">	
 								<colgroup>
@@ -250,8 +244,8 @@
 				</div>
 				<div class="restaurant">
 					<div class="title_box">
-						<a href="">배송 내역</a>
-						<a href="" class="more">more</a>
+						<a>배송 내역</a>
+						<!-- <a href="" class="more">more</a> -->
 					</div>
 						<div class="boardwrite">
 							<table cellspacing="0" border="1" class="frt_tbl_type" style="width:100%;padding-right:15px;">
