@@ -51,7 +51,7 @@ div {
 }
 </style>
 <script>
-	function back() {
+	function turn() {
 		history.back();
 	}
 </script>
@@ -88,7 +88,7 @@ div {
 		</table>
 	</div>
 	<div>
-		<input type="button" class="btn btn-danger" value="이전 페이지로" onclick="back()"/>
+		<input type="button" onClick="turn()" class="btn btn-danger" value="이전 페이지로"/>
 	</div>
 </body>
 </html>

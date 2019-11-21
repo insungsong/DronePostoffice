@@ -57,7 +57,7 @@
 	
 	<update id="registRequest" parameterType="int">
 		update package set
-			state_id ='s005'
+			state_id ='s007'
 		where
 			package_id=#{package_id}
 	</update>
