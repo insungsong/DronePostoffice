@@ -26,6 +26,7 @@
 		
 	</select>
 	<!-- 마을 이름 join해서 받아와야함 -->
+	
 	<select id="selectMailList" parameterType="map" resultMap="Mail">
 	select rn,mail_id,from_name,from_address,to_name,to_address,mail_weight,state_name,mail_date,vname
 		from(

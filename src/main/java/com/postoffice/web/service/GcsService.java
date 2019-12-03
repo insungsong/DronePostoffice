@@ -32,6 +32,7 @@ public class GcsService {
 		try {
 			client = new MqttClient("tcp://106.253.56.124:1883", MqttClient.generateClientId(), null);
 			client.connect();
+			
 			logger.debug("MQTT Broker에 연결 성공: tcp://106.253.56.124:1883");
 		}catch(Exception e) {
 			e.printStackTrace();

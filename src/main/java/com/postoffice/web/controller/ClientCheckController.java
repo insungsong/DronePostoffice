@@ -42,6 +42,7 @@ public class ClientCheckController {
 	 
 	
 	
+	
 	@RequestMapping("/check")
 	public ModelAndView selectAll(Model model,HttpSession session) {
 		String vid=(String)session.getAttribute("vid");

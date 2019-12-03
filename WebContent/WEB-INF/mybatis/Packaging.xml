@@ -53,6 +53,7 @@
 
    </select>
    
+   
    <select id="selectMailListVillage" parameterType="string" resultMap="mainInfo">
       SELECT
          mail.mail_id, mail.from_name, mail.from_address, mail.to_name, mail.to_address, mail.mail_weight, mail.package_num, mail.mail_date, mail.state_id, state.state_name, village.vid, village.vname

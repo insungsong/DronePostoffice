@@ -21,6 +21,7 @@
 			vmid=#{lid}
 	</select>
 	
+	
 	<select id="selectUserInfo" parameterType="string" resultMap="vmemberInfo">
 		select 
 			vmember.vmid, vmember.vmname, vmember.vmpassword, vmember.vmname, village.vid, village.vname 

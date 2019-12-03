@@ -88,6 +88,7 @@
 		Left outer join village c on c.vid = a.vid
 	</select>
 
+	
 	<select id="packageCheck" resultMap="Package">
 		select
 			p.package_id,

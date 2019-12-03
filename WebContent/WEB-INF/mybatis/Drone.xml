@@ -38,6 +38,7 @@
       </collection>
    </resultMap>
    
+	
 	<select id="selectDroneList" resultMap="droneInfo">
 		SELECT
 			drone.*, state.state_name
